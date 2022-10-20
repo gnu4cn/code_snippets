@@ -278,6 +278,140 @@ success
 
 ## M$ AD 部分的配置
 
+```perl
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021-2022 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+#  Note:
+#
+#  -->> Most OTRS configuration should be done via the OTRS web interface
+#       and the SysConfig. Only for some configuration, such as database
+#       credentials and customer data source changes, you should edit this
+#       file. For changes do customer data sources you can copy the definitions
+#       from Kernel/Config/Defaults.pm and paste them in this file.
+#       Config.pm will not be overwritten when updating OTRS.
+# --
+#
+# /opt/otrs/Kernel/Config.pm
+#
+
+package Kernel::Config;
+
+use strict;
+use warnings;
+use utf8;
+
+sub Load {
+    my $Self = shift;
+
+# ---------------------------------------------------- #
+# database settings                                    #
+# ---------------------------------------------------- #
+
+# The database host
+    $Self->{'DatabaseHost'} = '127.0.0.1';
+
+# The database name
+    $Self->{'Database'} = "otrsdb";
+
+# The database user
+    $Self->{'DatabaseUser'} = "otrs";
+
+# The password of database user. You also can use bin/otrs.Console.pl Maint::Database::PasswordCrypt
+# for crypted passwords
+    $Self->{'DatabasePw'} = '***********';
+
+# The database DSN for MySQL ==> more: "perldoc DBD::mysql"
+    $Self->{'DatabaseDSN'} = "DBI:Pg:dbname=$Self->{Database};host=$Self->{DatabaseHost}";
+
+# Customer Auth Module
+    $Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::LDAP';
+    $Self->{'Customer::AuthModule::LDAP::Host'} = 'dc.senscomm.com';
+    $Self->{'Customer::AuthModule::LDAP::BaseDN'} = 'OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com';
+    $Self->{'Customer::AuthModule::LDAP::UID'} = 'sAMAccountName';
+
+
+    $Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'CN=Domain Users,CN=Users,DC=senscomm,DC=com';
+
+    $Self->{'Customer::AuthModule::LDAP::SearchUserDN'} = 'CN=Lenny Peng,OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com';
+    $Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '*********';
+
+    $Self->{'Customer::AuthModule::LDAP::Params'} = {
+        port => 389,
+        timeout => 120,
+        async => 0,
+        version => 3,
+    };
+
+    # $Self->{'AuthSyncModule'} = 'Kernel::System::Auth::Sync::LDAP';
+
+    $Self->{CustomerUser} = {
+        Name => 'LDAP Backend',
+        Module => 'Kernel::System::CustomerUser::LDAP',
+        Params => {
+            Host => 'dc.senscomm.com',
+            BaseDN => 'OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com',
+            SSCOPE => 'sub',
+            UserDN => 'CN=Lenny Peng,OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com',
+            UserPw => '*************',
+            AlwaysFilter => '',
+            Die => 0,
+            Params => {
+                port => 389,
+                timeout => 120,
+                async => 0,
+                version => 3,
+            },
+        },
+
+        # The order and LDAP field name of the following items are very important for otrs working.
+        CustomerKey => 'sAMAccountName',
+        CustomerID => 'userPrincipalName',
+        CustomerUserListFields => ['cn', 'userPrincipalName'],
+        CustomerUserSearchFields => ['sAMAccountName', 'cn', 'userPrincipalName'],
+        CustomerUserSearchPrefix => '',
+        CustomerUserSearchSuffix => '*',
+        CustomerUserSearchListLimit => 1000,
+        CustomerUserPostMasterSearchFields => ['userPrincipalName'],
+        CustomerUserNameFields => ['givenname', 'sn'],
+        CustomerUserNameFieldsJoin => '',
+        CustomerUserExcludePrimaryCustomerID => 0,
+        CacheTTL => 0,
+        Map => [
+            [ 'UserTitle',		'Title or salutation', 	'title',		        1, 0, 'var', '', 1 ],
+            [ 'UserFirstname',	'Firstname',      		'givenname',		    1, 1, 'var', '', 0 ],
+            [ 'UserLastname', 	'Lastname',		        'sn',			        1, 1, 'var', '', 0 ],
+            [ 'UserLogin', 		'Username',		        'sAMAccountName',	    1, 1, 'var', '', 0 ],
+            [ 'UserEmail', 		'Email', 		        'userPrincipalName',    1, 1, 'var', '', 0 ],
+            [ 'UserCustomerID',	'CustomerID',	        'userPrincipalName',    0, 1, 'var', '', 0 ],
+        ],
+    };
+
+
+    $Self->{Home} = '/opt/otrs';
+
+    return 1;
+}
+
+# ---------------------------------------------------- #
+# needed system stuff (don't edit this)                #
+# ---------------------------------------------------- #
+
+use Kernel::Config::Defaults; # import Translatable()
+use parent qw(Kernel::Config::Defaults);
+
+# -----------------------------------------------------#
+
+1;
+```
+
+*代码清单 27-4：`/opt/otrs/Kernel/Config.pm` 中有关 LDAP/M$ AD 做客户用户认证及用户后端的配置*
+
 ## 脚注
 
 1. OTRS，是 Open-Source Ticket Request System，开源技术支持请求系统的首字母缩写，是一种自由与开源的，公司、组织或其他实体可以用于将技术支持记录，分配给提交的技术支持请求，并跟踪有关这些技术支持随后的联络的故障执行系统软件包。他表示了多种的技术支持受理、反馈、支持请求、缺陷报告及其他有关的联络；
