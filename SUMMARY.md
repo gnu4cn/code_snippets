@@ -1,4 +1,4 @@
-# 点滴记录
+# Your Book Title
 
 * [00 Sh Bash](00_sh_bash.md)
 * [01 Flask Uwsgi Supervisord](01_flask_uwsgi_supervisord.md)
@@ -25,3 +25,6 @@
 * [22 Dot 1 X Port Dynamic Vlan](22_dot1x_port_dynamic_vlan.md)
 * [23 Huawei Switch SSH TELENT Weird Problem](23_Huawei_switch_SSH_TELENT_weird_problem.md)
 * [24 SC Network Op](24_SC_network_op.md)
+* [25 Gitlab Ce Deployment](25_gitlab_ce_deployment.md)
+* [26 Nginx Selinux Problem](26_nginx_selinux_problem.md)
+* [27 Zotrs Nginx Deployment](27_zotrs_nginx_deployment.md)
