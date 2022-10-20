@@ -265,16 +265,17 @@ exit $RETVAL
 
 > **注意**：要放行 `80/tcp` 端口：
 
-> **注意**：要将用户 `nginx` 加入到 `apache` 组（RHEL/CentOS），`sudo usermod -a -G apache nginx`
-
-> **注意**：更新到 `/opt/otrs` 的软连接 `sudo ln -vnsf /opt/znuny-6.0.46 /opt/otrs` 及 `sudo ln -vnsf /opt/OTRS-Community-Edition-6.0.37 /opt/otrs`（源路径与目标路径，均不以 `/` 结束）。
-
 ```console
 $ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
 success
 $ sudo firewall-cmd --reload
 success
 ```
+
+> **注意**：要将用户 `nginx` 加入到 `apache` 组（RHEL/CentOS），`sudo usermod -a -G apache nginx`
+
+> **注意**：更新到 `/opt/otrs` 的软连接 `sudo ln -vnsf /opt/znuny-6.0.46 /opt/otrs` 及 `sudo ln -vnsf /opt/OTRS-Community-Edition-6.0.37 /opt/otrs`（源路径与目标路径，均不以 `/` 结束）。
+
 
 ## M$ AD 部分的配置
 
