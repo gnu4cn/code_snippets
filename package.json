@@ -1,0 +1,23 @@
+{
+  "name": "code_snippets",
+  "version": "0.1.0",
+  "description": "Code snippets and work records.",
+  "main": "index.js",
+  "scripts": {
+    "git-push": "git add . && git commit -m \"Updated.\" && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnu4cn/code_snippets.git"
+  },
+  "keywords": [
+    "Code",
+    "snippets"
+  ],
+  "author": "unisko@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gnu4cn/code_snippets/issues"
+  },
+  "homepage": "https://github.com/gnu4cn/code_snippets#readme"
+}
