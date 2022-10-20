@@ -410,7 +410,7 @@ use parent qw(Kernel::Config::Defaults);
 1;
 ```
 
-*代码清单 27-4：`/opt/otrs/Kernel/Config.pm` 中有关 LDAP/M$ AD 做客户用户认证及用户后端的配置*
+*代码清单 27-5：`/opt/otrs/Kernel/Config.pm` 中有关 LDAP/M$ AD 做客户用户认证及用户后端的配置*
 
 ## 脚注
 
