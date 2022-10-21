@@ -6,6 +6,7 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 
 > **注意**：“系统配置” -> 搜索 `ProductName` 配置窗口标题；搜索 “CustomerHeadline”，可修改 “Example Company”。
 > **注意**：除了使用 `sudo yum install "perl(XX:YY)" -y` 方式安装 Perl 的依赖包之外，还可以使用 `sudo cpanm XX::YY` 方式安装（注意安装失败可能是因为系统没有 `gcc`）。
+> **注意**：需要修改 `Sysconfig` 中默认的 `NotificationSenderEmail` 选项。
 
 
 ## Nginx 部分的配置
