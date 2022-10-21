@@ -1,6 +1,6 @@
 # 将社区版 OTRS 与 PostgreSQL、NGINX 及 M$ AD 部署在一起
 
-OTRS 是一间德国公司开发的、用 Perl 语言实现的 Helpdesk/Ticketing 系统，商业部已经发展到 8.x，该公司自 6.0.37 版本便不再支持社区版，有个网站 [otrscommunityedition.com](https://otrscommunityedition.com/)。有好事者接手了这个不被支持的社区，在 [znuny.org](https://www.znuny.org/en) 上试图延续其寿命，并在 [github.com/znuny](https://github.com/znuny) 公开了源代码，znuny.org 推出了 LTS 版与包含了错误修复与新增小特性的版本。
+OTRS 是一间德国公司开发的、用 Perl 语言实现的 Helpdesk/Ticketing 系统，商业版已经发展到 8.x，该公司自 6.0.37 版本便不再支持社区版，有个网站 [otrscommunityedition.com](https://otrscommunityedition.com/)。有好事者接手了这个不被支持的社区，在 [znuny.org](https://www.znuny.org/en) 上试图延续其寿命，并在 [github.com/znuny](https://github.com/znuny) 公开了源代码，znuny.org 推出了 LTS 版与包含了错误修复与新增小特性的版本。
 
 OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 nginx 作为 HTTP 服务器。其会建立用户 otrs 作为 otrs 系统用户，并将 `/opt/otrs` 作为该用户的主目录。在安装结束后，访问网页 `http://localhost/otrs/installer.pl`，运行安装程序会要求获得 PostgreSQL 数据库的管理员账号与口令，随后会在数据库中建立一个新用户，并其随后所使用的创建数据库。接下来分别给出 Nginx 与 M$ AD 配置两个部分的配置文件。
 
