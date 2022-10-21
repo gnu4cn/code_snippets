@@ -28,3 +28,4 @@
 * [25 Gitlab Ce Deployment](25_gitlab_ce_deployment.md)
 * [26 Nginx Selinux Problem](26_nginx_selinux_problem.md)
 * [27 Zotrs Nginx Deployment](27_zotrs_nginx_deployment.md)
+* [28 Manjaro User Tips](28_manjaro_user_tips.md)
