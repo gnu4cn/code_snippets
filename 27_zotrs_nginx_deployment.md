@@ -5,7 +5,9 @@ OTRS 是一间德国公司开发的、用 Perl 语言实现的 Helpdesk/Ticketin
 OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 nginx 作为 HTTP 服务器。其会建立用户 otrs 作为 otrs 系统用户，并将 `/opt/otrs` 作为该用户的主目录。在安装结束后，访问网页 `http://localhost/otrs/installer.pl`，运行安装程序会要求获得 PostgreSQL 数据库的管理员账号与口令，随后会在数据库中建立一个新用户，并其随后所使用的创建数据库。接下来分别给出 Nginx 与 M$ AD 配置两个部分的配置文件。
 
 > **注意**：“系统配置” -> 搜索 `ProductName` 配置窗口标题；搜索 “CustomerHeadline”，可修改 “Example Company”。
+
 > **注意**：除了使用 `sudo yum install "perl(XX:YY)" -y` 方式安装 Perl 的依赖包之外，还可以使用 `sudo cpanm XX::YY` 方式安装（注意安装失败可能是因为系统没有 `gcc`）。
+
 > **注意**：需要修改 `Sysconfig` 中默认的 `NotificationSenderEmail` 选项。
 
 
