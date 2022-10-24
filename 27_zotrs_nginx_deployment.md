@@ -10,6 +10,8 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 
 > **注意**：需要修改 `Sysconfig` 中默认的 `NotificationSenderEmail` 选项。
 
+> **注意**：`Sysconfig` -> `SendmailModule` 即可设置 SMTP 相关参数。
+
 
 ## Nginx 部分的配置
 
