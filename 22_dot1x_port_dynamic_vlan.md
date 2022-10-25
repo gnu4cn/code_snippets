@@ -27,7 +27,7 @@ interface Vlanif9
 
 - 配置 TELNET/SSH 协议；
 
-```
+```config
 telnet server enable
 telnet server-source -i Vlanif9
 
@@ -137,7 +137,7 @@ interface Vlanif10
 
 5. 接口在 `dot1x` 认证失败时，根据 `dot1x mac-bypass` 设置，就会前往全局设置的 `mac-authen` 认证。
 
-6. 在 M$ NPS(网络策略服务，Network Policy Service) 设置 `网络策略`，并在 AD 服务器中添加 `mac` 地址的账户，密码为步骤 4 中的密码。
+6. 在 M$ NPS(网络策略服务，Network Policy Service) 设置 `网络策略`，并在 AD 服务器中添加 `mac` 地址的账户，密码为 MAC 地址（打印机等哑终端无法提供除MAC地址外的其他任何口令）。
 
 
 ### 统一认证模式
