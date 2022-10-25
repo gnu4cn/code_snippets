@@ -45,8 +45,10 @@ Nginx 并不直接支持 CGI，但支持 FastCGI。这里的问题是 OTRS 在 F
 
 将 `nginx.conf` 配置为支持 OTRS 与 FastCGI：
 
-```console
-$ sudo cat /etc/nginx/conf.d/default.conf
+```nginx
+#
+# /etc/nginx/conf.d/default.conf
+#
 server {
     listen       80;
     server_name  10.12.7.133;
@@ -91,8 +93,10 @@ Manage the OTRS daemon process.
 Daemon started
 ```
 
-```console
-$ sudo cat /etc/nginx/conf.d/otrs.data
+```nginx
+#
+# /etc/nginx/conf.d/otrs.data
+#
 location /otrs-web {
         gzip on;
         alias /opt/otrs/var/httpd/htdocs;
@@ -124,8 +128,10 @@ location /otrs-web {
 *代码清单 27-2：`/etc/nginx/conf.d/otrs.data`*
 
 ```perl
-sudo cat /usr/bin/fastcgi-wrapper.pl
 #!/usr/bin/perl
+#
+# /usr/bin/fastcgi-wrapper.pl
+#
 
 use FCGI;
 use Socket;
@@ -230,7 +236,6 @@ sub request_loop {
 *代码清单 27-3：`/usr/bin/fastcgi-wrapper.pl`*
 
 ```bash
-sudo cat /etc/init.d/perl-fcgi
 #!/bin/bash
 ### BEGIN INIT INFO
 # Provides:          perl-fcgi
@@ -240,6 +245,9 @@ sudo cat /etc/init.d/perl-fcgi
 # Default-Stop:      0 1 6
 # Short-Description: Start the Perl FastCGI daemon.
 ### END INIT INFO
+#
+# /etc/init.d/perl-fcgi
+#
 PERL_SCRIPT=/usr/bin/fastcgi-wrapper.pl
 FASTCGI_USER=otrs
 RETVAL=0
