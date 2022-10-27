@@ -7,6 +7,8 @@
 gitlab_rails['backup_path'] = "/backup"
 ```
 
-***注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间*
+> **注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间
+
+> 其所有者为 `git:root`，权限为 `755`
 
 
