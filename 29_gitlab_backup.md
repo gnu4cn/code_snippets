@@ -1,5 +1,9 @@
 # 关于 GitLab 的备份问题（包括备份到挂载的NFS分区）
 
+## 配置的备份
+
+参考 [备份与恢复 Omnibus GitLab 的配置](https://docs.gitlab.com/omnibus/settings/backups.html)
+
 
 - 修改 `/etc/gitlab/gitlab.rb` 中的：
 
