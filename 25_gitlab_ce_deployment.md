@@ -11,25 +11,25 @@
 
 3. 配置相关证书；
 
-    - LDAP（M$ AD）导出的 PEM 证书，用于 GitLab CE 与 AD 服务器之间的秘密通信；
+- LDAP（M$ AD）导出的 PEM 证书，用于 GitLab CE 与 AD 服务器之间的秘密通信；
 
-```console
-$ sudo cp gitlab-configs/certnew.pem /etc/pki/ca-trust/source/anchors/
-$ sudo update-ca-trust
-$ sudo cp gitlab-configs/certnew.pem /etc/gitlab/ssl/
-```
+    ```console
+    $ sudo cp gitlab-configs/certnew.pem /etc/pki/ca-trust/source/anchors/
+    $ sudo update-ca-trust
+    $ sudo cp gitlab-configs/certnew.pem /etc/gitlab/ssl/
+    ```
 
-    - NGINX 的证书（要从根证书，生成 nginx web 主机（gitlab.xfoss.com）的证书）；
+- NGINX 的证书（要从根证书，生成 nginx web 主机（gitlab.xfoss.com）的证书）；
 
-```console
-$ sudo cp gitlab-configs/gitlab.crt /etc/gitlab/ssl
-$ sudo cp gitlab-configs/gitlab-rsa.key /etc/gitlab/ssl
-```
+    ```console
+    $ sudo cp gitlab-configs/gitlab.crt /etc/gitlab/ssl
+    $ sudo cp gitlab-configs/gitlab-rsa.key /etc/gitlab/ssl
+    ```
 
 
 4. 拷贝 `gitlab.rb`，并编辑，然后执行 `$ sudo gitlab-cfg reconfigure` 重新配置。
 
-```console
-$ sudo cp ~/gitlab-configs/gitlab.rb /etc/gitlab/
-$ sudo gitlab-cfg reconfigure
-```
+    ```console
+    $ sudo cp ~/gitlab-configs/gitlab.rb /etc/gitlab/
+    $ sudo gitlab-cfg reconfigure
+    ```
