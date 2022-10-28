@@ -118,3 +118,16 @@ firewall-cmd --reload
 ```console
 $ sudo gitlab-rails console
 ```
+
+### 数据库与代码仓库的恢复
+
+```console
+$ sudo gitlab-ctl stop puma
+$ sudo gitlab-ctl stop sidekiq
+# Verify
+$ sudo gitlab-ctl status
+$ sudo gitlab-backup restore BACKUP=11493107454_2018_04_25_10.6.4-ce
+$ sudo gitlab-ctl reconfigure
+$ sudo gitlab-ctl restart
+$ sudo gitlab-rake gitlab:check SANITIZE=true
+```
