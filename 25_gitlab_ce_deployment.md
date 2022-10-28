@@ -85,3 +85,11 @@ firewall-cmd --permanent --add-service=mountd
 firewall-cmd --permanent --add-service=rpc-bind
 firewall-cmd --reload
 ```
+
+## 使用要点
+
+### Rails console
+
+```console
+$ sudo gitlab-rails console
+```
