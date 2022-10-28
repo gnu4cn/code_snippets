@@ -57,6 +57,23 @@
 参考 [备份与恢复 Omnibus GitLab 的配置](https://docs.gitlab.com/omnibus/settings/backups.html)
 
 
+```console
+sudo gitlab-ctl backup-etc --backup-path <DIRECTORY>
+```
+
+将配置备份到指定位置。
+
+编辑 root 用户的 cron 表，来创建一种定时的应用备份：
+
+```console
+$ sudo crontab -e -u root
+```
+
+```cron
+15 04 * * 2-6  gitlab-ctl backup-etc && cd /etc/gitlab/config_backup && cp $(ls -t | head -n1) /secret/gitlab/backups/
+```
+
+
 ## 数据库与代码仓库的备份
 
 
