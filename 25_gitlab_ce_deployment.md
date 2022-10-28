@@ -64,3 +64,16 @@ gitlab_rails['backup_path'] = "/backup"
 
 > 其所有者为 `git:root`，权限为 `755`
 
+
+> **注意**：CentOS 7 上假设 NFS 服务器要开启 SeLinux 规则，并在防火墙上放行 NSF 服务：
+
+```console
+setsebool -P nfs_export_all_rw 1
+setsebool -P nfs_export_all_ro 1
+
+
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=mountd
+firewall-cmd --permanent --add-service=rpc-bind
+firewall-cmd --reload
+```
