@@ -60,5 +60,7 @@ gitlab_rails['backup_path'] = "/backup"
 
 > **注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间
 
+> **注**：CentOS 7 中，需要安装安装 `yum install nfs-utils nfs-utils-lib`。
+
 > 其所有者为 `git:root`，权限为 `755`
 
