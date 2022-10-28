@@ -57,13 +57,21 @@
 参考 [备份与恢复 Omnibus GitLab 的配置](https://docs.gitlab.com/omnibus/settings/backups.html)
 
 
-## 数据库与代码仓库得备份
+## 数据库与代码仓库的备份
 
 
-- 修改 `/etc/gitlab/gitlab.rb` 中的：
+### 修改 `/etc/gitlab/gitlab.rb` 中的：
 
 ```ruby
 gitlab_rails['backup_path'] = "/backup"
+```
+
+### 运行备份命令
+
+```console
+$ sudo gitlab-backup create
+
+$ sudo gitlab-backup create INCREMENTAL=yes # 增量备份
 ```
 
 > **注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间
@@ -88,7 +96,7 @@ firewall-cmd --reload
 
 ## 使用要点
 
-### Rails console
+### GitLab 命令行：Rails console
 
 ```console
 $ sudo gitlab-rails console
