@@ -4,6 +4,14 @@
 
 这里记录在 CentOS 7 上，安装部署 GitLab CE 的步骤。
 
+
+> **注意**: 要开启 `80` 与 `443` 端口：
+
+```console
+# firewall-cmd --zone=public --add-service=http --permanent
+# firewall-cmd --zone=public --add-service=https --permanent
+```
+
 1. 安装、更新 CentOS 7；
 
     - `sudo yum -y update`；
