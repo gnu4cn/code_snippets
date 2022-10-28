@@ -119,6 +119,21 @@ firewall-cmd --reload
 $ sudo gitlab-rails console
 ```
 
+### GitLab 控制台修改用户口令
+
+```console
+irb(main):001:0> user = User.find_by_username 'root'
+=> #<User id:1 @root>
+irb(main):002:0> new_password = ::User.random_password
+=> "wm-KRAmuoCJDgTSNMHBbGVuyte57DiNWu54R1nnAfALsbG-iVJ_8rk35fiBzhZJb9-Zk7sAVrNLLYt1NgbCk3zHCstWxcH2fXyEWn6ygd6g13STcx_nDWk89a...
+irb(main):003:0> user.password = new_password
+=> "wm-KRAmuoCJDgTSNMHBbGVuyte57DiNWu54R1nnAfALsbG-iVJ_8rk35fiBzhZJb9-Zk7sAVrNLLYt1NgbCk3zHCstWxcH2fXyEWn6ygd6g13STcx_nDWk89a...
+irb(main):004:0> user.password_confirmation = new_password
+=> "wm-KRAmuoCJDgTSNMHBbGVuyte57DiNWu54R1nnAfALsbG-iVJ_8rk35fiBzhZJb9-Zk7sAVrNLLYt1NgbCk3zHCstWxcH2fXyEWn6ygd6g13STcx_nDWk89a...
+irb(main):005:0> user.save!
+=> true
+```
+
 ### 数据库与代码仓库的恢复
 
 ```console
