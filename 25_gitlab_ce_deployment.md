@@ -150,3 +150,5 @@ $ sudo gitlab-ctl reconfigure
 $ sudo gitlab-ctl restart
 $ sudo gitlab-rake gitlab:check SANITIZE=true
 ```
+
+> **注意**：恢复配置文件后，在网页端修改一些设置时，会报出 `http 500` 错误。这样的报错在恢复了数据库及代码仓库后，便会消失。
