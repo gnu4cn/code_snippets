@@ -12,18 +12,17 @@ fi
 cd "${BACKUP_DIR}"
 
 
+echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -----执行 GitLab-jh 备份-----" >> $LOG_FILE
 
 existed_copies=`ls *${SUBSTRING} | wc -l`
-
-echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -----执行 GitLab-jh 备份-----" >> $LOG_FILE
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >> $LOG_FILE
 
 if [[ $existed_copies == 0 ]]; then
     # echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $log_file
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
-    touch "$(date +%s)${SUBSTRING}"
-	# /bin/gitlab-backup create >> $LOG_FILE
+    # touch "$(date +%s)${SUBSTRING}"
+	/bin/gitlab-backup create >> $LOG_FILE
 
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
@@ -41,8 +40,8 @@ else
     # echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 发现先前备份：${previous_backup}，采取增量备份......" >> $log_file
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 发现先前备份：${previous_backup}，采取增量备份......" >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
-    touch "$(date +%s)${SUBSTRING}"
-	# /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$SUBSTRING"} >> $LOG_FILE
+    # touch "$(date +%s)${SUBSTRING}"
+	/bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$SUBSTRING"} >> $LOG_FILE
 
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
