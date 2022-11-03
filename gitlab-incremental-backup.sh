@@ -16,9 +16,7 @@ handle_backup_cmd_err() {
     fi
 }
 
-if [[ ! -f "$LOG_FILE" ]]; then 
-    touch "$LOG_FILE"
-fi
+if [[ ! -f "$LOG_FILE" ]]; then touch "$LOG_FILE"; fi
 
 cd "${BACKUP_DIR}"
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
