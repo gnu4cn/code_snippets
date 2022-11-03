@@ -14,7 +14,7 @@ cd "${BACKUP_DIR}"
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -----执行 GitLab-jh 备份-----" >> $LOG_FILE
 
 substring="_gitlab_backup.tar"
-existed_copies=`ls *${substring} | wc -l`
+existed_copies=`ls *${substring} > /dev/null 2>&1 | wc -l`
 
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >> $LOG_FILE
 
