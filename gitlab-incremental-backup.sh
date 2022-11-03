@@ -3,10 +3,6 @@ LOG_FILE="/var/log/gitlab_backup.log"
 COPIES_KEPT=7
 BACKUP_DIR="/mnt/gitlab-backups"
 
-if [[ ! -f "$LOG_FILE" ]]; then 
-    touch "$LOG_FILE"
-fi
-
 handle_backup_cmd_err() {
     if [ $1 -ne 0 ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
@@ -19,6 +15,10 @@ handle_backup_cmd_err() {
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
     fi
 }
+
+if [[ ! -f "$LOG_FILE" ]]; then 
+    touch "$LOG_FILE"
+fi
 
 cd "${BACKUP_DIR}"
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
