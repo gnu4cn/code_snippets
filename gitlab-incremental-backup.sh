@@ -7,12 +7,6 @@ if [[ ! -f "$LOG_FILE" ]]; then
     touch "$LOG_FILE"
 fi
 
-cd "${BACKUP_DIR}"
-echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
-
-substring="_gitlab_backup.tar"
-existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
-
 handle_backup_cmd_err() {
     if [ $1 -ne 0 ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
@@ -26,6 +20,11 @@ handle_backup_cmd_err() {
     fi
 }
 
+cd "${BACKUP_DIR}"
+echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
+
+substring="_gitlab_backup.tar"
+existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >> $LOG_FILE
 
 if [[ $existed_copies == 0 ]]; then
