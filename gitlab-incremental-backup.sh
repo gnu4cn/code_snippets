@@ -8,8 +8,7 @@ handle_backup_cmd_err() {
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
         exit 1
     else
-        /bin/sync
-        /bin/sleep 0.5
+        /bin/sync && /bin/sleep 0.5
 
         new_backup=`/bin/ls *${substring} -t | head -n1`
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
