@@ -13,6 +13,19 @@ echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份-----
 substring="_gitlab_backup.tar"
 existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
 
+handle_backup_cmd_err() {
+    if [ $1 -ne 0 ]; then
+        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
+        exit 1
+    else
+        /bin/sync
+        /bin/sleep 0.5
+
+        new_backup=`/bin/ls *${substring} -t | head -n1`
+        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
+    fi
+}
+
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >> $LOG_FILE
 
 if [[ $existed_copies == 0 ]]; then
@@ -21,16 +34,7 @@ if [[ $existed_copies == 0 ]]; then
     touch "$(date +%s)${substring}"
     # /bin/gitlab-backup create >> $LOG_FILE
 
-    if [ $? -ne 0 ]; then
-        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
-        exit 1
-    else
-        /bin/sync
-        /bin/sleep 0.5
-
-        new_backup=`/bin/ls *${substring} -t | head -n1`
-        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
-    fi
+    handle_backup_cmd_err "$?"
 else 
     previous_backup=`/bin/ls *${substring} -t | head -n1`
 
@@ -39,16 +43,7 @@ else
     touch "$(date +%s)${substring}"
     # /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
 
-    if [ $? -ne 0 ]; then
-        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
-        exit 1
-    else
-        /bin/sync
-        /bin/sleep 0.5
-
-        new_backup=`/bin/ls *${substring} -t | head -n1`
-        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
-    fi
+    handle_backup_cmd_err "$?"
 
     /bin/sync
     /bin/sleep 1
@@ -67,5 +62,7 @@ else
         existed_copies=`/bin/ls *${substring} | wc -l`
     done
 fi
+
+
 
 exit 0
