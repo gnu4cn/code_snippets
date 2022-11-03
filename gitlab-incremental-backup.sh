@@ -7,10 +7,7 @@ if [[ ! -f "$LOG_FILE" ]]; then
     touch "$LOG_FILE"
 fi
 
-
 cd "${BACKUP_DIR}"
-
-
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
 
 substring="_gitlab_backup.tar"
@@ -22,7 +19,7 @@ if [[ $existed_copies == 0 ]]; then
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
     touch "$(date +%s)${substring}"
-	# /bin/gitlab-backup create >> $LOG_FILE
+    # /bin/gitlab-backup create >> $LOG_FILE
 
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
