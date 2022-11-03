@@ -11,10 +11,10 @@ fi
 cd "${BACKUP_DIR}"
 
 
-echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -----执行 GitLab-jh 备份-----" >> $LOG_FILE
+echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
 
 substring="_gitlab_backup.tar"
-existed_copies=`ls *${substring} > /dev/null 2>&1 | wc -l`
+existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
 
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >> $LOG_FILE
 
@@ -31,11 +31,11 @@ if [[ $existed_copies == 0 ]]; then
         /bin/sync
         /bin/sleep 0.5
 
-        new_backup=`ls *${substring} -t | head -n1`
+        new_backup=`/bin/ls *${substring} -t | head -n1`
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
     fi
 else 
-    previous_backup=`ls *${substring} -t | head -n1`
+    previous_backup=`/bin/ls *${substring} -t | head -n1`
 
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 发现先前备份：${previous_backup}，采取增量备份......" >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
@@ -49,17 +49,17 @@ else
         /bin/sync
         /bin/sleep 0.5
 
-        new_backup=`ls *${substring} -t | head -n1`
+        new_backup=`/bin/ls *${substring} -t | head -n1`
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
     fi
 
     /bin/sync
     /bin/sleep 1
     
-    existed_copies=`ls *${substring} | wc -l`
+    existed_copies=`/bin/ls *${substring} | wc -l`
 
     while [ $existed_copies -gt $COPIES_KEPT ]; do
-        oldest_copy=`ls *${substring} -t | tail -n 1`
+        oldest_copy=`/bin/ls *${substring} -t | tail -n 1`
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数 ${existed_copies}, 超出预设 ${COPIES_KEPT}，将删除最早备份：${oldest_copy}" >> $LOG_FILE
 
         /bin/rm -rf "${oldest_copy}"
@@ -67,7 +67,7 @@ else
         /bin/sync
         /bin/sleep 0.5
 
-        existed_copies=`ls *${substring} | wc -l`
+        existed_copies=`/bin/ls *${substring} | wc -l`
     done
 fi
 
