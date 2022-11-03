@@ -21,8 +21,8 @@ echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >
 if [[ $existed_copies == 0 ]]; then
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
-    # touch "$(date +%s)${substring}"
-	/bin/gitlab-backup create >> $LOG_FILE
+    touch "$(date +%s)${substring}"
+	# /bin/gitlab-backup create >> $LOG_FILE
 
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
@@ -39,8 +39,8 @@ else
 
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 发现先前备份：${previous_backup}，采取增量备份......" >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
-    # touch "$(date +%s)${substring}"
-	/bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
+    touch "$(date +%s)${substring}"
+	# /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
 
     if [ $? -ne 0 ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
