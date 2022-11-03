@@ -31,25 +31,24 @@ echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >
 if [[ $existed_copies == 0 ]]; then
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
+
     touch "$(date +%s)${substring}"
     # /bin/gitlab-backup create >> $LOG_FILE
-
     handle_backup_cmd_err "$?"
 else 
     previous_backup=`/bin/ls *${substring} -t | head -n1`
 
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 发现先前备份：${previous_backup}，采取增量备份......" >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
+
     touch "$(date +%s)${substring}"
     # /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
-
     handle_backup_cmd_err "$?"
 
     /bin/sync
     /bin/sleep 1
     
     existed_copies=`/bin/ls *${substring} | wc -l`
-
     while [ $existed_copies -gt $COPIES_KEPT ]; do
         oldest_copy=`/bin/ls *${substring} -t | tail -n 1`
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数 ${existed_copies}, 超出预设 ${COPIES_KEPT}，将删除最早备份：${oldest_copy}" >> $LOG_FILE
