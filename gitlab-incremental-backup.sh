@@ -5,8 +5,7 @@ BACKUP_DIR="/mnt/gitlab-backups"
 
 handle_backup_cmd_err() {
     if [ $1 -ne 0 ]; then
-        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE
-        exit 1
+        echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份失败，退出此程序！" >> $LOG_FILE && exit 1
     fi
 
     /bin/sync && /bin/sleep 0.5
@@ -20,8 +19,7 @@ if [[ ! -f "$LOG_FILE" ]]; then touch "$LOG_FILE"; fi
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
 
 if [ ! -d "${BACKUP_DIR}" ]; then
-    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ${BACKUP_DIR} 不存在，将退出此程序！" >> $LOG_FILE
-    exit 1
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ${BACKUP_DIR} 不存在，将退出此程序！" >> $LOG_FILE && exit 1
 fi
 
 cd "${BACKUP_DIR}"
