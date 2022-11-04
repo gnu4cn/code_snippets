@@ -17,8 +17,14 @@ handle_backup_cmd_err() {
 
 if [[ ! -f "$LOG_FILE" ]]; then touch "$LOG_FILE"; fi
 
-cd "${BACKUP_DIR}"
 echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
+
+if [ ! -d "${BACKUP_DIR}" ]; then
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ${BACKUP_DIR} 不存在，将退出此程序！" >> $LOG_FILE
+    exit 1
+fi
+
+cd "${BACKUP_DIR}"
 
 substring="_gitlab_backup.tar"
 existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
