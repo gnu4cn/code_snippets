@@ -46,8 +46,6 @@ touch "$(date +%s)${substring}"
 # /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
 handle_backup_cmd_err "$?"
 
-/bin/sync && /bin/sleep 1
-
 existed_copies=`/bin/ls *${substring} | wc -l`
 while [ $existed_copies -gt $COPIES_KEPT ]; do
     oldest_copy=`/bin/ls *${substring} -t | tail -n 1`
