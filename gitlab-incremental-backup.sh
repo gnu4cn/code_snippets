@@ -24,11 +24,11 @@ beginning_msg_log() {
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
 }
 
-if [[ ! -f "$LOG_FILE" ]]; then touch "$LOG_FILE"; fi
-
 if [ ! -d "${BACKUP_DIR}" ]; then
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ${BACKUP_DIR} 不存在，将退出此程序！" >> $LOG_FILE && exit 1
 fi
+
+if [[ ! -f "$LOG_FILE" ]]; then touch "$LOG_FILE"; fi
 
 cd "${BACKUP_DIR}"
 substring="_gitlab_backup.tar"
