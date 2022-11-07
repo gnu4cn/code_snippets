@@ -44,11 +44,9 @@ beginning_msg_log "${previous_backup}"
 /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$SUBSTRING"} >> $LOG_FILE
 handle_backup_cmd_err "$?"
 
-existed_copies=`/bin/ls *${SUBSTRING} | wc -l`
-while [ $existed_copies -gt $COPIES_KEPT ]; do
+while [ $(/bin/ls *${SUBSTRING} | wc -l) -gt $COPIES_KEPT ]; do
     oldest_copy=`/bin/ls *${SUBSTRING} -t | tail -n 1`
-    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数 ${existed_copies}, 超出预设 ${COPIES_KEPT}，将删除最早备份：${oldest_copy}" >> $LOG_FILE
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数超出预设，将删除最早备份：${oldest_copy}" >> $LOG_FILE
     /bin/rm -rf "${oldest_copy}" && /bin/sync && /bin/sleep 0.5
-    existed_copies=`/bin/ls *${SUBSTRING} | wc -l`
 done
 exit 0
