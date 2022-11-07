@@ -15,6 +15,8 @@ handle_backup_cmd_err() {
 }
 
 beginning_msg_log() {
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
+
     if [ "${1}" = "" ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $LOG_FILE
     else
@@ -26,8 +28,6 @@ beginning_msg_log() {
 
 if [[ ! -f "$LOG_FILE" ]]; then touch "$LOG_FILE"; fi
 
-echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
-
 if [ ! -d "${BACKUP_DIR}" ]; then
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ${BACKUP_DIR} 不存在，将退出此程序！" >> $LOG_FILE && exit 1
 fi
@@ -36,22 +36,15 @@ cd "${BACKUP_DIR}"
 
 substring="_gitlab_backup.tar"
 existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
-echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数：${existed_copies}" >> $LOG_FILE
 
 if [[ $existed_copies == 0 ]]; then
-    beginning_msg_log
-
-    touch "$(date +%s)${substring}"
-    # /bin/gitlab-backup create >> $LOG_FILE
+    beginning_msg_log && /bin/gitlab-backup create >> $LOG_FILE
     handle_backup_cmd_err "$?"
     exit 0
 fi
 
 previous_backup=`/bin/ls *${substring} -t | head -n1`
-beginning_msg_log "${previous_backup}"
-
-touch "$(date +%s)${substring}"
-# /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
+beginning_msg_log "${previous_backup}" && /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
 handle_backup_cmd_err "$?"
 
 existed_copies=`/bin/ls *${substring} | wc -l`
