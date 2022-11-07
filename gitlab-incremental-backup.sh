@@ -32,9 +32,7 @@ if [[ ! -f "$LOG_FILE" ]]; then touch "$LOG_FILE"; fi
 
 cd "${BACKUP_DIR}"
 substring="_gitlab_backup.tar"
-existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
-
-if [[ $existed_copies == 0 ]]; then
+if [[ $(/bin/ls *${substring} 2> /dev/null | wc -l) == 0 ]]; then
     beginning_msg_log
     /bin/gitlab-backup create >> $LOG_FILE
     handle_backup_cmd_err "$?"
