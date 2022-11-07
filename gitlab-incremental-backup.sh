@@ -9,9 +9,7 @@ handle_backup_cmd_err() {
     fi
 
     /bin/sync && /bin/sleep 0.5
-
-    new_backup=`/bin/ls *${substring} -t | head -n1`
-    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：${new_backup}" >> $LOG_FILE
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 备份成功：$(/bin/ls *${substring} -t | head -n1)" >> $LOG_FILE
 }
 
 beginning_msg_log() {
