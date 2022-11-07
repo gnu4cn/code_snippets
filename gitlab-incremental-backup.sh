@@ -52,9 +52,7 @@ existed_copies=`/bin/ls *${substring} | wc -l`
 while [ $existed_copies -gt $COPIES_KEPT ]; do
     oldest_copy=`/bin/ls *${substring} -t | tail -n 1`
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 现有备份数 ${existed_copies}, 超出预设 ${COPIES_KEPT}，将删除最早备份：${oldest_copy}" >> $LOG_FILE
-
     /bin/rm -rf "${oldest_copy}" && /bin/sync && /bin/sleep 0.5
-
     existed_copies=`/bin/ls *${substring} | wc -l`
 done
 exit 0
