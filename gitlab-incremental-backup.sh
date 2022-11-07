@@ -33,18 +33,19 @@ if [ ! -d "${BACKUP_DIR}" ]; then
 fi
 
 cd "${BACKUP_DIR}"
-
 substring="_gitlab_backup.tar"
 existed_copies=`/bin/ls *${substring} 2> /dev/null | wc -l`
 
 if [[ $existed_copies == 0 ]]; then
-    beginning_msg_log && /bin/gitlab-backup create >> $LOG_FILE
+    beginning_msg_log
+    /bin/gitlab-backup create >> $LOG_FILE
     handle_backup_cmd_err "$?"
     exit 0
 fi
 
 previous_backup=`/bin/ls *${substring} -t | head -n1`
-beginning_msg_log "${previous_backup}" && /bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
+beginning_msg_log "${previous_backup}"
+/bin/gitlab-backup create INCREMENTAL=yes PREVIOUS_BACKUP=${previous_backup%"$substring"} >> $LOG_FILE
 handle_backup_cmd_err "$?"
 
 existed_copies=`/bin/ls *${substring} | wc -l`
