@@ -14,7 +14,9 @@ handle_backup_cmd_err() {
 }
 
 beginning_msg_log() {
-    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------执行 GitLab-jh 备份----------" >> $LOG_FILE
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -------------------------------------------------------------" >> $LOG_FILE
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -------------------- 执行 GitLab-jh 备份 --------------------" >> $LOG_FILE
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -------------------------------------------------------------" >> $LOG_FILE
 
     if [ "${1}" = "" ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $LOG_FILE
