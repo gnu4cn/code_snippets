@@ -14,9 +14,7 @@ handle_backup_cmd_err() {
 }
 
 beginning_msg_log() {
-    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -------------------------------------------------------------" >> $LOG_FILE
     echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -------------------- 执行 GitLab-jh 备份 --------------------" >> $LOG_FILE
-    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -------------------------------------------------------------" >> $LOG_FILE
 
     if [ "${1}" = "" ]; then
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 无先前备份，进行完整备份......." >> $LOG_FILE
@@ -24,7 +22,7 @@ beginning_msg_log() {
         echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- 发现先前备份：${1}，采取增量备份......" >> $LOG_FILE
     fi
 
-    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- ----------gitlab-backup 开始运行----------" >> $LOG_FILE
+    echo "$(date '+%Y-%m-%d, %H:%M:%S %Z') -- -------------------- gitlab-backup 开始运行 -------------------" >> $LOG_FILE
 }
 
 if [ ! -d "${BACKUP_DIR}" ]; then
