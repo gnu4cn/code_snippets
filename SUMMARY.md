@@ -29,3 +29,4 @@
 * [26 Nginx Selinux Problem](26_nginx_selinux_problem.md)
 * [27 Zotrs Nginx Deployment](27_zotrs_nginx_deployment.md)
 * [28 Manjaro User Tips](28_manjaro_user_tips.md)
+* [29 Vim Tips](29_vim_tips.md)
