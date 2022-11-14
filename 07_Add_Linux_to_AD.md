@@ -39,6 +39,8 @@ sudo vim /etc/resolvconf/resolv.conf.d/head
 sudo resolvconf -u
 ```
 
+> **注意**：在 CentOS 7 上没有 `resolvconf` 软件包，可修改 `/etc/resolv.conf`，然后使用命令 `$ sudo chattr +i /etc/resolv.conf` 将这个文件属性，设置为不可修改（immutable）。
+
 ## 03. 在 Linux 机器上配置时间服务
 
 将配置了 NTP 服务的 DC 服务器，配置为 Linux 机器的 NTP 服务器。编辑文件：
