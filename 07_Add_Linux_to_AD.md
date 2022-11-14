@@ -22,7 +22,7 @@ rdns = false
 
 通过 `hostname -f` 查看。同时在 Windows 服务器上加入对应的 `A` 记录。
 
-## 02. 在 Linux 机器上配置有效的DNS服务器
+## 02. 在 Linux 机器上配置有效的 DNS 服务器
 
 安装 `resolvconf` 软件包，并启动 `resolvconf` 服务，修改 `/etc/resolvconf/resolvconf.d/head`配置文件（加入 `nameserver 192.168.153.131`, 其中 `192.168.153.131` 就是配置了 DNS 服务的 DC 服务器地址），然后运行 `sudo resolvconf -u` 更新配置。
 
@@ -111,6 +111,22 @@ sudo realm join -U lenny.peng xfoss.com --os-name="`uname -o`" --os-version="`un
 
 ![已加入到AD的Ubuntu机器](images/ad_screen_shotcut.png)
 
+
+> **注**：在 CentOS 7 下执行这个命令，会报错：
+
+```console
+$ sudo realm join -U lenny.peng xfoss.com --os-name="`uname -o`" --os-version="`uname -rsv`" --install='/' --verbose
+ * Resolving: _ldap._tcp.xfoss.com
+ * Performing LDAP DSE lookup on: 192.168.192.135
+ * Successfully discovered: xfoss.com
+Password for lenny.peng:
+ * Assuming packages are installed
+ * LANG=C /usr/bin/net -s /var/cache/realmd/realmd-smb-conf.XG63V1 -U lenny.peng ads join xfoss.com osName=GNU/Linux osVer=Linux 3.10.0-1160.80.1.el7.x86_64 #1 SMP Tue Nov 8 15:48:59 UTC 2022
+ ! Failed to enroll machine in realm: Failed to execute child process “/usr/bin/net” (No such file or directory)
+realm: Couldn't join realm: Failed to enroll machine in realm. See diagnostics.
+```
+
+> 解决方法：在 CentOS 7 上，执行 `$ sudo yum install samba-common-tools -y` 安装这个 `samba-common-tools` 软件包。
 
 要脱离 AD，以 `sudo` 模式，运行 `sudo realm leave xfoss.com`。
 
