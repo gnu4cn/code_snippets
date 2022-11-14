@@ -16,6 +16,12 @@ sudo apt install sssd-ad sssd-tools realmd adcli krb5-user
 rdns = false
 ```
 
+> **注**：对于 CentOS 7，需安装如下的这些软件包：
+
+```console
+$ sudo yum install sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python -y
+```
+
 ## 01. 主机名及主机名的解析
 
 编辑文件 `/etc/hostname`，将主机名修改为 FQDN 样式（比如 `udesktop.xfoss.com`）。
@@ -139,6 +145,24 @@ realm: Couldn't join realm: Failed to enroll machine in realm. See diagnostics.
 运行命令 `sudo pam-auth-update --enable mkhomedir`, 就可以在用户登录后，自动创建用户主目录。
 
 > 创建出来的主目录的格式为： `/home/hailin.peng@xfoss.com`、`/home/lenny.peng@xfoss.com`
+
+> **注意**：对于 CentOS 7，修改配置文件 `/etc/sssd/sssd.conf` 为：
+
+
+```conf
+use_fully_qualified_names = False
+fallback_homedir = /home/%u
+```
+
+> 然后重启 `sssd`：`$ sudo systemctl restart sssd`。
+
+（在 CentOS 7 上）用户登录的情况：
+
+```console
+$ ssh lenny.peng@192.168.192.134
+lenny.peng@192.168.192.134's password:
+Creating home directory for lenny.peng.
+```
 
 ### 04-04. 对设置进行测试
 
