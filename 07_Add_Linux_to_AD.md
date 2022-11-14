@@ -2,7 +2,7 @@
 
 _本文以 Ubuntu 20.04为例，记录将 Linux 机器加入到 M$ AD的操作过程。_
 
-### 00. 安装 SSSD 软件及工具
+## 00. 安装 SSSD 软件及工具
 
 SSSD 是 **System Security Services Daemon** 的缩写。安装以下软件：
 
@@ -16,13 +16,13 @@ sudo apt install sssd-ad sssd-tools realmd adcli krb5-user
 rdns = false
 ```
 
-### 01. 主机名及主机名的解析
+## 01. 主机名及主机名的解析
 
 编辑文件 `/etc/hostname`，将主机名修改为 FQDN 样式（比如 `udesktop.xfoss.com`）。
 
 通过 `hostname -f` 查看。同时在 Windows 服务器上加入对应的 `A` 记录。
 
-### 02. 在 Linux 机器上配置有效的DNS服务器
+## 02. 在 Linux 机器上配置有效的DNS服务器
 
 安装 `resolvconf` 软件包，并启动 `resolvconf` 服务，修改 `/etc/resolvconf/resolvconf.d/head`配置文件（加入 `nameserver 192.168.153.131`, 其中 `192.168.153.131` 就是配置了 DNS 服务的 DC 服务器地址），然后运行 `sudo resolvconf -u` 更新配置。
 
@@ -33,7 +33,7 @@ sudo vim /etc/resolvconf/resolv.conf.d/head
 sudo resolvconf -u
 ```
 
-### 03. 在 Linux 机器上配置时间服务
+## 03. 在 Linux 机器上配置时间服务
 
 将配置了 NTP 服务的 DC 服务器，配置为 Linux 机器的 NTP 服务器。编辑文件：
 
@@ -49,9 +49,9 @@ NTP=dc.xfoss.com
 FallbackNTP=ntp.ubuntu.com
 ```
 
-## 连接到 AD
+## 04. 连接到 AD
 
-### 01. 发现 Active Directory
+### 04-01. 发现 Active Directory
 
 运行命令（无需 `sudo`）：
 
@@ -97,7 +97,7 @@ xfoss.com
   login-policy: allow-realm-logins
 ```
 
-## 02. 加入到活动目录
+### 04-02. 加入到活动目录
 
 要加入到活动目录，以 `sudo` 执行以下命令：
 
@@ -116,19 +116,19 @@ sudo realm join -U lenny.peng xfoss.com --os-name="`uname -o`" --os-version="`un
 
 此时以普通用户运行 `realm list xfoss.com`，输出与 `realm discover xfoss.com` 的输出一致。
 
-## 03. 配置自动创建用户主目录（Creating home directory automatically）
+### 04-03. 配置自动创建用户主目录（Creating home directory automatically）
 
 运行命令 `sudo pam-auth-update --enable mkhomedir`, 就可以在用户登录后，自动创建用户主目录。
 
 > 创建出来的主目录的格式为： `/home/hailin.peng@xfoss.com`、`/home/lenny.peng@xfoss.com`
 
-## 04. 对设置进行测试
+### 04-04. 对设置进行测试
 
 > 可能需要需要重启系统，设置才能生效。
 
 **测试发现，Linux下也是支持新用户首次登录修改密码的。在GUI登录下，直接修改密码后登录到桌面；但在SSH登录时，修改密码后会显示 `Connection to ulite.xfoss.com closed.` 之后需再次SSH登录。**
 
-## 05. 关于 `ldap-utils`
+### 04-05. 关于 `ldap-utils`
 
 `ldapsearch` 是 LDAP 实用工具之一。运行 `ldapsearch` 需要在域账号登录环境之下。否则会报错：
 
@@ -151,6 +151,6 @@ SASL data security layer installed.
 ...
 ```
 
-## 06. 后记
+## 05. 后记
 
 经测试，在 M$ AD 域控制器服务器关机时，以前曾登录过 Linux 机器的用户，可以继续登录，未曾登录过的用户，无法登录。说明登录凭据被保存在了 Linux 机器本地。
