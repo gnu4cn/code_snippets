@@ -127,6 +127,8 @@ realm: Couldn't join realm: Failed to enroll machine in realm. See diagnostics.
 ```
 
 > 解决方法：在 CentOS 7 上，执行 `$ sudo yum install samba-common-tools -y` 安装这个 `samba-common-tools` 软件包。
+> 
+> **注意**：似乎还应安装 `dconf-editor` 这个软件包。
 
 要脱离 AD，以 `sudo` 模式，运行 `sudo realm leave xfoss.com`。
 
