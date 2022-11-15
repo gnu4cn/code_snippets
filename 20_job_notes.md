@@ -11,3 +11,9 @@
 2. 无法远程桌面到另一 Windows 终端的问题
 
     由于该 Windows 开启了防火墙，导致其他计算机无法远程桌面控制此 Windows 计算机。并表现为从此 Windows 终端可 Ping 通远端计算机，但远端计算机无法 Ping 通此 Windows 计算机。*解决方法*：关闭此计算机的防火墙即可。
+
+3. 远程连接到 Linux 主机方案 - X2go
+
+    [X2Go - everywhere@home](https://wiki.x2go.org)
+
+    使用 X2go 无法连接到 Gnome-shell, 原因：[The problem is with Gnome, installing Xfce works well.](https://unix.stackexchange.com/a/322350)
