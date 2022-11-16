@@ -1,4 +1,4 @@
-# 笔记与代码片段
+# Your Book Title
 
 * [00 Sh Bash](00_sh_bash.md)
 * [01 Flask Uwsgi Supervisord](01_flask_uwsgi_supervisord.md)
@@ -26,7 +26,7 @@
 * [23 Huawei Switch SSH TELENT Weird Problem](23_Huawei_switch_SSH_TELENT_weird_problem.md)
 * [24 SC Network Op](24_SC_network_op.md)
 * [25 Gitlab Ce Deployment](25_gitlab_ce_deployment.md)
-* [26 Nginx Selinux Problem](26_nginx_selinux_problem.md)
+* [26 Epel Nginx Selinux Problem](26_epel_nginx_selinux_problem.md)
 * [27 Zotrs Nginx Deployment](27_zotrs_nginx_deployment.md)
 * [28 Manjaro User Tips](28_manjaro_user_tips.md)
 * [29 Vim Tips](29_vim_tips.md)
