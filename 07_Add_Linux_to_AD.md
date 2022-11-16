@@ -195,6 +195,16 @@ SASL data security layer installed.
 ...
 ```
 
+### 04-06. 将 AD 中的用户，加入到 `sudoers` 组中
+
+修改配置文件：`/etc/sudoers.d/sudoers` 如下：
+
+```conf
+%sudoers    ALL=(ALL)       ALL
+```
+
+并在 AD 中建立一个用户组 `sudoers`，把需要 `sudo` 权限的用户，加入到这个组中，那么这些用户将在 Linux 系统中得到 `sudo` 权限。
+
 ## 05. 后记
 
 经测试，在 M$ AD 域控制器服务器关机时，以前曾登录过 Linux 机器的用户，可以继续登录，未曾登录过的用户，无法登录。说明登录凭据被保存在了 Linux 机器本地。
