@@ -34,3 +34,5 @@
     ```
 
     到文件 `/etc/yum.repos.d/yselkowitz-gnome-flashback-epel-7.repo`，再执行：`$ sudo yum install gnome-flashback -y`。
+
+    随后即可通过 `X2Go` 连接到 Gnome 桌面了。
