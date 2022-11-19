@@ -19,9 +19,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 "Add your bundles here
 
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-
+Plugin 'godlygeek/tabular'
 " ============================================================================
 " Active plugins
 " You can disable or add new ones here:
@@ -30,7 +28,6 @@ Bundle 'plasticboy/vim-markdown'
 
 " autoformat
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 " TypeScript 
 Bundle 'leafgarland/typescript-vim'
 " Better file browser
@@ -132,6 +129,7 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'rhysd/vim-gfm-syntax'
 Plug 'Raimondi/delimitMate'
 Plug 'yuezk/vim-js'
 Plug 'ycm-core/YouCompleteMe'
@@ -143,9 +141,8 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 call plug#end()
 
 let g:snipMate = { 'snippet_version' : 1 }
-let g:instant_markdown_slow=1
 let g:vim_markdown_folding_disabled=1
-
+let g:markdown_fenced_languages = ['typescript', 'python', 'ruby', 'java', 'rust', 'bash', 'sh', 'javascript']
 
 " You should always run `$python -m venv venv` to create python virtual
 " environment
