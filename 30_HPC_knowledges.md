@@ -17,3 +17,9 @@
 ## `Environment Modules` 工具
 
 [IBM LSF](https://en.wikipedia.org/wiki/IBM_Spectrum_LSF) 与 [Open MPI](https://www.open-mpi.org/) 都要用到这个 [Environment Modules 工具](https://modules.readthedocs.io/en/latest/)。本小节将介绍此工具原理与用法。
+
+在 ArchLinux 系统（Manjaro）上安装 Environment Modules：
+
+```console
+$ yay -S env-modules
+```
