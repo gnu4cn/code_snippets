@@ -13,3 +13,7 @@
 - 防务、武器设计。
 
 并行计算主要用到消息传递接口标准，Message Passing Interface, MPI，开放实现为 [OpenMPI](https://www.open-mpi.org/)，达到多机并行计算时相互之间通信目的。此外，随着 GPGPU、ASIC 与 FPGA 计算的出现和发展成熟，高性能计算呈现异构、混合形态，参考 [HPC 编程模型、编译器，性能分析](https://hpc-lr.umontpellier.fr/wp-content/uploads/2017/02/5_HPC_SystemArchitecture_ProgrammingModels_Compilers.pdf)。
+
+## `Environment Modules` 工具
+
+[IBM LSF](https://en.wikipedia.org/wiki/IBM_Spectrum_LSF) 与 [Open MPI](https://www.open-mpi.org/) 都要用到这个 [Environment Modules 工具](https://modules.readthedocs.io/en/latest/)。本小节将介绍此工具原理与用法。
