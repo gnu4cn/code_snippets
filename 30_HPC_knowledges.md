@@ -23,3 +23,10 @@
 ```console
 $ yay -S env-modules
 ```
+
+## 关于 IBM LSF
+
+IBM Spectrum LSF, spectrum, 光谱、谱系，LSF，load sharing facility, 负载分配设施。
+
+- [IBM 红皮书：IBM Spetrum LSF 套装：安装最佳实践](https://www.redbooks.ibm.com/redpapers/pdfs/redp5572.pdf)
+- [IBM Spectrum MPI: 安装文档](https://www.ibm.com/docs/en/SSZTET_EOS/eos/install_101.pdf)
