@@ -142,7 +142,7 @@ call plug#end()
 
 let g:snipMate = { 'snippet_version' : 1 }
 let g:vim_markdown_folding_disabled=1
-let g:markdown_fenced_languages = ['typescript', 'python', 'ruby', 'java', 'rust', 'bash', 'sh', 'javascript']
+let g:markdown_fenced_languages = ['typescript', 'python', 'ruby', 'java', 'rust', 'bash', 'sh', 'javascript', 'lisp']
 
 " You should always run `$python -m venv venv` to create python virtual
 " environment
