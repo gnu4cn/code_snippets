@@ -36,3 +36,9 @@
     到文件 `/etc/yum.repos.d/yselkowitz-gnome-flashback-epel-7.repo`，再执行：`$ sudo yum install gnome-flashback -y`。
 
     随后即可通过 `X2Go` 连接到 Gnome 桌面了。
+
+4. M$/Windows DHCP 服务器管理器
+
+“设置” -> “Windows 设置” -> “应用” -> “可选功能” -> “添加功能” -> “RSAT: xxx” 组别
+
+RSAT，Remote Server Administration Tools, 远端服务器管理工具
