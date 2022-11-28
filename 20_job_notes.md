@@ -39,6 +39,6 @@
 
 4. M$/Windows DHCP 服务器管理器
 
-“设置” -> “Windows 设置” -> “应用” -> “可选功能” -> “添加功能” -> “RSAT: xxx” 组别
+    “设置” -> “Windows 设置” -> “应用” -> “可选功能” -> “添加功能” -> “RSAT: xxx” 组别
 
-RSAT，Remote Server Administration Tools, 远端服务器管理工具
+    RSAT，Remote Server Administration Tools, 远端服务器管理工具
