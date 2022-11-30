@@ -42,3 +42,12 @@
     “设置” -> “Windows 设置” -> “应用” -> “可选功能” -> “添加功能” -> “RSAT: xxx” 组别
 
     RSAT，Remote Server Administration Tools, 远端服务器管理工具
+
+5. AnyDesk `Aborted(core dumped)` 问题
+
+
+    该问题初步认为是由于安装 AnyDesk 时使用了 `$ sudo su -`，安装结束后未退出 `root` 用户，就运行了 `anydesk` 命令，在用户主目录下建立了 `.anydesk` 文件夹，所以因为权限原因，而报出 `Aborted(core dumped)` 错误。
+
+    解决办法即是删除主目录下的 `.anydesk` 文件夹。
+
+    参考：[Anydesk error: Aborted (core dumped) in Ubuntu 22.04](https://askubuntu.com/a/1413795`)
