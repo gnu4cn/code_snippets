@@ -210,3 +210,19 @@ SASL data security layer installed.
 ## 05. 后记
 
 经测试，在 M$ AD 域控制器服务器关机时，以前曾登录过 Linux 机器的用户，可以继续登录，未曾登录过的用户，无法登录。说明登录凭据被保存在了 Linux 机器本地。
+
+## 06. 补充
+
+在 Ubuntu 上，会出现照上述步骤配置好后，无法使用 LDAP/AD 账号登录的情况，如下所示：
+
+```log
+Nov 30 14:19:15 fpga-sta sshd[7060]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.12.10.96  user=leny.peng
+Nov 30 14:19:15 fpga-sta sshd[7060]: pam_sss(sshd:auth): authentication success; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.12.10.96 user=lenn.peng
+Nov 30 14:19:15 fpga-sta sshd[7060]: pam_sss(sshd:account): Access denied for user lenny.peng: 4 (System error)
+Nov 30 14:19:15 fpga-sta sshd[7060]: Failed password for lenny.peng from 10.12.10.96 port 52482 ssh2
+Nov 30 14:19:15 fpga-sta sshd[7060]: fatal: Access denied for user lenny.peng by PAM account configuration [preauth]
+```
+
+这是一种妥协的处理办法是，将 `ad_gpo_access_control = permissive` 添加到 `/etc/sssd/sssd.conf` 配置文件的 `[domain/xfoss.com]` 小节，便可通过 LDAP/AD 登录了。
+
+参考：[Debugging sssd login: pam_sss [...] System error](https://serverfault.com/q/872542)
