@@ -153,6 +153,7 @@ realm: Couldn't join realm: Failed to enroll machine in realm. See diagnostics.
 
 
 ```conf
+[domain/xfoss.com]
 use_fully_qualified_names = False
 fallback_homedir = /home/%u
 ```
