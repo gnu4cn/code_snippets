@@ -13,7 +13,8 @@ sudo apt install sssd-ad sssd-tools realmd adcli krb5-user
 其中 `krb5-user` 是必须的，且需要修改 `/etc/krb5.conf` 文件，加入下面的配置：
 
 ```conf
-rdns = false
+[libdefaults]
+    rdns = false
 ```
 
 > **注**：对于 CentOS 7，需安装如下的这些软件包：
