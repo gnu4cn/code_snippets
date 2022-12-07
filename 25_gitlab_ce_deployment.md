@@ -238,4 +238,32 @@ sync {
 }
 ```
 
-这时运行 `$ sudo systemctl restart lsyncd` 就可以将主机与从机的 `/var/opt/gitlab` 目录同步了。
+这时运行 `$ sudo systemctl restart lsyncd` 就可以将主机与从机的 `/var/opt/gitlab` 目录同步了。接下来配置 PostgreSQL 的主从复制。
+
+
+### PostgreSQL 主从复制
+
+GitLab CE 集成的 PostgreSQL 已建立了复制账号 `gitlab_replicator`，可经由以下命令操作查看到：
+
+```console
+$ sudo su - gitlab-psql
+Last login: Wed Dec  7 14:35:49 CST 2022 on pts/0
+-sh-4.2$ psql -h /var/opt/gitlab/postgresql -d gitlabhq_production
+gitlabhq_production=# select * from pg_roles;
+```
+
+**修改认证文件 `pg_hba.conf`**
+
+```console
+$ sudo su -
+# cd /var/opt/gitlab/postgresql/data
+# vim pg_hba.conf
+```
+
+在该文件底部，加入下面这行：
+
+```conf
+host    replication gitlab_replicator   10.12.7.125/32 trust
+```
+
+
