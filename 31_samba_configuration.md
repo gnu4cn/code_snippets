@@ -1,6 +1,12 @@
 # Linux 配置 Samba 文件共享
 
-Samba 文件共享涉及到以下几个方面：`/etc/hosts` 修改、Kerberos 配置 `/etc/krb5.conf`、Samba 配置 `/etc/samba/smb.conf` 与 `winbindd` — Name Service Switch daemon for resolving names from NT servers 配置 `/etc/nsswitch.conf` 等。中间要运行 `$ sudo net ads join -U (AD_admin)`，将运行 Samba 共享的机器，加入到域中。
+Samba 文件共享涉及到以下几个方面：`/etc/hosts` 修改、Kerberos 配置 `/etc/krb5.conf`、Samba 配置 `/etc/samba/smb.conf` 与 `winbindd` — Name Service Switch daemon for resolving names from NT servers 配置 `/etc/nsswitch.conf` 等。中间要运行 
+
+```console
+$ sudo net ads join -U (AD_admin)
+```
+
+将运行 Samba 共享的机器，加入到域中。
 
 ## 配置 `/etc/hosts`
 
