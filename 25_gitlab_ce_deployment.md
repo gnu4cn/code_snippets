@@ -312,6 +312,5 @@ $ sudo systemctl stop lsyncd
 ```
 
 ```console
-# cd /opt/gitlab/embedded/postgresql/13/bin/
-# ./pg_basebackup -h 10.12.7.121 -p 5432 -U gitlab_replicator -F p -P -D /var/opt/gitlab/postgres/data
+# pg_basebackup -h 10.12.7.121 -p 5432 -U gitlab_replicator -Fp -Xs -Pv -R -D /var/opt/gitlab/postgresql/data/
 ```
