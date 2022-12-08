@@ -5,8 +5,8 @@
 ## 00. PyPI 使用华为镜像
 
 ```bash
-$mkdir ~/.pip
-$vim.gtks ~/.pip/conf
+mkdir ~/.pip
+vim.gtks ~/.pip/conf
 ```
 
 加入以下内容：
@@ -21,21 +21,21 @@ timeout = 120
 ## 01. NVM 配置华为镜像
 
 ```bash
-$echo 'export NVM_NODEJS_ORG_MIRROR=https://repo.huaweicloud.com/nodejs' >> ~/.bashrc
+echo 'export NVM_NODEJS_ORG_MIRROR=https://repo.huaweicloud.com/nodejs' >> ~/.bashrc
 ```
 
 然后运行：
 
 ```bash
-$npm config set registry https://repo.huaweicloud.com/repository/npm/
-$npm cache clean -f
-$npm config set disturl https://repo.huaweicloud.com/nodejs
-$npm config set sass_binary_site https://repo.huaweicloud.com/node-sass
-$npm config set phantomjs_cdnurl https://repo.huaweicloud.com/phantomjs
-$npm config set chromedriver_cdnurl https://repo.huaweicloud.com/chromedriver
-$npm config set operadriver_cdnurl https://repo.huaweicloud.com/operadriver
-$npm config set electron_mirror https://repo.huaweicloud.com/electron/
-$npm config set python_mirror https://repo.huaweicloud.com/python 
+npm config set registry https://repo.huaweicloud.com/repository/npm/
+npm cache clean -f
+npm config set disturl https://repo.huaweicloud.com/nodejs
+npm config set sass_binary_site https://repo.huaweicloud.com/node-sass
+npm config set phantomjs_cdnurl https://repo.huaweicloud.com/phantomjs
+npm config set chromedriver_cdnurl https://repo.huaweicloud.com/chromedriver
+npm config set operadriver_cdnurl https://repo.huaweicloud.com/operadriver
+npm config set electron_mirror https://repo.huaweicloud.com/electron/
+npm config set python_mirror https://repo.huaweicloud.com/python 
 ```
 
 
