@@ -266,4 +266,52 @@ $ sudo su -
 host    replication gitlab_replicator   10.12.7.125/32 trust
 ```
 
+然后修改 GitLab CE 下 PostgreSQL 配置文件 `/var/opt/gitlab/postgresql/data/postgresql.conf`，修改下面这些配置项：
 
+
+```conf
+#监听服务器
+listen_addresses = '*'
+
+#开启归档
+archive_mode = on
+#归档命令
+archive_command = 'cp %p /db/pgsql/archive/%f'
+
+#主从设置为热备模式，流复制必选参数, [minimal, replica, logical]，务必设置高于 replica 
+wal_level = replica
+
+#流复制允许的连接进程，一般同standby数量一致
+max_wal_senders = 10
+
+#流复制在没有基于文件的连续归档时，主服务器可能在备机收到WAL日志前回收这些旧的WAL，此时备机需要重新从一个新的基础备份初始化；可设置wal_keep_segments为一个足够高的值来确保旧的WAL段不会被太早重用；1个WAL日志为16MB，所以在设置wal_keep_segments时，在满足空间的前提下可以尽量设置大一些
+wal_keep_size = 64
+
+#流复制超时时间
+wal_sender_timeout = 60s
+
+max_replication_slots = 8
+```
+
+> **参考**：[PostgreSQL 主从复制](https://blog.51cto.com/suncj/5102637)
+
+随后重启 GitLab CE 主实例下的 PostgreSQL：
+
+```console
+$ sudo gitlab-ctl restart postgresql
+```
+
+### PostgreSQL 从库配置
+
+**备份主库的数据**
+
+备份之前要先停止主库的 `lsyncd` 服务，否则会同步主库数据，清空 data 目录。
+
+```console
+$ sudo systemctl stop lsyncd
+```
+
+```console
+# cd /opt/gitlab/embedded/postgresql/13/bin/
+# ./pg_basebackup -h 10.12.7.121 -p 5432 -U gitlab_replicator -F p -P -D /var/opt/gitlab/postgres/data
+```
