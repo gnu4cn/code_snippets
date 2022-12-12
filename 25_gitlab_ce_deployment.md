@@ -159,6 +159,12 @@ $ sudo gitlab-rake gitlab:check SANITIZE=true
 
 需要使用 `lsyncd` 实现双向同步，a two-way sync；并将 PostgreSQL 数据库，配置为双向复制，Bi-Directional Replication, BDR 下的多主同步，multi-master replication。
 
+参考资料：
+
+- [Implementing a two-way sync with Lsyncd](https://medium.com/@jpandithas/implementing-a-two-way-sync-with-lsyncd-a82026725e66)
+- [Comparison of Different Solutions](https://www.postgresql.org/docs/current/different-replication-solutions.html)
+- [Multi-Master Replication Solutions for PostgreSQL](https://www.percona.com/blog/2020/06/09/multi-master-replication-solutions-for-postgresql/)
+
 
 以下是前期做的设置，文件与数据库的同步均是单向的，从数据库为只读模式，备份实例中用户无法登录，因此无法使用。
 
