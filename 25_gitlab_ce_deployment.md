@@ -273,11 +273,6 @@ host    replication gitlab_replicator   10.12.7.125/32 trust
 #监听服务器
 listen_addresses = '*'
 
-#开启归档
-archive_mode = on
-#归档命令
-archive_command = 'cp %p /db/pgsql/archive/%f'
-
 #主从设置为热备模式，流复制必选参数, [minimal, replica, logical]，务必设置高于 replica 
 wal_level = replica
 
