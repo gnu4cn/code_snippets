@@ -332,3 +332,40 @@ $ sudo systemctl stop lsyncd
 ```console
 # pg_basebackup -h 10.12.7.121 -p 5432 -U gitlab_replicator -Fp -Xs -Pv -R -D /var/opt/gitlab/postgresql/data/
 ```
+
+修改 `/var/opt/gitlab/postgresql/data` 目录所有者：
+
+```console
+$ sudo chown -R gitlab-psql:root /var/opt/gitlab/postgresql/data/
+```
+
+修改 `/var/opt/gitlab/postgresql/data` 目录下的 `standby.signal` 文件为：
+
+```conf
+standby_mode = 'on'
+```
+
+修改 `/var/opt/gitlab/postgresql/data` 下的 `postgresql.conf` 配置文件，使其包含以下配置：
+
+```conf
+# 连接到主库信息
+primary_conninfo = 'host=10.12.7.121 port=5432 user=gitlab_replicator'
+
+# 同步到最新数据
+recovery_target_timeline = 'latest'
+
+hot_standby = on
+# 可选，流复制最大延迟
+max_standby_streaming_delay = 30s
+
+# 可选，从向主报告状态的最大间隔时间
+wal_receiver_status_interval = 10s
+
+# 可选，查询冲突时向主反馈
+hot_standby_feedback = on
+
+##默认参数，非主从配置相关参数，表示到数据库的连接数，一般从库做主要的读服务时，设置值需要高于主库
+max_connections = 2048
+```
+
+> **注意**：这里的 `max_connections` 要配置为大于或等于主库上的 `max_connections`，否则数据库会报错。
