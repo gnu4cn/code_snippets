@@ -295,6 +295,16 @@ max_replication_slots = 8
 
 > **参考**：[PostgreSQL 主从复制](https://blog.51cto.com/suncj/5102637)
 
+运行以下命令，可以查看到 `max_replication_slots` 等一些参数：
+
+```console
+$ sudo su - gitlab-psql
+-sh-4.2$  psql -h /var/opt/gitlab/postgresql -d gitlabhq_production
+gitlabhq_production=# show max_replication_slots;
+gitlabhq_production=# select * from pg_replication_slots;
+```
+
+
 随后重启 GitLab CE 主实例下的 PostgreSQL：
 
 ```console
