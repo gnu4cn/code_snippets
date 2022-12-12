@@ -288,6 +288,18 @@ wal_sender_timeout = 60s
 max_replication_slots = 8
 ```
 
+或者将下面的配置，放置于 `/etc/gitlab/gitlab.rb` 中。
+
+```conf
+postgresql['listen_addresses'] = '*'
+postgresql['wal_level'] = 'logical'
+postgresql['max_wal_senders'] = 16
+postgresql['wal_keep_size'] = 64
+postgresql['wal_sender_timeout'] = '60s'
+postgresql['max_replication_slots'] = 8
+postgresql['trust_auth_cidr_addresses'] = ['10.12.7.125/32', '127.0.0.1/32']
+```
+
 > **参考**：[PostgreSQL 主从复制](https://blog.51cto.com/suncj/5102637)
 
 运行以下命令，可以查看到 `max_replication_slots` 等一些参数：
