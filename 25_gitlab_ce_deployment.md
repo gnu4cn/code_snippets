@@ -156,6 +156,12 @@ $ sudo gitlab-rake gitlab:check SANITIZE=true
 
 ## GitLab CE 主从实时同步
 
+
+需要使用 `lsyncd` 实现双向同步，a two-way sync；并将 PostgreSQL 数据库，配置为双向复制，Bi-Directional Replication, BDR 下的多主同步，multi-master replication。
+
+
+以下是前期做的设置，文件与数据库的同步均是单向的，从数据库为只读模式，备份实例中用户无法登录，因此无法使用。
+
 参考：[gitlab搭建+主从实时同步](https://www.jianshu.com/p/d94d9f1cf744)
 
 这种 GitLab CE 两个实例实时同步，主要通过 [lsyncd](https://github.com/lsyncd/lsyncd) 实现 `/var/opt/gitlab` 目录同步，以及配置 [PostgreSQL](https://www.postgresql.org/) 的复制实现数据库同步，而达到他们实时同步目的。
