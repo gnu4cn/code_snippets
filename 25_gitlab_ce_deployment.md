@@ -295,7 +295,8 @@ postgresql['listen_addresses'] = '*'
 postgresql['wal_level'] = 'logical'
 postgresql['max_wal_senders'] = 16
 postgresql['wal_keep_size'] = 64
-postgresql['wal_sender_timeout'] = '60s'
+# 经测试，这个配置项不生效
+# postgresql['wal_sender_timeout'] = 60000
 postgresql['max_replication_slots'] = 8
 postgresql['trust_auth_cidr_addresses'] = ['10.12.7.125/32', '127.0.0.1/32']
 ```
