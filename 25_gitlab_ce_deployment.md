@@ -165,6 +165,80 @@ $ sudo gitlab-rake gitlab:check SANITIZE=true
 - [Comparison of Different Solutions](https://www.postgresql.org/docs/current/different-replication-solutions.html)
 - [Multi-Master Replication Solutions for PostgreSQL](https://www.percona.com/blog/2020/06/09/multi-master-replication-solutions-for-postgresql/)
 
+首先假设有 GitLab CE 两个实例 A（`10.12.7.121`） 与 B（`10.12.7.125`）。第一步在 A 和 B 主机上配置 `lsyncd`。
+
+
+### 在实例 A 与 B 上配置 `lsyncd`
+
+- 生成 SSH 密钥并交换密钥；
+
+```console
+# ssh-keygen -t rsa
+# ssh-copy-id otrs.sc@10.12.7.121
+```
+
+在主机 B 上执行同样步骤。
+
+- 修改 `/etc/sysconfig/lsyncd`:
+
+```console
+$  cat /etc/sysconfig/lsyncd
+LSYNCD_OPTIONS="/etc/lsyncd.conf.lua"
+```
+
+
+- 编辑 `/etc/lsyncd.conf.lua` 文件，启用 `lsyncd.service` 服务；
+
+```lua
+settings {
+    logfile ="/var/log/lsyncd/lsyncd.log",
+    statusFile ="/var/log/lsyncd/lsyncd.status",
+    inotifyMode = "CloseWrite",
+    -- 同时最大起的rsync进程数，一个rsync同步一个文件
+    maxProcesses = 8,
+}
+
+-- 远程目录同步，rsync模式 + ssh shell
+sync {
+    default.rsync,
+    -- 源目录，路径使用绝对路径
+    source = "/var/opt/gitlab",
+    -- 目标目录
+    target = "root@10.12.7.125:/var/opt/gitlab/",
+    -- 上面target，注意如果是普通用户，必须拥有写权限
+    exclude = {
+        "backups",
+        "gitlab-ci",
+        "sockets",
+        "gitlab.yml",
+        "redis",
+        "postmaster.pid",
+        "recovery.conf",
+        "postgresql.conf",
+        "pg_hba.conf",
+        "postgresql"
+    },
+    -- 统计到多少次监控事件即开始一次同步
+    maxDelays = 5,
+    -- 若30s内未出发5次监控事件，则每30s同步一次
+    delay = 30,
+    -- init = true,
+    rsync = {
+        -- rsync可执行文件
+        binary = "/usr/bin/rsync",
+        -- 保持文件所有属性
+        archive = true,
+        -- 压缩传输，是否开启取决于带宽及cpu
+        compress = true,
+        -- 限速 kb／s
+        bwlimit   = 2000
+        -- rsh = "/usr/bin/ssh -p 22 -o StrictHostKeyChecking=no"
+        -- 如果要指定其它端口，请用上面的rsh
+    }
+}
+```
+
+并在主机 B 上完成这两项同样的配置。
 
 以下是前期做的设置，文件与数据库的同步均是单向的，从数据库为只读模式，备份实例中用户无法登录，因此无法使用。
 
