@@ -209,6 +209,7 @@ sync {
     exclude = {
         "backups",
         "gitlab-ci",
+        ".*.swp",
         "sockets",
         "gitlab.yml",
         "redis",
