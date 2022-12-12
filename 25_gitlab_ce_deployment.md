@@ -369,3 +369,17 @@ max_connections = 2048
 ```
 
 > **注意**：这里的 `max_connections` 要配置为大于或等于主库上的 `max_connections`，否则数据库会报错。
+
+> **注意**：此时重启 PostgreSQL `sudo gitlab-ctl start postgresql`，查看其日志：`# less /var/log/gitlab/postgresql/current` 会发现以下报错：
+
+```log
+2022-12-12_08:36:01.81260 FATAL:  could not connect to the primary server: invalid connection option "sslsni"
+```
+
+> 原因是在 `/var/opt/gitlab/postgresql/data/postgresql.auto.conf` 中，有 `sslsni` 设置项，删除此文件（先停止 `postgresql`，再删除，然后在启动 `postgresql`）：
+
+```console
+# gitlab-ctl stop postgresql
+# rm -rf /var/opt/gitlab/postgresql/data/postgresql.auto.conf
+# gitlab-ctl start postgresql
+```
