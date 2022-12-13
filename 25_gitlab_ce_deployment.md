@@ -214,10 +214,7 @@ sync {
         "gitlab.yml",
         "redis",
         "postmaster.pid",
-        "recovery.conf",
-        "postgresql.conf",
-        "pg_hba.conf",
-        "postgresql"
+        "postgresql/data"
     },
     -- 统计到多少次监控事件即开始一次同步
     maxDelays = 5,
@@ -380,9 +377,10 @@ max_replication_slots = 8
 或者将下面的配置，放置于 `/etc/gitlab/gitlab.rb` 中。
 
 ```conf
-postgresql['listen_addresses'] = '*'
+postgresql['listen_addresses'] = '192.168.192.138'
 postgresql['wal_level'] = 'logical'
 postgresql['max_wal_senders'] = 16
+postgresql['max_connections'] = 512
 postgresql['wal_keep_size'] = 64
 # 经测试，这个配置项不生效
 # postgresql['wal_sender_timeout'] = 60000
