@@ -463,7 +463,7 @@ max_connections = 2048
 2022-12-12_08:36:01.81260 FATAL:  could not connect to the primary server: invalid connection option "sslsni"
 ```
 
-> 原因是在 `/var/opt/gitlab/postgresql/data/postgresql.auto.conf` 中，有 `sslsni` 设置项，删除此文件（先停止 `postgresql`，再删除，然后在启动 `postgresql`）：
+> 原因是在 `/var/opt/gitlab/postgresql/data/postgresql.auto.conf` 中，有 `sslsni` 设置项，删除此文件中的配置行（先停止 `postgresql`，再删除，然后在启动 `postgresql`）：
 
 ```console
 # gitlab-ctl stop postgresql
