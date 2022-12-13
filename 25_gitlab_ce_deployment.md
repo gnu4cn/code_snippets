@@ -298,12 +298,14 @@ max_replication_slots = 8
 postgresql['listen_addresses'] = '192.168.192.138'
 postgresql['wal_level'] = 'logical'
 postgresql['max_wal_senders'] = 16
+postgresql['wal_log_hints'] = 'on'
 postgresql['max_connections'] = 512
 postgresql['wal_keep_size'] = 64
 # 经测试，这个配置项不生效
 # postgresql['wal_sender_timeout'] = 60000
 postgresql['max_replication_slots'] = 8
-postgresql['trust_auth_cidr_addresses'] = ['10.12.7.125/32', '127.0.0.1/32']
+# 这里要把主从两个 IP 地址都加进去，以便后面的原主机数据恢复
+postgresql['trust_auth_cidr_addresses'] = ['192.168.192.137/32', '192.168.192.138/32', '127.0.0.1/32']
 ```
 
 > **参考**：[PostgreSQL 主从复制](https://blog.51cto.com/suncj/5102637)
@@ -400,4 +402,12 @@ $ sudo su - gitlab-psql
 # 检查新的主节点状态
 -sh-4.2$ pg_controldata -D /var/opt/gitlab/postgresql/data | grep cluster
 Database cluster state:               in production
+```
+
+### 将原主库设置为备机
+
+```console
+$ sudo su - gitlab-psql
+-sh-4.2$ cd /opt/gitlab/embedded/postgresql/13/bin
+-sh-4.2$ ./pg_rewind --target-pgdata /var/opt/gitlab/postgresql/data/ --source-server='host=192.168.192.137 port=5432 dbname=gitlabhq_production' --progress --debug -n
 ```
