@@ -409,5 +409,7 @@ Database cluster state:               in production
 ```console
 $ sudo su - gitlab-psql
 -sh-4.2$ cd /opt/gitlab/embedded/postgresql/13/bin
--sh-4.2$ ./pg_rewind --target-pgdata /var/opt/gitlab/postgresql/data/ --source-server='host=192.168.192.137 port=5432 dbname=gitlabhq_production' --progress --debug -n
+-sh-4.2$ ./pg_rewind --target-pgdata /var/opt/gitlab/postgresql/data/ \
+--source-server='host=192.168.192.137 port=5432 dbname=gitlabhq_production' \
+--progress --debug -n
 ```
