@@ -168,7 +168,7 @@ $ sudo gitlab-rake gitlab:check SANITIZE=true
 首先假设有 GitLab CE 两个实例 A（`10.12.7.121`） 与 B（`10.12.7.125`）。第一步在 A 和 B 主机上配置 `lsyncd`。
 
 
-### 在实例 A 与 B 上配置 `lsyncd`
+## ~~在实例 A 与 B 上配置 `lsyncd`~~
 
 - 生成 SSH 密钥并交换密钥；
 
