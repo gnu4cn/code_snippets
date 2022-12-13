@@ -416,6 +416,8 @@ $ sudo gitlab-ctl restart postgresql
 $ sudo systemctl stop lsyncd
 ```
 
+运行 `/opt/gitlab/embedded/postgresql/13/bin` 中的 `pg_basebackup` 进行初始备份：
+
 ```console
 # pg_basebackup -h 10.12.7.121 -p 5432 -U gitlab_replicator -Fp -Xs -Pv -R -D /var/opt/gitlab/postgresql/data/
 ```
