@@ -19,13 +19,13 @@
 
 2. 参考 [Official Linux Package](https://about.gitlab.com/install/#centos-7) 安装 GitLab CE；
 
-> **注意**：
->
-> 列出软件包可用版本的命令：
-> 
-> `yum list gitlab-ce --showduplicates | sort -r`
+    > **注意**：
+    >
+    > 列出软件包可用版本的命令：
+    > 
+    > `yum list gitlab-ce --showduplicates | sort -r`
 
-在后面恢复 GitLab-CE 时，需严格按照备份时 gitlab-ce 的版本安装 GitLab-CE。
+    在后面恢复 GitLab-CE 时，需严格按照备份时 gitlab-ce 的版本安装 GitLab-CE。
 
 3. 配置相关证书；
 
