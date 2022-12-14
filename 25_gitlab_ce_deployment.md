@@ -217,10 +217,7 @@ sync {
         "gitlab.yml",
         "redis",
         "postmaster.pid",
-        "recovery.conf",
-        "postgresql.conf",
-        "pg_hba.conf",
-        "postgresql"
+        "postgresql/data"
     },
     -- 统计到多少次监控事件即开始一次同步
     maxDelays = 5,
