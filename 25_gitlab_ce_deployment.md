@@ -216,8 +216,7 @@ sync {
         "sockets",
         "gitlab.yml",
         "redis",
-        "postmaster.pid",
-        "postgresql/data"
+        "postgresql/data",
     },
     -- 统计到多少次监控事件即开始一次同步
     maxDelays = 5,
