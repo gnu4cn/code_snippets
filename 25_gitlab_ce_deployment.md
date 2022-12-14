@@ -91,14 +91,14 @@ $ sudo crontab -e -u root
     $ sudo gitlab-backup create INCREMENTAL=yes # 增量备份
     ```
 
-    > **注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间
+> **注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间
 
-    > **注**：CentOS 7 中，需要安装安装 `yum install nfs-utils nfs-utils-lib`。
+> **注**：CentOS 7 中，需要安装安装 `yum install nfs-utils nfs-utils-lib`。
 
-    > 其所有者为 `git:root`，权限为 `755`
+> 其所有者为 `git:root`，权限为 `755`
 
 
-    > **注意**：CentOS 7 上假设 NFS 服务器要开启 SeLinux 规则，并在防火墙上放行 NSF 服务：
+> **注意**：CentOS 7 上假设 NFS 服务器要开启 SeLinux 规则，并在防火墙上放行 NSF 服务：
 
     ```console
     setsebool -P nfs_export_all_rw 1
