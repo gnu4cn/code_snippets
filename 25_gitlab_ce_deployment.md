@@ -373,7 +373,7 @@ hot_standby_feedback = on
 max_connections = 2048
 ```
 
-> **注意**：这里的 `max_connections` 要配置为大于或等于主库上的 `max_connections`，否则数据库会报错。
+这里的 `max_connections` 要配置为大于或等于主库上的 `max_connections`，否则数据库会报错。
 
 > **注意**：此时重启 PostgreSQL `sudo gitlab-ctl start postgresql`，查看其日志：`# less /var/log/gitlab/postgresql/current` 会发现以下报错：
 
@@ -399,6 +399,8 @@ $ sudo su - gitlab-psql
 -sh-4.2$ pg_controldata -D /var/opt/gitlab/postgresql/data | grep cluster
 Database cluster state:               in production
 ```
+
+> **注**：运行 `./pg_ctl promote` 命令后，会删除 `standby.signal` 文件。
 
 ### 将原主库设置为备机
 
