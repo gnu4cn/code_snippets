@@ -83,7 +83,7 @@ $ sudo crontab -e -u root
     gitlab_rails['backup_path'] = "/backup"
     ```
 
-2 .运行备份命令
+2. 运行备份命令
 
     ```console
     $ sudo gitlab-backup create
