@@ -29,20 +29,20 @@
 
 3. 配置相关证书；
 
-- LDAP（M$ AD）导出的 PEM 证书，用于 GitLab CE 与 AD 服务器之间的秘密通信；
+    - LDAP（M$ AD）导出的 PEM 证书，用于 GitLab CE 与 AD 服务器之间的秘密通信；
 
-    ```console
-    $ sudo cp gitlab-configs/certnew.pem /etc/pki/ca-trust/source/anchors/
-    $ sudo update-ca-trust
-    $ sudo cp gitlab-configs/certnew.pem /etc/gitlab/ssl/
-    ```
+        ```console
+        $ sudo cp gitlab-configs/certnew.pem /etc/pki/ca-trust/source/anchors/
+        $ sudo update-ca-trust
+        $ sudo cp gitlab-configs/certnew.pem /etc/gitlab/ssl/
+        ```
 
-- NGINX 的证书（要从根证书，生成 nginx web 主机（gitlab.xfoss.com）的证书）；
+    - NGINX 的证书（要从根证书，生成 nginx web 主机（gitlab.xfoss.com）的证书）；
 
-    ```console
-    $ sudo cp gitlab-configs/gitlab.crt /etc/gitlab/ssl
-    $ sudo cp gitlab-configs/gitlab-rsa.key /etc/gitlab/ssl
-    ```
+        ```console
+        $ sudo cp gitlab-configs/gitlab.crt /etc/gitlab/ssl
+        $ sudo cp gitlab-configs/gitlab-rsa.key /etc/gitlab/ssl
+        ```
 
 
 4. 拷贝 `gitlab.rb`，并编辑，然后执行 `$ sudo gitlab-cfg reconfigure` 重新配置。
@@ -160,6 +160,7 @@ $ sudo gitlab-rake gitlab:check SANITIZE=true
 参考：
 
 1. [gitlab搭建+主从实时同步](https://www.jianshu.com/p/d94d9f1cf744)
+
 2. [Setting up and switching PostgreSQL active/standby environment on Linux](https://pankajconnect.medium.com/setting-up-and-switching-postgresql-active-standby-environment-on-linux-6af1ce660846)
 
 这种 GitLab CE 两个实例实时同步，主要通过 [lsyncd](https://github.com/lsyncd/lsyncd) 实现 `/var/opt/gitlab` 目录同步，以及配置 [PostgreSQL](https://www.postgresql.org/) 的复制实现数据库同步，而达到他们实时同步目的。
@@ -169,74 +170,75 @@ $ sudo gitlab-rake gitlab:check SANITIZE=true
 
 1. 修改 `/etc/sysconfig/lsyncd`:
 
-```console
-$  cat /etc/sysconfig/lsyncd
-LSYNCD_OPTIONS="/etc/lsyncd.conf.lua"
-```
-
 > *注*：`lsyncd` 的配置文件 `/etc/lsyncd.conf.lua` 本身就是 Lua 脚本程序，这样修改后在 Vim 中打开时，会语法高亮显示。
+
+    ```console
+    $  cat /etc/sysconfig/lsyncd
+    LSYNCD_OPTIONS="/etc/lsyncd.conf.lua"
+    ```
+
 
 2. 将主机 `root` 用户 SSH 公钥，添加到从机 `/root/.ssh/authorized_keys` 文件
 
-首先生成公钥：
+    首先生成公钥：
 
-```console
-# ssh-keygen -t rsa
-```
+    ```console
+    # ssh-keygen -t rsa
+    ```
 
-在将公钥传输到从机：
+    在将公钥传输到从机：
 
-```console
-# ssh-copy-id root@10.12.7.125
-```
+    ```console
+    # ssh-copy-id root@10.12.7.125
+    ```
 
 
 3. `/etc/lsyncd.conf.lua`
 
-```lua
-settings {
-    logfile ="/var/log/lsyncd/lsyncd.log",
-    statusFile ="/var/log/lsyncd/lsyncd.status",
-    inotifyMode = "CloseWrite",
-    -- 同时最大起的rsync进程数，一个rsync同步一个文件
-    maxProcesses = 8,
-}
-
--- 远程目录同步，rsync模式 + ssh shell
-sync {
-    default.rsync,
-    -- 源目录，路径使用绝对路径
-    source = "/var/opt/gitlab",
-    -- 目标目录
-    target = "root@10.12.7.125:/var/opt/gitlab/",
-    -- 上面target，注意如果是普通用户，必须拥有写权限
-    exclude = {
-        "backups",
-        "gitlab-ci",
-        "sockets",
-        "gitlab.yml",
-        "redis",
-        "postgresql/data",
-    },
-    -- 统计到多少次监控事件即开始一次同步
-    maxDelays = 5,
-    -- 若30s内未出发5次监控事件，则每30s同步一次
-    delay = 30,
-    -- init = true,
-    rsync = {
-        -- rsync可执行文件
-        binary = "/usr/bin/rsync",
-        -- 保持文件所有属性
-        archive = true,
-        -- 压缩传输，是否开启取决于带宽及cpu
-        compress = true,
-        -- 限速 kb／s
-        bwlimit   = 2000
-        -- rsh = "/usr/bin/ssh -p 22 -o StrictHostKeyChecking=no"
-        -- 如果要指定其它端口，请用上面的rsh
+    ```lua
+    settings {
+        logfile ="/var/log/lsyncd/lsyncd.log",
+        statusFile ="/var/log/lsyncd/lsyncd.status",
+        inotifyMode = "CloseWrite",
+        -- 同时最大起的rsync进程数，一个rsync同步一个文件
+        maxProcesses = 8,
     }
-}
-```
+
+    -- 远程目录同步，rsync模式 + ssh shell
+    sync {
+        default.rsync,
+        -- 源目录，路径使用绝对路径
+        source = "/var/opt/gitlab",
+        -- 目标目录
+        target = "root@10.12.7.125:/var/opt/gitlab/",
+        -- 上面target，注意如果是普通用户，必须拥有写权限
+        exclude = {
+            "backups",
+            "gitlab-ci",
+            "sockets",
+            "gitlab.yml",
+            "redis",
+            "postgresql/data",
+        },
+        -- 统计到多少次监控事件即开始一次同步
+        maxDelays = 5,
+        -- 若30s内未出发5次监控事件，则每30s同步一次
+        delay = 30,
+        -- init = true,
+        rsync = {
+            -- rsync可执行文件
+            binary = "/usr/bin/rsync",
+            -- 保持文件所有属性
+            archive = true,
+            -- 压缩传输，是否开启取决于带宽及cpu
+            compress = true,
+            -- 限速 kb／s
+            bwlimit   = 2000
+            -- rsh = "/usr/bin/ssh -p 22 -o StrictHostKeyChecking=no"
+            -- 如果要指定其它端口，请用上面的rsh
+        }
+    }
+    ```
 
 这时运行 `$ sudo systemctl restart lsyncd` 就可以将主机与从机的 `/var/opt/gitlab` 目录同步了。接下来配置 PostgreSQL 的主从复制。
 
