@@ -77,39 +77,39 @@ $ sudo crontab -e -u root
 ## 数据库与代码仓库的备份
 
 
-### 修改 `/etc/gitlab/gitlab.rb` 中的：
+1. 修改 `/etc/gitlab/gitlab.rb` 中的 `backup_path` 配置项
 
-```ruby
-gitlab_rails['backup_path'] = "/backup"
-```
+    ```ruby
+    gitlab_rails['backup_path'] = "/backup"
+    ```
 
-### 运行备份命令
+2 .运行备份命令
 
-```console
-$ sudo gitlab-backup create
+    ```console
+    $ sudo gitlab-backup create
 
-$ sudo gitlab-backup create INCREMENTAL=yes # 增量备份
-```
+    $ sudo gitlab-backup create INCREMENTAL=yes # 增量备份
+    ```
 
-> **注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间
+    > **注**：这里的 `/backup` 是经由 `/etc/fstab` 挂载到系统的 NFS 存储空间
 
-> **注**：CentOS 7 中，需要安装安装 `yum install nfs-utils nfs-utils-lib`。
+    > **注**：CentOS 7 中，需要安装安装 `yum install nfs-utils nfs-utils-lib`。
 
-> 其所有者为 `git:root`，权限为 `755`
-
-
-> **注意**：CentOS 7 上假设 NFS 服务器要开启 SeLinux 规则，并在防火墙上放行 NSF 服务：
-
-```console
-setsebool -P nfs_export_all_rw 1
-setsebool -P nfs_export_all_ro 1
+    > 其所有者为 `git:root`，权限为 `755`
 
 
-firewall-cmd --permanent --add-service=nfs
-firewall-cmd --permanent --add-service=mountd
-firewall-cmd --permanent --add-service=rpc-bind
-firewall-cmd --reload
-```
+    > **注意**：CentOS 7 上假设 NFS 服务器要开启 SeLinux 规则，并在防火墙上放行 NSF 服务：
+
+    ```console
+    setsebool -P nfs_export_all_rw 1
+    setsebool -P nfs_export_all_ro 1
+
+
+    firewall-cmd --permanent --add-service=nfs
+    firewall-cmd --permanent --add-service=mountd
+    firewall-cmd --permanent --add-service=rpc-bind
+    firewall-cmd --reload
+    ```
 
 ## 使用要点
 
