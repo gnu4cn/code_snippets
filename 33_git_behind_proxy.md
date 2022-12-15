@@ -10,7 +10,7 @@ First please install the `ncat`/`socat` tool, with
 
 Then put the following configuration into the file `~/.ssh/config`(if there is no the file, you should create it by hand.):
 
-```config
+```conf
 Host github.com
 	Hostname github.com
 	ServerAliveInterval 55
