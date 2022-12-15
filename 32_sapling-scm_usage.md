@@ -1,5 +1,19 @@
 # Sapling-SCM 使用说明
 
+## 安装问题
+
+在运行 `yay -S sapling-scm` 时，报出了以下问题：
+
+```console
+
+[2/4] Fetching packages...
+error An unexpected error occurred: "/home/peng/.cache/yarn/v6/npm-ignore-5.2.0-6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a-integrity/node_modules/ignore/.yarn-metadata.json: Unexpected end of JSON input".
+info If you think this is a bug, please open a bug report with the information provided in "/home/peng/.cache/yay/sapling-scm/src/sapling-0.1.20221201-095354-r360873f1/addons/yarn-error.log".
+info Visit https://yarnpkg.com/en/docs/cli/install for documentation about this command.
+```
+
+此时运行 `yarn cache clean` 后再度安装即可。
+
 ## 配置文件
 
 Sapling 配置文件分为三个级别 `user`、`local` 与 `system`，对应了以下三个文件：
@@ -46,3 +60,4 @@ no = gitlab.senscomm.com
 [http_proxy]
 host = 192.168.30.51:3128
 ```
+
