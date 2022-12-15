@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/gnu4cn/code_snippets/issues"
   },
-  "homepage": "https://github.com/gnu4cn/code_snippets#readme"
+  "homepage": "https://github.com/gnu4cn/code_snippets#readme",
+  "devDependencies": {
+    "gitbook-summary": "^1.2.4"
+  }
 }
