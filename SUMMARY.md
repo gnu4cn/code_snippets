@@ -32,3 +32,4 @@
 * [29 Vim Tips](29_vim_tips.md)
 * [30 HPC Knowledges](30_HPC_knowledges.md)
 * [31 Samba Configuration](31_samba_configuration.md)
+* [32 Sapling Scm Usage](32_sapling-scm_usage.md)
