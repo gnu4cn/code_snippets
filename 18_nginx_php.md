@@ -574,3 +574,17 @@ pm.max_spare_servers = 3
 ;php_admin_flag[log_errors] = on
 ;
 ```
+
+## 解决：connect() to unix:/run/php/php8.1-fpm.sock failed (13: Permission denied)
+
+参考：
+
+- [解决：connect() to unix:/run/php/php8.1-fpm.sock failed (13: Permission denied)](https://www.cnblogs.com/workhelper/p/16212995.html)
+
+原因是　php8.1-fpm 的apt安装使用了缺省用户www-data，nginx的apt安装使用了缺省用户nginx，/run/php/php8.1-fpm.sock的所有者是www-data, nginx用户无权访问，导致以上报错。
+
+解决方法：把运行 nginx 的用户，添加到 `www-data` 组：
+
+```console
+$ sudo usermod -a -G www-data unisko
+````
