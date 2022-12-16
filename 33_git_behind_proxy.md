@@ -20,3 +20,35 @@ Host github.com
 ```
 
 If any question, please feel free to contact Ryan or me.
+
+## Git HTTP Proxy Settings 
+
+To make git http traffic(only for github.com) proxied, run the following commands:
+
+```console
+$ git config --global http.https://github.com.proxy http://192.168.30.51:3128
+```
+
+Or for the socks5 proxy:
+
+```console
+$ git config --global http.https://github.com.proxy socks5://127.0.0.1:10080
+```
+
+This will modify the file `~/.gitconfig` to this:
+
+```conf
+$ cat ~/.gitconfig                                                                        lennyp@vm-manjaro
+[user]
+        email = lenny.peng@senscomm.com
+        name = Lenny Peng
+[pull]
+        rebase = false
+[core]
+        compression = 0
+[http]
+        postBuffer = 1048576000
+        maxRequestBuffer = 100M
+[http "https://github.com"]
+        proxy = http://192.168.30.51:3128
+```
