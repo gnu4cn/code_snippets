@@ -51,3 +51,13 @@
     解决办法即是删除主目录下的 `.anydesk` 文件夹。
 
     参考：[Anydesk error: Aborted (core dumped) in Ubuntu 22.04](https://askubuntu.com/a/1413795`)
+
+6. `curl` 永久代理
+
+    参考 [Set Up cURL to Permanently Use a Proxy](https://www.baeldung.com/linux/curl-permanent-proxy)
+
+    由于许多软件项目在构建时，都会使用 Curl 下载依赖项，因此就要想办法配置 Curl 使用代理，简单的做法是创建一个 `~/.curlrc` 文件，将代理写入到这个文件中：
+
+    ```conf
+    proxy=socks5h://localhost:10080
+    ```
