@@ -587,4 +587,16 @@ pm.max_spare_servers = 3
 
 ```console
 $ sudo usermod -a -G www-data unisko
-````
+```
+
+## 解决 `FastCGI sent in stderr: “Primary script unknown”`
+
+修改 `/etc/php/8.1/fpm/pool.d/www.conf` 中的 `user` 与 `group` 设置：
+
+```
+; Unix user/group of processes
+; Note: The user is mandatory. If the group is not set, the default user's group
+;       will be used.
+user = unisko
+group = nginx
+```
