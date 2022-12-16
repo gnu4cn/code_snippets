@@ -600,3 +600,18 @@ $ sudo usermod -a -G www-data unisko
 user = unisko
 group = nginx
 ```
+
+## 解决 Mozilla Firefox `MOZILLA_PKIX_ERROR_REQUIRED_TLS_FEATURE_MISSING`
+
+参考：
+
+- [`MOZILLA_PKIX_ERROR_REQUIRED_TLS_FEATURE_MISSING`](https://really-simple-ssl.com/mozilla_pkix_error_required_tls_feature_missing/)
+- [NGINX - Enable OCSP Stapling ](https://support.globalsign.com/ssl/ssl-certificates-installation/nginx-enable-ocsp-stapling)
+
+
+在 Nginx 配置文件 `/etc/nginx/nginx.conf` 的 `http` 小节，加入以下配置：
+
+```conf
+        ssl_stapling on;
+        ssl_stapling_verify on;
+```
