@@ -35,7 +35,7 @@ Or for the socks5 proxy:
 $ git config --global http.https://github.com.proxy socks5://127.0.0.1:10080
 ```
 
-This will modify the file `~/.gitconfig` to this:
+It will modify the file `~/.gitconfig` like this:
 
 ```conf
 $ cat ~/.gitconfig                                                                        lennyp@vm-manjaro
