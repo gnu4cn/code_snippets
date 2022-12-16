@@ -601,7 +601,7 @@ user = unisko
 group = nginx
 ```
 
-## 解决 Mozilla Firefox `MOZILLA_PKIX_ERROR_REQUIRED_TLS_FEATURE_MISSING`
+## 解决 Mozilla Firefox 报出的 `MOZILLA_PKIX_ERROR_REQUIRED_TLS_FEATURE_MISSING` 问题
 
 参考：
 
