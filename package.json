@@ -4,7 +4,8 @@
   "description": "Code snippets and work records.",
   "main": "index.js",
   "scripts": {
-    "git-push": "git add . && git commit -m \"Updated.\" && git push"
+    "git-push": "git add . && git commit -m \"Updated.\" && git push",
+    "sl-push": "sl add . && sl commit -m \"Updated.\" && sl push"
   },
   "repository": {
     "type": "git",
