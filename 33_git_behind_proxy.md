@@ -17,7 +17,10 @@ Host github.com
 	ForwardAgent yes
 	ProxyCommand /usr/bin/ncat --proxy 192.168.30.51:3128 %h %p
     # ProxyCommand /usr/bin/socat - PROXY:192.168.30.51:%h:%p,proxyport=3128
+    # ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:10080 %h %p
 ```
+
+> **Note**：in the last `ProxyCommand` statement, the `-X 5` stands for SOCKS version 5, and the `-x` presents using the SOCKS proxy. Source: [How can I use SSH with a SOCKS 5 proxy?](https://superuser.com/a/454211)
 
 If any question, please feel free to contact Ryan or me.
 
