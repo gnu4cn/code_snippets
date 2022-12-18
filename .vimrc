@@ -26,10 +26,9 @@ Plugin 'godlygeek/tabular'
 
 " Plugins from github repos:
 
-" autoformat
-Plugin 'Chiel92/vim-autoformat'
 " TypeScript 
 Bundle 'leafgarland/typescript-vim'
+Bundle 'ludovicchabant/vim-lawrencium'
 " Better file browser
 Bundle 'scrooloose/nerdtree'
 " Code commenter
@@ -68,7 +67,6 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
 " For yaml
 Bundle 'chase/vim-ansible-yaml'
-Bundle 'tpope/vim-pathogen'
 Bundle 'lepture/vim-jinja'
 
 Bundle 'garbas/vim-snipmate'
@@ -142,7 +140,7 @@ call plug#end()
 
 let g:snipMate = { 'snippet_version' : 1 }
 let g:vim_markdown_folding_disabled=1
-let g:markdown_fenced_languages = ['typescript', 'python', 'ruby', 'java', 'rust', 'bash', 'sh', 'javascript', 'lisp']
+let g:markdown_fenced_languages = ['typescript', 'python', 'ruby', 'java', 'rust', 'bash', 'sh', 'javascript']
 
 " You should always run `$python -m venv venv` to create python virtual
 " environment
