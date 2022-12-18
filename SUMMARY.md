@@ -34,3 +34,4 @@
 * [31 Samba Configuration](31_samba_configuration.md)
 * [32 Sapling Scm Usage](32_sapling-scm_usage.md)
 * [33 Git Behind Proxy](33_git_behind_proxy.md)
+* [34 Arch Linux Manjaro Autoproxy Pac](34_ArchLinux_Manjaro_autoproxy_pac.md)
