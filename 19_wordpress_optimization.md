@@ -1,6 +1,6 @@
 # WordPress 优化记录
 
-## 重新 WordPress 中的一些函数。
+## 重新 WordPress 中的一些函数
 
     - `外观` -> `主题文件编辑器` -> `functions.php`:
 
@@ -13,7 +13,7 @@
     });   
     ```
 
-## 将类别页中的 "CATEGORY ARCHIVES: " 移除。
+## 将类别页中的 "CATEGORY ARCHIVES: " 移除
 
 
     - `外观` -> `主题文件编辑器` -> `footer.php`, 加入 JavaScript 代码：
@@ -27,7 +27,7 @@
     </script>
     ```
 
-## 博客列表显示（图片居左）的 CSS。
+## 博客列表显示（图片居左）的 CSS
 
     ```css
     .posts-bricks-1 .posts-grid-container {
