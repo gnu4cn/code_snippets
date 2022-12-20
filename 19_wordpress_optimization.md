@@ -1,6 +1,6 @@
 # WordPress 优化记录
 
-1. 重新 WordPress 中的一些函数。
+## 重新 WordPress 中的一些函数。
 
     - `外观` -> `主题文件编辑器` -> `functions.php`:
 
@@ -13,7 +13,7 @@
     });   
     ```
 
-2. 将类别页中的 "CATEGORY ARCHIVES: " 移除。
+## 将类别页中的 "CATEGORY ARCHIVES: " 移除。
 
 
     - `外观` -> `主题文件编辑器` -> `footer.php`, 加入 JavaScript 代码：
@@ -27,7 +27,7 @@
     </script>
     ```
 
-3. 博客列表显示（图片居左）的 CSS。
+## 博客列表显示（图片居左）的 CSS。
 
     ```css
     .posts-bricks-1 .posts-grid-container {
@@ -78,7 +78,7 @@
     }
     ```
 
-4. 修正 `WPCACHEHOME` 设置项
+## 修正 `WPCACHEHOME` 设置项
 
     `vim ~/wordpress/wp-config.php` 打开文件，然后将其中两行修改为：
 
@@ -88,7 +88,7 @@
     define( 'WPCACHEHOME', ABSPATH.'/wp-content/plugins/wp-super-cache/' );
     ```
 
-5. 安装和使用 `wp-cli` 工具
+## 安装和使用 `wp-cli` 工具
 
     [WP-CLI 命令行工具](https://wp-cli.org/) 可以简化 WP 的管理，如下安装这个工具。
 
