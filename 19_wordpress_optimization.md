@@ -77,3 +77,13 @@
         }
     }
     ```
+
+4. 修正 `WPCACHEHOME` 设置项
+
+    `vim ~/wordpress/wp-config.php` 打开文件，然后将其中两行修改为：
+
+    ```php
+    // WP_CACHE
+    define('WP_CACHE', true);
+    define( 'WPCACHEHOME', ABSPATH.'/wp-content/plugins/wp-super-cache/' );
+    ```
