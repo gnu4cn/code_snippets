@@ -2,7 +2,7 @@
 
 ## 重新 WordPress 中的一些函数
 
-    - `外观` -> `主题文件编辑器` -> `functions.php`:
+- `外观` -> `主题文件编辑器` -> `functions.php`:
 
     ```php
     /* Custom translations */
