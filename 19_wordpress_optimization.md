@@ -87,3 +87,26 @@
     define('WP_CACHE', true);
     define( 'WPCACHEHOME', ABSPATH.'/wp-content/plugins/wp-super-cache/' );
     ```
+
+5. 安装和使用 `wp-cli` 工具
+
+    [WP-CLI 命令行工具](https://wp-cli.org/) 可以简化 WP 的管理，如下安装这个工具。
+
+    ```console
+    $ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    $ mkdir -p ~/.local/bin
+    $ mv wp-cli.phar ~/.local/bin/wp
+    $ chmod +x ~/.local/bin/wp
+    $ echo PATH=~/.local/bin:$PATH >> .bashrc
+    ```
+
+    运行命令 `which wp && wp --info` 检查是否安装成功。
+
+    运行以下命令，将数据库中原来的 `www.xfoss.com`，全部替换为 `wp.xfoss.com`:
+
+    ```console
+    $ wp --path="/home/unisko/wordpress" search-replace www.senscomm.com wp.senscomm.com --all-tables
+    ```
+
+    运行 `wp --path="/home/unisko/wordpress" cache flush` 清除服务器上的缓存。
+    
