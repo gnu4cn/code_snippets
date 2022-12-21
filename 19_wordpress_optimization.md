@@ -109,3 +109,21 @@ $ wp --path="/home/unisko/wordpress" search-replace www.senscomm.com wp.senscomm
 ```
 
 运行 `wp --path="/home/unisko/wordpress" cache flush` 清除服务器上的缓存。
+
+## 解决 `Fatal error: Uncaught Error: Call to undefined function Sphere\SGF\arrays() in ... .de/wp-content/plugins/selfhost-google-fonts/inc/file-system.php:41` 导致的页面底部错误渲染空白问题
+
+特定情形下 （腾讯云 lighthouse）会报出这个错误，从而导致页面底部有不正常的渲染输出和报错信息。追踪到文件 `/usr/local/lighthouse/softwares/wordpress/wp-content/plugins/selfhost-google-fonts/inc/file-system.php` 的第 41 行。发现一个简单的 `arrays()` 函数调用。到这里设法卸载这个 `selfhost-google-fonts` 插件。
+
+```console
+$ wp --path="/usr/local/lighthouse/softwares/wordpress" plugin uninstall selfhost-google-fonts
+Error: Cannot do 'launch': The PHP functions `proc_open()` and/or `proc_close()` are disabled. Please check your PHP ini directive `disable_functions` or suhosin settings.
+```  
+
+于是修改 `php.ini`，找到并删除 `proc_open()`，并重启 `php-fpm-74.service`：
+
+```console
+$ vim /www/server/php/74/etc/php.ini
+$ sudo systemctl restart php-fpm-74.service
+```
+
+再运行 `$ wp --path="/usr/local/lighthouse/softwares/wordpress" plugin uninstall selfhost-google-fonts` 即可卸载该插件。后恢复 `php.ini`，加入之前删除的 `proc_open`，并重启 `php-fmp-74.service` 服务。问题解决！
