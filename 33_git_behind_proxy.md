@@ -8,7 +8,7 @@ First please install the `ncat`/`socat` tool, with
 
 - `pacman -S/yum|apt|brew install socat`
 
-Then put the following configuration into the file `~/.ssh/config`(if there is no the file, you should create it by hand):
+Then put the following configuration into the file `~/.ssh/config`(if there is no the file, you should create it by hand.):
 
 ```conf
 Host github.com
