@@ -8,7 +8,7 @@ First please install the `ncat`/`socat` tool, with
 
 - `pacman -S/yum|apt|brew install socat`
 
-Then put the following configuration into the file `~/.ssh/config`(if there is no the file, you should create it by hand.):
+Then put the following configuration into the file `~/.ssh/config`(if there is no the file, you should create it by hand):
 
 ```conf
 Host github.com
@@ -19,6 +19,44 @@ Host github.com
     # ProxyCommand /usr/bin/socat - PROXY:192.168.30.51:%h:%p,proxyport=3128
     # ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:10080 %h %p
 ```
+
+## Settings under OS/Windows 
+
+Under M$ Windows OS, It's a little bit different with GNU/Linux. We need install the [Chocolate package manager for Windows](https://chocolatey.org/) within an administrative Powershell window.
+
+```powershell
+PS C:\Windows\system32> Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+Then, install the `nmap` package with `choco.exe`:
+
+```powershell
+PS C:\Windows\system32> choco install nmap
+```
+
+We need install the [Git-SCM for Windows](https://git-scm.com/) to the `git` and Minimalist GNU for Windows, MinGW environment. After Git-SCM for Windows installed, we can now launch a `Git Bash` window, from right clicking the Windows `Start` button. From the `Git Bash` window, we can find the newly install `ncat` command location with `which ncat`, which returns the following output:
+
+```console
+$ which ncat
+/c/Program Files (x86)/Nmap/ncat
+```
+
+So, the `~/.ssh/config` file should contain the following content now:
+
+```config
+Host github.com
+	Hostname github.com
+	ServerAliveInterval 55
+	ForwardAgent yes
+	ProxyCommand "/c/Program Files (x86)/Nmap/ncat" --proxy 192.168.30.51:3128 %h %p
+    # ProxyCommand /usr/bin/socat - PROXY:192.168.30.51:%h:%p,proxyport=3128
+    # ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:10080 %h %p
+```
+
+As the same with GNU/Linux OS，we should generate the SSH keys with `ssh-keygen -t rsa`, and put the `~/.ssh/id_rsa.pub` file content into the [GitHub SSH keys](https://github.com/settings/keys)。
+
+Now you get the github.com SSH traffic proxied under Windows OS platform!
+
 
 > **Note**：in the last `ProxyCommand` statement, the `-X 5` stands for SOCKS version 5, and the `-x` presents using the SOCKS proxy. Source: [How can I use SSH with a SOCKS 5 proxy?](https://superuser.com/a/454211)
 
