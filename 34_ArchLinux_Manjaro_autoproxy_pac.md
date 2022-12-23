@@ -34,7 +34,7 @@ $ genpac --pac-proxy "SOCKS5 127.0.0.1:10080" \
 --user-rule-from="user-rules.list"
 ```
 
-这样便得到一个 `autoproxy.pac` 文件了，然后通过 `lighttp`/`nginx` 在本地假设一个 `http` 服务器，来通过 HTTP 协议提供到这个文件。然后在系统 `设置` -》`网络` -》`代理` -》`自动` 里，填入 `autoproxy.pac` 的 URL 即可实现，系统级别的自动代理了。
+这样便得到一个 `autoproxy.pac` 文件了，然后通过 `lighttp`/`nginx` 在本地架设一个 `http` 服务器，来通过 HTTP 协议提供到这个文件。然后在系统 `设置` -》`网络` -》`代理` -》`自动` 里，填入 `autoproxy.pac` 的 URL 即可实现，系统级别的自动代理了。
 
 ## 分别设置 `~/.curlrc`、`~/.ssh/config` 与 `~/.gitconfig`
 
