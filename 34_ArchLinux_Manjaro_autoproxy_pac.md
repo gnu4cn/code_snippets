@@ -57,3 +57,5 @@ $ gsettings get org.gnome.system.proxy autoconfig-url
 ```
 
 ## 配置 `~/.curlrc`、`~/.gitconfig` 及 `~/.ssh/config`
+
+因为上一布中所设置 “网络代理”，“自动配置 URL” 属于窗口管理系统级别的设置，因此仍要设置 Curl、Git 与 SSH 各自的代理。
