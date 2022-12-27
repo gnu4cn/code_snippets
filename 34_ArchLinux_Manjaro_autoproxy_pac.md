@@ -35,3 +35,25 @@ $ genpac --pac-proxy "SOCKS5 127.0.0.1:10080" \
 ```
 
 这样便得到一个 `autoproxy.pac` 文件了，然后通过 `lighttp`/`nginx` 在本地架设一个 `http` 服务器，来通过 HTTP 协议提供到这个文件。然后在系统 `设置` -》`网络` -》`代理` -》`自动` 里，填入 `autoproxy.pac` 的 URL 即可实现，系统级别的自动代理了。
+
+## 设置网络代理为 “自动” 及 `autoconfig-url`
+
+参考：[Set PAC (Proxy Auto-Config) file via bash? [closed]](https://askubuntu.com/a/1046410)
+
+使用以下命令可以设置窗口环境下的此方面设置：
+
+```console
+gsettings set org.gnome.system.proxy mode auto
+gsettings set org.gnome.system.proxy autoconfig-url 'http://my.prox.org/foo.pac'
+```
+
+检查相关设置：
+
+```console
+$ gsettings get org.gnome.system.proxy mode
+'auto'
+$ gsettings get org.gnome.system.proxy autoconfig-url
+'http://my.prox.org/foo.pac'
+```
+
+## 配置 `~/.curlrc`、`~/.gitconfig` 及 `~/.ssh/config`
