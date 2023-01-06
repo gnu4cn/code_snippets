@@ -45,3 +45,23 @@
     ```
 
     其中的 `-t ed` 传入了名为 `ed` 的终端 Tab。
+
+
+4. `tmux` 与 `vim` 终端颜色配置问题
+
+
+    参考：[lose vim colorscheme in tmux mode](https://stackoverflow.com/a/10264470)
+
+    要解决此问题，就有在 `.zshrc`/`.bashrc` 中设置：
+
+    ```sh
+    alias tmux="TERM=screen-256color-bce tmux"
+    ```
+
+    并在 `~/.tmux.conf` 中设置 `default-terminal` 选项：
+
+    ```conf
+    set -g default-terminal "xterm"
+    ```
+
+    最后，要执行 `$ source ~/.zshrc` 或 `$ source ~/.bashrc` 加载新的命令别名。
