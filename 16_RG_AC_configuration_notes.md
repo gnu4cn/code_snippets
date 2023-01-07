@@ -33,5 +33,5 @@
 29. line 配置模式
 30. cwmp 配置模式
 31. time-range 模式
-32. telnet 默认密码：ruijie。
-33. `enable` 默认密码：apdebug。
+32. `telnet` 默认密码：`ruijie`
+33. `enable` 默认密码：`apdebug`
