@@ -13,7 +13,7 @@ TypeError: cb.apply is not a function
 
 ```console
 cd ~/.nvm/versions/node/v12.22.12/lib/node_modules/gitbook-cli/node_modules/npm/node_modules/
-npm i graceful@latest --save
+npm i graceful-fs@latest --save
 ```
 
 安装完成后问题消失。
