@@ -11,8 +11,9 @@ do
 done
 
 if [ $i != 3 ]; then
-    echo "命令行参数问题。仅支持两个参数：start/stop/restart, all/service_name"
-    echo "service_name: rust-lang, java-lang, ccna, www, ts-lang"
+    echo "命令行参数问题。仅支持两个参数：start/stop/restart/status, all/service_name"
+    echo "command: ${COMMANDS[@]}"
+    echo "service_name: ${!dirs[@]}"
     exit 1
 fi
 
@@ -48,4 +49,15 @@ if [ $2 == "all" ]; then
     if [ $1 == "start" ]; then start_all && exit 0; fi
     if [ $1 == "stop" ]; then kill_all && exit 0; fi
     if [ $1 == "restart" ]; then kill_all && start_all && exit 0; fi
+fi
+
+if [ $1 == "status" ]; then
+   if [ $2 != "all" ]; then
+       show_status $2
+   else
+       for name in ${!ports[@]}; do
+           echo "_______________________$name 状态___________________________"
+           show_status $name
+       done
+   fi
 fi

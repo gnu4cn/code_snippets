@@ -1,4 +1,4 @@
-COMMANDS=("start" "stop" "restart")
+COMMANDS=("start" "stop" "restart" "status")
 
 declare -A dirs
 
@@ -42,4 +42,9 @@ kill_all() {
     ps -A | grep node | while read -r line; do
         kill $(echo $line | awk -F' ' '{print $1}') && sleep 60
     done
+}
+
+show_status() {
+    pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
+    /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime -o comm,args=ARGS
 }
