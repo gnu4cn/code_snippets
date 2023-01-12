@@ -61,3 +61,6 @@ no = gitlab.senscomm.com
 host = 192.168.30.51:3128
 ```
 
+## `sl pull` 问题
+
+默认 `sl pull` 后，不会前往远端的最新 commit，可运行 `sl pull && sl go main`，前往最新 commit 处。
