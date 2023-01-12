@@ -45,6 +45,7 @@ kill_all() {
 }
 
 show_status() {
+    echo "_______________________$name 状态___________________________"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
     /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime -o comm,args=ARGS
 }

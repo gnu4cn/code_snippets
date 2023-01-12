@@ -56,7 +56,6 @@ if [ $1 == "status" ]; then
        show_status $2
    else
        for name in ${!ports[@]}; do
-           echo "_______________________$name 状态___________________________"
            show_status $name
        done
    fi
