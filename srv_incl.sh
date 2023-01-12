@@ -29,7 +29,7 @@ stop_srv() {
 }
 
 start_srv() {
-    cd "$HOME/${dirs[$1]}" && npm run serve && sleep 300
+    cd "$HOME/${dirs[$1]}" && npm run serve && sleep 120
 }
 
 start_all() {
@@ -47,5 +47,11 @@ kill_all() {
 show_status() {
     echo "_______________________$name 状态___________________________"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
-    /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime -o comm,args=ARGS
+
+    re='^[0-9]+$'
+    if ! [[ $pid =~ $re ]] ; then
+        echo "---- Dead !!!!!!!"
+    else
+        /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime -o comm,args=ARGS
+    fi
 }
