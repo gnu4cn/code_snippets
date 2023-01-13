@@ -9,8 +9,7 @@ for para in "$@"; do paras[$i]=$para && i=$((i + 1)); done
 if [ $i != 3 ]; then
     echo "命令行参数问题。仅支持两个参数：start/stop/restart/status, all/service_name"
     echo "command: ${COMMANDS[@]}"
-    echo "service_name: ${!dirs[@]}"
-    exit 1
+    echo "service_name: ${!dirs[@]}" && exit 1
 fi
 
 cmd_okay=0
