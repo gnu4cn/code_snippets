@@ -1,4 +1,3 @@
-COMMANDS=("start" "stop" "restart" "status")
 INFO_COLOR="\033[1;90;1;93m"
 SUCESS_COLOR="\033[0;90;2;92m"
 END_COLOR="\033[0m"
@@ -20,6 +19,7 @@ ports["ccna"]="10444"
 ports["ts-lang"]="10447"
 ports["www"]="10446"
 
+COMMANDS=("start" "stop" "restart" "status")
 OPTIONS=("all")
 for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
 
