@@ -1,11 +1,8 @@
 COMMANDS=("start" "stop" "restart" "status")
-RED="31"
-GREEN="32"
-ORANGE="33[93m"
-BOLDGREEN="\e[1;${GREEN}m"
-ITALICRED="\e[3;${RED}m"
-ITALICORANGE="\e[3;${ORANGE}m"
-ENDCOLOR="\e[0m"
+INFO_COLOR="\033[5;90;1;93m"
+SUCESS_COLOR="\033[5;90;1;92m"
+END_COLOR="\033[0m"
+ALERT_COLOR="\033[5;41;1;37m"
 
 declare -A dirs
 
@@ -53,13 +50,15 @@ kill_all() {
 
 show_status() {
     echo "---------------------------------------------"
-    echo -e "${ITALICORANGE}$name.xfoss.com${ENDCOLOR} 状态:"
+    echo -e "${INFO_COLOR}$name.xfoss.com${END_COLOR} 状态:"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
 
     re='^[0-9]+$'
     if ! [[ $pid =~ $re ]] ; then
-        echo -e "${RED}----- Dead !!!!!!!${ENDCOLOR}"
+        echo -e "${ALERT_COLOR}----- Dead !!!!!!!${END_COLOR}"
     else
-        /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
+       echo -n -e "${SUCESS_COLOR}"
+       /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
+       echo -n -e "${END_COLOR}"
     fi
 }
