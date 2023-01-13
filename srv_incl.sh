@@ -1,6 +1,6 @@
 COMMANDS=("start" "stop" "restart" "status")
-INFO_COLOR="\033[5;90;1;93m"
-SUCESS_COLOR="\033[5;90;1;92m"
+INFO_COLOR="\033[1;90;1;93m"
+SUCESS_COLOR="\033[0;90;2;92m"
 END_COLOR="\033[0m"
 ALERT_COLOR="\033[5;41;1;37m"
 

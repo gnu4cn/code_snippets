@@ -39,33 +39,45 @@ if [ $option_okay -eq 0 ]; then
     exit 1
 fi
 
-if [ $1 == "start" ] && [ $2 != "all" ]; then start_srv $2 exit 0; fi
-
-if [ $1 == "stop" ] && [ $2 != "all" ]; then stop_srv $2 && exit 0; fi
-
-if [ $1 == "restart" ] && [ $2 != "all" ]; then stop_srv $2 && start_srv $2 && exit 0; fi
-
-if [ $2 == "all" ]; then
-    case $1 in
-        "start")
-            start_all && exit 0
-            ;;
-        "stop")
-            kill_all && exit
-            ;;
-        "restart")
-            kill_all && start_all && exit 0
-            ;;
-    esac
-fi
-
-if [ $1 == "status" ]; then
-    case $2 in
-        "all")
-            for name in ${!ports[@]}; do show_status $name; done
-            ;;
-        *)
-            show_status $2
-            ;;
-    esac
-fi
+case $1 in
+    "start")
+        case $2 in
+            "all")
+                start_all
+                ;;
+            *)
+                start_srv $2
+                ;;
+        esac
+        ;;
+    "stop")
+        case $2 in
+            "all")
+                stop_all
+                ;;
+            *)
+                stop_srv $2
+                ;;
+        esac
+        ;;
+    "restart")
+        case $2 in
+            "all")
+                stop_all && start_all
+                ;;
+            "*")
+                stop_srv $2 && start_srv $2
+                ;;
+        esac
+        ;;
+    "status")
+        case $2 in
+            "all")
+                for name in ${!ports[@]}; do show_status $name; done
+                ;;
+            *)
+                show_status $2
+                ;;
+        esac
+        ;;
+esac
