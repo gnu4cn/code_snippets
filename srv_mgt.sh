@@ -4,11 +4,7 @@ source $(dirname $0)/srv_incl.sh
 declare -A paras
 
 i=1;
-for para in "$@"
-do
-    paras[$i]=$para;
-    i=$((i + 1));
-done
+for para in "$@"; do paras[$i]=$para && i=$((i + 1)); done
 
 if [ $i != 3 ]; then
     echo "命令行参数问题。仅支持两个参数：start/stop/restart/status, all/service_name"
@@ -24,8 +20,7 @@ done
 
 if [ $cmd_okay -eq 0 ]; then
     echo "第一个命令行参数错误"
-    echo "可选参数：${COMMANDS[@]}"
-    exit 1
+    echo "可选参数：${COMMANDS[@]}" && exit 1
 fi
 
 option_okay=0
@@ -35,8 +30,7 @@ done
 
 if [ $option_okay -eq 0 ]; then
     echo "第二个命令行参数错误"
-    echo "可选参数：${OPTIONS[@]}"
-    exit 1
+    echo "可选参数：${OPTIONS[@]}" && exit 1
 fi
 
 case $1 in
@@ -81,3 +75,5 @@ case $1 in
         esac
         ;;
 esac
+
+exit 0
