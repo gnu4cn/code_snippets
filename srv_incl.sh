@@ -53,12 +53,12 @@ kill_all() {
 
 show_status() {
     echo "---------------------------------------------"
-    echo "$name.xfoss.com 状态:"
+    echo -e "${ITALICORANGE}$name.xfoss.com${ENDCOLOR} 状态:"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
 
     re='^[0-9]+$'
     if ! [[ $pid =~ $re ]] ; then
-        echo -e "\e[32m---- Dead !!!!!!!\e[0m"
+        echo -e "${RED}----- Dead !!!!!!!${ENDCOLOR}"
     else
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
     fi
