@@ -33,17 +33,21 @@ stop_srv() {
 }
 
 start_srv() {
-    cd "$HOME/${dirs[$1]}" && npm run serve && sleep 120
+    if [ $(netstat -ntlp 2> /dev/null | grep ${ports[$1]} | wc -l) == 1 ]; then
+        :
+    else
+        cd "$HOME/${dirs[$1]}" && npm run serve && sleep 120
+    fi
 }
 
 start_all() {
     for name in ${!dirs[@]}; do
-        cd "$HOME/${dirs[$name]}" && npm run serve && sleep 120
+        start_srv $name && sleep 120
     done
 }
 
 kill_all() {
-    ps -A | grep node | while read -r line; do
+    /usr/bin/ps -A | grep node | while read -r line; do
         kill $(echo $line | awk -F' ' '{print $1}') && sleep 60
     done
 }
@@ -57,8 +61,8 @@ show_status() {
     if ! [[ $pid =~ $re ]] ; then
         echo -e "${ALERT_COLOR}----- Dead !!!!!!!${END_COLOR}"
     else
-       echo -n -e "${SUCESS_COLOR}"
-       /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
-       echo -n -e "${END_COLOR}"
+        echo -n -e "${SUCESS_COLOR}"
+        /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
+        echo -n -e "${END_COLOR}"
     fi
 }
