@@ -48,8 +48,8 @@ start_all() {
 
 kill_all() {
     /usr/bin/ps -A | grep node | while read -r line; do
-        kill $(echo $line | awk -F' ' '{print $1}') && sleep 60
-    done
+    kill $(echo $line | awk -F' ' '{print $1}') && sleep 60
+done
 }
 
 show_status() {
@@ -65,4 +65,25 @@ show_status() {
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
         echo -n -e "${END_COLOR}"
     fi
+}
+
+monitor() {
+    case $1 in
+        "all")
+            for name in ${!dirs[@]}; do cd "$HOME/${dirs[$name]}" && npm run sl-checkout; done
+
+            sleep 30
+
+            for name in ${!dirs[@]}; do
+                resp_code=$(/usr/bin/curl -I "https://${name}.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
+                if [ $resp_code != 200 ]; then stop_srv $name && start_srv $name && sleep 120; fi
+            done
+            ;;
+        *)
+            cd "$HOME/${dirs[$1]}" && npm run sl-checkout;
+            sleep 30
+            resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
+            if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $name && sleep 120; fi
+            ;;
+    esac
 }

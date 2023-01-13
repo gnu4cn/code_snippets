@@ -73,6 +73,9 @@ case $1 in
                 ;;
         esac
         ;;
+    "monitor")
+        monitor $2
+        ;;
 esac
 
 exit 0
