@@ -45,7 +45,8 @@ kill_all() {
 }
 
 show_status() {
-    echo "_______________________$name 状态___________________________"
+    echo "---------------------------------------------"
+    echo "$name.xfoss.com 状态:"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
 
     re='^[0-9]+$'
