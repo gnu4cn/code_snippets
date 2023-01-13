@@ -4,7 +4,7 @@ SUCESS_COLOR="\033[0;90;2;92m"
 END_COLOR="\033[0m"
 ALERT_COLOR="\033[5;47;1;31m"
 
-COMMANDS=("start" "restart" "monitor" "status")
+COMMANDS=("start" "stop" "restart" "monitor" "status")
 
 start_conn() {
     /usr/bin/ssh -q -C -N -D 10080 user@example.com -p 38460 2>/dev/null
@@ -77,5 +77,8 @@ case $1 in
         ;;
     "status")
         show_status
+        ;;
+    "stop")
+        stop_conn
         ;;
 esac
