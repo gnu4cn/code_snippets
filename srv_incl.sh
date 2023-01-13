@@ -52,6 +52,6 @@ show_status() {
     if ! [[ $pid =~ $re ]] ; then
         echo "---- Dead !!!!!!!"
     else
-        /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime -o comm,args=ARGS
+        /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime
     fi
 }
