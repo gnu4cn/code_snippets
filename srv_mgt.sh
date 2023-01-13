@@ -46,17 +46,26 @@ if [ $1 == "stop" ] && [ $2 != "all" ]; then stop_srv $2 && exit 0; fi
 if [ $1 == "restart" ] && [ $2 != "all" ]; then stop_srv $2 && start_srv $2 && exit 0; fi
 
 if [ $2 == "all" ]; then
-    if [ $1 == "start" ]; then start_all && exit 0; fi
-    if [ $1 == "stop" ]; then kill_all && exit 0; fi
-    if [ $1 == "restart" ]; then kill_all && start_all && exit 0; fi
+    case $1 in
+        "start")
+            start_all && exit 0
+            ;;
+        "stop")
+            kill_all && exit
+            ;;
+        "restart")
+            kill_all && start_all && exit 0
+            ;;
+    esac
 fi
 
 if [ $1 == "status" ]; then
-   if [ $2 != "all" ]; then
-       show_status $2
-   else
-       for name in ${!ports[@]}; do
-           show_status $name
-       done
-   fi
+    case $2 in
+        "all")
+            for name in ${!ports[@]}; do show_status $name; done
+            ;;
+        *)
+            show_status $2
+            ;;
+    esac
 fi
