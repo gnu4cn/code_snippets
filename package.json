@@ -4,8 +4,9 @@
   "description": "Code snippets and work records.",
   "main": "index.js",
   "scripts": {
-    "git-push": "git add . && git commit -m \"Updated.\" && git push",
-    "sl-push": "sl add . && sl commit -m \"Updated.\" && sl push"
+    "sl-push": "sl add . && sl commit -m \"Updated.\" && sl push",
+    "sl-ch": "sl pull && sl go main",
+    "index-gen": "cp SUMMARY.md SUMMARY.md.old && book sm -r ."
   },
   "repository": {
     "type": "git",
