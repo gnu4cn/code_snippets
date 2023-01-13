@@ -1,7 +1,5 @@
 # 代码 snippets 与技术记录
 
-这里记录一些平时的心得体会、工作备忘录（总计 35 篇）。
-
 ## 运维
 
 * [01 Flask Uwsgi Supervisord](01_flask_uwsgi_supervisord.md)
