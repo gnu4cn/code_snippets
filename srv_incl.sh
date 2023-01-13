@@ -38,7 +38,7 @@ start_srv() {
 
 start_all() {
     for name in ${!dirs[@]}; do
-        cd "$HOME/${dirs[$name]}" && npm run serve && sleep 300
+        cd "$HOME/${dirs[$name]}" && npm run serve && sleep 120
     done
 }
 

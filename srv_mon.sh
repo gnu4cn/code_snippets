@@ -7,7 +7,7 @@ done
 
 for name in ${!dirs[@]}; do
     resp_code=$(/usr/bin/curl -I "https://${name}.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-    if [ $resp_code != 200 ]; then stop_srv $name && start_srv $name && sleep 300; fi
+    if [ $resp_code != 200 ]; then stop_srv $name && start_srv $name && sleep 120; fi
 done
 
 exit 0
