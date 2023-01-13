@@ -1,4 +1,11 @@
 COMMANDS=("start" "stop" "restart" "status")
+RED="31"
+GREEN="32"
+ORANGE="33[93m"
+BOLDGREEN="\e[1;${GREEN}m"
+ITALICRED="\e[3;${RED}m"
+ITALICORANGE="\e[3;${ORANGE}m"
+ENDCOLOR="\e[0m"
 
 declare -A dirs
 
@@ -51,7 +58,7 @@ show_status() {
 
     re='^[0-9]+$'
     if ! [[ $pid =~ $re ]] ; then
-        echo "---- Dead !!!!!!!"
+        echo -e "\e[32m---- Dead !!!!!!!\e[0m"
     else
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
     fi
