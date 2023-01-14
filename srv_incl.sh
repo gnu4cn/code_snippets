@@ -42,7 +42,7 @@ start_srv() {
     if [ $proc_num -eq 1 ]; then
         :
     else
-        cd "$HOME/${dirs[$1]}" && npm --max_old_space_size=256 run serve && sleep 120
+        cd "$HOME/${dirs[$1]}" && npm --max_old_space_size=144 run serve && sleep 120
     fi
 }
 
