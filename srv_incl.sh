@@ -56,7 +56,7 @@ done
 
 show_status() {
     echo "---------------------------------------------"
-    echo -e "${INFO_COLOR}$name.xfoss.com${END_COLOR} 状态:"
+    echo -e "> ${INFO_COLOR}$name.xfoss.com${END_COLOR} 状态:"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
 
     re='^[0-9]+$'
