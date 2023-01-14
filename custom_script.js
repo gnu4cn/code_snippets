@@ -4,6 +4,6 @@ var text = honkit_link.text();
 honkit_link.parent().html(`<span style="align: center;">${text}</span>`);
 
 $("li.chapter > a").click(function() {
-  $(".book-body").css("left", "300px !important");
+    $(".book-body").style("");
 });
 
