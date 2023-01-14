@@ -10,6 +10,7 @@ dirs["java-lang"]="learningJava"
 dirs["ccna"]="ccna60d"
 dirs["ts-lang"]="ts-learnings"
 dirs["www"]="buy-me-a-coffee"
+dirs["snippets"]="code_snippets"
 
 declare -A ports
 
@@ -18,6 +19,7 @@ ports["java-lang"]="10445"
 ports["ccna"]="10444"
 ports["ts-lang"]="10447"
 ports["www"]="10446"
+ports["www"]="10448"
 
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 OPTIONS=("all")

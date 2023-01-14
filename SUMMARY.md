@@ -1,7 +1,8 @@
 # 代码 snippets 与技术记录
 
-## 运维
+* [Introduction](README.md)
 
+## 运维
 * [01 Flask Uwsgi Supervisord](01_flask_uwsgi_supervisord.md)
 * [02 Ionic Serve](02_ionic_serve.md)
 * [03 Ionic 4 Flask Cors](03_ionic_4_flask_cors.md)
@@ -24,10 +25,7 @@
 * [33 Git Behind Proxy](33_git_behind_proxy.md)
 * [34 Arch Linux Manjaro Autoproxy Pac](34_ArchLinux_Manjaro_autoproxy_pac.md)
 
-
 ## 编程开发
-
-
 * [00 Sh Bash](00_sh_bash.md)
 * [08 Using Huawei Repos](08_Using_Huawei_Repos.md)
 * [09_vim.gtk3_Installation_Notes](09_vim.gtk3_Installation_Notes.md)
@@ -40,8 +38,6 @@
 * [35 Tmux Manual](35_tmux_manual.md)
 
 ## 杂项
-
-
 * [14 OA BPM](14_OA_BPM.md)
 * [17_eteams.cn_notes](17_eteams.cn_notes.md)
 * [24 SC Network Op](24_SC_network_op.md)
