@@ -2,7 +2,7 @@
 
 这里记录一些平时的心得体会、工作备忘录（总计 35 篇）。
 
-## 运维 devops<
+## 运维 devops
 
 * [01 Flask Uwsgi Supervisord](01_flask_uwsgi_supervisord.md)
 * [02 Ionic Serve](02_ionic_serve.md)
