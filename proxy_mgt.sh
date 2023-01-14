@@ -1,15 +1,15 @@
 #!/usr/bin/bash
-INFO_COLOR="\033[1;90;1;93m"
-SUCESS_COLOR="\033[0;90;2;92m"
-END_COLOR="\033[0m"
-ALERT_COLOR="\033[5;47;1;31m"
+INFO_CLR="\033[1;90;1;93m"
+SUCESS_CLR="\033[0;90;2;92m"
+END_CLR="\033[0m"
+ALERT_CLR="\033[5;47;1;31m"
 
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 
 start_conn() {
     /usr/bin/ssh -q -C -N -D 10080 unisko@xfoss.com -p 38460 2>/dev/null
 
-    if [ $? -ne 0 ]; then echo -e "${ALERT_COLOR}连接不上....${END_COLOR}"; fi
+    if [ $? -ne 0 ]; then echo -e "${ALERT_CLR}连接不上....${END_CLR}"; fi
 }
 
 stop_conn() {
@@ -34,16 +34,16 @@ monitor() {
 
 show_status() {
     echo "---------------------------------------------"
-    echo -e "${INFO_COLOR}SSH proxy${END_COLOR} 状态:"
+    echo -e "${INFO_CLR}SSH proxy${END_CLR} 状态:"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep "10080" | awk -F' ' '{print $7}' | awk -F'/' '{print $1}' | head -n 1)
 
     re='^[0-9]+$'
     if ! [[ $pid =~ $re ]] ; then
-        echo -e "${ALERT_COLOR}----- Not connected !!!!!!! -----------------${END_COLOR}"
+        echo -e "${ALERT_CLR}----- Not connected !!!!!!! -----------------${END_CLR}"
     else
-        echo -n -e "${SUCESS_COLOR}"
+        echo -n -e "${SUCESS_CLR}"
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
-        echo -n -e "${END_COLOR}"
+        echo -n -e "${END_CLR}"
     fi
 }
 

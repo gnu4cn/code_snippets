@@ -1,7 +1,7 @@
-INFO_COLOR="\033[1;90;1;93m"
-SUCESS_COLOR="\033[0;90;2;92m"
-END_COLOR="\033[0m"
-ALERT_COLOR="\033[5;47;1;31m"
+INFO_CLR="\033[1;90;1;93m"
+SUCESS_CLR="\033[0;90;2;92m"
+END_CLR="\033[0m"
+ALERT_CLR="\033[5;47;1;31m"
 
 declare -A dirs
 
@@ -60,16 +60,16 @@ done
 
 show_status() {
     echo "---------------------------------------------"
-    echo -e " ${INFO_COLOR}$name.xfoss.com${END_COLOR} 状态:"
+    echo -e " ${INFO_CLR}$name.xfoss.com${END_CLR} 状态:"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
 
     re='^[0-9]+$'
     if ! [[ $pid =~ $re ]] ; then
-        echo -e "${ALERT_COLOR}----- Dead !!!!!!!${END_COLOR}"
+        echo -e "${ALERT_CLR}----- Dead !!!!!!!${END_CLR}"
     else
-        echo -n -e "${SUCESS_COLOR}"
+        echo -n -e "${SUCESS_CLR}"
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
-        echo -n -e "${END_COLOR}"
+        echo -n -e "${END_CLR}"
     fi
 }
 
