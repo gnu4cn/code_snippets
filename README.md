@@ -50,5 +50,3 @@
 * [24 SC Network Op](24_SC_network_op.md)
 * [28 Manjaro User Tips](28_manjaro_user_tips.md)
 * [30 HPC Knowledges](30_HPC_knowledges.md)
-
-</td></tr></table>
