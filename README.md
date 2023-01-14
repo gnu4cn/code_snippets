@@ -2,9 +2,7 @@
 
 这里记录一些平时的心得体会、工作备忘录（总计 35 篇）。
 
-<table>
-<tr><th>运维 devops</th><th>编程 programming</th><th>杂项 miscs</th></tr>
-<tr><td valign="top">
+## 运维 devops<
 
 * [01 Flask Uwsgi Supervisord](01_flask_uwsgi_supervisord.md)
 * [02 Ionic Serve](02_ionic_serve.md)
@@ -28,7 +26,9 @@
 * [33 Git Behind Proxy](33_git_behind_proxy.md)
 * [34 Arch Linux Manjaro Autoproxy Pac](34_ArchLinux_Manjaro_autoproxy_pac.md)
 
-</td><td valign="top">
+
+## 编程 programming
+
 
 * [00 Sh Bash](00_sh_bash.md)
 * [08 Using Huawei Repos](08_Using_Huawei_Repos.md)
@@ -41,7 +41,9 @@
 * [32 Sapling Scm Usage](32_sapling-scm_usage.md)
 * [35 Tmux Manual](35_tmux_manual.md)
 
-</td><td valign="top">
+
+## 杂项 miscs
+
 
 * [14 OA BPM](14_OA_BPM.md)
 * [17_eteams.cn_notes](17_eteams.cn_notes.md)
