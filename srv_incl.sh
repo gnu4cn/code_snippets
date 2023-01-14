@@ -19,7 +19,7 @@ ports["java-lang"]="10445"
 ports["ccna"]="10444"
 ports["ts-lang"]="10447"
 ports["www"]="10446"
-ports["www"]="10448"
+ports["snippets"]="10448"
 
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 OPTIONS=("all")
