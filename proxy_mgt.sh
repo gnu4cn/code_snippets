@@ -39,7 +39,7 @@ show_status() {
 
     re='^[0-9]+$'
     if ! [[ $pid =~ $re ]] ; then
-        echo -e "${ALERT_COLOR}----- Not connected !!!!!!!${END_COLOR}"
+        echo -e "${ALERT_COLOR}----- Not connected !!!!!!! -----------------${END_COLOR}"
     else
         echo -n -e "${SUCESS_COLOR}"
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
