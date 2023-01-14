@@ -58,7 +58,7 @@ case $1 in
             "all")
                 kill_all && start_all
                 ;;
-            "*")
+            *)
                 stop_srv $2 && start_srv $2
                 ;;
         esac
