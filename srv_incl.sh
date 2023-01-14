@@ -26,7 +26,9 @@ OPTIONS=("all")
 for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
 
 stop_srv() {
-    if [ $(/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l) -eq 0 ]; then
+    proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
+    echo $proc_num
+    if [ $proc_num -eq 0 ]; then
         :
     else
         kill `/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}'`
@@ -35,10 +37,12 @@ stop_srv() {
 }
 
 start_srv() {
-    if [ $(/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l) -eq 1 ]; then
+    proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
+    echo $proc_num
+    if [ $proc_num -eq 1 ]; then
         :
     else
-        cd "$HOME/${dirs[$1]}" && npm --max_old_space_size=192 run serve && sleep 120
+        cd "$HOME/${dirs[$1]}" && npm --max_old_space_size=256 run serve && sleep 120
     fi
 }
 
