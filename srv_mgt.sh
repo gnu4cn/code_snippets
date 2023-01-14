@@ -46,7 +46,7 @@ case $1 in
     "stop")
         case $2 in
             "all")
-                stop_all
+                kill_all
                 ;;
             *)
                 stop_srv $2
@@ -56,7 +56,7 @@ case $1 in
     "restart")
         case $2 in
             "all")
-                stop_all && start_all
+                kill_all && start_all
                 ;;
             "*")
                 stop_srv $2 && start_srv $2

@@ -36,7 +36,7 @@ start_srv() {
     if [ $(netstat -ntlp 2> /dev/null | grep ${ports[$1]} | wc -l) == 1 ]; then
         :
     else
-        cd "$HOME/${dirs[$1]}" && npm run serve && sleep 120
+        cd "$HOME/${dirs[$1]}" && npm --max_old_space_size=192 run serve && sleep 120
     fi
 }
 
