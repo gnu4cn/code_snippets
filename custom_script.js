@@ -9,9 +9,7 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
 
     setTimeout(() => {
       var el = $('div.book-body');
-      console.log("Page changed");
-      el.attr('style', 'left: 300px; position: absolute;');
-      console.log(el.attr('style'));
-    }, 500);
+      el.attr('style', '');
+    }, 300);
   });
 });
