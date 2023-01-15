@@ -74,7 +74,7 @@ get_status() {
 show_status() {
     case $1 in
         all)
-            for name in $(!dirs[@]); do get_status $name; done
+            for name in ${!dirs[@]}; do get_status $name; done
             ;;
         *)
             get_status $1
