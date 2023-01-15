@@ -34,44 +34,16 @@ fi
 
 case $1 in
     "start")
-        case $2 in
-            "all")
-                start_all
-                ;;
-            *)
-                start_srv $2
-                ;;
-        esac
+        do_start $2
         ;;
     "stop")
-        case $2 in
-            "all")
-                kill_all
-                ;;
-            *)
-                stop_srv $2
-                ;;
-        esac
+        do_stop $2
         ;;
     "restart")
-        case $2 in
-            "all")
-                kill_all && start_all
-                ;;
-            *)
-                stop_srv $2 && start_srv $2
-                ;;
-        esac
+        do_start $2
         ;;
     "status")
-        case $2 in
-            "all")
-                for name in ${!ports[@]}; do show_status $name; done
-                ;;
-            *)
-                show_status $2
-                ;;
-        esac
+        show_status $2
         ;;
     "monitor")
         monitor $2

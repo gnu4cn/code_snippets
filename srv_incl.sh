@@ -56,9 +56,9 @@ kill_all() {
 done
 }
 
-show_status() {
+get_status() {
     echo "---------------------------------------------"
-    echo -e " ${INFO_CLR}$name.xfoss.com${END_CLR} 状态:"
+    echo -e " ${INFO_CLR}$1.xfoss.com${END_CLR} 状态:"
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
 
     re='^[0-9]+$'
@@ -71,10 +71,53 @@ show_status() {
     fi
 }
 
-chk_n_restart() {
-                resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-                if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $1 && sleep 120; fi
+show_status() {
+    case $1 in
+        all)
+            for name in $(!dirs[@]); do get_status $name; done
+            ;;
+        *)
+            get_status $1
+            ;;
+    esac
+}
 
+do_start() {
+    case $1 in
+        all)
+            start_all
+            ;;
+        *)
+            start_srv $1
+            ;;
+    esac
+}
+
+do_stop() {
+    case $1 in
+        all)
+            kill_all
+            ;;
+        *)
+            stop_srv $1
+            ;;
+    esac
+}
+
+do_restart() {
+    case $1 in
+        all)
+            kill_all && start_all
+            ;;
+        *)
+            stop_srv $1 && start_srv $1
+            ;;
+    esac
+}
+
+chk_n_restart() {
+    resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
+    if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $1 && sleep 120; fi
 }
 
 monitor() {
@@ -89,8 +132,7 @@ monitor() {
         *)
             cd "$HOME/${dirs[$1]}" && npm run sl-checkout;
             sleep 30
-            resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-            if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $name && sleep 120; fi
+            chk_n_restart $1
             ;;
     esac
 }
