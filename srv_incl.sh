@@ -71,6 +71,12 @@ show_status() {
     fi
 }
 
+chk_n_restart() {
+                resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
+                if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $1 && sleep 120; fi
+
+}
+
 monitor() {
     case $1 in
         "all")
@@ -78,10 +84,7 @@ monitor() {
 
             sleep 30
 
-            for name in ${!dirs[@]}; do
-                resp_code=$(/usr/bin/curl -I "https://${name}.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-                if [ $resp_code != 200 ]; then stop_srv $name && start_srv $name && sleep 120; fi
-            done
+            for name in ${!dirs[@]}; do chk_n_restart $name; done
             ;;
         *)
             cd "$HOME/${dirs[$1]}" && npm run sl-checkout;
