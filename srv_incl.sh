@@ -27,7 +27,6 @@ for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
 
 stop_srv() {
     proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
-    echo $proc_num
     if [ $proc_num -eq 0 ]; then
         :
     else
@@ -38,7 +37,6 @@ stop_srv() {
 
 start_srv() {
     proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
-    echo $proc_num
     if [ $proc_num -eq 1 ]; then
         :
     else
