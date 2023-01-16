@@ -40,7 +40,7 @@ case $1 in
         do_stop $2
         ;;
     "restart")
-        do_start $2
+        do_restart $2
         ;;
     "status")
         show_status $2

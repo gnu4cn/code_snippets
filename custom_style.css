@@ -24,6 +24,11 @@ i.fa {
   color: #5f5f5f;
 }
 
+div.book-header {
+  top: 30px;
+}
+
+
 .page-toc-menu {
   background-color: #555555 !important;
   color: #cccccc !important;
@@ -31,9 +36,6 @@ i.fa {
 }
 
 @media only screen and (min-width: 1024px) {
-  div.book-header {
-    top: 30px;
-  }
   .nav-list .nav-item a {
     font-size: small !important;
   }
