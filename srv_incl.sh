@@ -2,6 +2,7 @@ INFO_CLR="\033[1;90;1;93m"
 SUCESS_CLR="\033[0;90;2;92m"
 END_CLR="\033[0m"
 ALERT_CLR="\033[5;47;1;31m"
+LOG_FILE="${HOME}/log/srv_mgt.log"
 
 declare -A dirs
 
@@ -24,6 +25,16 @@ ports["snippets"]="10448"
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 OPTIONS=("all")
 for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
+
+
+dir_name=`/usr/bin/dirname $LOG_FILE`
+if [ ! -d "${dirname}" ]; then
+    /usr/bin/mkdir -p $dir_name
+fi
+
+if [ ! -f "${LOG_FILE}" ]; then
+    touch $LOG_FILE
+fi
 
 stop_srv() {
     proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
@@ -123,16 +134,27 @@ chk_n_restart() {
 monitor() {
     case $1 in
         "all")
-            for name in ${!dirs[@]}; do cd "$HOME/${dirs[$name]}" && npm run sl-checkout; done
+            for name in ${!dirs[@]}; do
+                cd "$HOME/${dirs[$name]}"
+                npm run sl-checkout &>/dev/null
+                echo "`date` - $name sl checkout 完成" >> $LOG_FILE
+            done
 
             sleep 30
 
-            for name in ${!dirs[@]}; do chk_n_restart $name; done
+            for name in ${!dirs[@]}; do
+                chk_n_restart $name
+                echo "`date` - 检查 $name 运行状态并重启服务完成" >> $LOG_FILE
+            done
             ;;
         *)
-            cd "$HOME/${dirs[$1]}" && npm run sl-checkout;
+            cd "$HOME/${dirs[$1]}"
+            npm run sl-checkout &>/dev/null
+            echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
+
             sleep 30
             chk_n_restart $1
+            echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
             ;;
     esac
 }
