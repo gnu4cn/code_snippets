@@ -7,7 +7,7 @@ ALERT_CLR="\033[5;47;1;31m"
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 
 start_conn() {
-    /usr/bin/ssh -q -C -N -D 10080 unisko@xfoss.com -p 38460 2>/dev/null
+    /usr/bin/ssh -q -C -N -D 10080 unisko@xfoss.com -p 38460 2>/dev/null &
 
     if [ $? -ne 0 ]; then echo -e "${ALERT_CLR}连接不上....${END_CLR}"; fi
 }
