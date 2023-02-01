@@ -236,3 +236,7 @@ group = nginx
 ```console
  ps aux | grep nginx | grep -v grep
 ```
+
+## 出现 `File not found. ` 错误
+
+修改 `php-fpm.ini` 配置文件中的 `user` 与 `group` 项目为正确项目。
