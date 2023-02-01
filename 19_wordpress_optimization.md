@@ -127,3 +127,8 @@ $ sudo systemctl restart php-fpm-74.service
 ```
 
 再运行 `$ wp --path="/usr/local/lighthouse/softwares/wordpress" plugin uninstall selfhost-google-fonts` 即可卸载该插件。后恢复 `php.ini`，加入之前删除的 `proc_open`，并重启 `php-fmp-74.service` 服务。问题解决！
+
+
+## 插入 HTML 内容时，所插入 HTML 中的全部内联样式都将被移出
+
+因此，需要在主题样式文件中，补充所需的样式。
