@@ -240,3 +240,9 @@ group = nginx
 ## 出现 `File not found. ` 错误
 
 修改 `php-fpm.ini` 配置文件中的 `user` 与 `group` 项目为正确项目。
+
+## MySQL/MariaDB 创建数据库
+
+```sql
+create schema neo_wp default character set utf8 collate utf8_general_ci;
+````
