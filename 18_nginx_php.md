@@ -248,12 +248,10 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 ````
 
 
-## `net::ERR_HTTP2_PROTOCOL_ERROR 200` 问题
+## 启用 Nginx 的 `fastcgi_cache` 特性，降低页面加载时间
 
 
-在 Wordpress 文章或页面编辑中，出现 Elementor 编辑器无法编辑的情况，这是由于 `fastcgi_temp` 权限设置，限制了当前运行 Nginx/PHP-FPM 用户的打开与写入。该目录通常位于以下位置：
+参考：[Use the Nginx FastCGI Page Cache With WordPress](https://www.linode.com/docs/guides/how-to-use-nginx-fastcgi-page-cache-with-wordpress/)
 
-- `/var/cache/nginx/fastcgi_temp`
-- `/www/server/nginx/fastcgi_temp` - 腾讯云 Lighthouse
 
-修改该目录权限 `chmod`，或修改其所有者 `chown`，均可解决此问题。*注*：通过查看 Nginx 日志，即可发现此故障原因。
+此举可有效降低 URL 加载时间，以腾讯云为例，可将加载时间从 16xxms 降低到 xxms。原理是缓存 fastcgi 生成的内容，php 渲染 HTML 的次数，从而减少 Nginx 与 PHP 通信次数，减轻 PHP 与数据库的压力。
