@@ -132,3 +132,16 @@ $ sudo systemctl restart php-fpm-74.service
 ## 插入 HTML 内容时，所插入 HTML 中的全部内联样式都将被移出
 
 因此，需要在主题样式文件中，补充所需的样式。
+
+
+## `net::ERR_HTTP2_PROTOCOL_ERROR 200` 问题
+
+
+在 Wordpress 文章或页面编辑中，出现 Elementor 编辑器无法编辑的情况，这是由于 `fastcgi_temp` 权限设置，限制了当前运行 Nginx/PHP-FPM 用户的打开与写入。该目录通常位于以下位置：
+
+- `/var/cache/nginx/fastcgi_temp`
+- `/www/server/nginx/fastcgi_temp` - 腾讯云 Lighthouse
+
+修改该目录权限 `chmod`，或修改其所有者 `chown`，均可解决此问题。*注*：通过查看 Nginx 日志，即可发现此故障原因。
+
+
