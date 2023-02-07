@@ -9,8 +9,8 @@
 add_filter('gettext', function ($translated) {
     $translated = str_ireplace('Read More', 'Learn more', $translated);
     $translated = str_ireplace('READ MORE', 'LEARN MORE', $translated);
-    return $translated; 
-});   
+    return $translated;
+});
 ```
 
 ## 将类别页中的 "CATEGORY ARCHIVES: " 移除
@@ -117,7 +117,7 @@ $ wp --path="/home/unisko/wordpress" search-replace www.senscomm.com wp.senscomm
 ```console
 $ wp --path="/usr/local/lighthouse/softwares/wordpress" plugin uninstall selfhost-google-fonts
 Error: Cannot do 'launch': The PHP functions `proc_open()` and/or `proc_close()` are disabled. Please check your PHP ini directive `disable_functions` or suhosin settings.
-```  
+```
 
 于是修改 `php.ini`，找到并删除 `proc_open()`，并重启 `php-fpm-74.service`：
 
@@ -145,3 +145,44 @@ $ sudo systemctl restart php-fpm-74.service
 修改该目录权限 `chmod`，或修改其所有者 `chown`，均可解决此问题。*注*：通过查看 Nginx 日志，即可发现此故障原因。
 
 
+## Gravity Forms 表单插入
+
+在主题文件编辑器中，编辑文章页面 `single.php`，在 `posterity_under_post_content(); ?> </div></div>` 与 `<?php posterity_posts_navigation(); ?>` 之间插入如下代码：
+
+```html
+							<br>
+							<div href="javascript:void(0)" id="tclink" onclick="ljsq()" style="padding:10px 20px;background:rgb(41, 122, 216);color:#ffffff;text-decoration:none;font-size:16px;display:inline-block;margin-bottom:20px;">立即申请</div>
+							<br>
+							<!--<iframe id="tcif" allowtransparency="true" style="width:100%;border:none;overflow:auto;display:none;" src="http://handsometc.mikecrm.com/yjybDi3" height="850" frameborder="0"></iframe>-->
+
+							<script>
+								if(window.location.href.indexOf("press")!=-1||window.location.href.indexOf("news")!=-1){
+									document.getElementById('tclink').style.display='none';
+								}
+								if(window.location.href.indexOf("en/jobs")!=-1){
+									console.log(11111)
+									document.getElementById('tclink').innerHTML='Apply now';
+								}
+								function ljsq(){
+									if(window.location.href.indexOf("zhaopin")!=-1){
+									   document.getElementById('gform_wrapper_1').style.display='block';
+										document.getElementById('gform_wrapper_2').style.display='none';
+									}else if(window.location.href.indexOf("en/jobs")!=-1){
+										document.getElementById('gform_wrapper_1').style.display='none';
+										document.getElementById('gform_wrapper_2').style.display='block';
+									}
+								}
+							</script>
+							<style>
+								#gform_wrapper_1{
+									display:none;
+								}
+								#gform_wrapper_2{
+									display:none;
+								}
+							</style>
+							<?php echo do_shortcode( '[gravityform id=1 title=false description=false ajax=true]' ); ?>
+							<?php echo do_shortcode( '[gravityform id=2 title=false description=false ajax=true]' ); ?>
+```
+
+此举将 Gravity Forms 插件中的表单，插入到 文章页面。
