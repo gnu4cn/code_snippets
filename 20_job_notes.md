@@ -45,7 +45,6 @@
 
 5. AnyDesk `Aborted(core dumped)` 问题
 
-
     该问题初步认为是由于安装 AnyDesk 时使用了 `$ sudo su -`，安装结束后未退出 `root` 用户，就运行了 `anydesk` 命令，在用户主目录下建立了 `.anydesk` 文件夹，所以因为权限原因，而报出 `Aborted(core dumped)` 错误。
 
     解决办法即是删除主目录下的 `.anydesk` 文件夹。
