@@ -11,70 +11,70 @@
 
 ## `tmux` 常用命令
 
-- 创建出一个终端
+### 创建出一个终端
 
-    ```console
-    $ tmux new -s ed
-    ```
+```console
+$ tmux new -s ed
+```
 
-    创建出一个名为 `ed[itor]` 的终端，`-s` 命令行参数，是给新创建出的终端会话，一个字符串的 `session-name`。创建出终端会话后，便会立即进入该终端会话。
-
-
-+ 按键绑定
-
-    是指 `tmux` 中有大量命令按键绑定，command key bindings，这些命令默认都以 `Ctrl + b` 作为前缀，常用的按键绑定有：
-
-    - 以竖直方式分割视窗，即为 `Ctrl+b %`
-
-    - 从屏幕中脱离即为 `Ctrl+b d`
-
-    - 列出所有终端会话 `Ctrl+b w`
-
-    - 杀掉除当前所选终端外的其他所有终端会话 `Ctrl+b : kill-pane -a`
-
-    - 移到上一终端会话 `Ctrl+b Shift+9`
-    
-    - 移到下一终端会话 `Ctrl+b Shift+0`
-
-    - 杀死当前会话 `Ctrl+b x y`
+创建出一个名为 `ed[itor]` 的终端，`-s` 命令行参数，是给新创建出的终端会话，一个字符串的 `session-name`。创建出终端会话后，便会立即进入该终端会话。
 
 
-- 取回脱离的终端会话
+### 按键绑定
+
+是指 `tmux` 中有大量命令按键绑定，command key bindings，这些命令默认都以 `Ctrl + b` 作为前缀，常用的按键绑定有：
+
+- 以竖直方式分割视窗，即为 `Ctrl+b %`
+
+- 从屏幕中脱离即为 `Ctrl+b d`
+
+- 列出所有终端会话 `Ctrl+b w`
+
+- 杀掉除当前所选终端外的其他所有终端会话 `Ctrl+b : kill-pane -a`
+
+- 移到上一终端会话 `Ctrl+b Shift+9`
+
+- 移到下一终端会话 `Ctrl+b Shift+0`
+
+- 杀死当前会话 `Ctrl+b x y`
 
 
-    ```console
-    $ tmux attach -t ed
-    ```
-
-    其中的 `-t ed` 传入了名为 `ed` 的终端 Tab。
+### 取回脱离的终端会话
 
 
-- 杀死会话
+```console
+$ tmux attach -t ed
+```
 
-    运行命令：
-
-    ```console
-    $ tmum kill-session -t sh
-    ```
-
-    杀死名为 `sh` 的会话。
+其中的 `-t ed` 传入了名为 `ed` 的终端 Tab。
 
 
-- `tmux` 与 `vim` 终端颜色配置问题
+### 杀死会话
+
+运行命令：
+
+```console
+$ tmum kill-session -t sh
+```
+
+杀死名为 `sh` 的会话。
 
 
-    参考：[lose vim colorscheme in tmux mode](https://stackoverflow.com/a/10264470)
+### `tmux` 与 `vim` 终端颜色配置问题
 
-    要解决此问题，就有在 `.zshrc`/`.bashrc` 中设置：
 
-    ```sh
-    alias tmux="TERM=screen-256color-bce tmux"
-    ```
+参考：[lose vim colorscheme in tmux mode](https://stackoverflow.com/a/10264470)
 
-    并在 `~/.tmux.conf` 中设置 `default-terminal` 选项：
+要解决此问题，就有在 `.zshrc`/`.bashrc` 中设置：
 
-    ```conf
-    set -g default-terminal "xterm"
-    ```
+```sh
+alias tmux="TERM=screen-256color-bce tmux"
+```
 
-    最后，要执行 `$ source ~/.zshrc` 或 `$ source ~/.bashrc` 加载新的命令别名。
+并在 `~/.tmux.conf` 中设置 `default-terminal` 选项：
+
+```conf
+set -g default-terminal "xterm"
+```
+
+最后，要执行 `$ source ~/.zshrc` 或 `$ source ~/.bashrc` 加载新的命令别名。
