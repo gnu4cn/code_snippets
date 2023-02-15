@@ -11,6 +11,8 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 
 > **注意**：需要修改 `Sysconfig` 中默认的 `NotificationSenderEmail` 选项。
 
+> **注意**：需要修改 `Sysconfig` 中默认的 `NotificationRecipientEmail` 选项，否则会导致邮件回执发送失败。
+
 > **注意**：`Sysconfig` -> `SendmailModule` 即可设置 SMTP 相关参数。
 
 > **注意**：“打印” 功能中 PDF 字体存放在 `/opt/otrs/var/fonts` 目录，在 `Sysconfig` -> `PDF::TTFontFile` 或许可设置打印 PDF 的汉字字体。
