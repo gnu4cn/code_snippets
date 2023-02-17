@@ -28,6 +28,21 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 - 用户登录：/otrs/customer.pl
 
 
+## 运行中的问题
+
+
+- PDF 打印中 PNG 的问题
+
+
+```console
+[Fri Feb 17 15:12:27 2023] customer.pl: Unsupported Interlace(1) Method at /opt/znuny-6.4.5/bin/fcgi-bin/../../Kernel/cpan-lib/PDF/API2/Resource/XObject/Image/PNG.pm line 51.
+```
+
+参考：[Tiket printing](https://community.znuny.org/viewtopic.php?t=41070)
+
+不支持 PNG 的 Interlace 特性。
+
+
 ## Nginx 部分的配置
 
 Nginx 并不直接支持 CGI，但支持 FastCGI。这里的问题是 OTRS 在 FastCGI 下存在问题。为了让 Nginx 来提供 OTRS，就必须使用 FastCGI 封装器（FastCGI wrapper），来将 FastCGI 作为 CGI 进行加载。
