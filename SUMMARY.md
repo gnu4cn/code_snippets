@@ -24,7 +24,7 @@
 * [31 Samba Configuration](31_samba_configuration.md)
 * [33 Git Behind Proxy](33_git_behind_proxy.md)
 * [34 Arch Linux Manjaro Autoproxy Pac](34_ArchLinux_Manjaro_autoproxy_pac.md)
-* [34 Win Software Installation Ways](36_win_software_installation_ways.md)
+* [36 Win Software Installation Ways](36_win_software_installation_ways.md)
 
 ## 编程开发
 * [00 Sh Bash](00_sh_bash.md)
@@ -44,4 +44,4 @@
 * [24 SC Network Op](24_SC_network_op.md)
 * [28 Manjaro User Tips](28_manjaro_user_tips.md)
 * [30 HPC Knowledges](30_HPC_knowledges.md)
-
+* [37 IPTV Watching Guide](37_IPTV_Watching_Guide.md)
