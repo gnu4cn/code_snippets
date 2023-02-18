@@ -11,11 +11,13 @@
 
 ### Kodi
 
+[kodi.tv](https://kodi.tv/)
+
 Kodi 软件项目虽然专业，但实际使用下来并不好用。
 
 ### Hyponotix
 
-比较简单，堪用程度。[linuxmint](https://github.com/linuxmint/hypnotix)
+比较简单，堪用程度。[linuxmint/hypnotix](https://github.com/linuxmint/hypnotix)
 
 ### IPTVnator
 
