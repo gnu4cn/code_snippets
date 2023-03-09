@@ -25,7 +25,7 @@
 * [31 Samba Configuration](31_samba_configuration.md)
 * [33 Git Behind Proxy](33_git_behind_proxy.md)
 * [34 Arch Linux Manjaro Autoproxy Pac](34_ArchLinux_Manjaro_autoproxy_pac.md)
-* [36 Win Software Installation Ways](36_win_software_installation_ways.md)
+* [36 Win Sys Admin](36_Win_Sys_Admin.md)
 
 ## 编程 programming
 
