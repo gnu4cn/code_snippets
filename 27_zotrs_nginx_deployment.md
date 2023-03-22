@@ -42,6 +42,10 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 
 不支持 PNG 的 Interlace 特性。
 
+## 通过邮件关闭工单
+
+参考：[SOLVED - Close Ticket from E-mail](https://community.znuny.org/viewtopic.php?t=28822)
+
 
 ## Nginx 部分的配置
 
