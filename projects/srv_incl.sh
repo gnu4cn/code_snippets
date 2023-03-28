@@ -43,7 +43,7 @@ stop_srv() {
     else
         echo -e "\n\rStopping $1 ..."
         kill `/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}'`
-        sleep 5
+        sleep 3
     fi
 }
 
@@ -55,8 +55,9 @@ start_srv() {
         cd "$HOME/${dirs[$1]}"
         echo -e "\n\rStarting $1 ..."
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
-        sleep 10
-        mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
+        sleep 5
+        mdbook-sitemap-generator -d "https://$1.xfoss.com" -o book/sitemap.xml
+        /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
     fi
 }
 
@@ -70,7 +71,7 @@ kill_all() {
     echo -e "\n\rStopping all..."
     /usr/bin/ps -A | grep mdbook | while read -r line; do
         kill $(echo $line | awk -F' ' '{print $1}')
-        sleep 5
+        sleep 3
     done
 }
 
