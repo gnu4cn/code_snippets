@@ -142,39 +142,31 @@ chk_n_restart() {
     if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $1; fi
 }
 
+do_mon() {
+    cd "$HOME/${dirs[$1]}"
+
+    if [ $1 = "ts" ]; then
+        sl pull && sl goto master
+    else
+        sl pull && sl goto main
+    fi
+
+    echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
+
+    chk_n_restart $1
+    echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
+
+}
+
 monitor() {
     case $1 in
         "all")
             for name in ${!dirs[@]}; do
-                cd "$HOME/${dirs[$name]}"
-
-                if [ $name = "ts" ]; then
-                    sl pull && sl goto master
-                else
-                    sl pull && sl goto main
-                fi
-
-                echo "`date` - $name sl checkout 完成" >> $LOG_FILE
-            done
-
-            for name in ${!dirs[@]}; do
-                chk_n_restart $name
-                echo "`date` - 检查 $name 运行状态并重启服务完成" >> $LOG_FILE
-            done
+                do_mon $name
+            done;
             ;;
         *)
-            cd "$HOME/${dirs[$1]}"
-
-            if [ $1 = "ts" ]; then
-                sl pull && sl goto master
-            else
-                sl pull && sl goto main
-            fi
-
-            echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
-
-            chk_n_restart $1
-            echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
+            do_mon $1
             ;;
     esac
 }
