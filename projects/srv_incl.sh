@@ -42,7 +42,6 @@ stop_srv() {
         :
     else
         kill `/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}'`
-        sleep 10
     fi
 }
 
@@ -59,13 +58,13 @@ start_srv() {
 
 start_all() {
     for name in ${!dirs[@]}; do
-        start_srv $name && sleep 10
+        start_srv $name
     done
 }
 
 kill_all() {
     /usr/bin/ps -A | grep mdbook | while read -r line; do
-    kill $(echo $line | awk -F' ' '{print $1}') && sleep 10
+    kill $(echo $line | awk -F' ' '{print $1}')
 done
 }
 
@@ -130,7 +129,7 @@ do_restart() {
 
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-    if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $1 && sleep 10; fi
+    if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $1; fi
 }
 
 monitor() {
@@ -150,8 +149,6 @@ monitor() {
                 echo "`date` - $name sl checkout 完成" >> $LOG_FILE
             done
 
-            sleep 10
-
             for name in ${!dirs[@]}; do
                 chk_n_restart $name
                 echo "`date` - 检查 $name 运行状态并重启服务完成" >> $LOG_FILE
@@ -170,7 +167,6 @@ monitor() {
 
             echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
 
-            sleep 10
             chk_n_restart $1
             echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
             ;;
