@@ -62,7 +62,7 @@ start_all() {
 }
 
 kill_all() {
-    /usr/bin/ps -A | grep node | while read -r line; do
+    /usr/bin/ps -A | grep mdbook | while read -r line; do
     kill $(echo $line | awk -F' ' '{print $1}') && sleep 60
 done
 }
@@ -136,7 +136,15 @@ monitor() {
         "all")
             for name in ${!dirs[@]}; do
                 cd "$HOME/${dirs[$name]}"
-                npm run sl-checkout &>/dev/null
+
+                if [ name = "ts-learnings" ]; then
+                    sl pull && sl goto master
+                else
+                    sl pull && sl goto main
+                fi
+
+                mdbook-sitemap-generator -d "$name.xfoss.com" -o book/sitemap.xml
+
                 echo "`date` - $name sl checkout 完成" >> $LOG_FILE
             done
 
@@ -149,7 +157,15 @@ monitor() {
             ;;
         *)
             cd "$HOME/${dirs[$1]}"
-            npm run sl-checkout &>/dev/null
+
+            if [ name = "ts-learnings" ]; then
+                sl pull && sl goto master
+            else
+                sl pull && sl goto main
+            fi
+
+            mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
+
             echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
 
             sleep 30
