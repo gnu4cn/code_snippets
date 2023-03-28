@@ -6,7 +6,7 @@ LOG_FILE="${HOME}/log/srv_mgt.log"
 
 declare -A dirs
 
-dirs["rust-lang"]="rust-lang"
+dirs["rust-lang"]="rust-lang-zh_CN"
 dirs["java-lang"]="learningJava"
 dirs["ccna"]="ccna60d"
 dirs["ts-lang"]="ts-learnings"
@@ -51,7 +51,7 @@ start_srv() {
     if [ $proc_num -eq 1 ]; then
         :
     else
-        cd "$HOME/${dirs[$1]}" && npm --max_old_space_size=144 run serve && sleep 120
+        cd "$HOME/${dirs[$1]}" && mdbook serve . -p "${ports[$1]}" -n 127.0.0.1
     fi
 }
 
