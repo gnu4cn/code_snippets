@@ -148,7 +148,7 @@ monitor() {
             for name in ${!dirs[@]}; do
                 cd "$HOME/${dirs[$name]}"
 
-                if [ name = "ts-learnings" ]; then
+                if [ $name = "ts" ]; then
                     sl pull && sl goto master
                 else
                     sl pull && sl goto main
@@ -165,7 +165,7 @@ monitor() {
         *)
             cd "$HOME/${dirs[$1]}"
 
-            if [ name = "ts-learnings" ]; then
+            if [ $1 = "ts" ]; then
                 sl pull && sl goto master
             else
                 sl pull && sl goto main
