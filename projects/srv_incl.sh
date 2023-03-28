@@ -56,7 +56,7 @@ start_srv() {
         echo -e "\n\rStarting $1 ..."
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
         sleep 5
-        mdbook-sitemap-generator -d "https://$1.xfoss.com" -o book/sitemap.xml
+        mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
         /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
     fi
 }
