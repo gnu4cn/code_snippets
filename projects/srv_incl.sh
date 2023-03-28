@@ -51,9 +51,9 @@ start_srv() {
         :
     else
         cd "$HOME/${dirs[$1]}"
-        mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
         sleep 10
+        mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
     fi
 }
 
@@ -145,8 +145,6 @@ monitor() {
                     sl pull && sl goto main
                 fi
 
-                mdbook-sitemap-generator -d "$name.xfoss.com" -o book/sitemap.xml
-
                 echo "`date` - $name sl checkout 完成" >> $LOG_FILE
             done
 
@@ -163,8 +161,6 @@ monitor() {
             else
                 sl pull && sl goto main
             fi
-
-            mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
 
             echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
 
