@@ -7,18 +7,18 @@ LOG_FILE="${HOME}/log/srv_mgt.log"
 declare -A dirs
 
 dirs["rust-lang"]="rust-lang-zh_CN"
-dirs["java-lang"]="learningJava"
-dirs["ccna"]="ccna60d"
-dirs["ts-lang"]="ts-learnings"
+dirs["java"]="learningJava"
+dirs["ccna60d"]="ccna60d"
+dirs["ts"]="ts-learnings"
 dirs["www"]="buy-me-a-coffee"
 dirs["snippets"]="code_snippets"
 
 declare -A ports
 
 ports["rust-lang"]="10443"
-ports["java-lang"]="10445"
-ports["ccna"]="10444"
-ports["ts-lang"]="10447"
+ports["java"]="10445"
+ports["ccna60d"]="10444"
+ports["ts"]="10447"
 ports["www"]="10446"
 ports["snippets"]="10448"
 
@@ -57,8 +57,10 @@ start_srv() {
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
         sleep 5
         mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
+        /usr/bin/sed -i '1 i\<?xml version="1.0" encoding="utf-8" ?>' book/sitemap.xml
         /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
         /usr/bin/sed -i 's/<loc>/<loc>https:\/\//g' book/sitemap.xml
+        /usr/bin/sed -i 's/<urlset>/<urlset xmlns=\"http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9\">/g' book/sitemap.xml
     fi
 }
 
