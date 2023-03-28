@@ -1,0 +1,11 @@
+[book]
+authors = ["Lenny Peng"]
+language = "zh_CN"
+multilingual = false
+src = "src"
+title = "代码片段与技术笔记，code snippets & tech notes"
+
+[preprocessor.pagetoc]
+[output.html]
+additional-css = ["theme/pagetoc.css"]
+additional-js  = ["theme/pagetoc.js"]
