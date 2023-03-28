@@ -51,7 +51,9 @@ start_srv() {
     if [ $proc_num -eq 1 ]; then
         :
     else
-        cd "$HOME/${dirs[$1]}" && mdbook serve . -p "${ports[$1]}" -n 127.0.0.1
+        cd "$HOME/${dirs[$1]}"
+	mdbook-sitemap-generator -d "$name.xfoss.com" -o book/sitemap.xml
+	mdbook serve . -p "${ports[$1]}" -n 127.0.0.1
     fi
 }
 
