@@ -53,6 +53,7 @@ start_srv() {
         cd "$HOME/${dirs[$1]}"
         mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
+        sleep 10
     fi
 }
 
