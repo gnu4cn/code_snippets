@@ -58,6 +58,7 @@ start_srv() {
         sleep 5
         mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
         /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
+        /usr/bin/sed -i 's/<loc>/<loc>https:\/\//g' book/sitemap.xml
     fi
 }
 
