@@ -139,16 +139,19 @@ do_restart() {
 
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-    if [ $resp_code != 200 ]; then stop_srv $1 && start_srv $1; fi
+
+    if [ "$resp_code" != "200" ]; then
+        stop_srv $1 && start_srv $1;
+    fi
 }
 
 do_mon() {
     cd "$HOME/${dirs[$1]}"
 
-    if [ $1 = "ts" ]; then
-        sl pull && sl goto master
+    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then
+        sl pull && sl goto master --clean
     else
-        sl pull && sl goto main
+        sl pull && sl goto main --clean
     fi
 
     echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
