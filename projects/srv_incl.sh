@@ -90,7 +90,7 @@ get_status() {
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 
-    if [ "$resp_code" != "200" ]; then stop_srv $1 && start_srv $1; fi
+    if [ "$resp_code" != "200" ]; then stop_srv $1 && sleep 10 && start_srv $1; fi
 }
 
 do_mon() {
@@ -99,7 +99,7 @@ do_mon() {
     if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
     else sl pull && sl goto main --clean; fi
 
-    sleep 10 && gen_sitemap "$1"
+    sleep 30 && gen_sitemap "$1"
 
     echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
 
