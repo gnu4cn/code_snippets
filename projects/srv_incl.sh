@@ -95,7 +95,7 @@ get_status() {
 
 show_status() {
     case $1 in
-        all)
+        "all")
             for name in ${!dirs[@]}; do get_status $name; done
             ;;
         *)
@@ -106,7 +106,7 @@ show_status() {
 
 do_start() {
     case $1 in
-        all)
+        "all")
             start_all
             ;;
         *)
@@ -117,7 +117,7 @@ do_start() {
 
 do_stop() {
     case $1 in
-        all)
+        "all")
             kill_all
             ;;
         *)
@@ -128,7 +128,7 @@ do_stop() {
 
 do_restart() {
     case $1 in
-        all)
+        "all")
             kill_all && start_all
             ;;
         *)
