@@ -41,6 +41,14 @@ stop_srv() {
     fi
 }
 
+gen_sitemap() {
+    mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
+    /usr/bin/sed -i '1 i\<?xml version="1.0" encoding="utf-8" ?>' book/sitemap.xml
+    /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
+    /usr/bin/sed -i 's/<loc>/<loc>https:\/\//g' book/sitemap.xml
+    /usr/bin/sed -i 's/<urlset>/<urlset xmlns=\"http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9\">/g' book/sitemap.xml
+}
+
 start_srv() {
     proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
 
@@ -49,11 +57,7 @@ start_srv() {
         echo -e "\n\rStarting $1 ..."
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
         sleep 5
-        mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
-        /usr/bin/sed -i '1 i\<?xml version="1.0" encoding="utf-8" ?>' book/sitemap.xml
-        /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
-        /usr/bin/sed -i 's/<loc>/<loc>https:\/\//g' book/sitemap.xml
-        /usr/bin/sed -i 's/<urlset>/<urlset xmlns=\"http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9\">/g' book/sitemap.xml
+        gen_sitemap "$1"
     fi
 }
 
@@ -64,8 +68,8 @@ start_all() {
 kill_all() {
     echo -e "\n\rStopping all..."
     /usr/bin/ps -A | grep mdbook | while read -r line; do
-        kill $(echo $line | awk -F' ' '{print $1}') && sleep 3
-    done
+    kill $(echo $line | awk -F' ' '{print $1}') && sleep 3
+done
 }
 
 get_status() {
@@ -137,6 +141,8 @@ do_mon() {
 
     if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
     else sl pull && sl goto main --clean; fi
+
+    sleep 30 && gen_sitemap "$1"
 
     echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
 
