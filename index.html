@@ -1,151 +1,169 @@
 <!DOCTYPE HTML>
 <html lang="zh_CN" class="sidebar-visible no-js light">
-    <head>
-        <!-- Book generated using mdBook -->
-        <meta charset="UTF-8">
-        <title>Introduction - 代码片段与技术笔记，code snippets &amp; tech notes</title>
+  <head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8">
+    <title>Introduction - 代码片段与技术笔记，code snippets &amp; tech notes</title>
 
 
-        <!-- Custom HTML head -->
-        
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+    <!-- Custom HTML head -->
+    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="icon" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/chrome.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
 
-        <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="highlight.css">
+    <link rel="stylesheet" href="tomorrow-night.css">
+    <link rel="stylesheet" href="ayu-highlight.css">
 
-        <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/pagetoc.css">
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="theme/pagetoc.css">
 
-    </head>
-    <body>
+  </head>
+  <body>
     <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
+      <!-- Provide site root to javascript -->
+      <script>
+        var path_to_root = "";
+        var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+      </script>
 
-        <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script>
-            try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+      <!-- Work around some values being stored in localStorage wrapped in quotes -->
+      <script>
+        try {
+                  var theme = localStorage.getItem('mdbook-theme');
+                  var sidebar = localStorage.getItem('mdbook-sidebar');
 
-                if (theme.startsWith('"') && theme.endsWith('"')) {
-                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
-                }
+                  if (theme.startsWith('"') && theme.endsWith('"')) {
+                            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                          }
 
-                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
-                }
-            } catch (e) { }
-        </script>
+                  if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                          }
+                } catch (e) { }
+      </script>
 
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script>
-            var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
-            if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
-            html.classList.remove('light')
-            html.classList.add(theme);
-            html.classList.add('js');
-        </script>
+      <!-- Set the theme before any content is loaded, prevents flash -->
+      <script>
+        var theme;
+        try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+        if (theme === null || theme === undefined) { theme = default_theme; }
+        var html = document.querySelector('html');
+        html.classList.remove('no-js')
+        html.classList.remove('light')
+        html.classList.add(theme);
+        html.classList.add('js');
+      </script>
 
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script>
-            var html = document.querySelector('html');
-            var sidebar = null;
-            if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
-                sidebar = sidebar || 'visible';
-            } else {
-                sidebar = 'hidden';
-            }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
-        </script>
+      <!-- Hide / unhide sidebar before it is displayed -->
+      <script>
+        var html = document.querySelector('html');
+        var sidebar = null;
+        if (document.body.clientWidth >= 1080) {
+                  try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                  sidebar = sidebar || 'visible';
+                } else {
+                          sidebar = 'hidden';
+                        }
+        html.classList.remove('sidebar-visible');
+        html.classList.add("sidebar-" + sidebar);
+      </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html" class="active">Introduction</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">运维</li><li class="chapter-item expanded "><a href="01_flask_uwsgi_supervisord.html"><strong aria-hidden="true">1.</strong> 01 Flask Uwsgi Supervisord</a></li><li class="chapter-item expanded "><a href="02_ionic_serve.html"><strong aria-hidden="true">2.</strong> 02 Ionic Serve</a></li><li class="chapter-item expanded "><a href="03_ionic_4_flask_cors.html"><strong aria-hidden="true">3.</strong> 03 Ionic 4 Flask Cors</a></li><li class="chapter-item expanded "><a href="04_Hackintosh.html"><strong aria-hidden="true">4.</strong> 04 Hackintosh</a></li><li class="chapter-item expanded "><a href="05_modprobe.html"><strong aria-hidden="true">5.</strong> 05 Modprobe</a></li><li class="chapter-item expanded "><a href="06_Viewflow_Deploy_Notes.html"><strong aria-hidden="true">6.</strong> 06 Viewflow Deploy Notes</a></li><li class="chapter-item expanded "><a href="07_Add_Linux_to_AD.html"><strong aria-hidden="true">7.</strong> 07 Add Linux To AD</a></li><li class="chapter-item expanded "><a href="10_Extend_a_Disk_Partion_with_Unallocated_Disk_Space_in_Linux.html"><strong aria-hidden="true">8.</strong> 10 Extend A Disk Partion With Unallocated Disk Space In Linux</a></li><li class="chapter-item expanded "><a href="11_LDAP_Query.html"><strong aria-hidden="true">9.</strong> 11 LDAP Query</a></li><li class="chapter-item expanded "><a href="13_BPM_deployment.html"><strong aria-hidden="true">10.</strong> 13 BPM Deployment</a></li><li class="chapter-item expanded "><a href="16_RG_AC_configuration_notes.html"><strong aria-hidden="true">11.</strong> 16 RG AC Configuration Notes</a></li><li class="chapter-item expanded "><a href="18_nginx_php.html"><strong aria-hidden="true">12.</strong> 18 Nginx Php</a></li><li class="chapter-item expanded "><a href="19_wordpress_optimization.html"><strong aria-hidden="true">13.</strong> 19 Wordpress Optimization</a></li><li class="chapter-item expanded "><a href="22_dot1x_port_dynamic_vlan.html"><strong aria-hidden="true">14.</strong> 22 Dot 1 X Port Dynamic Vlan</a></li><li class="chapter-item expanded "><a href="23_Huawei_switch_SSH_TELENT_weird_problem.html"><strong aria-hidden="true">15.</strong> 23 Huawei Switch SSH TELENT Weird Problem</a></li><li class="chapter-item expanded "><a href="25_gitlab_ce_deployment.html"><strong aria-hidden="true">16.</strong> 25 Gitlab Ce Deployment</a></li><li class="chapter-item expanded "><a href="26_epel_nginx_selinux_problem.html"><strong aria-hidden="true">17.</strong> 26 Epel Nginx Selinux Problem</a></li><li class="chapter-item expanded "><a href="27_zotrs_nginx_deployment.html"><strong aria-hidden="true">18.</strong> 27 Zotrs Nginx Deployment</a></li><li class="chapter-item expanded "><a href="31_samba_configuration.html"><strong aria-hidden="true">19.</strong> 31 Samba Configuration</a></li><li class="chapter-item expanded "><a href="33_git_behind_proxy.html"><strong aria-hidden="true">20.</strong> 33 Git Behind Proxy</a></li><li class="chapter-item expanded "><a href="34_ArchLinux_Manjaro_autoproxy_pac.html"><strong aria-hidden="true">21.</strong> 34 Arch Linux Manjaro Autoproxy Pac</a></li><li class="chapter-item expanded "><a href="36_Win_Sys_Admin.html"><strong aria-hidden="true">22.</strong> 36 Win Sys Admin</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编程开发</li><li class="chapter-item expanded "><a href="00_sh_bash.html"><strong aria-hidden="true">23.</strong> 00 Sh Bash</a></li><li class="chapter-item expanded "><a href="08_Using_Huawei_Repos.html"><strong aria-hidden="true">24.</strong> 08 Using Huawei Repos</a></li><li class="chapter-item expanded "><a href="09_vim.gtk3_Installation_Notes.html"><strong aria-hidden="true">25.</strong> 09_vim.gtk3_Installation_Notes</a></li><li class="chapter-item expanded "><a href="12_Java_Learning.html"><strong aria-hidden="true">26.</strong> 12 Java Learning</a></li><li class="chapter-item expanded "><a href="15_ffmpeg.html"><strong aria-hidden="true">27.</strong> 15 Ffmpeg</a></li><li class="chapter-item expanded "><a href="20_job_notes.html"><strong aria-hidden="true">28.</strong> 20 Job Notes</a></li><li class="chapter-item expanded "><a href="21_gitbook_polyfills-js_problem.html"><strong aria-hidden="true">29.</strong> 21 Gitbook Polyfills Js Problem</a></li><li class="chapter-item expanded "><a href="29_vim_tips.html"><strong aria-hidden="true">30.</strong> 29 Vim Tips</a></li><li class="chapter-item expanded "><a href="32_sapling-scm_usage.html"><strong aria-hidden="true">31.</strong> 32 Sapling Scm Usage</a></li><li class="chapter-item expanded "><a href="35_tmux_manual.html"><strong aria-hidden="true">32.</strong> 35 Tmux Manual</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">杂项</li><li class="chapter-item expanded "><a href="14_OA_BPM.html"><strong aria-hidden="true">33.</strong> 14 OA BPM</a></li><li class="chapter-item expanded "><a href="17_eteams.cn_notes.html"><strong aria-hidden="true">34.</strong> 17_eteams.cn_notes</a></li><li class="chapter-item expanded "><a href="24_SC_network_op.html"><strong aria-hidden="true">35.</strong> 24 SC Network Op</a></li><li class="chapter-item expanded "><a href="28_manjaro_user_tips.html"><strong aria-hidden="true">36.</strong> 28 Manjaro User Tips</a></li><li class="chapter-item expanded "><a href="30_HPC_knowledges.html"><strong aria-hidden="true">37.</strong> 30 HPC Knowledges</a></li><li class="chapter-item expanded "><a href="37_IPTV_Watching_Guide.html"><strong aria-hidden="true">38.</strong> 37 IPTV Watching Guide</a></li></ol>
+      <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <div class="sidebar-scrollbox">
+          <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html" class="active">Introduction</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">运维</li><li class="chapter-item expanded "><a href="01_flask_uwsgi_supervisord.html"><strong aria-hidden="true">1.</strong> 01 Flask Uwsgi Supervisord</a></li><li class="chapter-item expanded "><a href="02_ionic_serve.html"><strong aria-hidden="true">2.</strong> 02 Ionic Serve</a></li><li class="chapter-item expanded "><a href="03_ionic_4_flask_cors.html"><strong aria-hidden="true">3.</strong> 03 Ionic 4 Flask Cors</a></li><li class="chapter-item expanded "><a href="04_Hackintosh.html"><strong aria-hidden="true">4.</strong> 04 Hackintosh</a></li><li class="chapter-item expanded "><a href="05_modprobe.html"><strong aria-hidden="true">5.</strong> 05 Modprobe</a></li><li class="chapter-item expanded "><a href="06_Viewflow_Deploy_Notes.html"><strong aria-hidden="true">6.</strong> 06 Viewflow Deploy Notes</a></li><li class="chapter-item expanded "><a href="07_Add_Linux_to_AD.html"><strong aria-hidden="true">7.</strong> 07 Add Linux To AD</a></li><li class="chapter-item expanded "><a href="10_Extend_a_Disk_Partion_with_Unallocated_Disk_Space_in_Linux.html"><strong aria-hidden="true">8.</strong> 10 Extend A Disk Partion With Unallocated Disk Space In Linux</a></li><li class="chapter-item expanded "><a href="11_LDAP_Query.html"><strong aria-hidden="true">9.</strong> 11 LDAP Query</a></li><li class="chapter-item expanded "><a href="13_BPM_deployment.html"><strong aria-hidden="true">10.</strong> 13 BPM Deployment</a></li><li class="chapter-item expanded "><a href="16_RG_AC_configuration_notes.html"><strong aria-hidden="true">11.</strong> 16 RG AC Configuration Notes</a></li><li class="chapter-item expanded "><a href="18_nginx_php.html"><strong aria-hidden="true">12.</strong> 18 Nginx Php</a></li><li class="chapter-item expanded "><a href="19_wordpress_optimization.html"><strong aria-hidden="true">13.</strong> 19 Wordpress Optimization</a></li><li class="chapter-item expanded "><a href="22_dot1x_port_dynamic_vlan.html"><strong aria-hidden="true">14.</strong> 22 Dot 1 X Port Dynamic Vlan</a></li><li class="chapter-item expanded "><a href="23_Huawei_switch_SSH_TELENT_weird_problem.html"><strong aria-hidden="true">15.</strong> 23 Huawei Switch SSH TELENT Weird Problem</a></li><li class="chapter-item expanded "><a href="25_gitlab_ce_deployment.html"><strong aria-hidden="true">16.</strong> 25 Gitlab Ce Deployment</a></li><li class="chapter-item expanded "><a href="26_epel_nginx_selinux_problem.html"><strong aria-hidden="true">17.</strong> 26 Epel Nginx Selinux Problem</a></li><li class="chapter-item expanded "><a href="27_zotrs_nginx_deployment.html"><strong aria-hidden="true">18.</strong> 27 Zotrs Nginx Deployment</a></li><li class="chapter-item expanded "><a href="31_samba_configuration.html"><strong aria-hidden="true">19.</strong> 31 Samba Configuration</a></li><li class="chapter-item expanded "><a href="33_git_behind_proxy.html"><strong aria-hidden="true">20.</strong> 33 Git Behind Proxy</a></li><li class="chapter-item expanded "><a href="34_ArchLinux_Manjaro_autoproxy_pac.html"><strong aria-hidden="true">21.</strong> 34 Arch Linux Manjaro Autoproxy Pac</a></li><li class="chapter-item expanded "><a href="36_Win_Sys_Admin.html"><strong aria-hidden="true">22.</strong> 36 Win Sys Admin</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">编程开发</li><li class="chapter-item expanded "><a href="00_sh_bash.html"><strong aria-hidden="true">23.</strong> 00 Sh Bash</a></li><li class="chapter-item expanded "><a href="08_Using_Huawei_Repos.html"><strong aria-hidden="true">24.</strong> 08 Using Huawei Repos</a></li><li class="chapter-item expanded "><a href="09_vim.gtk3_Installation_Notes.html"><strong aria-hidden="true">25.</strong> 09_vim.gtk3_Installation_Notes</a></li><li class="chapter-item expanded "><a href="12_Java_Learning.html"><strong aria-hidden="true">26.</strong> 12 Java Learning</a></li><li class="chapter-item expanded "><a href="15_ffmpeg.html"><strong aria-hidden="true">27.</strong> 15 Ffmpeg</a></li><li class="chapter-item expanded "><a href="20_job_notes.html"><strong aria-hidden="true">28.</strong> 20 Job Notes</a></li><li class="chapter-item expanded "><a href="21_gitbook_polyfills-js_problem.html"><strong aria-hidden="true">29.</strong> 21 Gitbook Polyfills Js Problem</a></li><li class="chapter-item expanded "><a href="29_vim_tips.html"><strong aria-hidden="true">30.</strong> 29 Vim Tips</a></li><li class="chapter-item expanded "><a href="32_sapling-scm_usage.html"><strong aria-hidden="true">31.</strong> 32 Sapling Scm Usage</a></li><li class="chapter-item expanded "><a href="35_tmux_manual.html"><strong aria-hidden="true">32.</strong> 35 Tmux Manual</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">杂项</li><li class="chapter-item expanded "><a href="14_OA_BPM.html"><strong aria-hidden="true">33.</strong> 14 OA BPM</a></li><li class="chapter-item expanded "><a href="17_eteams.cn_notes.html"><strong aria-hidden="true">34.</strong> 17_eteams.cn_notes</a></li><li class="chapter-item expanded "><a href="24_SC_network_op.html"><strong aria-hidden="true">35.</strong> 24 SC Network Op</a></li><li class="chapter-item expanded "><a href="28_manjaro_user_tips.html"><strong aria-hidden="true">36.</strong> 28 Manjaro User Tips</a></li><li class="chapter-item expanded "><a href="30_HPC_knowledges.html"><strong aria-hidden="true">37.</strong> 30 HPC Knowledges</a></li><li class="chapter-item expanded "><a href="37_IPTV_Watching_Guide.html"><strong aria-hidden="true">38.</strong> 37 IPTV Watching Guide</a></li></ol>
+        </div>
+        <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+      </nav>
+
+      <div id="page-wrapper" class="page-wrapper">
+
+        <div class="page">
+                    <div id="menu-bar-hover-placeholder"></div>
+          <div id="menu-bar" class="menu-bar sticky bordered">
+            <div class="left-buttons">
+              <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                <i class="fa fa-bars"></i>
+              </button>
+              <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                <i class="fa fa-paint-brush"></i>
+              </button>
+              <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+              </ul>
+              <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                <i class="fa fa-search"></i>
+              </button>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
-        </nav>
 
-        <div id="page-wrapper" class="page-wrapper">
+            <h1 class="menu-title">代码片段与技术笔记，code snippets &amp; tech notes</h1>
 
-            <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
-                    <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                        </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+            <div class="right-buttons">
+              <a href="https://rust-lang.xfoss.com" title="Yet another Chinese rust-lang book"
+                                                    aria-label="Yet another Chinese rust-lang book">
+                ⚙️·Rust 官方书中文
+              </a>
 
-                    <h1 class="menu-title">代码片段与技术笔记，code snippets &amp; tech notes</h1>
+              <a href="https://java.xfoss.com" title="Head First Java 中文版" aria-label="Head First Java 中文版">
+                ☕·Head First Java 中文
+              </a>
+              <a href="https://ccna60d.xfoss.com" title="CCNA in 60 days" aria-label="CCNA 60 天">
+                🖧·60 天通过 CCNA
+              </a>
+              <a href="https://ts.xfoss.com" title="TypeScript 教程" aria-label="TypeScript 教程">
+                📜·TypeScript 教程
+              </a>
+              <a href="https://books.xfoss.com" title="捐赠，donation" aria-label="捐赠，donation">
+                🎁·捐赠，donation
+              </a>
 
-                    <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
-                        </a>
+              <a href="print.html" title="Print this book" aria-label="Print this book">
+                <i id="print-button" class="fa fa-print"></i>
+              </a>
 
-                    </div>
-                </div>
+            </div>
+          </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
+          <div id="search-wrapper" class="hidden">
+            <form id="searchbar-outer" class="searchbar-outer">
+              <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+            </form>
+            <div id="searchresults-outer" class="searchresults-outer hidden">
+              <div id="searchresults-header" class="searchresults-header"></div>
+              <ul id="searchresults">
+              </ul>
+            </div>
+          </div>
 
-                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
-                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });
-                </script>
+          <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+          <script>
+            document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+            Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                          link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                        });
+          </script>
 
-                <div id="content" class="content">
-                    <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
-                        <h1 id="代码-snippets-与技术笔记"><a class="header" href="#代码-snippets-与技术笔记">代码 snippets 与技术笔记</a></h1>
+          <div id="content" class="content">
+            <main><div class="sidetoc"><nav class="pagetoc"></nav></div>
+              <h1 id="代码-snippets-与技术笔记"><a class="header" href="#代码-snippets-与技术笔记">代码 snippets 与技术笔记</a></h1>
 <p>这里记录一些平时的心得体会、工作备忘录（总计 35 篇）。</p>
 <h2 id="运维-devops"><a class="header" href="#运维-devops">运维 devops</a></h2>
 <ul>
@@ -195,65 +213,65 @@
 <li><a href="37_IPTV_Watching_Guide.html">37 IPTV Watching Guide</a></li>
 </ul>
 
-                    </main>
+            </main>
 
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
+            <nav class="nav-wrapper" aria-label="Page navigation">
+              <!-- Mobile navigation buttons -->
 
-                            <a rel="next" href="01_flask_uwsgi_supervisord.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+              <a rel="next" href="01_flask_uwsgi_supervisord.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                <i class="fa fa-angle-right"></i>
+              </a>
 
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
-            </div>
-
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-
-                    <a rel="next" href="01_flask_uwsgi_supervisord.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
+              <div style="clear: both"></div>
             </nav>
-
+          </div>
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
+        <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+          <a rel="next" href="01_flask_uwsgi_supervisord.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </nav>
+
+      </div>
+
+      <!-- Livereload script (if served using the cli tool) -->
+      <script>
+        const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+        const socket = new WebSocket(wsAddress);
+        socket.onmessage = function (event) {
+                  if (event.data === "reload") {
+                            socket.close();
+                            location.reload();
+                          }
+                };
+
+        window.onbeforeunload = function() {
+                  socket.close();
                 }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
+      </script>
 
 
 
-        <script>
-            window.playground_copyable = true;
-        </script>
+      <script>
+        window.playground_copyable = true;
+      </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+      <script src="elasticlunr.min.js"></script>
+      <script src="mark.min.js"></script>
+      <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+      <script src="clipboard.min.js"></script>
+      <script src="highlight.js"></script>
+      <script src="book.js"></script>
 
-        <!-- Custom JS scripts -->
-        <script src="theme/pagetoc.js"></script>
+      <!-- Custom JS scripts -->
+      <script src="theme/pagetoc.js"></script>
 
 
     </div>
-    </body>
+  </body>
 </html>
