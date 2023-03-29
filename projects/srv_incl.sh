@@ -28,13 +28,9 @@ for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
 
 
 dir_name=`/usr/bin/dirname $LOG_FILE`
-if [ ! -d "${dirname}" ]; then
-    /usr/bin/mkdir -p $dir_name
-fi
+if [ ! -d "${dirname}" ]; then /usr/bin/mkdir -p $dir_name; fi
 
-if [ ! -f "${LOG_FILE}" ]; then
-    touch $LOG_FILE
-fi
+if [ ! -f "${LOG_FILE}" ]; then touch $LOG_FILE; fi
 
 stop_srv() {
     proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
@@ -65,16 +61,13 @@ start_srv() {
 }
 
 start_all() {
-    for name in ${!dirs[@]}; do
-        start_srv $name
-    done
+    for name in ${!dirs[@]}; do start_srv $name; done
 }
 
 kill_all() {
     echo -e "\n\rStopping all..."
     /usr/bin/ps -A | grep mdbook | while read -r line; do
-        kill $(echo $line | awk -F' ' '{print $1}')
-        sleep 3
+        kill $(echo $line | awk -F' ' '{print $1}') && sleep 3
     done
 }
 
@@ -140,9 +133,7 @@ do_restart() {
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 
-    if [ "$resp_code" != "200" ]; then
-        stop_srv $1 && start_srv $1;
-    fi
+    if [ "$resp_code" != "200" ]; then stop_srv $1 && start_srv $1; fi
 }
 
 do_mon() {
@@ -164,9 +155,7 @@ do_mon() {
 monitor() {
     case $1 in
         "all")
-            for name in ${!dirs[@]}; do
-                do_mon $name
-            done;
+            for name in ${!dirs[@]}; do do_mon $name; done
             ;;
         *)
             do_mon $1
