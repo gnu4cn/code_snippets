@@ -42,11 +42,13 @@ stop_srv() {
 }
 
 gen_sitemap() {
-    mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
-    /usr/bin/sed -i '1 i\<?xml version="1.0" encoding="utf-8" ?>' book/sitemap.xml
-    /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
-    /usr/bin/sed -i 's/<loc>/<loc>https:\/\//g' book/sitemap.xml
-    /usr/bin/sed -i 's/<urlset>/<urlset xmlns=\"http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9\">/g' book/sitemap.xml
+    if [ ! -f "book/sitemap.xml" ]; then
+        mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
+        /usr/bin/sed -i '1 i\<?xml version="1.0" encoding="utf-8" ?>' book/sitemap.xml
+        /usr/bin/sed -i 's/\.md/\.html/g' book/sitemap.xml
+        /usr/bin/sed -i 's/<loc>/<loc>https:\/\//g' book/sitemap.xml
+        /usr/bin/sed -i 's/<urlset>/<urlset xmlns=\"http:\/\/www.sitemaps.org\/schemas\/sitemap\/0.9\">/g' book/sitemap.xml
+    fi
 }
 
 start_srv() {
@@ -83,6 +85,27 @@ get_status() {
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
         echo -n -e "${END_CLR}"
     fi
+}
+
+chk_n_restart() {
+    resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
+
+    if [ "$resp_code" != "200" ]; then stop_srv $1 && start_srv $1; fi
+}
+
+do_mon() {
+    cd "$HOME/${dirs[$1]}"
+
+    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
+    else sl pull && sl goto main --clean; fi
+
+    sleep 10 && gen_sitemap "$1"
+
+    echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
+
+    chk_n_restart $1
+    echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
+
 }
 
 show_status() {
@@ -129,26 +152,6 @@ do_restart() {
     esac
 }
 
-chk_n_restart() {
-    resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-
-    if [ "$resp_code" != "200" ]; then stop_srv $1 && start_srv $1; fi
-}
-
-do_mon() {
-    cd "$HOME/${dirs[$1]}"
-
-    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
-    else sl pull && sl goto main --clean; fi
-
-    sleep 10 && gen_sitemap "$1"
-
-    echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
-
-    chk_n_restart $1
-    echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
-
-}
 
 monitor() {
     case $1 in
