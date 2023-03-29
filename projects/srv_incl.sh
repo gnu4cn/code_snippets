@@ -56,7 +56,7 @@ start_srv() {
         cd "$HOME/${dirs[$1]}"
         echo -e "\n\rStarting $1 ..."
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
-        sleep 5 && gen_sitemap "$1"
+        sleep 10 && gen_sitemap "$1"
     fi
 }
 
@@ -141,7 +141,7 @@ do_mon() {
     if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
     else sl pull && sl goto main --clean; fi
 
-    sleep 30 && gen_sitemap "$1"
+    sleep 10 && gen_sitemap "$1"
 
     echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
 
