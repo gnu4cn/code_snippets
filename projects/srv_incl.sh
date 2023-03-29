@@ -56,8 +56,7 @@ start_srv() {
         cd "$HOME/${dirs[$1]}"
         echo -e "\n\rStarting $1 ..."
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
-        sleep 5
-        gen_sitemap "$1"
+        sleep 5 && gen_sitemap "$1"
     fi
 }
 
