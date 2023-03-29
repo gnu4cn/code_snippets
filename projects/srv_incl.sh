@@ -42,6 +42,7 @@ stop_srv() {
 }
 
 gen_sitemap() {
+    echo -e "\r\nGenerating $1 sitemap.xml..."
     if [ ! -f "book/sitemap.xml" ]; then
         mdbook-sitemap-generator -d "$1.xfoss.com" -o book/sitemap.xml
         /usr/bin/sed -i '1 i\<?xml version="1.0" encoding="utf-8" ?>' book/sitemap.xml
@@ -90,12 +91,13 @@ get_status() {
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 
-    if [ "$resp_code" != "200" ]; then stop_srv $1 && sleep 10 && start_srv $1; fi
+    if [ "$resp_code" != "200" ]; then echo "\r\n$1 not running, now starting it" && start_srv $1; fi
 }
 
 do_mon() {
     cd "$HOME/${dirs[$1]}"
 
+    echo -e "\r\nTrying to checkout $1 ..."
     if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
     else sl pull && sl goto main --clean; fi
 
