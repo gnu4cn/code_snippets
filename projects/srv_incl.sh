@@ -34,9 +34,7 @@ if [ ! -f "${LOG_FILE}" ]; then touch $LOG_FILE; fi
 
 stop_srv() {
     proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
-    if [ $proc_num -eq 0 ]; then
-        :
-    else
+    if [ $proc_num -ne 0 ]; then
         echo -e "\n\rStopping $1 ..."
         kill `/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}'`
         sleep 3
@@ -45,9 +43,8 @@ stop_srv() {
 
 start_srv() {
     proc_num=`/usr/bin/netstat -ntlp 2> /dev/null | grep "${ports[$1]}" | wc -l`
-    if [ $proc_num -eq 1 ]; then
-        :
-    else
+
+    if [ $proc_num -ne 1 ]; then
         cd "$HOME/${dirs[$1]}"
         echo -e "\n\rStarting $1 ..."
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
@@ -77,8 +74,7 @@ get_status() {
     pid=$(/usr/bin/netstat -ntlp 2> /dev/null | grep ${ports[$1]} | awk -F' ' '{print $7}' | awk -F'/' '{print $1}')
 
     re='^[0-9]+$'
-    if ! [[ $pid =~ $re ]] ; then
-        echo -e "${ALERT_CLR}----- Dead !!!!!!!${END_CLR}"
+    if ! [[ $pid =~ $re ]] ; then echo -e "${ALERT_CLR}----- Dead !!!!!!!${END_CLR}"
     else
         echo -n -e "${SUCESS_CLR}"
         /usr/bin/ps -p $pid -o pid,vsz=MEMORY -o etime=ELAPSED_TIME -o state=STATE,stime=START_TIME
@@ -139,11 +135,8 @@ chk_n_restart() {
 do_mon() {
     cd "$HOME/${dirs[$1]}"
 
-    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then
-        sl pull && sl goto master --clean
-    else
-        sl pull && sl goto main --clean
-    fi
+    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
+    else sl pull && sl goto main --clean; fi
 
     echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
 
