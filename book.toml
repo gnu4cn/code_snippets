@@ -9,3 +9,8 @@ title = "代码片段与技术笔记，code snippets & tech notes"
 [output.html]
 additional-css = ["theme/pagetoc.css"]
 additional-js  = ["theme/pagetoc.js"]
+git-repository-url = "https://github.com/gnu4cn/code_snippets"
+git-repository-icon = "fa-github"
+
+[output.html.print]
+enable = false
