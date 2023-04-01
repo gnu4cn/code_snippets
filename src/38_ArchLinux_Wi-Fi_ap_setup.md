@@ -117,3 +117,9 @@ logger_stdout_level=2
 ```
 
 注意，其中的 `interface` 为支持 AP 模式的无线网卡，`bridge` 为前面建立的桥接接口 `br0`。保存配置后，运行 `$ sudo systemctl enable --now hostapd` 启用这个服务，就实现了无线访问点的宽带共享。`$ sudo systemctl status hostapd` 命令可以用来查看 `hostapd` 服务的状态。
+
+## 注意事项
+
+1. 若执行 `nmcli con mod bridge-br0 connection.autoconnect true` 及 `nmcli con mod bridge-slave-enp2s0 connection.autoconnect true` 命令，而意图自动开启 `bridge-br0` 与 `bridge-slave-enp2s0` 两个连接，则不光达不到目的，还会导致运行 `nmcli conn up bridge-br0` 及 `nmcli conn up bridge-slave-enp2s0` 两个命令报错。
+
+2. Intel AX200 在没有数据时会进入睡眠状态，此问题仍需考虑如何解决。
