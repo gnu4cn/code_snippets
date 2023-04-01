@@ -122,4 +122,10 @@ logger_stdout_level=2
 
 1. 若执行 `nmcli con mod bridge-br0 connection.autoconnect true` 及 `nmcli con mod bridge-slave-enp2s0 connection.autoconnect true` 命令，而意图自动开启 `bridge-br0` 与 `bridge-slave-enp2s0` 两个连接，则不光达不到目的，还会导致运行 `nmcli conn up bridge-br0` 及 `nmcli conn up bridge-slave-enp2s0` 两个命令报错。
 
-2. Intel AX200 在没有数据时会进入睡眠状态，此问题仍需考虑如何解决。
+2. Intel AX200 在没有数据时会进入睡眠状态，此问题仍需考虑如何解决。尝试在文件 `/etc/modprobe.d/iwlwifi.conf` 中添加：
+
+```conf
+options iwlmvm power_scheme=1
+```
+
+或者运行命令 `$ sudo iw dev wlp3s0 set power_save off`，不知效果如何。
