@@ -26,6 +26,7 @@
 - [Git Behind Proxy](33_git_behind_proxy.md)
 - [Arch Linux Manjaro Autoproxy Pac](34_ArchLinux_Manjaro_autoproxy_pac.md)
 - [Win Sys Admin](36_Win_Sys_Admin.md)
+- [Linux Sys Admin](39_Linux_Sys_Admin.md)
 
 ---
 # 编程开发
