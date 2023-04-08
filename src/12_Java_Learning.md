@@ -1,5 +1,8 @@
 # Java 语言学习笔记
 
+
+请阅读完整的 [Head First Java 中文](https://java.xfoss.com)。
+
 ## 1. Eclipse IDE下，在终端运行程序报错：
 
 ```bash
