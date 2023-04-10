@@ -2,6 +2,10 @@
 
 Win 系统使用心得与经验记录。
 
+## Wins 安装过程中，激活码的问题
+
+微软有专门的 [KMS Client Setup Keys](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj612867(v=ws.11))。
+
 ## Win11 22h2 安装过程中跳过 “Let's connect you to a network”
 
 
