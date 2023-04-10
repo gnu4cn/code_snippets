@@ -1,5 +1,12 @@
 # M$ Win 系统管理笔记
 
+Win 系统使用心得与经验记录。
+
+## Win11 22h2 安装过程中跳过 “Let's connect you to a network”
+
+
+在这个界面，按下 `Shift + F10`，于命令行中输入 `OOBE\BYPASSNRO`，之后机器将重启，且 out-of-box eperience, OOBE 将再次启动。
+
 ## Win 系统下软件安装的几种方式
 
 这里要讨论的，并非习以为常的经由下载安装程序并运行，或是从应用商店 App Store 安全软件。而是一些另类的软件安装方式。
