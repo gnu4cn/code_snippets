@@ -2,6 +2,10 @@
 
 Win 系统使用心得与经验记录。
 
+## 本地 AD 密码同步到 Azure Ad 的问题
+
+本地修改密码后，应等待 5 分钟到本地 AD 密码同步到 Azure AD 后，再登录激活 Office365。
+
 ## Wins 安装过程中，激活码的问题
 
 微软有专门的 [KMS Client Setup Keys](https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys)。
