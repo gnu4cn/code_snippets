@@ -4,6 +4,7 @@ language = "zh"
 multilingual = false
 src = "src"
 title = "代码片段与技术笔记，code snippets & tech notes"
+description = "代码片段与技术笔记，code snippets & tech notes"
 
 [preprocessor.pagetoc]
 [output.html]
