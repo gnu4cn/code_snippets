@@ -78,3 +78,5 @@ set -g default-terminal "xterm"
 ```
 
 最后，要执行 `$ source ~/.zshrc` 或 `$ source ~/.bashrc` 加载新的命令别名。
+
+要使上述设置在系统范围生效，可分别建立 `/etc/profile.d/tmux.sh` 与 `/etc/tmux.conf` 然后把上述配置分别写入这两个文件。
