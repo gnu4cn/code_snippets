@@ -14,7 +14,11 @@ Failed to enable unit: Unit file /etc/systemd/system/NetworkManager.service is m
 
 ## "Authentication required. System policy prevents WiFi scans"
 
-在使用 X2go 客户端连接到 Linux Mate 桌面时，会遇到这个问题。参考：[How do I fix "System policy prevents Wi-Fi scans" error?](https://www.reddit.com/r/gnome/comments/py9ln0/how_do_i_fix_system_policy_prevents_wifi_scans/), [xRDP – Cannot connect to WiFi Networks in xRDP session – System policy prevents WiFi scans. How to Fix it !](https://c-nergy.be/blog/?p=16310)
+在使用 X2go 客户端连接到 Linux Mate 桌面时，会遇到这个问题。参考：
+
+- [How do I fix "System policy prevents Wi-Fi scans" error?](https://www.reddit.com/r/gnome/comments/py9ln0/how_do_i_fix_system_policy_prevents_wifi_scans/)
+
+- [xRDP – Cannot connect to WiFi Networks in xRDP session – System policy prevents WiFi scans. How to Fix it !](https://c-nergy.be/blog/?p=16310)
 
 在 `/etc/polkit-1/localauthority/50-local.d/` 下建立一个 `47-allow-wifi-scan.pkla` 策略文件，内容如下：
 
@@ -27,4 +31,4 @@ ResultInactive=yes
 ResultActive=yes
 ```
 
-然后运行 `$ sudo systemctl restart polkit.service` 重启该服务，之后该问题解决。
+然后运行 `$ sudo systemctl restart polkit.service` 重启该服务，之后问题解决。
