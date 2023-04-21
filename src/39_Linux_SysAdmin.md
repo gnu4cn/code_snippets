@@ -32,3 +32,9 @@ ResultActive=yes
 ```
 
 然后运行 `$ sudo systemctl restart polkit.service` 重启该服务，之后问题解决。
+
+## X2Go "Globally allow server-side disabling of the clipboard" 问题
+
+此问题已在 `X2Go` `4.0.1.16` 版本中解决，参考 [Globally allow server-side disabling of the clipboard](https://bugs.x2go.org/cgi-bin/bugreport.cgi?bug=506)
+
+在文件 `/etc/x2go/Xsession.options` 中，找到 `X2GO_NXAGENT_DEFAULT_OPTIONS+=" -clipboard both"` 这行，将其解除注释，然后根据需要设置 `both`、`client`、`server` 或 `none` 选项。
