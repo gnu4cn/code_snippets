@@ -18,6 +18,8 @@
 
 **Fenced Code Blocks**
 
+参考：[Fenced Code Blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks)
+
 基本 Markdown 语法允许咱们通过缩进 4 个空格或一个制表符，创建代码块。而当咱们发现那样不方便时，就要尝试使用围栏代码块。依据咱们的 Markdown 处理器或编辑器，咱们将在代码块的前一行与后一行上，使用三个反引号（backtick, `` ` ``）或三个波浪号（代字号，tilde, `~`）。最重要的是什么？那就是咱们不必缩进任何行！
 
 ~~~text
