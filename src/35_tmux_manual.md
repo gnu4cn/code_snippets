@@ -80,3 +80,16 @@ set -g default-terminal "xterm"
 最后，要执行 `$ source ~/.zshrc` 或 `$ source ~/.bashrc` 加载新的命令别名。
 
 要使上述设置在系统范围生效，可分别建立 `/etc/profile.d/tmux.sh` 与 `/etc/tmux.conf` 然后把上述配置分别写入这两个文件。
+
+## Tmux 光标偏移问题
+
+参见：[(SOLVED) Tmux cursor position shifts](https://github.com/martanne/vis/issues/763)
+
+
+在 `~/.bashrc`/`~/.zshrc`/`.kshrc` 文件中加入：
+
+```sh
+LC_ALL=en_US.UTF-8
+LC_CTYPE=en_US.UTF-8
+LANG=en_US.UTF-8
+```
