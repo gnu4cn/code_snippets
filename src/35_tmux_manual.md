@@ -93,3 +93,26 @@ LC_ALL=en_US.UTF-8
 LC_CTYPE=en_US.UTF-8
 LANG=en_US.UTF-8
 ```
+
+
+## 没有窗口滚动条的问题
+
+在 `~/.tmux.conf` 中加入：
+
+```conf
+set -g mouse on     # 对于 2.1 以上版本的 tmux
+```
+
+或
+
+```conf
+set -g mode-mouse on     # 对于 2.1 以下版本的 tmux
+```
+
+然后运行以下命令：
+
+```console
+tmux source-file ~/.tmux.conf
+```
+
+即可在 `tmux` 窗口中通过鼠标滚轮向上翻页。
