@@ -97,6 +97,11 @@ LANG=en_US.UTF-8
 
 ## 没有窗口滚动条的问题
 
+
+> 注：后面发现此问题特定于运行在 `msys2` 下的 `tmux` 才出现，而发现 `msys2` 有个 “用于鼠标滚动的修饰键” 选项，故只需按住鼠标修饰键，就无需额外设置，便可在运行于 `msys2` 下 `tmux` 窗口中，通过滚动鼠标滚轮而上下翻页。
+
+参考：[How do I scroll in tmux?](https://superuser.com/a/510310)
+
 在 `~/.tmux.conf` 中加入：
 
 ```conf
@@ -116,3 +121,5 @@ tmux source-file ~/.tmux.conf
 ```
 
 即可在 `tmux` 窗口中通过鼠标滚轮向上翻页。
+
+
