@@ -104,3 +104,20 @@ Please run chocolatey with `choco command -help` for specific help on
 ### 导出证书
 
 需要选择 “导出私钥” 选项，必要时为证书设置密码。
+
+
+## “Internet 选项” 中 SSL/TLS 相关设置被修改的问题
+
+参考：
+
+1. [IE高级配置中支持的SSL/TLS协议对应注册表值](https://blog.csdn.net/dong123ohyes/article/details/127983040)
+2. [Turn off encryption support](https://admx.help/?Category=InternetExplorer&Policy=Microsoft.Policies.InternetExplorer::Advanced_SetWinInetProtocols)
+
+
+Win 系统中 “Internet 选项” 中，SSL/TLS 设置不当，会导致无法连接到相关服务。有的时候这些设置会被未知程序修改。可在 “管理员终端，Windows Powershell(Admin)” 里，运行注册表命令快速设置。
+
+```powershell
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v SecureProtocols /t REG_DWORD /d 2728 /f
+```
+
+其中的 `2728` 是表示 SSL/TLS 设置组合的代码，不同组合有不同的代码。
