@@ -82,3 +82,8 @@ RSAT，Remote Server Administration Tools, 远端服务器管理工具
 ```conf
 proxy=socks5h://localhost:10080
 ```
+
+## 在开启 `hybrid` 的交换机端口下连接傻瓜交换机遇到终端数瓶颈
+
+
+此问题出现在将一台 Linux 终端连接到傻瓜交换机上时，终端可以获取到 IP 地址，但没有流浪，无法 `ping` 通网关，导致无法使用。后续应调查此问题。
