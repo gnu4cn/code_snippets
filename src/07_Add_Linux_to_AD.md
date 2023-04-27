@@ -29,6 +29,8 @@ $ sudo yum install sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-
 
 通过 `hostname -f` 查看。同时在 Windows 服务器上加入对应的 `A` 记录。
 
+> 注：经测试，设置为仅主机名，而非 FQDN 也是可行的，比如 `sta-neo-fpga`。
+
 ## 02. 在 Linux 机器上配置有效的 DNS 服务器
 
 安装 `resolvconf` 软件包，并启动 `resolvconf` 服务，修改 `/etc/resolvconf/resolvconf.d/head`配置文件（加入 `nameserver 192.168.153.131`, 其中 `192.168.153.131` 就是配置了 DNS 服务的 DC 服务器地址），然后运行 `sudo resolvconf -u` 更新配置。
@@ -136,7 +138,7 @@ realm: Couldn't join realm: Failed to enroll machine in realm. See diagnostics.
 ```
 
 > 解决方法：在 CentOS 7 上，执行 `$ sudo yum install samba-common-tools -y` 安装这个 `samba-common-tools` 软件包。
-> 
+>
 > **注意**：似乎还应安装 `dconf-editor` 这个软件包。
 
 要脱离 AD，以 `sudo` 模式，运行 `sudo realm leave xfoss.com`。
