@@ -113,7 +113,7 @@ server {
 
 	location ~ \.php$ {
 		include snippets/fastcgi-php.conf;
-	
+
 		# With php-fpm (or other unix sockets):
 		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
 		# With php-cgi (or other tcp sockets):
@@ -255,3 +255,8 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 
 
 此举可有效降低 URL 加载时间，以腾讯云为例，可将加载时间从 16xxms 降低到 xxms。原理是缓存 fastcgi 生成的内容，php 渲染 HTML 的次数，从而减少 Nginx 与 PHP 通信次数，减轻 PHP 与数据库的压力。
+
+
+## 在不重新安装 Linux 下添加 `ngx_cache_purge` 模组
+
+参考：[ngx_cache_purge 清除 Nginx 快取](https://blog.owo9.com/p/ngx_cache_purge-clear-nginx-cache/)
