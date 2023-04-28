@@ -264,3 +264,5 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 ## Nginx 通过 Cerbot 获取证书注意的问题
 
 在运行 `nginx -t` 检查配置文件时，若没有 `ssl_certificate` 和 `ssl_certificate_key` 字段，而 `listen` 字段中又有 `ssl` 时，就会通不过检查。此时应去掉 `listen` 中的 `ssl`。
+
+参考：[Nginx: [emerg] no “ssl_certificate” is defined for the “listen … ssl” directive in /etc/nginx/sites-enabled/cockpit:1](https://community.letsencrypt.org/t/nginx-emerg-no-ssl-certificate-is-defined-for-the-listen-ssl-directive-in-etc-nginx-sites-enabled-cockpit-1/154331)
