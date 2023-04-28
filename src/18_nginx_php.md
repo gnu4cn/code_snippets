@@ -260,3 +260,7 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 ## 在不重新安装 Linux 下添加 `ngx_cache_purge` 模组
 
 参考：[ngx_cache_purge 清除 Nginx 快取](https://blog.owo9.com/p/ngx_cache_purge-clear-nginx-cache/)
+
+## Nginx 通过 Cerbot 获取证书注意的问题
+
+在运行 `nginx -t` 检查配置文件时，若没有 `ssl_certificate` 和 `ssl_certificate_key` 字段，而 `listen` 字段中又有 `ssl` 时，就会通不过检查。此时应去掉 `listen` 中的 `ssl`。
