@@ -70,7 +70,7 @@ python3 -m venv .venv
 ./.venv/bin/activate
 pip3 install wheel
 pip install -U genpac
-curl https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt -o gfwlist
+curl https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt -o gfwlist.txt
 
 # 生成 autoproxy.pac 的命令
 genpac --pac-proxy "SOCKS5 127.0.0.1:10080" \
