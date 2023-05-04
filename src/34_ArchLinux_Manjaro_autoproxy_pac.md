@@ -59,3 +59,23 @@ $ gsettings get org.gnome.system.proxy autoconfig-url
 ## 配置 `~/.curlrc`、`~/.gitconfig` 及 `~/.ssh/config`
 
 因为上一布中所设置 “网络代理”，“自动配置 URL” 属于窗口管理系统级别的设置，因此仍要设置 Curl、Git 与 SSH 各自的代理。
+
+
+## 生成 `autoproxy.pac` 的脚本
+
+```bash
+mkdir gen-pac
+cd gen-pac
+python3 -m venv .venv
+./.venv/bin/activate
+pip3 install wheel
+pip install -U genpac
+curl https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt -o gfwlist
+
+# 生成 autoproxy.pac 的命令
+genpac --pac-proxy "SOCKS5 127.0.0.1:10080" \
+--gfwlist-proxy "SOCKS5 127.0.0.1:10080" \
+-o "/home/unisko/buy-me-a-coffee/src/autoproxy.pac" \
+--gfwlist-local "gfwlist.txt" \
+--user-rule "/home/unisko/gen-pac/cust.list"
+```
