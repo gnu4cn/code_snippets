@@ -2,6 +2,9 @@
 
 **Multi-threaded and Segmented FTP**
 
+
+参考：[Multi-threaded and Segmented FTP ](https://whatbox.ca/wiki/Multi-threaded_and_Segmented_FTP)
+
 ## 并发的传输
 
 **Concurrent transfers**
