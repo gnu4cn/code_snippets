@@ -7,7 +7,9 @@
 
 附 同步 EPEL 镜像脚本：
 
+```bash
 {{#include ../projects/epel_rsync.sh}}
+```
 
 Nginx 配置文件：
 
