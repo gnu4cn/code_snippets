@@ -121,3 +121,26 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v Se
 ```
 
 其中的 `2728` 是表示 SSL/TLS 设置组合的代码，不同组合有不同的代码。
+
+
+## 使用 `sshfs-win` 映射网络位置
+
+参考：[winfsp/sshfs-win](https://github.com/winfsp/sshfs-win)
+
+安装 `sshfs-win`：
+
+```powershell
+choco install -y sshfs
+```
+
+或
+
+```powershell
+winget install WinFsp.WinFsp; winget install SSHFS-Win.SSHFS-Win
+```
+
+然后映射一个网络驱动器到指定位置：
+
+```uri
+\\sshfs\REMUSER@HOST[\PATH]
+```
