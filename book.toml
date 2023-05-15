@@ -12,6 +12,7 @@ additional-css = ["theme/pagetoc.css"]
 additional-js  = ["theme/pagetoc.js"]
 git-repository-url = "https://github.com/gnu4cn/code_snippets"
 git-repository-icon = "fa-github"
+google-analytics="G-PD2HTNR5Z0"
 
 [output.html.print]
 enable = false
