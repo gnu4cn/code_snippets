@@ -79,3 +79,9 @@ genpac --pac-proxy "SOCKS5 127.0.0.1:10080" \
 --gfwlist-local "gfwlist.txt" \
 --user-rule "/home/unisko/gen-pac/cust.list"
 ```
+
+## 使用 `autossh` 建立自动重连的 SOCKS5 本地代理
+
+```console
+autossh -M 5122 -CqTnfN -D 127.0.0.1:10080 user@HOST -p PORT_NUM
+```
