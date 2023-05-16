@@ -196,9 +196,9 @@ pm.max_spare_servers = 3
 
 - [解决：connect() to unix:/run/php/php8.1-fpm.sock failed (13: Permission denied)](https://www.cnblogs.com/workhelper/p/16212995.html)
 
-原因是　php8.1-fpm 的apt安装使用了缺省用户www-data，nginx的apt安装使用了缺省用户nginx，/run/php/php8.1-fpm.sock的所有者是www-data, nginx用户无权访问，导致以上报错。
+原因是 `php8.1-fpm` 的 `apt` 安装使用了缺省用户 `www-data`，`nginx` 的 `apt` 安装使用了缺省用户 `nginx`，`/run/php/php8.1-fpm.sock` 的所有者是 `www-data`, `nginx` 用户无权访问，导致以上报错。
 
-解决方法：把运行 nginx 的用户，添加到 `www-data` 组：
+解决方法：把运行 `nginx` 的用户，添加到 `www-data` 组：
 
 ```console
 $ sudo usermod -a -G www-data unisko
@@ -241,6 +241,7 @@ group = nginx
 
 修改 `php-fpm.ini` 配置文件中的 `user` 与 `group` 项目为正确项目。
 
+
 ## MySQL/MariaDB 创建数据库
 
 ```sql
@@ -254,12 +255,17 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 参考：[Use the Nginx FastCGI Page Cache With WordPress](https://www.linode.com/docs/guides/how-to-use-nginx-fastcgi-page-cache-with-wordpress/)
 
 
-此举可有效降低 URL 加载时间，以腾讯云为例，可将加载时间从 16xxms 降低到 xxms。原理是缓存 fastcgi 生成的内容，php 渲染 HTML 的次数，从而减少 Nginx 与 PHP 通信次数，减轻 PHP 与数据库的压力。
+此举可有效降低 URL 加载时间，以腾讯云为例，可将加载时间从 `16xxms` 降低到 `xxms`。原理是缓存 `fastcgi` 生成的内容，php 渲染 HTML 的次数，从而减少 Nginx 与 PHP 通信次数，减轻 PHP 与数据库的压力。
 
 
 ## 在不重新安装 Linux 下添加 `ngx_cache_purge` 模组
 
-参考：[ngx_cache_purge 清除 Nginx 快取](https://blog.owo9.com/p/ngx_cache_purge-clear-nginx-cache/)
+参考：
+
+[ngx_cache_purge 清除 Nginx 快取](https://blog.owo9.com/p/ngx_cache_purge-clear-nginx-cache/)
+
+此举之所以可行，是源于 Nginx 应用的模块化设计，造成的模块可插拔效果。下文提到的 `ModSecurity` 模块，亦可这样编译出来，并通过 Nginx 配置文件加载生效。
+
 
 ## Nginx 通过 Cerbot 获取证书注意的问题
 
