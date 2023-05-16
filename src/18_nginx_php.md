@@ -268,3 +268,18 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 经测试，需将 `listen` 整个配置行删除，才能运行  `sudo certbot --nginx -d xfoss.com` 类似命令。
 
 参考：[Nginx: [emerg] no “ssl_certificate” is defined for the “listen … ssl” directive in /etc/nginx/sites-enabled/cockpit:1](https://community.letsencrypt.org/t/nginx-emerg-no-ssl-certificate-is-defined-for-the-listen-ssl-directive-in-etc-nginx-sites-enabled-cockpit-1/154331)
+
+
+## 使用 `ModSecurity` 加固 Nginx
+
+`ModSecurity` 是一个自由免费开源的 web 应用，最初是一个 Apache 模块，后来发展成为一个成熟的 Web 应用程序防火墙, web application firewall, WAF。它的工作原理是根据预定义的规则集，实时检查发送到 Web 服务器的请求，防止一些典型的 Web 应用程序攻击，如 XSS 和 SQL 注入。
+
+虽然最初是一个 Apache 模块，但 `ModSecurity` 也可以安装在 Nginx 上，如本指南中所述。
+
+参考：
+
+- [Securing Nginx With `ModSecurity`](https://www.linode.com/docs/guides/securing-nginx-with-modsecurity/)
+
+- [SpiderLabs/ModSecurity](https://github.com/SpiderLabs/ModSecurity)
+
+- [SpiderLabs/ModSecurity-niginx](https://github.com/SpiderLabs/ModSecurity-nginx)
