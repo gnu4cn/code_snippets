@@ -12,6 +12,7 @@ dirs["ccna60d"]="ccna60d"
 dirs["ts"]="ts-learnings"
 dirs["www"]="buy-me-a-coffee"
 dirs["snippets"]="code_snippets"
+dirs["jenkins"]="jenkins_book_zh"
 
 declare -A ports
 
@@ -21,6 +22,7 @@ ports["ccna60d"]="10444"
 ports["ts"]="10447"
 ports["www"]="10446"
 ports["snippets"]="10448"
+ports["jenkins"]="10449"
 
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 OPTIONS=("all")
