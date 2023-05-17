@@ -41,6 +41,8 @@
 - [Vim Tips](29_vim_tips.md)
 - [Sapling SCM Usage](32_sapling-scm_usage.md)
 - [`tmux` Manual](35_tmux_manual.md)
+- [底层开发大学](41_Low_Level_Programming_Brief.md)
+- [ 使用 `mdbook` 与 Nginx 搭建基于 Markdown 的文档服务器](42_mdbook_Server_Management.md)
 
 ---
 # 杂项
