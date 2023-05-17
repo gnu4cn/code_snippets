@@ -6,5 +6,31 @@
 
 ## 服务器管理脚本
 
+文件：`srv_incl.sh`
+
+```bash
+{{#include ../projects/srv_incl.sh}}
+```
+
+文件：`srv_mgt.sh`
+
+```bash
+{{#include ../projects/srv_mgt.sh}}
+```
+
 
 ## Nginx 配置示例
+
+
+文件：`/etc/nginx/nginx.conf`
+
+```conf
+{{#include ../projects/nginx.conf}}
+```
+
+文件：`/etc/nginx/conf.d/ccna60d.conf`
+
+
+```conf
+{{#include ../projects/ccna60d.conf}}
+```
