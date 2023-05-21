@@ -81,6 +81,19 @@ Please run chocolatey with `choco command -help` for specific help on
 
 ![MSYS2 终端](images/msys2-terminal.png)
 
+### `scoop.sh` 方式
+
+[scoop.sh](https://scoop.sh) 是另一个 Windows 的命令行安装程序。
+
+Scoop 从命令行中安装咱们所知道和喜爱的程序，而且摩擦最小。他：
+
+- 消除权限弹出窗口
+- 隐藏 GUI 向导式安装程序
+- 防止安装大量程序造成 `PATH` 污染
+- 避免因安装和卸载程序而产生的意外副作用
+- 自动查找并安装依赖项
+- 自行执行所有额外的设置步骤以获得工作的程序
+
 
 ## 删除用户配置文件
 
