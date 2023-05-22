@@ -289,3 +289,23 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 - [SpiderLabs/ModSecurity](https://github.com/SpiderLabs/ModSecurity)
 
 - [SpiderLabs/ModSecurity-niginx](https://github.com/SpiderLabs/ModSecurity-nginx)
+
+
+## `php-fpm` 进程 CPU 占用 `100%` 的问题
+
+在腾讯云虚拟主机上，间歇性出现 `php-fpm`（Wordpress 网站，最新版本）CPU 使用率达到 `100%` 的现象。无法定位出是因为恶意代码还是其他原因造成。后通过编译 `php` 最新版 `8.2.6`，并修改 `/etc/rc.d/init.d/php-fpm` 启动脚本，将 `php` 指向到新编译安装的版本，后 CPU 使用率转为正常。
+
+### `configure`、`make` 与 `make install`
+
+```bash
+$ cd php-8.2.6/
+$ ./configure --prefix=/usr/local/php \
+--enable-fpm --with-openssl --with-zlib \
+--with-curl --enable-gd --with-webp \
+--with-jpeg --with-freetype --enable-mbstring \
+--with-zip --with-mysqli --with-pdo-mysql
+$ make
+$ sudo make install
+```
+
+### 修改 `/etc/rc.d/init.d/php-fpm`
