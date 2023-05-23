@@ -1,7 +1,7 @@
-# 交换机 dot1x 认证端口动态指定 VLAN 配置
+# 交换机 `dot1x` 认证端口动态指定 VLAN 配置
 
 
-## 交换机配置
+## 交换机配置（华为HUAWEI）
 
 华为交换机的配置，分传统模式与统一认证模式。因为核心交换机目前运行的是统一认证模式，因此配置时，应选择统一认证模式。而不论是统一认证模式，还是传统认证模式，M$ AD NPS 服务器配置都是一样的。
 
@@ -210,6 +210,11 @@ interface GigabitEthernet0/0/2
  port hybrid untagged vlan 10
  authentication-profile auth.profile
 ```
+
+
+## 交换机配置（华三H3C）
+
+
 
 
 ## Windows 客户端与 NPS 服务器配置
