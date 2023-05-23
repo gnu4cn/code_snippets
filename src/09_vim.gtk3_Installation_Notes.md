@@ -46,7 +46,7 @@ $git submodule update --init --recursive
 
 安装各种语言的补全之前，需要满足各种条件。比如安装 TyepScript 的支持（`--ts-completer`），就需要先安装 Node.js 与 npm；要有 Java 的支持（`--java-completer`），就要有 JDK。
 
-> JDK 的安装：
+JDK 的安装：
 
 >> 1. 下载 JDK 的 tar.gz 文件
 >> 2. `$sudo tar xf jdk-xx.x.xx_linux-x64_bin.tar.gz -C /opt/`
@@ -54,7 +54,7 @@ $git submodule update --init --recursive
 >> 4. `$sudo update-alternatives --install "/usr/bin/java" "java" "/opt/jdk/bin/java" 1`
 >> 5. `$sudo update-alternatives --install "/usr/bin/javac" "javac" "/opt/jdk/bin/javac" 1`
 
-> 安装完成
+安装完成
 
 ```bash
 $python install.py --ts-completer
@@ -65,6 +65,7 @@ $python install.py --ts-completer
 [ibus-pinyin 1.5.0 on debian 9 will hide terminal cursor](https://github.com/phuang/ibus-pinyin/issues/11)
 
 > "Recently, I also encountered this problem. I solved this problem by unchecking the item 『Embed preedit text in application window』in the ibus preferences (run ibus-setup from the terminal."
+
 
 ## 使用 `Shougo/dein.vim` 来管理 Vim 插件
 
