@@ -43,3 +43,11 @@ ResultActive=yes
 ## "Ehternet device not managed" 问题
 
 在安装 Ubuntu 时，因安装的是服务器版本，而只安装了 `ubuntu-mate-core mate-tweak lxde xfce4` 桌面，重启后发现没有网络连接。
+
+
+## Ubuntu 安装 FirefoxESR
+
+参考：[How to install Firefox ESR via PPA in Ubuntu 22.04 | 20.04](https://ubuntuhandbook.org/index.php/2022/03/install-firefox-esr-ubuntu)
+
+
+Mozilla Firefox 有着两个发布系列：**Rapid** 与 **ESR**。Rapid 发布
