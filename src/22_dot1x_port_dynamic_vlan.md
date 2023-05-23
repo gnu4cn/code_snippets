@@ -214,75 +214,81 @@ interface GigabitEthernet0/0/2
 
 ## Windows 客户端与 NPS 服务器配置
 
-1. 客户端侧
 
 
-    在有线网卡上，要配置 “身份验证”。通过 AD 服务器，可集中下发域内计算机有线网卡“身份验证”策略。
-
-    ![“以太网” 属性 “身份验证” 选项卡](images/dot1x_cert_auth_client_01.png)
-
-    *图 1 - “以太网” 属性 “身份验证” 选项卡*
+### 客户端侧
 
 
-    ![“PEAP” 属性对话框](images/dot1x_cert_auth_client_02.png)
-
-    *图 2 - “PEAP” 属性对话框*
-
-    ![身份验证 "高级设置" 对话框](images/dot1x_cert_auth_client_03.png)
-
-    *图 3 - 身份验证 "高级设置" 对话框*
-
-2. NPS 服务器侧
+在有线网卡上，要配置 “身份验证”。通过 AD 服务器，可集中下发域内计算机有线网卡“身份验证”策略。
 
 
-    在 NPS 服务器上，分别要建立 “连接请求策略” 和 “网络策略”。自接入交换机来的端口接入请求，首先会被 “连接请求策略” 处理，接下来被 “网络策略” 处理（类似于流式编程中的操作）。
+![“以太网” 属性 “身份验证” 选项卡](images/dot1x_cert_auth_client_01.png)
 
-    - “连接请求策略”
-    
-    ![“连接请求策略” 概述 tab 页](images/nps_access_policy_01.png)
-
-    *图 4 - “连接请求策略” 概述 tab 页*
-
-    ![“连接请求策略” 条件 tab 页](images/nps_access_policy_02.png)
-
-    *图 5 - “连接请求策略” 条件 tab 页*
-
-    ![“连接请求策略” 设置 tab 页 - 身份验证方法](images/nps_access_policy_03.png)
-
-    *图 6 - “连接请求策略” 设置 tab 页 - 身份验证方法*
-
-    ![“连接请求策略” 设置 tab 页 - 身份验证](images/nps_access_policy_04.png)
-
-    *图 7 - “连接请求策略” 设置 tab 页 - 身份验证*
-
-    ![“连接请求策略” 设置 tab 页 - 标准](images/nps_access_policy_05.png)
-
-    *图 8 - “连接请求策略” 设置 tab 页 - 标准*
+*图 1 - “以太网” 属性 “身份验证” 选项卡*
 
 
-    - “网络策略”
-    
+![“PEAP” 属性对话框](images/dot1x_cert_auth_client_02.png)
 
-    !["网络策略" 概述 tab 页](images/nps_network_policy_01.png)
+*图 2 - “PEAP” 属性对话框*
 
-    *图 9 - "网络策略" 概述 tab 页*
+![身份验证 "高级设置" 对话框](images/dot1x_cert_auth_client_03.png)
 
-    !["网络策略" 条件 tab 页](images/nps_network_policy_02.png)
-
-    *图 10 - "网络策略" 条件 tab 页*
-
-    !["网络策略" 约束 tab 页 - 身份验证方法](images/nps_network_policy_03.png)
-
-    *图 11 - "网络策略" 约束 tab 页 - 身份验证方法*
+*图 3 - 身份验证 "高级设置" 对话框*
 
 
-    !["网络策略" 约束 tab 页 - NAS 端口类型](images/nps_network_policy_04.png)
-
-    *图 12 - "网络策略" 约束 tab 页 - NAS 端口类型*
 
 
-    ![“Microsoft: 受保护的 EAP（PEAP）” - “编辑”](images/nps_network_policy_05.png)
+### NPS 服务器侧
 
-    ***图 13 - “Microsoft: 受保护的 EAP（PEAP）” - “编辑”***
 
+在 NPS 服务器上，分别要建立 “连接请求策略” 和 “网络策略”。自接入交换机来的端口接入请求，首先会被 “连接请求策略” 处理，接下来被 “网络策略” 处理（类似于流式编程中的操作）。
+
+
+#### “连接请求策略”
+
+![“连接请求策略” 概述 tab 页](images/nps_access_policy_01.png)
+
+*图 4 - “连接请求策略” 概述 tab 页*
+
+![“连接请求策略” 条件 tab 页](images/nps_access_policy_02.png)
+
+*图 5 - “连接请求策略” 条件 tab 页*
+
+![“连接请求策略” 设置 tab 页 - 身份验证方法](images/nps_access_policy_03.png)
+
+*图 6 - “连接请求策略” 设置 tab 页 - 身份验证方法*
+
+![“连接请求策略” 设置 tab 页 - 身份验证](images/nps_access_policy_04.png)
+
+*图 7 - “连接请求策略” 设置 tab 页 - 身份验证*
+
+![“连接请求策略” 设置 tab 页 - 标准](images/nps_access_policy_05.png)
+
+*图 8 - “连接请求策略” 设置 tab 页 - 标准*
+
+
+#### “网络策略”
+
+
+!["网络策略" 概述 tab 页](images/nps_network_policy_01.png)
+
+*图 9 - "网络策略" 概述 tab 页*
+
+!["网络策略" 条件 tab 页](images/nps_network_policy_02.png)
+
+*图 10 - "网络策略" 条件 tab 页*
+
+!["网络策略" 约束 tab 页 - 身份验证方法](images/nps_network_policy_03.png)
+
+*图 11 - "网络策略" 约束 tab 页 - 身份验证方法*
+
+
+!["网络策略" 约束 tab 页 - NAS 端口类型](images/nps_network_policy_04.png)
+
+*图 12 - "网络策略" 约束 tab 页 - NAS 端口类型*
+
+
+![“Microsoft: 受保护的 EAP（PEAP）” - “编辑”](images/nps_network_policy_05.png)
+
+*图 13 - “Microsoft: 受保护的 EAP（PEAP）” - “编辑”*
 
