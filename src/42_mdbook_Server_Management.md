@@ -4,6 +4,16 @@
 
 以下是在建立此种文档服务器时，用到的一些配置与脚本。
 
+## `include` 自己的一些行
+
+`include` 指令可以重用 Markdown 文档中的一些行。而要从自己 `include` 一些行，可以向下面这样，在 `linux.md` 中写入：
+
+```markdown
+{{#include ./linux.md:119:191}}
+```
+
+便可以引用 `linux.md` 本身的 `119` 到 `191` 行。
+
 ## 服务器管理脚本
 
 文件：`srv_incl.sh`
