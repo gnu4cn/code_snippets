@@ -215,6 +215,8 @@ interface GigabitEthernet0/0/2
 ## 交换机配置（华三H3C）
 
 
+新华三交换机 LS-S5008PV5-EI 配置 `telnet` 登录时，需要特别注意针对 `user-interface vty 0 15` 做配置，否则登录时会显示 `Connection closed by foreign host.` 报错。
+
 
 
 ## Windows 客户端与 NPS 服务器配置
