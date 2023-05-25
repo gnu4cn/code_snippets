@@ -176,7 +176,7 @@ dot1x-access-profile name dot1x.profile
   authentication-mode radius
 ```
 
-- `domain xfoss.com` （全部配置模式，配置全局下的域）
+- `domain xfoss.com` （全局配置模式，配置全局下的域）
 
 - `domain xfoss.com` （`aaa`配置模式，将以上配置指定到所给的域）
 
