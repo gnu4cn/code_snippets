@@ -218,6 +218,35 @@ interface GigabitEthernet0/0/2
 新华三交换机 LS-S5008PV5-EI 配置 `telnet` 登录时，需要特别注意针对 `user-interface vty 0 15` 做配置，否则登录时会显示 `Connection closed by foreign host.` 报错。
 
 
+### 基础配置
+
+配置 `radius scheme nps.xfoss.com`、`domain xfoss.com`，全局开启 `dot1x`，并设置 `dot1x authentication-method eap`。
+
+
+### 端口配置
+
+为方便配置，先设置一个 `interface range name acc-grp`，将所有接入端口，都放入 `acc-grp`。
+
+
+然后每个端口的配置如下：
+
+```console
+interface GigabitEthernet1/0/1
+ port link-type hybrid
+ undo port hybrid vlan 1
+ port hybrid vlan 10 untagged
+ port hybrid pvid vlan 10
+ stp edged-port enable
+ dot1x guest-vlan 7
+ dot1x auth-fail vlan 7
+ undo dot1x handshake
+ dot1x mandatory-domain xofss.com
+ dot1x port-method portbased
+ dot1x
+```
+
+其中，`undo dot1x handshake` 是需要的，否则在对微软 NPS 服务器认证时会失败。
+
 
 ## Windows 客户端与 NPS 服务器配置
 
