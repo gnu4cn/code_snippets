@@ -248,7 +248,7 @@ interface GigabitEthernet1/0/1
 其中，`undo dot1x handshake` 是需要的，否则在对微软 NPS 服务器认证时会失败。
 
 
-> 注意：在配置网络时，为避免测试配置时有线连接路由权重高于无线连接，而造成网络连接终端（无线连接是可靠连接），可通过将无线连接的度量值，手动设为低于有线连接的度量值，而保证计算机始终使用无线连接网络。“控制面板”->“Network and Internet” -> “Network Connections”，然后在有线与无线连接上分别点击右键，双击 “Internet 协议版本 4（TCP/IPv4）”，点击右下角的 “高级（Advanced...）”，取消勾选 “IP Settings” Tab 页底部的 “Automatic metric” 并手动设置诸如 `10`、`20` 这样的度量值，度量值越小，路由优先级越高。
+> 注意：在配置网络时，为避免测试配置时有线连接路由权重高于无线连接，而造成网络连接中断（无线连接是可靠连接），可通过将无线连接的度量值，手动设为低于有线连接的度量值，而保证计算机始终使用无线连接网络。“控制面板”->“Network and Internet” -> “Network Connections”，然后在有线与无线连接上分别点击右键，双击 “Internet 协议版本 4（TCP/IPv4）”，点击右下角的 “高级（Advanced...）”，取消勾选 “IP Settings” Tab 页底部的 “Automatic metric” 并手动设置诸如 `10`、`20` 这样的度量值，度量值越小，路由优先级越高。
 
 
 ## Windows 客户端与 NPS 服务器配置
