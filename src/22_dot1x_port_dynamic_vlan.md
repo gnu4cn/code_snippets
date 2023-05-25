@@ -240,7 +240,7 @@ interface GigabitEthernet1/0/1
  dot1x guest-vlan 7
  dot1x auth-fail vlan 7
  undo dot1x handshake
- dot1x mandatory-domain xofss.com
+ dot1x mandatory-domain xfoss.com
  dot1x port-method portbased
  dot1x
 ```
