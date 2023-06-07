@@ -157,3 +157,26 @@ winget install WinFsp.WinFsp; winget install SSHFS-Win.SSHFS-Win
 ```uri
 \\sshfs\REMUSER@HOST[\PATH]
 ```
+
+## Windows 下 Docker 运行的一个问题
+
+Windows 系统上通过运行：
+
+```powershell
+choco install -y docker-for-windows
+```
+
+即可安装 Docker 环境。
+
+报出：
+
+```powershell
+> docker image ls -a
+error during connect: in the default daemon configuration on Windows, the docker client must be run with elevated privileges to connect: Get "http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/images/json?all=1": open //./pipe/docker_engine: The system cannot find the file specified.
+```
+
+此问题在 [docker: error during connect: In the default daemon configuration on Windows, the docker client must be run with elevated privileges to connect](https://stackoverflow.com/questions/67160140/docker-error-during-connect-in-the-default-daemon-configuration-on-windows-th) 上有讨论，并按照 [这个帖子](https://stackoverflow.com/a/75159317) 操作并重启计算机后，即可解决。
+
+重启系统后，Docker Desktop 会随系统启动自动运行。
+
+![Docker Desktop](./images/docker-desktop.png)
