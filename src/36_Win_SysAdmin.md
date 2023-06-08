@@ -192,3 +192,52 @@ wsl --update
 重启系统后，Docker Desktop 会随系统启动自动运行。
 
 ![Docker Desktop](./images/docker-desktop.png)
+
+
+## O365 激活操作
+
+O365 Retail 版转换为 VOL 版并激活的步骤（以下命令需再管理员 CMD 窗口执行，管理员 Powershell 终端窗口无效）：
+
+1. 进入 `ospp.vbs` 所在的目录
+
+```cmd
+cd C:\Program Files\Microsoft Office\Office16
+```
+
+2. 将 Retail 版转化为 VOL 版
+
+```cmd
+for /f %x in ('dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+for /f %x in ('dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') do cscript ospp.vbs /inslic:"..\root\Licenses16\%x"
+```
+
+3. 安装 KMS 激活密钥
+
+```cmd
+cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99
+```
+
+关于 KMS 激活密钥，请参考：[Microsoft Office 2019 RTM GVLK Keys](https://gist.github.com/AmbroseNTK/c6290a841deca679febb2ccc882516bb)
+
+4. 激活
+
+```cmd
+cscript ospp.vbs /sethst:kms.03k.org && cscript ospp.vbs /act
+```
+
+5. 可用的 KMS 服务器地址汇总
+
+可同时激活 Windows 和 Office。
+
+
+```conf
+kms.03k.org
+kms.chinancce.com
+kms.luody.info
+kms.lotro.cc
+kms.luochenzhimu.com
+kms8.MSGuides.com
+kms9.MSGuides.com
+```
+
+参考：[适用于windows && office 可用kms服务器激活地址汇总](https://cloud.tencent.com/developer/article/1939873)
