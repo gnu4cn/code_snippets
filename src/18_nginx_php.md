@@ -258,6 +258,9 @@ create schema neo_wp default character set utf8 collate utf8_general_ci;
 此举可有效降低 URL 加载时间，以腾讯云为例，可将加载时间从 `16xxms` 降低到 `xxms`。原理是缓存 `fastcgi` 生成的内容，php 渲染 HTML 的次数，从而减少 Nginx 与 PHP 通信次数，减轻 PHP 与数据库的压力。
 
 
+> **注意**：在启用了这个 `fastcgi_cache` 的 Nginx 模组后，在 Wordpress 后台点击顶部的 `Purge Cache` 并不能有效的消除缓存（至少在开启了 CDN 加速时如此），此时可手动执行 `rm -rf /var/run/cache/*`，删除那些缓存。
+
+
 ## 在不重新安装 Linux 下添加 `ngx_cache_purge` 模组
 
 参考：
