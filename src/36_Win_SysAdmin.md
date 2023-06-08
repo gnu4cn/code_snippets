@@ -196,6 +196,8 @@ wsl --update
 
 ## O365 激活操作
 
+> **摘录参考自**：[kms-activate](https://liuxinagxiang.github.io/kms/)
+
 O365 Retail 版转换为 VOL 版并激活的步骤（以下命令需再管理员 CMD 窗口执行，管理员 Powershell 终端窗口无效）：
 
 1. 进入 `ospp.vbs` 所在的目录
