@@ -51,3 +51,32 @@ ResultActive=yes
 
 
 Mozilla Firefox 有着两个发布系列：**Rapid** 与 **ESR**。Rapid 发布
+
+
+## `dpkg-statoverride` 命令
+
+在安装软件包时，偶然会遇到下面这种情况：
+
+
+![`statoverride` 文件错误故障](./images/MicrosoftTeams-image-7.png)
+
+这是就要查看这个 `statoverride` 文件：
+
+```bash
+$ sudo dpkg-statoverride --list
+geoclue geoclue 755 /var/lib/geoclue
+root lp 775 /var/log/hp/tmp
+root crontab 2755 /usr/bin/crontab
+root ssl-cert 710 /etc/ssl/private
+root x2gouser 2755 /usr/lib/x2go/libx2go-server-db-sqlite3-wrapper
+```
+
+这时运行以下命令：
+
+```bash
+sudo dpkg-statoverride --remove /usr/lib/x2go/libx2go-server-db-sqlite3-wrapper
+```
+
+删除 `x2gouser` 的那行，随后就解决了之前报出的问题，可以正常安装软件包了。
+
+参考：[syntax error: unknown user 'munin' in statoverride file](https://serverfault.com/a/549001)
