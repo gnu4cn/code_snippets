@@ -2,7 +2,7 @@
 
 Since yesterday afternoon, we found that the access to github.com suddenly lost, through some un-official source, we think it’s due to the GFW. Now we tested a solution to get the github.com access back with our own HTTP proxy.
 
-First please install the `ncat`/`socat` tool, with 
+First please install the `ncat`/`socat` tool, with
 
 - `pacman -S/yum|apt|brew|choco install nmap-ncat/ncat/nmap`
 
@@ -20,7 +20,7 @@ Host github.com
     # ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:10080 %h %p
 ```
 
-## Settings under OS/Windows 
+## Settings under OS/Windows
 
 Under M$ Windows OS, It's a little bit different with GNU/Linux. We need install the [Chocolate package manager for Windows](https://chocolatey.org/) within an administrative Powershell window.
 
@@ -62,7 +62,7 @@ Now you get the github.com SSH traffic proxied under Windows OS platform!
 
 If any question, please feel free to contact Ryan or me.
 
-## Git HTTP Proxy Settings 
+## Git HTTP Proxy Settings
 
 To make git http traffic(only for github.com) proxied, run the following commands:
 
@@ -93,3 +93,32 @@ $ cat ~/.gitconfig                                                              
 [http "https://github.com"]
         proxy = http://192.168.30.51:3128
 ```
+
+## 使用 `git` 命令时使用指定的 SSH 私钥
+
+修改 `~/.ssh/config` 文件，使其形如下面这样：
+
+```config
+cat ~/.ssh/config
+Host github-work
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa_work
+
+Host github-personal
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa_personal
+```
+
+然后这样运行 `git` 命令：
+
+```bash
+git clone git@github-work:corporateA/webapp.git
+```
+
+就会使用 `~/.ssh/id_rsa_work` 的私钥，而运行下面的 `git` 命令：
+
+```bash
+git clone git@github-personal:bob/blog.git
+```
+
+则会使用 `~/.ssh/id_rsa_personal` 的私钥。
