@@ -8,7 +8,7 @@
 
 `include` 指令可以重用 Markdown 文档中的一些行。而要从自己 `include` 一些行，可以向下面这样，在 `linux.md` 中写入：
 
-```markdown
+```
 {{#include ./linux.md:119:191}}
 ```
 
