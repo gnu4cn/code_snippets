@@ -6,7 +6,7 @@
 
 ## `include` 自己的一些行
 
-`include` 指令可以重用 Markdown 文档中的一些行。在 `linux.md` 中写下 `{{#include ./linux.md:119:191}}` 便可以引用 `linux.md` 本身的 `119` 到 `191` 行。
+`include` 指令可以重用 Markdown 文档中的一些行。在 `linux.md` 中写下双花括号括起来的 `#include ./linux.md:119:191` 便可以引用 `linux.md` 本身的 `119` 到 `191` 行。
 
 ## 服务器管理脚本
 
