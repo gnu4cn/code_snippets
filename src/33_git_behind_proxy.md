@@ -20,6 +20,8 @@ Host github.com
     # ProxyCommand /usr/bin/nc -X 5 -x 127.0.0.1:10080 %h %p
 ```
 
+> `netcat`（或 `nc`） 支持的代理协议：`4`(SOCKS v.4)、`5`(SOCKS v.5) 与 `connect`(HTTPS proxy)。参见：[`man netcat`](http://man.he.net/man1/netcat)。
+
 ## Settings under OS/Windows
 
 Under M$ Windows OS, It's a little bit different with GNU/Linux. We need install the [Chocolate package manager for Windows](https://chocolatey.org/) within an administrative Powershell window.
