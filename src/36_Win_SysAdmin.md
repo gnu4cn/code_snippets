@@ -243,3 +243,15 @@ kms9.MSGuides.com
 ```
 
 参考：[适用于windows && office 可用kms服务器激活地址汇总](https://cloud.tencent.com/developer/article/1939873)
+
+
+## `msys2` 下 `/home` 位置
+
+
+执行 `pwd -W` 命令，即可找出 `/home` 的位置：
+
+```bash
+ MSYS ~
+$ pwd -W
+C:/tools/msys64/home/Lenny.Peng
+```
