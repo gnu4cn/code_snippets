@@ -12,6 +12,27 @@ Failed to enable unit: Unit file /etc/systemd/system/NetworkManager.service is m
 
 参考 [What is a masked service?](https://askubuntu.com/a/1017315)，可以解除该服务的遮蔽，从而解决问题。
 
+
+## X2go 安装过程
+
+```bash
+ Quick howto to turn your machine into an X2Go server:
+
+sudo apt-add-repository ppa:x2go/stable
+sudo apt-get update
+sudo apt-get install x2goserver x2goserver-xsession
+sudo apt-get install x2gomatebindings  # if you use MATE/mubuntu
+sudo apt-get install x2golxdebindings  # if you use LXDE/lubuntu
+
+Quick howto to install the x2goclient:
+
+sudo apt-add-repository ppa:x2go/stable
+sudo apt-get update
+sudo apt-get install x2goclient
+```
+
+
+
 ## "Authentication required. System policy prevents WiFi scans"
 
 在使用 X2go 客户端连接到 Linux Mate 桌面时，会遇到这个问题。参考：
