@@ -124,3 +124,15 @@ git clone git@github-personal:bob/blog.git
 ```
 
 则会使用 `~/.ssh/id_rsa_personal` 的私钥。
+
+
+
+## `curl` 永久代理
+
+参考 [Set Up cURL to Permanently Use a Proxy](https://www.baeldung.com/linux/curl-permanent-proxy)
+
+由于许多软件项目在构建时，都会使用 Curl 下载依赖项，因此就要想办法配置 Curl 使用代理，简单的做法是创建一个 `~/.curlrc` 文件，将代理写入到这个文件中：
+
+```conf
+proxy=socks5h://localhost:10080
+```

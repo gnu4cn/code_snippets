@@ -73,15 +73,6 @@ RSAT，Remote Server Administration Tools, 远端服务器管理工具
 参考：[Anydesk error: Aborted (core dumped) in Ubuntu 22.04](https://askubuntu.com/a/1413795`)
 
 
-## `curl` 永久代理
-
-参考 [Set Up cURL to Permanently Use a Proxy](https://www.baeldung.com/linux/curl-permanent-proxy)
-
-由于许多软件项目在构建时，都会使用 Curl 下载依赖项，因此就要想办法配置 Curl 使用代理，简单的做法是创建一个 `~/.curlrc` 文件，将代理写入到这个文件中：
-
-```conf
-proxy=socks5h://localhost:10080
-```
 
 ## 在开启 `hybrid` 的交换机端口下连接傻瓜交换机遇到终端数瓶颈
 
