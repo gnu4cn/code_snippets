@@ -193,6 +193,8 @@ wsl --update
 
 ![Docker Desktop](./images/docker-desktop.png)
 
+> **注意**：`docker-desktop` 需要管理员权限运行，否则在启动容器时会报错。
+
 
 ## O365 激活操作
 
