@@ -262,4 +262,4 @@ C:/tools/msys64/home/Lenny.Peng
 ## OneDrive 无法登录问题
 
 
-在 OneDrive 遇到无法登录问题时，需暂时打开全局代理，让 OneDrive 完成登录，得到相应登录凭据，随后便可以关闭全局代理。
+在 OneDrive 遇到无法登录问题时，需暂时打开全局代理（并关闭 AutoProxy PAC），让 OneDrive 完成登录，得到相应登录凭据，随后便可以关闭全局代理。
