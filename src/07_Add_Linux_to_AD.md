@@ -23,6 +23,17 @@ sudo apt install sssd-ad sssd-tools realmd adcli krb5-user
 $ sudo yum install sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python -y
 ```
 
+> 对于 Ubunt 22.04，还需检查 `/etc/krb5.conf`, 确保有着下面的配置（否则域用户登录不上）：
+
+
+```conf
+[realms]
+        XFOSS.COM = {
+                kdc = DC.XFOSS.COM
+                admin_server = DC.XFOSS.COM
+        }
+```
+
 ## 01. 主机名及主机名的解析
 
 编辑文件 `/etc/hostname`，将主机名修改为 FQDN 样式（比如 `udesktop.xfoss.com`）。
