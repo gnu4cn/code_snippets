@@ -281,3 +281,72 @@ notepad "$env:USERPROFILE/.wslconfig"
 memory=3GB   # Limits VM memory in WSL 2 up to 3GB
 processors=2 # Makes the WSL 2 VM use two virtual processors
 ```
+
+
+## Powershell 中设置环境变量
+
+例如：
+
+
+```console
+$env:JENKINS_URL = 'https://ci.xfoss.com'
+```
+
+检查环境变量：
+
+
+```console
+> dir env:
+
+Name                           Value
+----                           -----
+ALLUSERSPROFILE                C:\ProgramData
+APPDATA                        C:\Users\Lenny.Peng\AppData\Roaming
+ChocolateyInstall              C:\ProgramData\chocolatey
+ChocolateyLastPathUpdate       133328263824380565
+ChocolateyToolsLocation        C:\tools
+CommonProgramFiles             C:\Program Files\Common Files
+CommonProgramFiles(x86)        C:\Program Files (x86)\Common Files
+CommonProgramW6432             C:\Program Files\Common Files
+COMPUTERNAME                   PC-SSZ063-1
+ComSpec                        C:\WINDOWS\system32\cmd.exe
+DEFLOGDIR                      C:\ProgramData\McAfee\Endpoint Security\Logs
+DriverData                     C:\Windows\System32\Drivers\DriverData
+GROOVY_HOME                    C:\tools\groovy-3.0.14
+HOMEDRIVE                      C:
+HOMEPATH                       \Users\Lenny.Peng
+JENKINS_URL                    https://ci.senscomm.com
+JMETER_HOME                    C:\ProgramData\chocolatey\lib\jmeter\tools\apache-jmeter-5.5
+LOCALAPPDATA                   C:\Users\Lenny.Peng\AppData\Local
+LOGONSERVER                    \\DC-SZ2
+NUMBER_OF_PROCESSORS           8
+NVM_HOME                       C:\Users\Lenny.Peng\AppData\Roaming\nvm
+NVM_SYMLINK                    C:\Program Files\nodejs
+OS                             Windows_NT
+Path                           C:\Program Files\Eclipse Adoptium\jre-11.0.19.7-hotspot\bin;C:\Python311\Scripts\;C:\Python311\;C:\S2C\PlayerPro_Runtime\bin;C:\WINDOWS\system32;C:\WINDOWS...
+PATHEXT                        .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW;.CPL
+PROCESSOR_ARCHITECTURE         AMD64
+PROCESSOR_IDENTIFIER           Intel64 Family 6 Model 140 Stepping 2, GenuineIntel
+PROCESSOR_LEVEL                6
+PROCESSOR_REVISION             8c02
+ProgramData                    C:\ProgramData
+ProgramFiles                   C:\Program Files
+ProgramFiles(x86)              C:\Program Files (x86)
+ProgramW6432                   C:\Program Files
+PSModulePath                   C:\Users\Lenny.Peng\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+PUBLIC                         C:\Users\Public
+RTHome                         C:\S2C\PlayerPro_Runtime
+S2C_Security                   1
+SESSIONNAME                    Console
+SystemDrive                    C:
+SystemRoot                     C:\WINDOWS
+TEMP                           C:\Users\LENNY~1.PEN\AppData\Local\Temp
+TMP                            C:\Users\LENNY~1.PEN\AppData\Local\Temp
+USERDNSDOMAIN                  SENSCOMM.COM
+USERDOMAIN                     SENSCOMM
+USERDOMAIN_ROAMINGPROFILE      SENSCOMM
+USERNAME                       Lenny.Peng
+USERPROFILE                    C:\Users\Lenny.Peng
+windir                         C:\WINDOWS
+ZES_ENABLE_SYSMAN              1
+```
