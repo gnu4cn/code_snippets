@@ -263,3 +263,21 @@ C:/tools/msys64/home/Lenny.Peng
 
 
 在 OneDrive 遇到无法登录问题时，需暂时打开全局代理（并关闭 AutoProxy PAC），让 OneDrive 完成登录，得到相应登录凭据，随后便可以关闭全局代理。
+
+
+
+## 限制 `wsl` 内存使用
+
+```
+# 关闭全部 wsl 示例，比如 docker-desktop
+wsl --shutdown
+notepad "$env:USERPROFILE/.wslconfig"
+```
+
+设置咱们希望的 CPU 核数与内存值：
+
+```config
+[wsl2]
+memory=3GB   # Limits VM memory in WSL 2 up to 3GB
+processors=2 # Makes the WSL 2 VM use two virtual processors
+```
