@@ -468,3 +468,39 @@ use parent qw(Kernel::Config::Defaults);
 1. OTRS，是 Open-Source Ticket Request System，开源技术支持请求系统的首字母缩写，是一种自由与开源的，公司、组织或其他实体可以用于将技术支持记录，分配给提交的技术支持请求，并跟踪有关这些技术支持随后的联络的故障执行系统软件包。他表示了多种的技术支持受理、反馈、支持请求、缺陷报告及其他有关的联络；
 
 2. nginx （发音为 “engine-x”） 是一个开放源代码的 Web 服务器，及一种用于 HTTP、SMTP、POP 与 IMAP 协议的反向代理服务器，其强调了高并发、性能及低内存使用。他有着类 BSD 许可证的授权，并运行在 Unix、Linux、BSD 的各种变种、Mac OS X、Solaris、AIX 及 M$ Windows 等操作系统之上。
+
+
+## 清除通信日志 Communication log
+
+使用 OTRS 的终端程序：
+
+```console
+$ bin/otrs.Console.pl Maint::Log::CommunicationLog
+Management of communication logs.
+
+Usage:
+ otrs.Console.pl Maint::Log::CommunicationLog [--force-delete] [--purge] [--delete-by-hours-old ...] [--delete-by-date ...] [--delete-by-id ...] [--verbose]
+
+Options:
+ [--force-delete]               - Delete even if still processing.
+ [--purge]                      - Purge successful communications older than a week and all communications older than a month. These durations are specified in SysConfig.
+ [--delete-by-hours-old ...]    - Delete logs older than these number of hours. Example: --delete-by-hours-old="7"
+ [--delete-by-date ...]         - Delete from specific date. Example: --delete-by-date="2001-12-01"
+ [--delete-by-id ...]           - Delete logs from CommunicationID. Example: --delete-by-id="abcdefg12345"
+ [--verbose]                    - Display debug information (can be used with --purge). Example: --purge --verbose
+ [--help]                       - Display help for this command.
+ [--no-ansi]                    - Do not perform ANSI terminal output coloring.
+ [--quiet]                      - Suppress informative output, only retain error messages.
+
+Error: Either --purge, --delete-by-id, --delete-by-date or --delete-by-days-old must be given!
+```
+
+
+比如：
+
+
+```console
+$ bin/otrs.Console.pl Maint::Log::CommunicationLog --delete-by-hours-old="1" --force-delete
+```
+
+将删除早于 1 小时前的通信日志。
