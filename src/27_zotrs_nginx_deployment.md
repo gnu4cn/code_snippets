@@ -504,3 +504,8 @@ $ bin/otrs.Console.pl Maint::Log::CommunicationLog --delete-by-hours-old="1" --f
 ```
 
 将删除早于 1 小时前的通信日志。
+
+
+## 采用 POP3TLS
+
+相比于采用 IMAPTLS 从邮件服务器定时查收邮件，采用 POP3TLS 表现出了更高的可靠性与稳定性，因此应采用 POP3TLS 来接收邮件。
