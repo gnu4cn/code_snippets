@@ -463,13 +463,6 @@ use parent qw(Kernel::Config::Defaults);
 
 *代码清单 27-5：`/opt/otrs/Kernel/Config.pm` 中有关 LDAP/M$ AD 做客户用户认证及用户后端的配置*
 
-## 脚注
-
-1. OTRS，是 Open-Source Ticket Request System，开源技术支持请求系统的首字母缩写，是一种自由与开源的，公司、组织或其他实体可以用于将技术支持记录，分配给提交的技术支持请求，并跟踪有关这些技术支持随后的联络的故障执行系统软件包。他表示了多种的技术支持受理、反馈、支持请求、缺陷报告及其他有关的联络；
-
-2. nginx （发音为 “engine-x”） 是一个开放源代码的 Web 服务器，及一种用于 HTTP、SMTP、POP 与 IMAP 协议的反向代理服务器，其强调了高并发、性能及低内存使用。他有着类 BSD 许可证的授权，并运行在 Unix、Linux、BSD 的各种变种、Mac OS X、Solaris、AIX 及 M$ Windows 等操作系统之上。
-
-
 ## 清除通信日志 Communication log
 
 使用 OTRS 的终端程序：
@@ -509,3 +502,8 @@ $ bin/otrs.Console.pl Maint::Log::CommunicationLog --delete-by-hours-old="1" --f
 ## 采用 POP3TLS
 
 相比于采用 IMAPTLS 从邮件服务器定时查收邮件，采用 POP3TLS 表现出了更高的可靠性与稳定性，因此应采用 POP3TLS 来接收邮件。
+## 脚注
+
+1. OTRS，是 Open-Source Ticket Request System，开源技术支持请求系统的首字母缩写，是一种自由与开源的，公司、组织或其他实体可以用于将技术支持记录，分配给提交的技术支持请求，并跟踪有关这些技术支持随后的联络的故障执行系统软件包。他表示了多种的技术支持受理、反馈、支持请求、缺陷报告及其他有关的联络；
+
+2. nginx （发音为 “engine-x”） 是一个开放源代码的 Web 服务器，及一种用于 HTTP、SMTP、POP 与 IMAP 协议的反向代理服务器，其强调了高并发、性能及低内存使用。他有着类 BSD 许可证的授权，并运行在 Unix、Linux、BSD 的各种变种、Mac OS X、Solaris、AIX 及 M$ Windows 等操作系统之上。
