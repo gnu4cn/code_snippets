@@ -382,14 +382,14 @@ sub Load {
 
 # Customer Auth Module
     $Self->{'Customer::AuthModule'} = 'Kernel::System::CustomerAuth::LDAP';
-    $Self->{'Customer::AuthModule::LDAP::Host'} = 'dc.senscomm.com';
-    $Self->{'Customer::AuthModule::LDAP::BaseDN'} = 'OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com';
+    $Self->{'Customer::AuthModule::LDAP::Host'} = 'dc.xfoss.com';
+    $Self->{'Customer::AuthModule::LDAP::BaseDN'} = 'OU=user,OU=Suzhou,OU=corp,DC=xfoss,DC=com';
     $Self->{'Customer::AuthModule::LDAP::UID'} = 'sAMAccountName';
 
 
-    $Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'CN=Domain Users,CN=Users,DC=senscomm,DC=com';
+    $Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'CN=Domain Users,CN=Users,DC=xfoss,DC=com';
 
-    $Self->{'Customer::AuthModule::LDAP::SearchUserDN'} = 'CN=Lenny Peng,OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com';
+    $Self->{'Customer::AuthModule::LDAP::SearchUserDN'} = 'CN=Lenny Peng,OU=user,OU=Suzhou,OU=corp,DC=xfoss,DC=com';
     $Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '*********';
 
     $Self->{'Customer::AuthModule::LDAP::Params'} = {
@@ -405,10 +405,10 @@ sub Load {
         Name => 'LDAP Backend',
         Module => 'Kernel::System::CustomerUser::LDAP',
         Params => {
-            Host => 'dc.senscomm.com',
-            BaseDN => 'OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com',
+            Host => 'dc.xfoss.com',
+            BaseDN => 'OU=user,OU=Suzhou,OU=corp,DC=xfoss,DC=com',
             SSCOPE => 'sub',
-            UserDN => 'CN=Lenny Peng,OU=user,OU=Suzhou,OU=corp,DC=senscomm,DC=com',
+            UserDN => 'CN=Lenny Peng,OU=user,OU=Suzhou,OU=corp,DC=xfoss,DC=com',
             UserPw => '*************',
             AlwaysFilter => '',
             Die => 0,

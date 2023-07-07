@@ -105,7 +105,7 @@ $ echo PATH=~/.local/bin:$PATH >> .bashrc
 运行以下命令，将数据库中原来的 `www.xfoss.com`，全部替换为 `wp.xfoss.com`:
 
 ```console
-$ wp --path="/home/unisko/wordpress" search-replace www.senscomm.com wp.senscomm.com --all-tables
+$ wp --path="/home/unisko/wordpress" search-replace www.xfoss.com wp.xfoss.com --all-tables
 ```
 
 运行 `wp --path="/home/unisko/wordpress" cache flush` 清除服务器上的缓存。

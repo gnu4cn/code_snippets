@@ -181,10 +181,10 @@ dot1x-access-profile name dot1x.profile
 - `domain xfoss.com` （`aaa`配置模式，将以上配置指定到所给的域）
 
 ```console
- domain senscomm.com
+ domain xfoss.com
   authentication-scheme dot1x.auth
   accounting-scheme default
-  radius-server nps.senscomm.com
+  radius-server nps.xfoss.com
 ```
 
 - `authentication-profile name auth.profile` （全局配置模式，这是最终的认证 profile 配置，是综合了上面各种 profile 配置后得到的）

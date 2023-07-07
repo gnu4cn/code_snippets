@@ -83,7 +83,7 @@ It will modify the file `~/.gitconfig` like this:
 ```conf
 $ cat ~/.gitconfig                                                                        lennyp@vm-manjaro
 [user]
-        email = lenny.peng@senscomm.com
+        email = lenny.peng@xfoss.com
         name = Lenny Peng
 [pull]
         rebase = false

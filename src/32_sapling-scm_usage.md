@@ -29,7 +29,7 @@ Sapling 配置文件分为三个级别 `user`、`local` 与 `system`，对应了
 ```console
 $ sl config --user http_proxy.host "192.168.30.51:3128"                                                    lennyp@vm-manjaro
 updated config in /home/lennyp/.config/sapling/sapling.conf
-$ sl config --user http_proxy.no gitlab.senscomm.com                                                       lennyp@vm-manjaro
+$ sl config --user http_proxy.no gitlab.xfoss.com                                                       lennyp@vm-manjaro
 updated config in /home/lennyp/.config/sapling/sapling.conf
 ```
 
@@ -55,7 +55,7 @@ username =Lenny Peng <unisko@gmail.com>
 peng = Lenny Peng <unisko@gmail.com>
 
 [http_proxy]
-no = gitlab.senscomm.com
+no = gitlab.xfoss.com
 
 [http_proxy]
 host = 192.168.30.51:3128
