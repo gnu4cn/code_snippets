@@ -81,6 +81,17 @@ Please run chocolatey with `choco command -help` for specific help on
 
 ![MSYS2 终端](images/msys2-terminal.png)
 
+在 MSYS2 中添加有空格的路径到 `PATH` 环境变量时，应采取以下的处理：
+
+```bash
+export PATH=$PATH:/c/Users/Lenny.Peng/.cargo/bin:/c/Program\ Files/Eclipse\ Adoptium/jre-11.0.19.7-hotspot/bin
+export JAVA_HOME=/c/Program\ Files/Eclipse\ Adoptium/jre-11.0.19.7-hotspot
+```
+
+需要在路径中的空格前添加 `\` 进行转义。
+
+参见：[Declaring space characters in PATH for MSYS2 - Windows](https://stackoverflow.com/a/63338490)
+
 ### `scoop.sh` 方式
 
 [scoop.sh](https://scoop.sh) 是另一个 Windows 的命令行安装程序。
