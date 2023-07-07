@@ -155,3 +155,29 @@ DESCRIPTION
 ```
 
 参见：[Docker Alpine executable binary not found even if in PATH](https://stackoverflow.com/a/66974607)
+
+
+## `tar` 命令用法
+
+
+将多个文件压缩到一个压缩包（带通配符）：
+
+
+```bash
+tar czf ~/wise.tar.gz -T <(\ls wise*) System.map
+```
+
+此命令会把当前目录下以 `wise` 开头的所有文件，与 `System.map` 文件一起打包进 `wise.tar.gz` 这个压缩包。而解压缩的步骤如下：
+
+```bash
+mkdir wise-bin
+tar xzf wise.tar.gz -C wise-bin
+```
+
+解压得到一下文件：
+
+
+```bash
+~/wise-bin$ ls
+System.map  wise  wise-boot-ram.bin  wise.cfg  wise.cfg.configs  wise.lds  wise.map  wise.sym
+```
