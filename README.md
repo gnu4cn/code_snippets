@@ -2,9 +2,7 @@
 
 这里记录一些平时的心得体会、工作备忘录。在线阅读：[snippets.xfoss.com](https://snippets.xfoss.com)
 
----
-
-{{#include ./src/howto_read_locally.md:}}
+在本地阅读：[`mdbook` 本地运行](./src/howto_read_locally.md}
 
 ---
 # 运维
