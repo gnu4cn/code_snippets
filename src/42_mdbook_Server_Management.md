@@ -38,3 +38,55 @@
 ```conf
 {{#include ../projects/ccna60d.conf}}
 ```
+
+
+## 一个域名下多本书的配置
+
+此需要是通过 Nginx 反向代理中，URL 重写的设置实现的。相较于一个域名一本书的 Nginx 设置，略有差别。
+
+```conf
+upstream docs-root { server 127.0.0.1:10446; }
+upstream xiaohu-zh { server 127.0.0.1:10447; }
+upstream xiaohu-en { server 127.0.0.1:10448; }
+
+server {
+        server_name docs.senscomm.com;
+
+        location / {
+                proxy_pass http://docs-root;
+        }
+
+        location /xiaohu/zh/ {
+                proxy_pass http://xiaohu-zh/;
+        }
+
+        location /xiaohu/en/ {
+                proxy_pass http://xiaohu-en/;
+        }
+
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+
+
+        listen 443 ssl;
+        ssl_certificate /etc/ssl/certs/Senscomm/cert_chain.pem;
+        ssl_certificate_key /etc/ssl/certs/Senscomm/private.key;
+}
+```
+
+其中，差别在于这里：
+
+```conf
+        location /xiaohu/zh/ {
+                proxy_pass http://xiaohu-zh/;
+        }
+```
+
+`proxy_pass http://xiaohu-zh/` 最后多了一个斜杠。
+
+
+
