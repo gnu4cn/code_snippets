@@ -89,4 +89,4 @@ server {
 `proxy_pass http://xiaohu-zh/` 最后多了一个斜杠。
 
 
-
+> 参考：[Nginx reverse proxy + URL rewrite](https://serverfault.com/a/870620)
