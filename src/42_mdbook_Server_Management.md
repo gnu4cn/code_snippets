@@ -90,3 +90,14 @@ server {
 
 
 > 参考：[Nginx reverse proxy + URL rewrite](https://serverfault.com/a/870620)
+
+
+## 单个域名下同步单个仓库，提供多本书的操作流程
+
+1. 在代码仓库根目录下建立一本新书对应的目录。此目录下应有 `src`、`theme` 目录及 `book.toml` 文件等必要组成部分，所有内容的 MarkDown 文件都在 `src` 目录下；
+
+2. 修改 `src_inc.sh` 文件，添加上面新书的目录，以及新书的端口；
+
+3. 修改 Nginx 的配置文件 `/etc/nginx/config.d/docs.conf`，添加新书的 `upstream` 设置及反向代理路径；
+
+4. 运行 `srv_mgt.sh start demo-book &` 及 `systemctl restart nginx` 启动新书，并重启 Nginx。
