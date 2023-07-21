@@ -70,3 +70,14 @@ $python install.py --ts-completer
 ## 使用 `Shougo/dein.vim` 来管理 Vim 插件
 
 其中 `ycm-core/YouCompleteMe` 可手动 `git` 到 `~/.cache/dein/repos/github.com/ycm-core/YouCompleteMe`，然后运行 `python install.py --java-completer --ts-completer` 进行安装。
+
+
+## 使用 `coc.nvim` 时，找不到 `utilsnips` 目录的问题
+
+在 Windows 系统上的 `msys2` 环境下运行安装了 `coc` 插件的 `vim`，默认会报出 `~/.vim/coc-data/utilsnips` 找不到的问题，此时需在 `.vimrc` 文件中加入下面这行：
+
+```vimrc
+let g:coc_data_home="/tools/msys64/home/Lenny.Peng/.vim/coc-data/"
+```
+
+指向 `coc-data` 的正确位置，随后再度启动 `vim` 将自动按照 `coc.nvim` 本身的一些依赖，并不再报出上面目录找不到的问题。
