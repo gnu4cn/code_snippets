@@ -71,6 +71,12 @@ Please run chocolatey with `choco command -help` for specific help on
  each command.
 ```
 
+在 `choco` 下使用代理安装软件示例：
+
+```powershell
+choco install -y baidupcs-go --proxy="http://192.168.30.51:3128" --force
+```
+
 ### MSYS2 方式
 
 > MSYS2 亦可经由 `choco.exe` 加以安装。
