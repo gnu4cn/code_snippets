@@ -332,7 +332,7 @@ DriverData                     C:\Windows\System32\Drivers\DriverData
 GROOVY_HOME                    C:\tools\groovy-3.0.14
 HOMEDRIVE                      C:
 HOMEPATH                       \Users\Lenny.Peng
-JENKINS_URL                    https://ci.senscomm.com
+JENKINS_URL                    https://ci.xfoss.com
 JMETER_HOME                    C:\ProgramData\chocolatey\lib\jmeter\tools\apache-jmeter-5.5
 LOCALAPPDATA                   C:\Users\Lenny.Peng\AppData\Local
 LOGONSERVER                    \\DC-SZ2
@@ -359,9 +359,9 @@ SystemDrive                    C:
 SystemRoot                     C:\WINDOWS
 TEMP                           C:\Users\LENNY~1.PEN\AppData\Local\Temp
 TMP                            C:\Users\LENNY~1.PEN\AppData\Local\Temp
-USERDNSDOMAIN                  SENSCOMM.COM
-USERDOMAIN                     SENSCOMM
-USERDOMAIN_ROAMINGPROFILE      SENSCOMM
+USERDNSDOMAIN                  XFOSS.COM
+USERDOMAIN                     XFOSS
+USERDOMAIN_ROAMINGPROFILE      XFOSS
 USERNAME                       Lenny.Peng
 USERPROFILE                    C:\Users\Lenny.Peng
 windir                         C:\WINDOWS

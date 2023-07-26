@@ -50,7 +50,7 @@ upstream xiaohu-zh { server 127.0.0.1:10447; }
 upstream xiaohu-en { server 127.0.0.1:10448; }
 
 server {
-        server_name docs.senscomm.com;
+        server_name docs.xfoss.com;
 
         location / {
                 proxy_pass http://docs-root;
