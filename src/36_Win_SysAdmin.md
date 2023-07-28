@@ -98,6 +98,51 @@ export JAVA_HOME=/c/Program\ Files/Eclipse\ Adoptium/jre-11.0.19.7-hotspot
 
 参见：[Declaring space characters in PATH for MSYS2 - Windows](https://stackoverflow.com/a/63338490)
 
+
+### `winget` 方式
+
+
+首先使用 `winget search foobar` 搜索要安装的软件，比如：
+
+```powershell
+> winget search obs
+尝试更新源失败： winget
+名称                          ID                                 版本         匹配             源
+------------------------------------------------------------------------------------------------------
+OBS Studio                    XPFFH613W8V6LV                     Unknown                       msstore
+NASA Earth Observatory        9WZDNCRFJ252                       Unknown                       msstore
+European Southern Observatory 9WZDNCRDF64K                       Unknown                       msstore
+Obscure Extractor             9NXLQD97BT9Z                       Unknown                       msstore
+OBS Studio                    OBSProject.OBSStudio               29.1.3       Moniker: obs     winget
+哔哩哔哩直播姬                Bilibili.Livehime                  4.48.0.5057  Tag: obs         winget
+StreamlabsOBS                 Streamlabs.StreamlabsOBS           0.23.2                        winget
+Stinker                       PatentLobster.stinker              0.2.3                         winget
+OpenObserve                   openobserve.openobserve            0.4.7                         winget
+AMD Encoder for OBS Studio    OBSProject.obs-amd-encoder         2.6.0.0                       winget
+MonkeyMote 4 Foobar           ObsidiumSoftware.MonkeyMote4Foobar 3.4.0.3                       winget
+Hindsight                     obsidianforensics.HindsightGUI     2023.03                       winget
+Obsidian                      Obsidian.Obsidian                  1.3.5                         winget
+OBS RTSP Server Plugin        iamscottxu.obs-rtspserver          3.0.0                         winget
+obs-virtualcam                Fenrirthviti.obs-virtual-cam       2.0.5                         winget
+Mobster                       dillonkearns.mobster               0.0.48                        winget
+obs-asio                      Andersama.obs-asio                 3.1.0                         winget
+blobsaver                     Airsquared.Blobsaver               3.5.1                         winget
+OBS Studio Beta               OBSProject.OBSStudio.Pre-release   29.1.0-beta3                  winget
+Streamlabs Desktop            Streamlabs.Streamlabs              1.11.1                        winget
+Deckboard                     RivaFarabi.Deckboard               2.1.3        Tag: obs-remote  winget
+Quarto                        Posit.Quarto                       1.3.433      Tag: observable  winget
+.NET Reactor                  Eziriz.DotNetReactor               6.8.0.0      Tag: obsfucation winget
+Aladin                        CDS.AladinDesktop                  11.024       Tag: observatory winget
+```
+
+然后使用打算安装软件的 `ID` 字段，运行下面的命令安装该软件。
+
+```powershell
+winget install OBSProject.OBSStudio
+```
+
+> `winget` 的命令：[Commands](https://learn.microsoft.com/en-us/windows/package-manager/winget/#commands)
+
 ### `scoop.sh` 方式
 
 [scoop.sh](https://scoop.sh) 是另一个 Windows 的命令行安装程序。
