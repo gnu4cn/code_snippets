@@ -1,6 +1,32 @@
 # VIM 使用技巧
 
+
 这里记录 VIM 的一些使用技巧。
+
+
+## 使用 `coc.nvim` 的 `~/.vimrc`
+
+这个 `.vimrc` 简单好用，特记录于此。
+
+```vimrc
+{{#include projects/coc.nvim-vimrc}}
+```
+
+
+## `coc.nvim` 插件的配置文件
+
+使用 `:CocConfig` 可以打开 `coc.nvim` 的配置文件。示例配置文件如下。
+
+```json
+{{#include projects/coc-settings.json}}
+```
+
+这个配置文件主要对 `rust-analyzer` 与 [`coc-rust-analyzer`](https://github.com/fannheyward/coc-rust-analyzer#configurations) 进行了配置。其中 `coc-rust-analyzer` 是通过 `vim` 的以下命令安装的。
+
+
+```bash
+:CocInstall coc-rust-analyzer
+```
 
 ## 查找两个汉字之间的 ASCII 字符串：
 
