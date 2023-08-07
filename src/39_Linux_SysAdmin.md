@@ -15,22 +15,27 @@ Failed to enable unit: Unit file /etc/systemd/system/NetworkManager.service is m
 
 ## X2go 安装过程
 
+
+快速将咱们的机器转入到一台 X2Go 服务器：
+
+
 ```bash
- Quick howto to turn your machine into an X2Go server:
 
 sudo apt-add-repository ppa:x2go/stable
 sudo apt-get update
 sudo apt-get install x2goserver x2goserver-xsession
 sudo apt-get install x2gomatebindings  # if you use MATE/mubuntu
 sudo apt-get install x2golxdebindings  # if you use LXDE/lubuntu
+```
 
-Quick howto to install the x2goclient:
+快速安装 `x2goclient`:
 
+
+```bash
 sudo apt-add-repository ppa:x2go/stable
 sudo apt-get update
 sudo apt-get install x2goclient
 ```
-
 
 
 ## "Authentication required. System policy prevents WiFi scans"
