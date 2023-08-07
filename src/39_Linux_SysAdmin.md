@@ -73,10 +73,21 @@ ResultActive=yes
 
 ## Ubuntu 安装 FirefoxESR
 
-参考：[How to install Firefox ESR via PPA in Ubuntu 22.04 | 20.04](https://ubuntuhandbook.org/index.php/2022/03/install-firefox-esr-ubuntu)
-
-
 Mozilla Firefox 有着两个发布系列：**Rapid** 与 **ESR**。Rapid 发布
+
+添加 Mozilla 官方 PPA：
+
+```bash
+sudo add-apt-repository -y ppa:mozillateam/ppa
+```
+
+安装 FirefoxESR:
+
+```bash
+sudo apt install -y firefox-esr
+```
+
+参考：[How to install Firefox ESR via PPA in Ubuntu 22.04 | 20.04](https://ubuntuhandbook.org/index.php/2022/03/install-firefox-esr-ubuntu)
 
 
 ## `dpkg-statoverride` 命令
