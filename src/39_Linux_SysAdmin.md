@@ -23,9 +23,9 @@ Failed to enable unit: Unit file /etc/systemd/system/NetworkManager.service is m
 
 sudo apt-add-repository ppa:x2go/stable
 sudo apt-get update
-sudo apt-get install x2goserver x2goserver-xsession
-sudo apt-get install x2gomatebindings  # if you use MATE/mubuntu
-sudo apt-get install x2golxdebindings  # if you use LXDE/lubuntu
+sudo apt-get install x2goserver x2goserver-xsession ubuntu-mate-core mate-tweak lxde xfce4 -y
+sudo apt-get install x2gomatebindings -y # if you use MATE/mubuntu
+sudo apt-get install x2golxdebindings -y # if you use LXDE/lubuntu
 ```
 
 快速安装 `x2goclient`:
