@@ -454,4 +454,20 @@ windir                         C:\WINDOWS
 ZES_ENABLE_SYSMAN              1
 ```
 
+## Windows 10 LTSC 企业评估版升级到完整版并激活
 
+如果咱们下载的是 Windows 10 Enterprise LTSC 2021 评估版，就没有密钥可以激活它。
+
+将 [Windows 10 Enterprise LTSC 的 SKU](../projects/Windows_10_ltsc_2021_skus_2.zip) 提取到 `C:\Windows\System32\spp\tokens\skus`, 然后以管理员权限，在 `CMD` 命令行窗口中运行一下命令：
+
+```cmd
+cscript.exe %windir%\system32\slmgr.vbs /rilc
+cscript.exe %windir%\system32\slmgr.vbs /upk >nul 2>&1
+cscript.exe %windir%\system32\slmgr.vbs /ckms >nul 2>&1
+cscript.exe %windir%\system32\slmgr.vbs /cpky >nul 2>&1
+cscript.exe %windir%\system32\slmgr.vbs /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D
+sc config LicenseManager start= auto & net start LicenseManager
+sc config wuauserv start= auto & net start wuauserv
+clipup -v -o -altto c:\
+echo
+```
