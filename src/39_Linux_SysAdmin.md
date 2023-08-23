@@ -199,6 +199,8 @@ System.map  wise  wise-boot-ram.bin  wise.cfg  wise.cfg.configs  wise.lds  wise.
 
 ## 切换 GRUB 默认启动项
 
+参考：[How do I change the GRUB default boot?](https://unix.stackexchange.com/a/560444)
+
 ```bash
 grep menuentry /boot/grub/grub.cfg # it will show all available menuentries
 sudo vim /etc/default/grub # replace GRUB_DEFAULT=0 with GRUB_DEFAULT="needed menu entry from above"
