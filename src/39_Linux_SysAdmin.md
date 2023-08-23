@@ -195,3 +195,14 @@ tar xzf wise.tar.gz -C wise-bin
 ~/wise-bin$ ls
 System.map  wise  wise-boot-ram.bin  wise.cfg  wise.cfg.configs  wise.lds  wise.map  wise.sym
 ```
+
+
+## 切换 GRUB 默认启动项
+
+```bash
+grep menuentry /boot/grub/grub.cfg # it will show all available menuentries
+sudo vim /etc/default/grub # replace GRUB_DEFAULT=0 with GRUB_DEFAULT="needed menu entry from above"
+sudo update-grub # update grub configuration file
+```
+
+> *注意*：运行 `update-grub` 时，在 Ubuntu 上会给出 `Advanced ....` 的提示信息，按照提示信息再编辑 `/etc/default/grub` 文件，即可消除该提示信息，且系统可以新设定的启动项启动。
