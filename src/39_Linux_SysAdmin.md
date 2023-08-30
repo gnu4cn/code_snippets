@@ -208,3 +208,10 @@ sudo update-grub # update grub configuration file
 ```
 
 > *注意*：运行 `update-grub` 时，在 Ubuntu 上会给出 `Advanced ....` 的提示信息，按照提示信息再编辑 `/etc/default/grub` 文件，即可消除该提示信息，且系统可以新设定的启动项启动。
+
+
+## 替换文件夹中所有文件名包含 `log` 文件的字符串
+
+```bash
+ls | grep log | xargs sed -i 's/text-wrap: wrap;/text-wrap: wrap; white-space: pre-wrap;/g'
+```
