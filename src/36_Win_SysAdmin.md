@@ -514,3 +514,12 @@ exit
 ```powershell
 Optimize-VHD .svlmon1.vhdx -Mode Full
 ```
+
+
+## PowerShell 命令备忘录
+
+- `ls | grep "mubs"` 等价物
+
+```powershell
+ls | Out-String -Stream | Select-String "mubs"
+```
