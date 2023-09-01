@@ -508,3 +508,9 @@ compact vdisk
 detach vdisk
 exit
 ```
+
+或使用 PowerShell 的 cmd-let，压缩动态扩展的 VHDX。
+
+```powershell
+Optimize-VHD .svlmon1.vhdx -Mode Full
+```
