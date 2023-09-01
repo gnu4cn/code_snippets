@@ -487,9 +487,9 @@ echo
 
 2. 运行 `sudo fstrim /` 命令，丢弃已挂载文件系统上的未使用块（`man fstrim`）；
 
-> 亦可运行
+> 亦可运行：
 
-````bash
+```bash
 cat /dev/zero > zero.file // 或 `dd if=/dev/zero of=~/zero.file`
 sudo sync
 rm ~/zero.file
