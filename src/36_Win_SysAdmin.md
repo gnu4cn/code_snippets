@@ -476,45 +476,16 @@ echo
 ## Hyper-V 中 Linux 虚拟机 `.vhdx` 文件收缩
 
 
-> 参考：
->
-> 1. [How to Compact a VHDX with a Linux Filesystem](https://www.altaro.com/hyper-v/compact-vhdx-linux-filesystem/)
->
-> 2. [Linux VHDX size on Hyper-V](https://stackoverflow.com/a/60450188)
+1. 登入客户机 Linux 系统，删除不需要的文件与文件夹（如有必要，将 Linux 引导至 [GParted](https://gparted.org)，调整其文件系统）；
+
+2. 关闭 Linux 客户机。在 Hyper-V 管理器中建立一块虚拟磁盘，将其挂载到 Linux 客户机；
+
+3. 设置 Linux 客户机从光盘启动 [Clonezilla](https://clonezilla.org/)，在 Clonezilla 中备份该 Linux 客户机整个磁盘;
+
+4. 在 Hyper-V 管理器中，参考原 Linux 客户机磁盘大小，建立一个新的虚拟机，然后使用 Clonezilla 将备份恢复到这个新的虚拟机。
 
 
-1. 首先清理文件系统，删除不需要的文件及文件夹；
-
-2. 运行 `sudo fstrim /` 命令，丢弃已挂载文件系统上的未使用块（`man fstrim`）；
-
-> 亦可运行：
-
-```bash
-cat /dev/zero > zero.file // 或 `dd if=/dev/zero of=~/zero.file`
-sudo sync
-rm ~/zero.file
-sudo sync
-```
-
-用全零填充文件，占满文件系统。后者不如 `sudo fstrim /` 快速高效，并对 SSD/NVMe 有潜在的损坏。
-
-3. 关掉 Linux 虚拟机，然后在宿主机的 Windows 命令行提示窗口，运行以下命令：
-
-```cmd
-diskpart
-select vdisk file="X:\path\to\somedisk.vhdx"
-attach vdisk readonly
-compact vdisk
-detach vdisk
-exit
-```
-
-或使用 PowerShell 的 cmd-let，压缩动态扩展的 VHDX。
-
-```powershell
-Optimize-VHD .svlmon1.vhdx -Mode Full
-```
-
+完成上述操作后，成功实现虚拟机磁盘的压缩。
 
 ## PowerShell 命令备忘录
 
