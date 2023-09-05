@@ -487,6 +487,8 @@ echo
 
 完成上述操作后，成功实现虚拟机磁盘的压缩。
 
+> **注意**：在关闭原 Linux 主机时，需要手动停止（`stop`） Docker 里的各个容器，并在原 Linux 主机下，停止包括 Docker 在内的各个服务，否则会出现 `Error response from daemon: stat /var/lib/docker/btrfs/subvolumes/[...]` 错误，导致恢复后，重启启动一些 Docker 容器出现问题。
+
 ## PowerShell 命令备忘录
 
 - `ls | grep "mubs"` 等价物
