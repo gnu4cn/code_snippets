@@ -43,7 +43,7 @@
 - [Sapling SCM Usage](32_sapling-scm_usage.md)
 - [`tmux` Manual](35_tmux_manual.md)
 - [Low Level Programming University](41_Low_Level_Programming_Brief.md)
-- [`git` 使用技巧](43_git_skills.md)
+- [`git` skills](43_git_skills.md)
 
 ---
 # 杂项

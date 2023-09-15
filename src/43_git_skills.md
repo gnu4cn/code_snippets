@@ -1,20 +1,20 @@
-# `git` 技巧
+# `git` 使用技巧
 
-## About `git tag`
+## 关于 `git tag`
 
-+ Add a tag and push it to remote
++ 添加一个标签，并将其推送到远端
 
     - `git tag TAG_NAME`
 
-    - `git tag TAG_NAME -a -m "message"`, Create an “annotated” tag with the given message (instead of prompting)
+    - `git tag TAG_NAME -a -m "message"`, 以给定的消息（而非提示输入），创建一个 “带注解的” 标签。
 
     - `git push origin TAG_NAME`
 
-+ Delete local and remote tag
++ 删除本地及远端的标签
 
     - `git tag -d TAG_NAME`
 
     - `git push --delete origin TAG_NAME`
 
-- List tags by commit date: `git tag --sort=committerdate`
+- 以提交日期顺序列出标签: `git tag --sort=committerdate`
 
