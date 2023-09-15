@@ -99,7 +99,7 @@ export JAVA_HOME=/c/Program\ Files/Eclipse\ Adoptium/jre-11.0.19.7-hotspot
 参见：[Declaring space characters in PATH for MSYS2 - Windows](https://stackoverflow.com/a/63338490)
 
 
-将 MSYS2 的 SHELLL 修改位 ZSH：
+**将 MSYS2 的 SHELLL 修改为 ZSH**：
 
 - 先在 MSYS2 中安装 ZSH：`pacman -S zsh`
 
