@@ -101,15 +101,27 @@ export JAVA_HOME=/c/Program\ Files/Eclipse\ Adoptium/jre-11.0.19.7-hotspot
 
 **将 MSYS2 的 SHELLL 修改为 ZSH**：
 
-- 先在 MSYS2 中安装 ZSH：`pacman -S zsh`
+- 先在 MSYS2 中安装 ZSH：`pacman -S zsh`；
 
-- 然后在桌面建立快捷方式：`C:\msys64\msys2_shell.cmd -mingw64 -shell zsh`
+- 然后在桌面建立快捷方式：`C:\msys64\msys2_shell.cmd -mingw64 -shell zsh`；
 
-或在 `msys2.ini` 配置文件中，加入 `SHELL=/usr/bin/zsh`。
+- 或在 `msys2.ini` 配置文件中，加入 `SHELL=/usr/bin/zsh`。
 
 参见：[Change default shell on MSYS2](https://superuser.com/a/1456294)
 
 
+**获得完整的 ZSH 体验**
+
+- 利用 [zsh-users/Antigen](https://github.com/zsh-users/antigen) 项目获得完整的 ZSH 体验；
+
+- 其中会报出安装 `zsh-users/zsh-syntax-hightlighting` 失败，此时可手动运行：
+
+```zsh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+```
+
+安装这个主题。
 
 
 ### `winget` 方式
