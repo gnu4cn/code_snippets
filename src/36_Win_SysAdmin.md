@@ -105,7 +105,7 @@ export JAVA_HOME=/c/Program\ Files/Eclipse\ Adoptium/jre-11.0.19.7-hotspot
 
 - 然后在桌面建立快捷方式：`C:\msys64\msys2_shell.cmd -mingw64 -shell zsh`
 
-或在 `mingw64.ini` 配置文件中，加入 `SHELL=/usr/bin/zsh`。
+或在 `msys2.ini` 配置文件中，加入 `SHELL=/usr/bin/zsh`。
 
 参见：[Change default shell on MSYS2](https://superuser.com/a/1456294)
 
