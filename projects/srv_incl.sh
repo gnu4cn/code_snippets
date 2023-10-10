@@ -13,6 +13,7 @@ dirs["ts"]="ts-learnings"
 dirs["www"]="buy-me-a-coffee"
 dirs["snippets"]="code_snippets"
 dirs["jenkins"]="jenkins_book_zh"
+dirs["jenkins"]="hpc-studies"
 
 declare -A ports
 
@@ -23,7 +24,6 @@ ports["ts"]="10447"
 ports["www"]="10446"
 ports["snippets"]="10448"
 ports["jenkins"]="10449"
-
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 OPTIONS=("all")
 for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
@@ -100,12 +100,12 @@ do_mon() {
     cd "$HOME/${dirs[$1]}"
 
     echo -e "\r\nTrying to checkout $1 ..."
-    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then sl pull && sl goto master --clean
-    else sl pull && sl goto main --clean; fi
+    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then git pull
+    else git pull; fi
 
     sleep 30 && gen_sitemap "$1"
 
-    echo "`date` - $1 sl checkout 完成" >> $LOG_FILE
+    echo "`date` - $1 git checkout 完成" >> $LOG_FILE
 
     chk_n_restart $1
     echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
