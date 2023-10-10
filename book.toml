@@ -6,6 +6,11 @@ src = "src"
 title = "代码片段与技术笔记，code snippets & tech notes"
 description = "代码片段与技术笔记，code snippets & tech notes"
 
+[preprocessor.last-changed]
+command = "mdbook-last-changed"
+renderer = ["html"]
+
+
 [preprocessor.pagetoc]
 [output.html]
 additional-css = ["theme/pagetoc.css"]
