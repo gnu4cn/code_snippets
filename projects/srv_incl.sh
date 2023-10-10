@@ -103,8 +103,8 @@ do_mon() {
     cd "$HOME/${dirs[$1]}"
 
     echo -e "\r\nTrying to checkout $1 ..."
-    if [ "$1" = "ts" ] || [ "$1" = "www" ]; then git pull
-    else git pull; fi
+
+    git pull
 
     sleep 30 && gen_sitemap "$1"
 
