@@ -13,7 +13,7 @@ dirs["ts"]="ts-learnings"
 dirs["www"]="buy-me-a-coffee"
 dirs["snippets"]="code_snippets"
 dirs["jenkins"]="jenkins_book_zh"
-dirs["jenkins"]="hpc-studies"
+dirs["hpc"]="hpc-studies"
 
 declare -A ports
 
@@ -24,6 +24,9 @@ ports["ts"]="10447"
 ports["www"]="10446"
 ports["snippets"]="10448"
 ports["jenkins"]="10449"
+ports["hpc"]="10450"
+
+
 COMMANDS=("start" "stop" "restart" "monitor" "status")
 OPTIONS=("all")
 for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
