@@ -100,7 +100,7 @@ chk_n_restart() {
         echo "\r\n$1 not running, now starting it" && start_srv $1;
     fi
 
-    if [ $((`date +%s`-`git log -1 --format=%ct`)) -lt 600 ]; then
+    if [ $((`date +%s`-`git log -1 --format=%ct`)) -lt 1200 ]; then
         echo "\r\n$1 content updated, now restarting it..." && do_restart $1;
     fi
 }

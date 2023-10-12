@@ -1,6 +1,6 @@
 # Sh/Bash 技巧
 
-- 在当前目录及其所有子目录下，查找并删除所有某类型的文件
+## 在当前目录及其所有子目录下，查找并删除所有某类型的文件
 
 ```console
 $ find . -name '*.pyc'
@@ -8,7 +8,7 @@ $ find . -name '*.pyc' -delete
 ```
 
 
-- 批量删除文件夹（保留想要的文件夹）
+## 批量删除文件夹（保留想要的文件夹）
 
 ```bash
 ls | grep -w -v -e "lenny" -e "sw" | xargs rm -rf
@@ -17,7 +17,7 @@ ls | grep -w -v -e "lenny" -e "sw" | xargs rm -rf
 > **注**：其中当前文件夹下，匹配 `lenny` 与 `sw` 的文件夹将被保留。
 
 
-- 替换文件夹中所有文件名包含 `log` 文件的字符串
+## 替换文件夹中所有文件名包含 `log` 文件的字符串
 
 ```bash
 ls | grep log | xargs sed -i 's/text-wrap: wrap;/text-wrap: wrap; white-space: pre-wrap;/g'
