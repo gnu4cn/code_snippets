@@ -210,27 +210,6 @@ sudo update-grub # update grub configuration file
 > *注意*：运行 `update-grub` 时，在 Ubuntu 上会给出 `Advanced ....` 的提示信息，按照提示信息再编辑 `/etc/default/grub` 文件，即可消除该提示信息，且系统可以新设定的启动项启动。
 
 
-## `bash` 备忘录
-
-
-- 批量删除文件夹（保留想要的文件夹）
-
-```bash
-ls | grep -w -v -e "lenny" -e "sw" | xargs rm -rf
-```
-
-> **注**：其中当前文件夹下，匹配 `lenny` 与 `sw` 的文件夹将被保留。
-
-
-- 替换文件夹中所有文件名包含 `log` 文件的字符串
-
-```bash
-ls | grep log | xargs sed -i 's/text-wrap: wrap;/text-wrap: wrap; white-space: pre-wrap;/g'
-```
-
-> **注**：将匹配当前文件夹下，文件名中包含 `log` 的文件，并将这些文件中的 `text-wrap: wrap;` 字符串，替换为 `text-wrap: wrap; white-space: pre-wrap;`，实现 HTML 的 `pre` 元素，在 Chrome（WebKit） 与 Firefox(Gecko) 下，都能自动断行。
-
-
 ## 安装 Linux 系统后追加安装 Windows 系统处理
 
 
