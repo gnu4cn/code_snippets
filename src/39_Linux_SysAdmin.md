@@ -229,3 +229,18 @@ ls | grep log | xargs sed -i 's/text-wrap: wrap;/text-wrap: wrap; white-space: p
 ```
 
 > **注**：将匹配当前文件夹下，文件名中包含 `log` 的文件，并将这些文件中的 `text-wrap: wrap;` 字符串，替换为 `text-wrap: wrap; white-space: pre-wrap;`，实现 HTML 的 `pre` 元素，在 Chrome（WebKit） 与 Firefox(Gecko) 下，都能自动断行。
+
+
+## 安装 Linux 系统后追加安装 Windows 系统处理
+
+
+- 使用 [GParted](https://gparted.org/) 启动盘，收缩 Linux 分区，给 Windows 安装腾出磁盘空间；
+
+- 安装 Windows 系统到腾出的磁盘空间，随后原先的 [GRUB](https://www.gnu.org/software/grub/) 引导程序会被 Windows 的引导程序附带，从而系统暂时只能启动 Windows；
+
+- 此时进入 Windows 系统，在设置中选择 “更改高级启动选项”，点击其中的 “高级启动” -> “立即重新启动”，即可进入原先的 Linux 系统；
+
+- 进入 Linux 系统后，运行 `os-prober`、`update-grub` 等程序，重新建立 GRUB 引导程序，实现 Windows/Linux 双系统引导。
+
+
+参考链接：[GRUB does not detect Windows](https://askubuntu.com/a/1322753)。
