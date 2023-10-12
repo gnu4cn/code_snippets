@@ -106,7 +106,7 @@ do_mon() {
 
     git pull
 
-    sleep 30 && gen_sitemap "$1"
+    sleep 5 && gen_sitemap "$1"
 
     echo "`date` - $1 git checkout 完成" >> $LOG_FILE
 
