@@ -26,3 +26,11 @@ ls | grep log | xargs sed -i 's/text-wrap: wrap;/text-wrap: wrap; white-space: p
 > **注**：将匹配当前文件夹下，文件名中包含 `log` 的文件，并将这些文件中的 `text-wrap: wrap;` 字符串，替换为 `text-wrap: wrap; white-space: pre-wrap;`，实现 HTML 的 `pre` 元素，在 Chrome（WebKit） 与 Firefox(Gecko) 下，都能自动断行。
 
 
+## 建立与更新软链接
+
+```bash
+// 建立软链接
+$ ln -s File link
+// 更新软链接
+$ ln -vfns File1 link
+```
