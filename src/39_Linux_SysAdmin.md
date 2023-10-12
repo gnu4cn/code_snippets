@@ -240,6 +240,9 @@ ls | grep log | xargs sed -i 's/text-wrap: wrap;/text-wrap: wrap; white-space: p
 
 - 此时进入 Windows 系统，在设置中选择 “更改高级启动选项”，点击其中的 “高级启动” -> “立即重新启动”，即可进入原先的 Linux 系统；
 
+
+![更改高级启动选项](./images/modify_advanced_boot_options.png)
+
 - 进入 Linux 系统后，运行 `os-prober`、`update-grub` 等程序，重新建立 GRUB 引导程序，实现 Windows/Linux 双系统引导。
 
 
