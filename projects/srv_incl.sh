@@ -111,9 +111,6 @@ do_mon() {
     echo -e "\r\nTrying to checkout $1 ..."
 
     git pull
-
-    sleep 5 && gen_sitemap "$1"
-
     echo "`date` - $1 git checkout 完成" >> $LOG_FILE
 
     chk_n_restart $1
