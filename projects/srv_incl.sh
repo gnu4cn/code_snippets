@@ -96,7 +96,13 @@ get_status() {
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 
-    if [ "$resp_code" != "200" ]; then echo "\r\n$1 not running, now starting it" && start_srv $1; fi
+    if [ "$resp_code" != "200" ]; then
+        echo "\r\n$1 not running, now starting it" && start_srv $1;
+    fi
+
+    if [ $((`date +%s`-`git log -1 --format=%ct`)) -lt 600 ]; then
+        echo "\r\n$1 content updated, now restarting it..." && do_restart $1;
+    fi
 }
 
 do_mon() {
