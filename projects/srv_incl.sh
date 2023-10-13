@@ -34,7 +34,6 @@ for name in ${!dirs[@]}; do OPTIONS=(${OPTIONS[@]} "${name}"); done
 
 dir_name=`/usr/bin/dirname $LOG_FILE`
 if [ ! -d "${dirname}" ]; then /usr/bin/mkdir -p $dir_name; fi
-
 if [ ! -f "${LOG_FILE}" ]; then touch $LOG_FILE; fi
 
 stop_srv() {
@@ -97,11 +96,11 @@ chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 
     if [ "$resp_code" != "200" ]; then
-        echo "\r\n$1 not running, now starting it" && start_srv $1;
+        echo -e "\r\n$1 not running, now starting it" && start_srv $1;
     fi
 
     if [ $((`date +%s`-`git log -1 --format=%ct`)) -lt 1200 ]; then
-        echo "\r\n$1 content updated, now restarting it..." && do_restart $1;
+        echo -e "\r\n$1 content updated, now restarting it..." && do_restart $1;
     fi
 }
 
