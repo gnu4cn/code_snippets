@@ -1,5 +1,11 @@
 # 安装此应用注意事项
 
+
+记录 `fire.fundersclub.com` 安装过程。
+
+
+## 修改 `py-requirements/base.txt` 及 `py-requirements/dev.txt` 两个文件
+
 需对 `py-requirements/base.txt`、`py-requirements/dev.txt` 两个文件做如下修改：
 
 
@@ -30,3 +36,8 @@
 修改为：
 
 `ipdb==0.13`
+
+
+## `npm` 安装时的问题
+
+运行 `npm i` 命令时，会报出 `PhantomJS not found on PATH` 错误，此时需先执行 `npm i phantomjs@2.1.1 --ignore-scripts`，单独安装 `phantomjs`，再执行 `npm i` 安装其他 NPM 包。
