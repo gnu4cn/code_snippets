@@ -51,7 +51,6 @@
 - [eteams.cn Notes](17_eteams.cn_notes.md)
 - [SC Network Op](24_SC_network_op.md)
 - [Manjaro User Tips](28_manjaro_user_tips.md)
-- [HPC Knowledges](30_HPC_knowledges.md)
 - [IPTV Watching Guide](37_IPTV_Watching_Guide.md)
 - [ArchLinux Wi-Fi AP Setup](38_ArchLinux_Wi-Fi_ap_setup.md)
 - [Multi-threaded and Segmented FTP](40_Multi-threaded_and_Segmented_FTP.md)
