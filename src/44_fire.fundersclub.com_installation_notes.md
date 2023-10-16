@@ -41,3 +41,13 @@
 ## `npm` 安装时的问题
 
 运行 `npm i` 命令时，会报出 `PhantomJS not found on PATH` 错误，此时需先执行 `npm i phantomjs@2.1.1 --ignore-scripts`，单独安装 `phantomjs`，再执行 `npm i` 安装其他 NPM 包。
+
+
+## 数据库配置
+
+数据库配置是在 `src/firebot/settings/dev.py` 文件中，先要在 PostgreSQL 中创建数据库账号及 `firebot` 数据库，然后写入到那个文件中。
+
+
+## 要使用 `nodejs10`
+
+需使用 `nvm` 安装和使用 `nodejs10`。
