@@ -29,6 +29,7 @@
 - [Win Sys Admin](36_Win_SysAdmin.md)
 - [Linux Sys Admin](39_Linux_SysAdmin.md)
 - [Server Management with `mdbook` and Nginx](42_mdbook_Server_Management.md)
+- [`fire.fundersclub.com` installation notes](44_fire.fundersclub.com_installation_notes.md)
 
 ---
 # 编程开发
