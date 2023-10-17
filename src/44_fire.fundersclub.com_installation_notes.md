@@ -51,3 +51,7 @@
 ## 要使用 `nodejs10`
 
 需使用 `nvm` 安装和使用 `nodejs10`。
+
+## `caseFolding` 模块找不到问题
+
+`mv node_modules/es-abstract/helpers/caseFolding.json node_modules/es-abstract/helpers/caseFolding.js`
