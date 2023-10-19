@@ -94,7 +94,7 @@ get_status() {
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 
-    if [ $((`date +%s`-`git log -1 --format=%ct`)) -lt 1200 ]; then
+    if [ $((`date +%s`-`git log -1 --format=%ct`)) -lt 900 ]; then
         echo -e "\r\n$1 content updated, now restarting it..." && do_restart $1;
         echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
         exit 0
