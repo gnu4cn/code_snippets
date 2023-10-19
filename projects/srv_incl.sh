@@ -63,7 +63,6 @@ start_srv() {
         cd "$HOME/${dirs[$1]}"
         echo -e "\n\rStarting $1 ..."
         mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
-        sleep 10 && gen_sitemap "$1"
     fi
 }
 
@@ -95,12 +94,15 @@ get_status() {
 chk_n_restart() {
     resp_code=$(/usr/bin/curl -I "https://$1.xfoss.com/sitemap.xml" 2>/dev/null | head -n 1 | cut -d$' ' -f2)
 
-    if [ "$resp_code" != "200" ]; then
-        echo -e "\r\n$1 not running, now starting it" && start_srv $1;
-    fi
-
     if [ $((`date +%s`-`git log -1 --format=%ct`)) -lt 1200 ]; then
         echo -e "\r\n$1 content updated, now restarting it..." && do_restart $1;
+        echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
+        exit 0
+    fi
+
+
+    if [ "$resp_code" != "200" ]; then
+        echo -e "\r\n$1 not running, now starting it" && start_srv $1;
     fi
 }
 
@@ -113,8 +115,6 @@ do_mon() {
     echo "`date` - $1 git checkout 完成" >> $LOG_FILE
 
     chk_n_restart $1
-    echo "`date` - 检查 $1 运行状态并重启服务完成" >> $LOG_FILE
-
 }
 
 show_status() {
