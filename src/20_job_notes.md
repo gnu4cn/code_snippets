@@ -97,3 +97,13 @@ additional-js  = ["theme/pagetoc.js", "theme/highlight.min.js", "theme/tcl.min.j
 
 - 修改 `theme/index.hbs`，包含上述三个文件。
 
+```html
+...
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" href="{{ path_to_root }}/theme/default.min.css">
+...
+      <script src="{{ path_to_root }}theme/highlight.min.js"></script>
+      <script src="{{ path_to_root }}theme/tcl.min.js"></script>
+
+```
+
