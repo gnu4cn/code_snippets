@@ -80,3 +80,20 @@ RSAT，Remote Server Administration Tools, 远端服务器管理工具
 
 
 此问题出现在将一台 Linux 终端连接到傻瓜交换机上时，终端可以获取到 IP 地址，但没有流浪，无法 `ping` 通网关，导致无法使用。后续应调查此问题。
+
+
+## `mdbook` 增加 `hljs` 语言模块
+
+- 将 `default.min.css`、`highlight.min.js` 及语言模块文件，如 `tcl.min.js` 下载到 `theme` 文件夹；
+
+- 修改 `book.toml` 文件，添加上述三个文件：
+
+```toml
+[preprocessor.pagetoc]
+[output.html]
+additional-css = ["theme/pagetoc.css", "theme/default.min.css"]
+additional-js  = ["theme/pagetoc.js", "theme/highlight.min.js", "theme/tcl.min.js"]
+```
+
+- 修改 `theme/index.hbs`，包含上述三个文件。
+
