@@ -107,3 +107,40 @@ additional-js  = ["theme/pagetoc.js", "theme/highlight.min.js", "theme/tcl.min.j
 
 ```
 
+## `ethtool`
+
+`ethtool` 用于查询及控制网络设备驱动程序和硬件设置，尤其是有线以太网设备。
+
+
+```console
+~ ethtool enp8s0
+Settings for enp8s0:
+        Supported ports: [ TP MII ]
+        Supported link modes:   10baseT/Half 10baseT/Full
+                                100baseT/Half 100baseT/Full
+                                1000baseT/Full
+        Supported pause frame use: Symmetric Receive-only
+        Supports auto-negotiation: Yes
+        Supported FEC modes: Not reported
+        Advertised link modes:  10baseT/Half 10baseT/Full
+                                100baseT/Half 100baseT/Full
+                                1000baseT/Full
+        Advertised pause frame use: Symmetric Receive-only
+        Advertised auto-negotiation: Yes
+        Advertised FEC modes: Not reported
+        Link partner advertised link modes:  10baseT/Half 10baseT/Full
+                                             100baseT/Half 100baseT/Full
+                                             1000baseT/Full
+        Link partner advertised pause frame use: Symmetric Receive-only
+        Link partner advertised auto-negotiation: Yes
+        Link partner advertised FEC modes: Not reported
+        Speed: 1000Mb/s
+        Duplex: Full
+        Port: Twisted Pair
+        PHYAD: 0
+        Transceiver: internal
+        Auto-negotiation: on
+        MDI-X: Unknown
+Cannot get wake-on-lan settings: Operation not permitted
+        Link detected: yes
+```
