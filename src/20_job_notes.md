@@ -144,3 +144,16 @@ Settings for enp8s0:
 Cannot get wake-on-lan settings: Operation not permitted
         Link detected: yes
 ```
+
+
+## 终端 `http_proxy` 与 `https_proxy` 环境变量
+
+可以 `export` 这两个环境变量，临时让该终端下的程序，经由指定的代理访问网络。比如：
+
+
+```console
+> export http_proxy=socks5://localhost:10080
+> export https_proxy=socks5://localhost:10080
+```
+
+就可以让该终端下的程序，使用经由 SSH 建立的 SOCKS5 `10080` 端口代理。
