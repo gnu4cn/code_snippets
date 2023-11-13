@@ -352,3 +352,28 @@ $ sudo cp modules/zip.so /usr/local/lib/php/extensions/
 咱们可以从 [PECL](https://pecl.php.net/)，下载到咱们需要的共享库源代码。
 
 > **参考**：[Compiling shared PECL extensions with `phpize`](https://www.php.net/manual/en/install.pecl.phpize.php)。
+
+
+## `Call to undefined function gzinflate()` 问题
+
+
+在升级了 PHP 版本版本后，运行 `wp-cli` 更新 WP 的插件、核心时，报出了这个问题。需要在 PHP 源码下，编译 `zlib.so`，并将这个静态对象，拷贝到 `/usr/local/lib/php/extensions/no-debug-non-zts-yyyymmdd` 目录。步骤如下：
+
+
+```bash
+$ cd php-8.2.x/ext/zlib
+$ cp config0.m4 config.m4
+$ phpize
+$ ./configure --with-php-config=/usr/local/php/bin/php-config --with-zlib
+$ make
+$ sudo cp modules/zlib.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/zlib.so
+```
+
+注意要从与正使用的 PHP 版本源码，编译拷贝这个 `zlib.so`。否则会报出
+
+
+```console
+PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) 'zlib.so' in Unknown on line 0
+```
+
+无效库错误。
