@@ -377,3 +377,6 @@ PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) 'zlib.so' i
 ```
 
 无效库错误。
+
+
+> **参考**：[`Fatal error: Uncaught Error: Call to undefined function gzinflate() in`](https://www.xxzhuti.com/791.html)
