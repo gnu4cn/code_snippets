@@ -331,6 +331,9 @@ PHP Warning:  PHP Startup: Unable to load dynamic library 'zip.so' (tried: /usr/
 
 ```bash
 $ which phpize
+/usr/local/bin/phpize
+$ phpize
+$ which php-config
 /usr/local/bin/php-config
 $ ./configure --with-php-config=/usr/local/bin/php-config
 $ make
@@ -345,3 +348,7 @@ $ sudo cp modules/zip.so /usr/local/lib/php/extensions/
 ```
 
 再次运行 `$ php --ini`，就会发现，已经不报出找不到 `zip.so` 动态库的错误。
+
+咱们可以从 [PECL](https://pecl.php.net/)，下载到咱们需要的共享库源代码。
+
+> **参考**：[Compiling shared PECL extensions with `phpize`](https://www.php.net/manual/en/install.pecl.phpize.php)。
