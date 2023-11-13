@@ -380,3 +380,13 @@ PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) 'zlib.so' i
 
 
 > **参考**：[`Fatal error: Uncaught Error: Call to undefined function gzinflate() in`](https://www.xxzhuti.com/791.html)
+
+
+## `wp core update` 时 `No working transport found` 问题
+
+这是由于在 `/usr/local/lib/php.ini` 配置文件中，未开启 `extension=openssl`；且缺少了相应的 `openssl.so` 静态对象文件。
+
+需参考上面的 `zlib.so` 编译，对 `ext/openssl` 进行编译，并在 `php.ini` 中开启 `extension = openssl`，随后问题解决。
+
+
+**参考**：[Installation failed: Download failed. No working transports found](https://wordpress.stackexchange.com/a/301227)。
