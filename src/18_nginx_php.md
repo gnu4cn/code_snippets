@@ -312,3 +312,36 @@ $ sudo make install
 ```
 
 ### 修改 `/etc/rc.d/init.d/php-fpm`
+
+
+## 使用 `phpize` 编译 PECL 扩展
+
+```console
+$ php --ini
+PHP Warning:  PHP Startup: Unable to load dynamic library 'redis.so' (tried: /usr/local/lib/php/extensions/no-debug-non-zts-20220829/redis.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/redis.so: cannot open shared object file: No such file or directory), /usr/local/lib/php/extensions/no-debug-non-zts-20220829/redis.so.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/redis.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'imagick.so' (tried: /usr/local/lib/php/extensions/no-debug-non-zts-20220829/imagick.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/imagick.so: cannot open shared object file: No such file or directory), /usr/local/lib/php/extensions/no-debug-non-zts-20220829/imagick.so.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/imagick.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'igbinary.so' (tried: /usr/local/lib/php/extensions/no-debug-non-zts-20220829/igbinary.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/igbinary.so: cannot open shared object file: No such file or directory), /usr/local/lib/php/extensions/no-debug-non-zts-20220829/igbinary.so.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/igbinary.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'zip.so' (tried: /usr/local/lib/php/extensions/no-debug-non-zts-20220829/zip.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/zip.so: cannot open shared object file: No such file or directory), /usr/local/lib/php/extensions/no-debug-non-zts-20220829/zip.so.so (/usr/local/lib/php/extensions/no-debug-non-zts-20220829/zip.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+...
+```
+
+这里显式出，`redis.so`、`imagick.so`、`igbinary.so` 及 `zip.so` 三个静态对象，static object 文件缺失。故需要经由 `phpize`、`./configure` 与 `make`，构造出这三个静态对象。
+
+若系统中有多个 PHP 版本的安装，则需要通过像下面这样：
+
+```bash
+$ which phpize
+/usr/local/bin/php-config
+$ ./configure --with-php-config=/usr/local/bin/php-config
+$ make
+```
+
+然后在 `./moduels` 目录下，就能发现相应的 `.so` 文件，将其拷贝到 PHP 安装下：
+
+```bash
+$ ls modules/
+zip.la  zip.so
+$ sudo cp modules/zip.so /usr/local/lib/php/extensions/
+```
+
+再次运行 `$ php --ini`，就会发现，已经不报出找不到 `zip.so` 动态库的错误。
