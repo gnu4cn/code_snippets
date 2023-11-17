@@ -523,8 +523,9 @@ ls | Out-String -Stream | Select-String "mubs"
 ```
 
 
-## “`wsl` 无法配置 networkingMode Nat)( 网络” 问题
+## `wsl` 无法配置 networkingMode Nat)( 网络
 
+![`wsl` 无法配置 networkingMode Nat)( 网络](images/wsl_networkingMode_Nat_problem.png)
 
 需要在 “启用或关闭 Windows 功能”（按下视窗按键，输入 “windows features”）中，开启 “虚拟机平台”。
 
