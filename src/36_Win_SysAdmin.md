@@ -521,3 +521,11 @@ echo
 ```powershell
 ls | Out-String -Stream | Select-String "mubs"
 ```
+
+
+## “`wsl` 无法配置 networkingMode Nat)( 网络” 问题
+
+
+需要在 “启用或关闭 Windows 功能”（按下视窗按键，输入 “windows features”）中，开启 “虚拟机平台”。
+
+参见：[Can't start distro on WSL 2.0.5 with any networkingMode besides None](https://github.com/microsoft/WSL/issues/10666#issuecomment-1779425612)。
