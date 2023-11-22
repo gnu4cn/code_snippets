@@ -35,7 +35,6 @@
 # 编程开发
 - [Sh Bash](00_sh_bash.md)
 - [Using Huawei Repos](08_Using_Huawei_Repos.md)
-- [`vim.gtk3` Installation Notes](09_vim.gtk3_Installation_Notes.md)
 - [Java Learning](12_Java_Learning.md)
 - [`ffmpeg`](15_ffmpeg.md)
 - [Job Notes](20_job_notes.md)
