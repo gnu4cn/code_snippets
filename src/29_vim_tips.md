@@ -151,3 +151,18 @@ let g:coc_data_home="/tools/msys64/home/Lenny.Peng/.vim/coc-data/"
 ```
 
 > 注：上面为了在代码块中显示 `` ``` ``，使用了 `~~~` 方式。
+
+
+## 在多个行前插入文本
+
+1. 按下 `Esc` 进入 “命令模式”；
+
+2. 使用 `Ctrl + V` 进入可视块模式；
+
+3. 按 `Up`/`Down` 键选择咱们要注释的行；
+
+4. 然后按 `Shift + i`，并输入咱们打算插入的文本；
+
+5. 随后按下 `Esc`，等 1 秒钟，插入的行就会出现在每一行上。
+
+参考：[How to insert text at beginning of a multi-line selection in vi/Vim](https://stackoverflow.com/a/253391)
