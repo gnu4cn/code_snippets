@@ -46,7 +46,7 @@
 - [`tmux` Manual](35_tmux_manual.md)
 - [Low Level Programming University](41_Low_Level_Programming_Brief.md)
 - [`git` skills](43_git_skills.md)
-- [燃尽图 burn-down chart 部署笔记](45_burn-down_chart_notes.md)
+- [An burn-down chart app deployment notes](45_burn-down_chart_notes.md)
 
 ---
 # 杂项
