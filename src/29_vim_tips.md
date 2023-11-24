@@ -166,3 +166,16 @@ let g:coc_data_home="/tools/msys64/home/Lenny.Peng/.vim/coc-data/"
 5. 随后按下 `Esc`，等 1 秒钟，插入的行就会出现在每一行上。
 
 参考：[How to insert text at beginning of a multi-line selection in vi/Vim](https://stackoverflow.com/a/253391)
+
+
+## `%s` 中模式匹配与捕获
+
+
+在要将 `**图 n.m, xxxxx**` 这样的大写文字，批量修改为 `### 图 n.m，xxx` 这样的标题时，就要用到 Vim 中，用到模式匹配与捕获特性。使用下面的命令：
+
+
+```vim
+:%s/\*\*图\(.*\)\*\*/\#\#\#\ 图\1/g
+```
+
+其中 `\(.*\)`，就表示要捕获 `图` 字后面、`**` 前面的任意个字符。而后面替换字符串中的 `\1`，就表示这个捕获的子字符串。
