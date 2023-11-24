@@ -5,6 +5,7 @@
 ---
 
 # 运维
+
 - [Flask `uwsgi` `supervisord`](01_flask_uwsgi_supervisord.md)
 - [`ionic serve`](02_ionic_serve.md)
 - [Ionic 4 flask cors](03_ionic_4_flask_cors.md)
@@ -33,6 +34,7 @@
 
 ---
 # 编程开发
+
 - [Sh Bash](00_sh_bash.md)
 - [Using Huawei Repos](08_Using_Huawei_Repos.md)
 - [Java Learning](12_Java_Learning.md)
@@ -44,9 +46,11 @@
 - [`tmux` Manual](35_tmux_manual.md)
 - [Low Level Programming University](41_Low_Level_Programming_Brief.md)
 - [`git` skills](43_git_skills.md)
+- [燃尽图 burn-down chart 部署笔记](45_burn-down_chart_notes.md)
 
 ---
 # 杂项
+
 - [OA BPM](14_OA_BPM.md)
 - [eteams.cn Notes](17_eteams.cn_notes.md)
 - [SC Network Op](24_SC_network_op.md)
