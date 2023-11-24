@@ -13,7 +13,7 @@ dirs["ts"]="ts-learnings"
 dirs["www"]="buy-me-a-coffee"
 dirs["snippets"]="code_snippets"
 dirs["jenkins"]="jenkins_book_zh"
-dirs["hpc"]="hpc-studies"
+dirs["hpcl"]="hpc-studies"
 
 declare -A ports
 
@@ -24,7 +24,7 @@ ports["ts"]="10447"
 ports["www"]="10446"
 ports["snippets"]="10448"
 ports["jenkins"]="10449"
-ports["hpc"]="10450"
+ports["hpcl"]="10450"
 
 
 COMMANDS=("start" "stop" "restart" "monitor" "status")
@@ -165,10 +165,10 @@ do_restart() {
 monitor() {
     case $1 in
         "all")
-            for name in ${!dirs[@]}; do do_mon $name; done
+            for name in ${!dirs[@]}; do do_mon & $name; done
             ;;
         *)
-            do_mon $1
+            do_mon $1 &
             ;;
     esac
 }
