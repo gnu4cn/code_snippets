@@ -165,7 +165,7 @@ do_restart() {
 monitor() {
     case $1 in
         "all")
-            for name in ${!dirs[@]}; do do_mon $name; exit 0 done
+            for name in ${!dirs[@]}; do do_mon $name &; exit 0; done
             ;;
         *)
             do_mon $1 && exit 0
