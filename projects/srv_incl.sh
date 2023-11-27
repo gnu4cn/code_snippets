@@ -168,7 +168,7 @@ monitor() {
             for name in ${!dirs[@]}; do do_mon $name > /dev/null 2>&1 & done
             ;;
         *)
-            echo "Updated website at background..."
+            echo -e "\nUpdated website at background..."
             do_mon $1 > /dev/null 2>&1 &
             ;;
     esac
