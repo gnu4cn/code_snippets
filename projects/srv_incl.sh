@@ -62,7 +62,7 @@ start_srv() {
     if [ $proc_num -ne 1 ]; then
         cd "$HOME/${dirs[$1]}"
         echo -e "\n\rStarting $1 ..."
-        mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 &
+        mdbook serve . -p "${ports[$1]}" -n 127.0.0.1 > /dev/null 2>&1 &
     fi
 }
 
@@ -165,11 +165,13 @@ do_restart() {
 monitor() {
     case $1 in
         "all")
-            for name in ${!dirs[@]}; do do_mon $name > /dev/null 2>&1 & done
+            for name in ${!dirs[@]}; do
+                do_mon $name && exit 0
+            done
             ;;
         *)
-            echo -e "\nUpdated website at background..."
-            do_mon $1 > /dev/null 2>&1 &
+            # do_mon $1 > /dev/null 2>&1 &
+            do_mon $1 && exit 0
             ;;
     esac
 }
