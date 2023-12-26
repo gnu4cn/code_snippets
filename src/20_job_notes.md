@@ -157,3 +157,42 @@ Cannot get wake-on-lan settings: Operation not permitted
 ```
 
 就可以让该终端下的程序，使用经由 SSH 建立的 SOCKS5 `10080` 端口代理。
+
+
+## VNC
+
+
+1. 启动
+
+
+VNC 的启动，是基于每个用户的。在用 SSH 登录了主机后，运行命令：
+
+```console
+$ vncserver :x
+```
+
+即可启动该用户下的 VNC 服务器，随后即可通过 VNC Viewer 连接到该主机。过程中 VNC 会询问密码。其中 `x` 是 VNC 的端口号。
+
+
+2. 查看 VNC 是否启动
+
+
+`ps -ef | grep vnc`
+
+
+3. 关掉 VNC
+
+
+`$ vncserver -kill :x`
+
+其中 `x` 是启动时用到的 VNC 端口号。
+
+
+4. 修改 VNC 分辨率
+
+
+在 VNC 的配置文件 `/etc/vnc/xstartup` 末尾，添加行：
+
+`xrandr -s 1280x800`
+
+重启 VNC 服务器，就应看到新分辨率生效。
