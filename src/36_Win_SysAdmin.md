@@ -10,6 +10,17 @@ Win 系统使用心得与经验记录。
 
 微软有专门的 [KMS Client Setup Keys](https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys)。
 
+
+- 打开命令行提示符界面 CMD，输入：
+
+`slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX`
+
+- 输入 `slmgr /skms kms.03k.org`；
+
+- 最后输入 `slmgr /ato` 查看激活状态。
+
+
+
 ## Win11 22h2 安装过程中跳过 “Let's connect you to a network”
 
 
