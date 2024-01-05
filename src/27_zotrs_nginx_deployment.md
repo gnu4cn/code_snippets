@@ -21,6 +21,61 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 - “打印” 功能中 PDF 用到的 TTF 字体存放在 `/opt/otrs/var/fonts` 目录，在 `Sysconfig` -> `PDF::TTFontFile` 或许可设置打印 PDF 的汉字字体。
 
 
+## 使用 `cpanm` 安装 Perl 模组
+
+
+参考：[Perl 基础笔记：使用 `cpanm` 安装 Perl 模块](https://blog.csdn.net/memray/article/details/17543791)
+
+
+`cpanm` 是安装 Perl 模块的最简便方法。关于 `cpanm`：
+
+[App::cpanminus](https://metacpan.org/release/MIYAGAWA/App-cpanminus-1.0015/view/lib/App/cpanminus.pm)
+
+
+### 安装 `cpanm`
+
+有 Debian 软件包、RPM、FreeBSD 移植版，以及适用于其他操作系统的软件包。如果咱们打算使用包管理系统，请搜索 `cpanminus` 并使用适当的命令进行安装。这使得咱们可以轻松地将 `cpanm`，安装到咱们的系统中，而无需考虑安装位置以及以后的升级。
+
+咱们也可以使用最新的 `cpanminus`，来安装 `cpanminus` 本身（又称 bootstrap）：
+
+`curl -L http://cpanmin.us | perl - --sudo App::cpanminus`
+
+这将把 `cpanm` 安装到 `/usr/local/bin` 等 `bin` 目录中（除非咱们在 `INSTALL_BASE` 中，配置了 `local::lib`），因此咱们可能需要 `--sudo` 选项。
+
+之后，咱们就可以 `cpanm --self-upgrade --sudo`，来升级到最新版本。
+
+否则，
+
+```console
+cd ~/bin
+wget http://xrl.us/cpanm
+chmod +x cpanm
+# edit shebang if you don't have /usr/bin/env
+```
+
+也会工作，但升级时一定要手动抓取新版本（`--self-upgrade` 可能不起作用）。
+
+
+### 使用 `cpanm`
+
+
+命令行参数直接为 Perl 模组即可。例如：
+
+
+```console
+$ sudo cpanm CGI::Session
+$ sudo cpanm Template
+```
+
+> 注: 如果不是 root 权限，`cpanm` 也一样能用。他会将模块下载安装到用户的根目录( `~` )下。（没试过，一直只用 sudo 安装。）
+
+为了加快 `cpanm` 下载速度, 可以指定使用镜像，并只从镜像下载。如下:
+
+
+```console
+$ sudo cpanm --mirror http://mirrors.163.com/cpan --mirror-only CGI::Session
+```
+
 
 ## 登录网址
 
