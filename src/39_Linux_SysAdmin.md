@@ -2,6 +2,23 @@
 
 本文记录一些 Linux 系统管理相关笔记。
 
+
+## 使用 `chpasswd` 批量修改密码
+
+
+首先以下面的格式，建立 `user-list.txt` 文件：
+
+
+```txt
+user1:password2
+user2:password2
+user3:password3
+...
+```
+
+然后执行 `sudo chpasswd < user-list.txt` 即可批量修改密码。
+
+
 ## `NetworkManager.service` is masked
 
 此问题在 `$ sudo systemctl enable --now NetworkManager.service` 时，会导致失败，报出如下错误：
