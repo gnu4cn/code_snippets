@@ -20,6 +20,8 @@ Win 系统使用心得与经验记录。
 - 最后输入 `slmgr /ato` 查看激活状态。
 
 
+或者在 Powersehll（管理员）中，输入 `irm massgrave.dev/get.ps1 | iex`，使用线上的 `ps1` 脚本激活。
+
 
 ## Win11 22h2 安装过程中跳过 “Let's connect you to a network”
 
