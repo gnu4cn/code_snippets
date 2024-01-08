@@ -38,7 +38,9 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 
 咱们也可以使用最新的 `cpanminus`，来安装 `cpanminus` 本身（又称 bootstrap）：
 
-`curl -L http://cpanmin.us | perl - --sudo App::cpanminus`
+```console
+curl -L http://cpanmin.us | perl - --sudo App::cpanminus
+```
 
 这将把 `cpanm` 安装到 `/usr/local/bin` 等 `bin` 目录中（除非咱们在 `INSTALL_BASE` 中，配置了 `local::lib`），因此咱们可能需要 `--sudo` 选项。
 
