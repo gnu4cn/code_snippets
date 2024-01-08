@@ -3,6 +3,15 @@
 本文记录一些 Linux 系统管理相关笔记。
 
 
+## 在 WSL2 GUI 中使用 pulseaudio 播放声音
+
+
+参考：[在 WSL2 GUI 中使用 pulseaudio 播放声音](https://blog.csdn.net/jiexijihe945/article/details/131680406)
+
+
+
+
+
 ## 使用 `chpasswd` 批量修改密码
 
 
