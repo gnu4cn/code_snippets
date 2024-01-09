@@ -20,6 +20,16 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 
 - “打印” 功能中 PDF 用到的 TTF 字体存放在 `/opt/otrs/var/fonts` 目录，在 `Sysconfig` -> `PDF::TTFontFile` 或许可设置打印 PDF 的汉字字体。
 
+- 需要修改 `SendmailNotificationEnvelopFrom` 选项，否则邮件通知发送会报错：
+
+
+```console
+10 		Kernel::System::Email::SMTP 	Envelope from '' not accepted by the server: 501, mail from address must be same as authorization user ! 	2024.01.09 13:31:17 (Asia/Shanghai)
+11 		Kernel::System::Email 	        Error sending message using backend 'Kernel::System::Email::SMTP'. 	2024.01.09 13:31:17 (Asia/Shanghai)
+12 		Kernel::System::MailQueue 	    Message could not be sent! Error message: Envelope from '' not accepted by the server: 501, mail from address must be same as authorization user ! 	2024.01.09 13:31:17 (Asia/Shanghai)
+13 		Kernel::System::MailQueue 	    Permanent sending problem or we reached the sending attempt limit. Message will be removed
+```
+
 
 ## 使用 `cpanm` 安装 Perl 模组
 
