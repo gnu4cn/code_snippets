@@ -30,6 +30,14 @@ OTRS 安装默认使用 Apache httpd 作为 HTTP 服务器，这里将改用 ngi
 13 		Kernel::System::MailQueue 	    Permanent sending problem or we reached the sending attempt limit. Message will be removed
 ```
 
+- 修改 Nginx 配置，解决 `perl-fcgi` 过早退出问题：
+
+```console
+ upstream prematurely closed FastCGI stdout while reading response header from upstream
+```
+
+要在 Nginx 配置文件中，提升 `client_body_timeout` 与 `client_header_timeout` 两个变量的值。
+
 
 ## 使用 `cpanm` 安装 Perl 模组
 
