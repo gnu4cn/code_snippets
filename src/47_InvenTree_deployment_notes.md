@@ -3,7 +3,7 @@
 
 ## `InvenTree/config.yaml` 中数据库密码的问题
 
-若 `src/InvenTree/config.yaml` 中的 `database.PASSWORD` 配置，是个纯数字，那么就要用 `''` 或 `“""` 将其括起来，否则会报出错误：
+若 `src/InvenTree/config.yaml` 中的 `database.PASSWORD` 配置，是个纯数字，那么就要用 `''` 或 `“"` 将其括起来，否则会报出错误：
 
 
 ```console
