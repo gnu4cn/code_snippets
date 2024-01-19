@@ -3,6 +3,19 @@
 本文记录一些 Linux 系统管理相关笔记。
 
 
+## Debian 中支持 `ll` 命令
+
+
+在 `/etc/profile.d` 下，编写一个 `ll_cmd.sh` 脚本，内容如下：
+
+
+```bash
+alias ll='ls -alF'
+```
+
+`source /etc/profile.d/ll_cmd.sh` 会立即生效，以后重启系统后将自动生效。
+
+
 ## 在 WSL2 GUI 中使用 pulseaudio 播放声音
 
 
