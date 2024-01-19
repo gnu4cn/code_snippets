@@ -32,6 +32,7 @@
 - [Server Management with `mdbook` and Nginx](42_mdbook_Server_Management.md)
 - [`fire.fundersclub.com` installation notes](44_fire.fundersclub.com_installation_notes.md)
 - [Server management](46_Server_management.md)
+- [InvenTree 部署笔记](47_InvenTree_deployment_notes.md)
 
 ---
 # 编程开发
