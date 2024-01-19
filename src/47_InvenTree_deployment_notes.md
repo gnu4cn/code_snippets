@@ -1,9 +1,11 @@
 # InvenTree 部署笔记
 
+InvenTree 是一款开源库存管理系统，可提供直观的零件管理和库存控制。InvenTree 功能广泛，是企业和业余爱好者的理想选择。InvenTree 的设计具有可扩展性，并提供与外部应用程序集成或添加自定义插件的多种选项。
+
 
 ## `InvenTree/config.yaml` 中数据库密码的问题
 
-若 `src/InvenTree/config.yaml` 中的 `database.PASSWORD` 配置，是个纯数字，那么就要用 `''` 或 `“"` 将其括起来，否则会报出错误：
+若 `src/InvenTree/config.yaml` 中的 `database.PASSWORD` 配置，是个纯数字，那么就要用 `''` 或 `""` 将其括起来，否则会报出错误：
 
 
 ```console
