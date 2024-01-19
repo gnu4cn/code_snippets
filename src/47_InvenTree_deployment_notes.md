@@ -21,3 +21,57 @@ TypeError: quote_from_bytes() expected bytes
 ## 创建数据库
 
 需要指定 `inventree` 数据库的 `OWNER` 为所创建的数据库用户。
+
+
+## `supervisord` 配置
+
+- `/etc/supervisor/supervisord.conf`
+
+```console
+$ cat /etc/supervisor/supervisord.conf
+[supervisord]
+; Change this path if log files are stored elsewhere
+logfile=/home/inventree/log/supervisor.log
+user=inventree
+
+[supervisorctl]
+
+[inet_http_server]
+port = 127.0.0.1:9001
+
+[include]
+files=/etc/supervisor/conf.d/*.conf
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+```
+
+- `/etc/supervisor/conf.d/inventree.conf`
+
+```console
+$ cat /etc/supervisor/conf.d/inventree.conf
+; InvenTree Web Server Process
+[program:inventree-server]
+user=inventree
+directory=/home/inventree/src/InvenTree
+command=/home/inventree/.venv/bin/gunicorn -c gunicorn.conf.py InvenTree.wsgi -b 10.11.0.105:8000
+startsecs=10
+autostart=true
+autorestart=true
+startretries=3
+; Change these paths if log files are stored elsewhere
+stderr_logfile=/home/inventree/log/server.err.log
+stdout_logfile=/home/inventree/log/server.out.log
+
+; InvenTree Background Worker Process
+[program:inventree-cluster]
+user=inventree
+directory=/home/inventree/src/InvenTree
+command=/home/inventree/.venv/bin/python manage.py qcluster
+startsecs=10
+autostart=true
+autorestart=true
+; Change these paths if log files are stored elsewhere
+stderr_logfile=/home/inventree/log/cluster.err.log
+stdout_logfile=/home/inventree/log/cluster.out.log
+```
