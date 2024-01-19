@@ -18,6 +18,22 @@ trusted-host = repo.huaweicloud.com
 timeout = 120
 ```
 
+Python3 `venv` 环境下使用华为镜像（参考：[python venv pip使用国内源](https://blog.csdn.net/duoyasong5907/article/details/129190001)）：
+
+
+- 首先激活 `venv` 环境，`source .venv/bin/activate`;
+
+- 然后配置 `pip` 使用国内源，随后的下载就都会使用国内源了。
+
+```console
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+亦可以安装 `pypi` 软件包 `pipyyuan`，一键修改国内源：`https://pypi.org/project/pipyuan/`。
+
+
+
+
 ## 01. NVM 配置华为镜像
 
 ```bash
@@ -35,7 +51,7 @@ npm config set phantomjs_cdnurl https://repo.huaweicloud.com/phantomjs
 npm config set chromedriver_cdnurl https://repo.huaweicloud.com/chromedriver
 npm config set operadriver_cdnurl https://repo.huaweicloud.com/operadriver
 npm config set electron_mirror https://repo.huaweicloud.com/electron/
-npm config set python_mirror https://repo.huaweicloud.com/python 
+npm config set python_mirror https://repo.huaweicloud.com/python
 ```
 
 
