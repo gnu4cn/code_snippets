@@ -33,6 +33,7 @@
 - [`fire.fundersclub.com` installation notes](44_fire.fundersclub.com_installation_notes.md)
 - [Server management](46_Server_management.md)
 - [InvenTree deployment notes](47_InvenTree_deployment_notes.md)
+- [SVN notes](48_SVN_notes.md)
 
 ---
 # 编程开发
