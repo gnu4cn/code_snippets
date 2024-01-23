@@ -136,3 +136,18 @@ git clone git@github-personal:bob/blog.git
 ```conf
 proxy=socks5h://localhost:10080
 ```
+
+
+## OpenWRT 设置
+
+主要使用 `autossh`、`polipo` 与 Web 代理自动发现，Web Proxy Auto-Discovery 协议。
+
+
+- `autossh`
+    用于从 SSH 隧道，建立 SOCKS5 端口。安装 `autossh` 后，会建立 `/etc/init.d/autossh` 服务，和 `/etc/conf/autossh` 配置文件。
+
+- `polipo`
+    用于将 SOCKS5 代理，转换为 HTTP 代理。
+
+- WPAD
+    通过 `dnsmasq` 的 DHCP 服务器通告选项 `list dhcp_option '252,http://example.com/proxy.pac'`，将 `autoproxy.pac` 文件提供给联网设备。
