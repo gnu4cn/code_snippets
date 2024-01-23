@@ -151,3 +151,9 @@ proxy=socks5h://localhost:10080
 
 - WPAD
     通过 `dnsmasq` 的 DHCP 服务器通告选项 `list dhcp_option '252,http://example.com/proxy.pac'`，将 `autoproxy.pac` 文件提供给联网设备。
+
+__参考链接__:
+
+- [WPAD 在 OpenWrt 上的配置（PAC 文件自动分发）](https://ratazzi.org/2013/02/10/wpad-on-openwrt/)
+
+- [Web Proxy Auto-Discovery Protocol](https://en.wikipedia.org/wiki/Web_Proxy_Auto-Discovery_Protocol)
