@@ -1,6 +1,6 @@
 # Linux 配置 Samba 文件共享
 
-Samba 文件共享涉及到以下几个方面：`/etc/hosts` 修改、Kerberos 配置 `/etc/krb5.conf`、Samba 配置 `/etc/samba/smb.conf` 与 `winbindd` — Name Service Switch daemon for resolving names from NT servers 配置 `/etc/nsswitch.conf` 等。中间要运行 
+Samba 文件共享涉及到以下几个方面：`/etc/hosts` 修改、Kerberos 配置 `/etc/krb5.conf`、Samba 配置 `/etc/samba/smb.conf` 与 `winbindd` — Name Service Switch daemon for resolving names from NT servers 配置 `/etc/nsswitch.conf` 等。中间要运行
 
 ```console
 $ sudo net ads join -U (AD_admin)
@@ -268,3 +268,8 @@ $ sudo systemctl enable --now winbind
 ```
 
 > **注**：`winbind` 必须也要打开，否则共享会失败。
+
+## 为用户设置 Samba 密码
+
+
+Samba 使用系统上的用户账号，但要为这些账号设置独立的密码：`smbpasswd -a username`。
