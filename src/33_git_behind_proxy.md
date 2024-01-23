@@ -150,7 +150,11 @@ proxy=socks5h://localhost:10080
     用于将 SOCKS5 代理，转换为 HTTP 代理。
 
 - WPAD
-    通过 `dnsmasq` 的 DHCP 服务器通告选项 `list dhcp_option '252,http://example.com/proxy.pac'`，将 `autoproxy.pac` 文件提供给联网设备。
+    通过 `dnsmasq` 的 DHCP 服务器通告选项
+
+    `list dhcp_option '252,http://example.com/proxy.pac'`
+
+    将 `autoproxy.pac` 文件提供给联网设备。
 
 __参考链接__:
 
