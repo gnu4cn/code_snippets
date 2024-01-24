@@ -50,7 +50,7 @@
 - [Low Level Programming University](41_Low_Level_Programming_Brief.md)
 - [`git` skills](43_git_skills.md)
 - [An burn-down chart app deployment notes](45_burn-down_chart_notes.md)
-- [在内网安装 Python 第三方包](49_Install_Python_packages_at_Intranet.md)
+- [Install Python packages at host in Intranet](49_Install_Python_packages_at_Intranet.md)
 
 ---
 # 杂项
