@@ -42,7 +42,8 @@ mount: unknown filesystem type 'LVM2_member'
 - `/dev/mapper/centos-home`
 
 
-了解这些信息后，即可使用 `mount /dev/mapper/centos-root /media/tmpRoot`，将 `/dev/mapper` 下的 `centos-root` 磁盘，挂载到 `/media/tmpRoot` 上了。前提是当前主机系统安装了 `lvm2` 支持。
+了解这些信息后，即可使用 `mount /dev/mapper/centos-root /media/tmpRoot`，将 `/dev/mapper` 下的 `centos-root` 磁盘，挂载到 `/media/tmpRoot` 上了。前提是当前主机系统安装了 `lvm2` 支持（所幸使用的 Linux 启动盘 Clonezilla，对各种文件系统支持非常好）。
+
 
 
 参考链接：
