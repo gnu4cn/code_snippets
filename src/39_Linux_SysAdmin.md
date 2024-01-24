@@ -3,6 +3,19 @@
 本文记录一些 Linux 系统管理相关笔记。
 
 
+
+## `auditd` 部署的危险性
+
+
+`auditd` 会使用到内核审计模块，极容易影响系统性能。__在配置不当的情况下，会直接导致系统挂起，以及启动失败__。千万不能在生产系统上部署 `auditd`。
+
+参考：
+
+- [linux audit审计系统](https://zhuanlan.zhihu.com/p/337289840)
+
+- [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
+
+
 ## Debian 中支持 `ll` 命令
 
 
