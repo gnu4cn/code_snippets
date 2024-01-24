@@ -16,6 +16,43 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+## 挂载 LVM 逻辑卷
+
+
+在 `/dev/sda3` 是个逻辑卷时，`mount /dev/sda3 /media/tmpRoot` 就会报错：
+
+
+```console
+mount: unknown filesystem type 'LVM2_member'
+```
+
+要挂载 LVM，就要先了解其内部结构，以及 LVM 的名字，此时需要使用 `fdisk -l` 命令：
+
+
+![`fdisk -l` 命令输出示例](images/fdisk--l.png)
+
+
+其中可以看出，`/dev/sda` 有三个分区，其中 `/dev/sda3` 是个 Linux LVM，其名字为 `mapper`，他下面又有三个磁盘，分别是：
+
+
+- `/dev/mapper/centos-root`
+
+- `/dev/mapper/centos-swap`
+
+- `/dev/mapper/centos-home`
+
+
+了解这些信息后，即可使用 `mount /dev/mapper/centos-root /media/tmpRoot`，将 `/dev/mapper` 下的 `centos-root` 磁盘，挂载到 `/media/tmpRoot` 上了。前提是当前主机系统安装了 `lvm2` 支持。
+
+
+参考链接：
+
+- [mount: unknown filesystem type 'LVM2_member'解决方案](https://www.cnblogs.com/dancesir/p/14200805.html)
+
+- [挂载硬盘，提示 mount: unknown filesystem type 'LVM2_member'的解决方案](https://blog.csdn.net/colin_yu/article/details/77892918)
+
+
+
 ## Debian 中支持 `ll` 命令
 
 
