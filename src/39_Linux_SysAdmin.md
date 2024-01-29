@@ -16,6 +16,16 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+## 查看服务器型号、序列号与内存插槽、规格
+
+
+- 查看服务器型号、序列号：`dmidecode -t1`
+
+- 查看内存插槽情况：`dmidecode | grep -P -A5 "Memory\s+Device" | grep Size | grep -v Range`
+
+- 查看内存规格：`dmidecode -t memory`
+
+
 ## 挂载 LVM 逻辑卷
 
 
