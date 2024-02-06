@@ -26,6 +26,18 @@
 - 查看内存规格：`dmidecode -t memory`
 
 
+## GParted 分配未分配磁盘空间
+
+
+
+参考：[How to allocate unallocated disk space with GParted Live?](https://askubuntu.com/a/856990)
+
+
+- 先将扩展分区，the Extended partition，增长到磁盘末尾
+
+- 随后即可在扩展分区下，将需要增大的分区增大到先前未分配的空间
+
+
 ## 挂载 LVM 逻辑卷
 
 
