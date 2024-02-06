@@ -1,9 +1,8 @@
-#!/bin/bash
-LOCK_FILE="$HOME/.lock/rsync.lck"
+#!/usr/bin/env bash
+LOCK_DIR="$HOME/.lock"
+LOCK_FILE="$LOCK_DIR/rsync.lck"
 
-if [ -f "${LOCK_FILE}" ]; then echo "经由 rsync 的更新已在运行......" && exit 0; fi
-
-BASE_DIR="/var/mirrors/"
+BASE_DIR="$HOME/mirrors/"
 SERVER="mirrors.bfsu.edu.cn"
 
 declare -A releases
@@ -13,8 +12,6 @@ releases["centos"]="7.9.2009/sclo/"
 declare -A GPG_KEY
 GPG_KEY["epel"]="RPM-GPG-KEY-EPEL-7"
 GPG_KEY["centos"]="RPM-GPG-KEY-CentOS-7"
-
-/usr/bin/touch "${LOCK_FILE}"
 
 rm_lock() {
     rm -rf "${LOCK_FILE}"
@@ -26,11 +23,16 @@ do_rsync() {
     rsync  -auvzP --delete "rsync://${3}" "${4}"
 }
 
+if [ -f "${LOCK_FILE}" ]; then echo "经由 rsync 的更新已在运行......" && exit 0; fi
+
+if ! [ -d $LOCK_DIR ]; then /usr/bin/mkdir -p $LOCK_DIR; fi
+/usr/bin/touch "${LOCK_FILE}"
+
 for name in ${!releases[@]}; do
-    release="${releases[$name]}" 
+    release="${releases[$name]}"
 
     target_base="${BASE_DIR}${name}/"
-    target_dir="${target_base}${release}" 
+    target_dir="${target_base}${release}"
 
     base_url="${SERVER}/${name}/"
     repo_url="${base_url}${release}"
