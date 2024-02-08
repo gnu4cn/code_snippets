@@ -45,7 +45,7 @@ openssl enc -aes-256-cbc -pass file:passphrase.txt \
 openssl rsautl -decrypt -inkey key.pem < enc.passphrase.txt > \ passphrase.txt 
 ```
 
-## 使用解密后的passphrase解密数据
+- 使用解密后的passphrase解密数据
 
 ```console
 openssl enc -aes-256-cbc -d -pass file:passphrase.txt \
