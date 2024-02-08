@@ -5,22 +5,13 @@ LOCK_FILE="$LOCK_DIR/rsync.lck"
 BASE_DIR="$HOME/mirrors/"
 SERVER="mirrors.bfsu.edu.cn"
 
-declare -A releases
-releases["epel"]="7/x86_64/"
-releases["centos"]="7.9.2009/sclo/"
-
-declare -A GPG_KEY
-GPG_KEY["epel"]="RPM-GPG-KEY-EPEL-7"
-GPG_KEY["centos"]="RPM-GPG-KEY-CentOS-7"
+declare -A repos
+repos["epel"]="epel/7/x86_64/"
+repos["base"]="centos/7.9.2009/os"
+repos["sclo"]="centos/7.9.2009/sclo"
 
 rm_lock() {
     rm -rf "${LOCK_FILE}"
-}
-
-do_rsync() {
-    # echo -e "\n${1}\n${2}\n${3}\n${4}"
-    rsync  -auvzP --exclude debug --delete "rsync://${1}" "${2}/" && \
-    rsync  -auvzP --delete "rsync://${3}" "${4}"
 }
 
 if [ -f "${LOCK_FILE}" ]; then echo "经由 rsync 的更新已在运行......" && exit 0; fi
@@ -28,22 +19,18 @@ if [ -f "${LOCK_FILE}" ]; then echo "经由 rsync 的更新已在运行......" &
 if ! [ -d $LOCK_DIR ]; then /usr/bin/mkdir -p $LOCK_DIR; fi
 /usr/bin/touch "${LOCK_FILE}"
 
-for name in ${!releases[@]}; do
-    release="${releases[$name]}"
+for name in ${!repos[@]}; do
+    target_dir="${BASE_DIR}${name}"
 
-    target_base="${BASE_DIR}${name}/"
-    target_dir="${target_base}${release}"
-
-    base_url="${SERVER}/${name}/"
-    repo_url="${base_url}${release}"
-    gpg_url="${base_url}${GPG_KEY[${name}]}"
+    repo="${repos[$name]}"
+    repo_url="${SERVER}/${repo}"
 
     if [[ -d "${target_dir}" ]]; then
-        do_rsync "$repo_url" "${target_dir}" "${gpg_url}" "${target_base}"
+        rsync  -auvzP --exclude debug --delete "rsync://${repo_url}" "${target_dir}/"
     else
         echo "${target_dir} 目录不存在:-{"
         /usr/bin/mkdir -p "${target_dir}"
-        do_rsync "$repo_url" "${target_dir}" "${gpg_url}" "${target_base}"
+        rsync  -auvzP --exclude debug --delete "rsync://${repo_url}" "${target_dir}/"
     fi
 
     if [[ $? -eq '0' ]]; then
