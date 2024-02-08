@@ -34,6 +34,7 @@
 - [Server management](46_Server_management.md)
 - [InvenTree deployment notes](47_InvenTree_deployment_notes.md)
 - [SVN notes](48_SVN_notes.md)
+- [Data encryption with openssl](50_data_encryption_with_openssl.md)
 
 ---
 # 编程开发
