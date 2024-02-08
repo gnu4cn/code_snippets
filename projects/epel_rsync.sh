@@ -7,8 +7,8 @@ SERVER="mirrors.bfsu.edu.cn"
 
 declare -A repos
 repos["epel"]="epel/7/x86_64/"
-repos["base"]="centos/7.9.2009/os"
-repos["sclo"]="centos/7.9.2009/sclo"
+repos["base"]="centos/7.9.2009/os/"
+repos["sclo"]="centos/7.9.2009/sclo/"
 
 rm_lock() {
     rm -rf "${LOCK_FILE}"
