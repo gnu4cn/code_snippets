@@ -23,15 +23,13 @@ openssl rand 32 -out passphrase.txt
 - 使用 passphrase 加密数据
 
 ```console
-openssl enc -aes-256-cbc -pass file:passphrase.txt \
-< UNENCRYPTED_FILE > encrypted.dat 
+openssl enc -aes-256-cbc -pass file:passphrase.txt < UNENCRYPTED_FILE > encrypted.dat 
 ```
 
 - 使用公钥加密passphrase
 
 ```console
- openssl rsautl -encrypt -pubin -inkey pub-key.pem \
-< passphrase.txt > enc.passphrase.txt
+ openssl rsautl -encrypt -pubin -inkey pub-key.pem < passphrase.txt > enc.passphrase.txt
 ```
 
 随后发送方把 encrypted.dat 和 enc.passphrase.txt 文件提交给接收方。
@@ -42,12 +40,11 @@ openssl enc -aes-256-cbc -pass file:passphrase.txt \
 - 解密 passphrase
 
 ```console
-openssl rsautl -decrypt -inkey key.pem < enc.passphrase.txt > \ passphrase.txt 
+openssl rsautl -decrypt -inkey key.pem < enc.passphrase.txt > passphrase.txt 
 ```
 
 - 使用解密后的passphrase解密数据
 
 ```console
-openssl enc -aes-256-cbc -d -pass file:passphrase.txt \
-< encrypted.dat > UNENCRYPTED_FILE 
+openssl enc -aes-256-cbc -d -pass file:passphrase.txt < encrypted.dat > UNENCRYPTED_FILE 
 ```
