@@ -3,6 +3,30 @@
 Win 系统使用心得与经验记录。
 
 
+## Win Server “拒绝请求的会话访问” 问题解决
+
+
+参考连接：
+
+- [你注意到，在 Windows Server 2003 和 Windows Server 2008 中，“拒绝此用户登录到远程桌面会话主机服务器的权限”复选框的行为不同](https://learn.microsoft.com/zh-cn/troubleshoot/windows-server/remote/deny-user-permissions-to-logon-to-rd-session-host)
+
+- [远程桌面提示拒绝访问有什么方法可以解决？](https://www.anyviewer.cn/how-to/remote-desktop-access-denied-2111.html)
+
+
+解决方法：
+
+
+- 按 "Win + R", 打开运行对话框，然后输入 `sysdm.cpl` 并点击 “确定”，打开系统属性；
+
+![系统属性](images/sysdm.cpl.png)
+
+
+- 单击 “远程” 选项卡，然后单击远程桌面中的 “选择用户”；
+
+- 在弹出的对话框中，单击 “添加”，然后再目标区域中输入用户名，再单击 “检查名称” 进行添加。
+
+
+
 ## 使用 RDP Wrapper 实现多用户同时 RDP
 
 [RDP Wrapper: stascorp/rdpwrap](https://github.com/stascorp/rdpwrap)，该项目的目标是在家用较弱的系统上，实现远程桌面主机支持和并发 RDP 会话。
