@@ -52,6 +52,15 @@
     $ sudo gitlab-cfg reconfigure
     ```
 
+
+## 经由 MS AD 的用户认证
+
+主要是开启  `ldap_enabled`、`prevent_ldap_sign_in` 等选项，并提供 `ldap_servers` 连接参数。注意连接参数是以 YAML 格式提供，因此要保持这些参数的缩进量。
+
+
+![GitLab LDAP 认证配置](images/gitlab_ldap.png)
+
+
 ## 配置的备份
 
 参考 [备份与恢复 Omnibus GitLab 的配置](https://docs.gitlab.com/omnibus/settings/backups.html)
