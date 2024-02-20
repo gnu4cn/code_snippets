@@ -3,7 +3,7 @@
 Win 系统使用心得与经验记录。
 
 
-## 通过 `WayBackMachine` 时光机，找到旧版 VS Code
+## 通过 `Internet Archive: Wayback Machine` 时光机，找到旧版 VS Code
 
 今天（2024-02-20）要在一台 Windows Server 2012 R2 机器上，安装 system-wide 的 VS Code，但新版本的 VS Code System Installer（VS Code 安装程序，分 User Installer 和 System Installer），已经不支持 Server 2012 R2 了。因此要找到支持该 Windows 版本的 System Installer。
 
