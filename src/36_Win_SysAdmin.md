@@ -3,6 +3,22 @@
 Win 系统使用心得与经验记录。
 
 
+
+## “Microsoft IME 已停止工作”
+
+Windows Server 2012 R2 单个用户下，会偶发此问题，如下图所示：
+
+
+![Microsoft IME 已停止工作](images/ChsIME_crash.png)
+
+
+解决办法：在输入法中，删除 “微软拼音输入法”。
+
+
+参考连接：[Microsoft IME 已停止工作](https://jingyan.baidu.com/article/f3e34a12ac61cef5ea653574.html)
+
+
+
 ## Win Server “拒绝请求的会话访问” 问题解决
 
 
