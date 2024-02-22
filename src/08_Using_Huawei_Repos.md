@@ -99,3 +99,23 @@ export PATH=${M2_HOME}/bin:${PATH}
 > * 注意 *：`/opt/jdk` 也是到 `/opt/jdk-xx.x.x` 目录的符号链接。
 
 > 运行 `$sudo chmod +x /etc/profile.d/mvn.sh`
+
+
+## RubyGems
+
+
+
+Ruby语言的开源依赖包镜像库。
+
+使用说明 打开终端并执行如下命令：
+
+```console
+gem sources --add https://repo.huaweicloud.com/repository/rubygems/ --remove https://rubygems.org/
+```
+
+如果你使用 Gemfile 和 Bundler，你可以用 Bundler 的 Gem 源代码镜像命令
+
+```console
+bundle config mirror.https://rubygems.org https://repo.huaweicloud.com/repository/rubygems/
+```
+
