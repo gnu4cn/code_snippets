@@ -35,6 +35,7 @@
 - [InvenTree deployment notes](47_InvenTree_deployment_notes.md)
 - [SVN notes](48_SVN_notes.md)
 - [Data encryption with openssl](50_data_encryption_with_openssl.md)
+- [Virtualization](51_virtualization.md)
 
 ---
 # 编程开发
