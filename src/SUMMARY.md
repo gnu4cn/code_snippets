@@ -36,6 +36,7 @@
 - [SVN notes](48_SVN_notes.md)
 - [Data encryption with openssl](50_data_encryption_with_openssl.md)
 - [Virtualization](51_virtualization.md)
+- [Redmine deployment](52_redmine_deployment.md)
 
 ---
 # 编程开发
