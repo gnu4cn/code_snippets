@@ -16,6 +16,33 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+## 安装 `samba` 时 `yum` 依赖失败的处理（`glibc-common`）
+
+
+参考：[ Yum Dependencies resolution fail (glibc-common)](https://www.linuxquestions.org/questions/linux-newbie-8/yum-dependencies-resolution-fail-glibc-common-4175582316/)
+
+
+1. 检查重复
+
+
+```console
+sudo yum list --showduplicates glibc
+```
+
+2. 降级 `glibc`
+
+```console
+sudo yum downgrade glibc glibc-common glibc-devel glibc-headers
+```
+
+
+3. 安装 `samba`
+
+```console
+sudo yum -y install samba-common samba samba-client smbldap-tools openldap-clients nss-pam-ldapd
+```
+
+
 ## 查看服务器型号、序列号与内存插槽、规格
 
 
