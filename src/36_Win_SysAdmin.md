@@ -87,6 +87,8 @@ RDP Wrapper 可作为服务控制管理器，Service Control Manager，和终端
 或者在 Powersehll（管理员）中，输入 `irm massgrave.dev/get.ps1 | iex`，使用线上的 `ps1` 脚本激活。
 
 
+> **注意**：若 `%windir%\System32\config\systemprofile` 这样的路径没有权限，那么上面的命令将报出 `错误：0x80070005 拒绝访问：所请求的操作需要提升特权`。因此需要 `Administrators` 用户具有对这个路径的权限。
+
 ## Win11 22h2 安装过程中跳过 “Let's connect you to a network”
 
 
