@@ -3,6 +3,17 @@
 Win 系统使用心得与经验记录。
 
 
+
+## Windows DNS 解析异常的一种情况
+
+
+今天（2024-03-02），在手动设置了一个 IPv4 的 DNS 服务器情况下，在终端中运行 `nslookup dc.xfoss.com`，仍未能得到正确的 IP 地址。
+
+发现 Windows 系统会在手动设置了 IPv4 的地址情况下，仍然使用 IPv6 的 DNS 服务器，去解析域名。而在关掉系统的 IPv6 协议后，系统便能通过手动设置的 IPv4 DNS 服务器地址，去解析域名。
+
+
+
+
 ## 通过 `Internet Archive: Wayback Machine` 时光机，找到旧版 VS Code
 
 今天（2024-02-20）要在一台 Windows Server 2012 R2 机器上，安装 system-wide 的 VS Code，但新版本的 VS Code System Installer（VS Code 安装程序，分 User Installer 和 System Installer），已经不支持 Server 2012 R2 了。因此要找到支持该 Windows 版本的 System Installer。

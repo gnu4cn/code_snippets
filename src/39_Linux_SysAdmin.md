@@ -16,6 +16,35 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+## `sshd_config` 中 `UsePAM yes` 及 `PAM` 环境变量的问题
+
+
+现 Ubuntu 22.04.1 已经成功加入 M$ AD，但是无法使用 AD 上的账号，进行 SSH 登录。排查后，发现需要开启 `sshd_config` 中，以下的项目：
+
+
+- `PasswordAuthentication yes`
+
+- `KbdInteractiveAuthentication yes`
+
+- `UsePAM yes`
+
+而在可以通过 AD 上的账号登录后，又报错以下错误：
+
+```console
+Last login: Sat Mar  2 16:43:18 2024                                                                                    -bash: groups: 未找到命令                                                                                               命令 “lesspipe” 可在以下位置找到                                                                                         * /bin/lesspipe                                                                                                         * /usr/bin/lesspipe                                                                                                    由于 /usr/bin:/bin 不在 PATH 环境变量中，故无法找到该命令。                                                             lesspipe：未找到命令                                                                                                    命令 “dircolors” 可在以下位置找到                                                                                        * /bin/dircolors                                                                                                        * /usr/bin/dircolors                                                                                                   由于 /bin:/usr/bin 不在 PATH 环境变量中，故无法找到该命令。                                                             dircolors：未找到命令
+```
+
+分析是 PAM 登录方式下，未能正确加载用户环境变量所致。故要修改 `/etc/security/pam_env.conf` 文件，取消以下两行的注释：
+
+
+```conf
+PATH            DEFAULT=${HOME}/bin:/usr/local/bin:/bin\
+:/usr/bin:/usr/local/bin/X11:/usr/bin/X11
+``` 
+
+然后在使用 AD 账号登录系统后，不再报出上面有个环境变量的错误。
+
+
 ## 安装 `samba` 时 `yum` 依赖失败的处理（`glibc-common`）
 
 
