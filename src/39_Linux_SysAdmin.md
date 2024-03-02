@@ -31,7 +31,18 @@
 而在可以通过 AD 上的账号登录后，又报错以下错误：
 
 ```console
-Last login: Sat Mar  2 16:43:18 2024                                                                                    -bash: groups: 未找到命令                                                                                               命令 “lesspipe” 可在以下位置找到                                                                                         * /bin/lesspipe                                                                                                         * /usr/bin/lesspipe                                                                                                    由于 /usr/bin:/bin 不在 PATH 环境变量中，故无法找到该命令。                                                             lesspipe：未找到命令                                                                                                    命令 “dircolors” 可在以下位置找到                                                                                        * /bin/dircolors                                                                                                        * /usr/bin/dircolors                                                                                                   由于 /bin:/usr/bin 不在 PATH 环境变量中，故无法找到该命令。                                                             dircolors：未找到命令
+Last login: Sat Mar  2 16:43:18 2024                                                                                
+-bash: groups: 未找到命令                                                                                           
+命令 “lesspipe” 可在以下位置找到                                                                                    
+ * /bin/lesspipe                                                                                                    
+ * /usr/bin/lesspipe                                                                                                
+由于 /usr/bin:/bin 不在 PATH 环境变量中，故无法找到该命令。                                                         
+lesspipe：未找到命令                                                                                                
+命令 “dircolors” 可在以下位置找到                                                                                   
+ * /bin/dircolors
+ * /usr/bin/dircolors                                                                                               
+由于 /bin:/usr/bin 不在 PATH 环境变量中，故无法找到该命令。                                                         
+dircolors：未找到命令
 ```
 
 分析是 PAM 登录方式下，未能正确加载用户环境变量所致。故要修改 `/etc/security/pam_env.conf` 文件，取消以下两行的注释：
