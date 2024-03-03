@@ -36,7 +36,8 @@
 - [SVN notes](48_SVN_notes.md)
 - [Data encryption with openssl](50_data_encryption_with_openssl.md)
 - [Virtualization](51_virtualization.md)
-- [Redmine deployment](52_redmine_deployment.md)
+- [Redmine Deployment](52_redmine_deployment.md)
+- [GNS3 Network Study](54_gns3_network_study.md)
 
 ---
 # 编程开发
@@ -65,4 +66,4 @@
 - [IPTV Watching Guide](37_IPTV_Watching_Guide.md)
 - [ArchLinux Wi-Fi AP Setup](38_ArchLinux_Wi-Fi_ap_setup.md)
 - [Multi-threaded and Segmented FTP](40_Multi-threaded_and_Segmented_FTP.md)
-- [Favored software list](53_favored_software_list.md)
+- [Favored Software List](53_favored_software_list.md)
