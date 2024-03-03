@@ -65,3 +65,4 @@
 - [IPTV Watching Guide](37_IPTV_Watching_Guide.md)
 - [ArchLinux Wi-Fi AP Setup](38_ArchLinux_Wi-Fi_ap_setup.md)
 - [Multi-threaded and Segmented FTP](40_Multi-threaded_and_Segmented_FTP.md)
+- [Favored software list](53_favored_software_list.md)
