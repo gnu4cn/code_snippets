@@ -3,6 +3,15 @@
 Win 系统使用心得与经验记录。
 
 
+## `W32Time` 服务无法启动
+
+使用 `net start w32time`，或在 `服务Services` 管理程序中启动 `W32Time` 服务时，可能遇到该服务无法启动的问题。原因是 windows time 服务失效。
+
+修复：在提升权限的 CMD 窗口中，键入 `w32tm /register`，将输出：`W32Time 成功注册`。此时再使用 `net start "windows time"`，或 `net start w32time` 命令，启动该服务。
+
+参考：[windows time 服务无法启动解决方法：`w32tm /register`](https://blog.51cto.com/56214415/391810)
+
+
 
 ## Windows DNS 解析异常的一种情况
 
