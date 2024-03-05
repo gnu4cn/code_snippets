@@ -594,7 +594,7 @@ $ bin/otrs.Console.pl Maint::Log::CommunicationLog --delete-by-hours-old="1" --f
 
 这是由于服务器的 DNS，在解析 MX 记录时，遇到错误所致。做法是修改服务器上的 DNS 服务器，到正确的 DNS 服务器。
 
-> **在 Linux 上设置有效的 DNS 服务器**
+### 在 Linux 上设置有效的 DNS 服务器
 
 {{#include 07_Add_Linux_to_AD.md:47:56}}
 
