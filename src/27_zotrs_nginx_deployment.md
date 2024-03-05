@@ -582,3 +582,14 @@ $ bin/otrs.Console.pl Maint::Log::CommunicationLog --delete-by-hours-old="1" --f
 1. OTRS，是 Open-Source Ticket Request System，开源技术支持请求系统的首字母缩写，是一种自由与开源的，公司、组织或其他实体可以用于将技术支持记录，分配给提交的技术支持请求，并跟踪有关这些技术支持随后的联络的故障执行系统软件包。他表示了多种的技术支持受理、反馈、支持请求、缺陷报告及其他有关的联络；
 
 2. nginx （发音为 “engine-x”） 是一个开放源代码的 Web 服务器，及一种用于 HTTP、SMTP、POP 与 IMAP 协议的反向代理服务器，其强调了高并发、性能及低内存使用。他有着类 BSD 许可证的授权，并运行在 Unix、Linux、BSD 的各种变种、Mac OS X、Solaris、AIX 及 M$ Windows 等操作系统之上。
+
+
+##  "One or more errors occurred!" 问题
+
+
+参考：[One or more errors occurred!](https://community.znuny.org/viewtopic.php?t=34023)
+
+回复工单邮件时，出线，"Please remove this entry and enter a new one with the correct value."，'请删除这个条目并重新输入一个正确的值。'
+
+
+这是由于服务器的 DNS，在解析 MX 记录时，遇到错误所致。做法是修改服务器上的 DNS 服务器，到正确的 DNS 服务器。（[CentOS 设置 DNS 服务器](https://snippets.xfoss.com/07_Add_Linux_to_AD.html#02-%E5%9C%A8-linux-%E6%9C%BA%E5%99%A8%E4%B8%8A%E9%85%8D%E7%BD%AE%E6%9C%89%E6%95%88%E7%9A%84-dns-%E6%9C%8D%E5%8A%A1%E5%99%A8)）
