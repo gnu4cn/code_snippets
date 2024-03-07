@@ -598,3 +598,10 @@ $ bin/otrs.Console.pl Maint::Log::CommunicationLog --delete-by-hours-old="1" --f
 
 {{#include 07_Add_Linux_to_AD.md:47:56}}
 
+
+## `IMAP: Can't fetch email 549 from helpdesk@xfoss.com/imap.exmail.qq.com. Email too big (30331 KB - max 16384 KB)!`
+
+
+修改 `Kernel/Config/Files/ZZZAAuto.pm` 文件中的 `PostMasterMaxEmailSize`，并检查是否生效。
+
+参考：[Can't fetch email...Email too big.](https://community.znuny.org/viewtopic.php?t=19107)
