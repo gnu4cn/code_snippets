@@ -71,4 +71,23 @@ postgres=# grant all on schema public to redmine;
 > **注意**：上面最后一行后面的 `;` 必须输入。
 
 
+## `rvm` 与安装特定版本的 `ruby` 时遇到的问题
+
+
+参考：[Cannot install ruby version 2.6.6 on Ubuntu 22.04](https://stackoverflow.com/a/72096279)
+
+
+`rvm` 是与 `nvm` 类似的 `ruby` 版本管理工具。在运行 `rvm install ruby-x.y.z` 安装特定版本会遇到失败的问题，检查日志文件：
+
+`/usr/local/rvm/log/1709778431_ruby-2.6.0/make.log`
+
+会发现：`make: *** [uncommon.mk:286: build-ext] Error 2`。此时需要先安装 `openssl`，然后再安装特定版本的 `ruby`:
+
+```console
+rvm pkg install openssl
+rvm install ruby-x.y.z --with-openssl-dir=/usr/local/rvm/usr
+```
+
+
+
 
