@@ -12,7 +12,6 @@
 - [Hackintosh](04_Hackintosh.md)
 - [`modprobe`](05_modprobe.md)
 - [Extend a Disk Partion with Unallocated Disk Space in Linux](10_Extend_a_Disk_Partion_with_Unallocated_Disk_Space_in_Linux.md)
-- [LDAP Query](11_LDAP_Query.md)
 - [BPM Deployment](13_BPM_deployment.md)
 - [RG AC Configuration Notes](16_RG_AC_configuration_notes.md)
 - [Nginx php](18_nginx_php.md)
