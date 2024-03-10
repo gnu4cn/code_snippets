@@ -11,8 +11,6 @@
 - [Ionic 4 flask cors](03_ionic_4_flask_cors.md)
 - [Hackintosh](04_Hackintosh.md)
 - [`modprobe`](05_modprobe.md)
-- [06 Viewflow deploy notes](06_Viewflow_Deploy_Notes.md)
-- [Add Linux to AD](07_Add_Linux_to_AD.md)
 - [Extend a Disk Partion with Unallocated Disk Space in Linux](10_Extend_a_Disk_Partion_with_Unallocated_Disk_Space_in_Linux.md)
 - [LDAP Query](11_LDAP_Query.md)
 - [BPM Deployment](13_BPM_deployment.md)
