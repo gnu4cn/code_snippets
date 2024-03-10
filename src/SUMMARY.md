@@ -6,9 +6,7 @@
 
 # 运维
 
-- [BPM Deployment](13_BPM_deployment.md)
 - [RG AC Configuration Notes](16_RG_AC_configuration_notes.md)
-- [Nginx php](18_nginx_php.md)
 - [Wordpress Optimization](19_wordpress_optimization.md)
 - [Dot 1 X Port Dynamic VLAN](22_dot1x_port_dynamic_vlan.md)
 - [Huawei Switch SSH TELENT Weird Problem](23_Huawei_switch_SSH_TELENT_weird_problem.md)
