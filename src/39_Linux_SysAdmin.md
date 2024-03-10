@@ -458,14 +458,14 @@ sudo apt install -y vim sssd-ad sssd-tools realmd adcli krb5-user
 > **注**：对于 CentOS 7，需安装如下的这些软件包：
 
 ```console
-$ sudo yum install sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python -y
+sudo yum install sssd realmd oddjob oddjob-mkhomedir adcli samba-common samba-common-tools krb5-workstation openldap-clients policycoreutils-python -y
 ```
 
 在 Debian Bookworm 上，需安装以下软件包：
 
 
 ```console
-apt -y install realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin oddjob oddjob-mkhomedir packagekit
+sudo apt -y install realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin oddjob oddjob-mkhomedir packagekit
 ```
 
 > 对于 Ubunt 22.04，还需检查 `/etc/krb5.conf`, 确保有着下面的配置（否则域用户登录不上）：
@@ -633,7 +633,7 @@ fallback_homedir = /home/%u
 （在 CentOS 7 上）用户登录的情况：
 
 ```console
-$ ssh lenny.peng@192.168.192.134
+ssh lenny.peng@192.168.192.134
 lenny.peng@192.168.192.134's password:
 Creating home directory for lenny.peng.
 ```
@@ -686,7 +686,7 @@ SASL data security layer installed.
 在 Ubuntu 上，会出现照上述步骤配置好后，无法使用 LDAP/AD 账号登录的情况，如下所示：
 
 ```log
-$ less /var/log/auth.log
+less /var/log/auth.log
 ...
 Nov 30 14:19:15 fpga-sta sshd[7060]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.12.10.96  user=leny.peng
 Nov 30 14:19:15 fpga-sta sshd[7060]: pam_sss(sshd:auth): authentication success; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.12.10.96 user=lenn.peng
