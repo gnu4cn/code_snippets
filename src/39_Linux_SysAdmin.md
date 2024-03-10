@@ -215,7 +215,7 @@ sudo apt-get install x2goclient
 ```
 
 
-## "Authentication required. System policy prevents WiFi scans"
+### "Authentication required. System policy prevents WiFi scans"
 
 在使用 X2go 客户端连接到 Linux Mate 桌面时，会遇到这个问题。参考：
 
@@ -236,11 +236,40 @@ ResultActive=yes
 
 然后运行 `$ sudo systemctl restart polkit.service` 重启该服务，之后问题解决。
 
-## X2Go "Globally allow server-side disabling of the clipboard" 问题
+### X2Go "Globally allow server-side disabling of the clipboard" 问题
 
 此问题已在 `X2Go` `4.0.1.16` 版本中解决，参考 [Globally allow server-side disabling of the clipboard](https://bugs.x2go.org/cgi-bin/bugreport.cgi?bug=506)
 
 在文件 `/etc/x2go/x2goagent.options` 中，找到 `X2GO_NXAGENT_DEFAULT_OPTIONS+=" -clipboard both"` 这行，将其解除注释，然后根据需要设置 `both`、`client`、`server` 或 `none` 选项。
+
+
+### X2go "Authentication is required to create a color profile/managed device"  问题
+
+
+参考：[How to fix “Authentication is required to create a color profile/managed device” on Ubuntu 22.04](https://www.geekdecoder.com/how-to-fix-authentication-is-required-to-create-a-color-profile-managed-device-on-ubuntu-22-04/)
+
+
+解决方法（Debian Bookworm）：
+
+```console
+sudo mkdir -p /etc/polkit-1/localauthority/50-local.d
+sudo vim /etc/polit-1/localauthority/50-local.d/45-allow-colord.pkla
+```
+
+将下面的内容，粘贴到该文件：
+
+
+```pkla
+[Allow Colord all Users]
+Identity=unix-user:*
+Action=org.freedesktop.color-manager.create-device;org.freedesktop.color-manager.create-profile;org.freedesktop.color-manager.delete-device;org.freedesktop.color-manager.delete-profile;org.freedesktop.color-manager.modify-device;org.freedesktop.color-manager.modify-profile
+ResultAny=no
+ResultInactive=no
+ResultActive=yes
+```
+
+
+然后运行 `$ sudo systemctl restart polkit.service` 重启该服务，之后问题解决。
 
 
 ## "Ehternet device not managed" 问题
