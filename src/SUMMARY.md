@@ -6,12 +6,6 @@
 
 # 运维
 
-- [Flask `uwsgi` `supervisord`](01_flask_uwsgi_supervisord.md)
-- [`ionic serve`](02_ionic_serve.md)
-- [Ionic 4 flask cors](03_ionic_4_flask_cors.md)
-- [Hackintosh](04_Hackintosh.md)
-- [`modprobe`](05_modprobe.md)
-- [Extend a Disk Partion with Unallocated Disk Space in Linux](10_Extend_a_Disk_Partion_with_Unallocated_Disk_Space_in_Linux.md)
 - [BPM Deployment](13_BPM_deployment.md)
 - [RG AC Configuration Notes](16_RG_AC_configuration_notes.md)
 - [Nginx php](18_nginx_php.md)
@@ -39,7 +33,9 @@
 ---
 # 编程开发
 
+
 - [Sh Bash](00_sh_bash.md)
+- [Make apps with Flask and Ionic](01_flask_and_ionic.md)
 - [Using Huawei Repos](08_Using_Huawei_Repos.md)
 - [Java Learning](12_Java_Learning.md)
 - [`ffmpeg`](15_ffmpeg.md)

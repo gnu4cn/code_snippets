@@ -1,4 +1,10 @@
-# Flask 框架技巧
+# 使用 Python Flask（Restful 后端）与 Inoic（前端）开发应用
+
+本文记录使用 Flask 与 Ionic 开发应用的一些问题。
+
+
+
+## Flask 框架技巧
 
 
 1. 在项目中有正确的 `wsgi.py` 或 `app.py` 时，通过 `flask shell`进入一个 CLI。
@@ -49,3 +55,30 @@ pidfile = %v/uwsgi_socket-io.pid
 lazy-apps = true
 ```
 
+## 解决`ionic serve`不自动编译的问题
+
+需要提升 `fs.inotify.max_user_watches` 参数：
+
+[https://github.com/ionic-team/ionic-app-scripts/issues/1239#issuecomment-342143562](https://github.com/ionic-team/ionic-app-scripts/issues/1239#issuecomment-342143562)
+
+如何提升：
+
+[https://stackoverflow.com/a/32600959/98057](https://stackoverflow.com/a/32600959/98057)
+
+
+
+
+
+## Ionic 4(Angular) 访问 Flask-Restful API时的CORS问题
+
+此问题是Flask应用服务器未设置 `Access-Control-Allow-Origin` 头所造成的。与 Ionic、Angular、uwsgi、Nginx均没有关系。
+
+> https://stackoverflow.com/questions/26980713/solve-cross-origin-resource-sharing-with-flask
+
+使用 Flask-Cors 可以不修改代码，就解决此问题
+
+> https://github.com/corydolphin/flask-cors
+
+也可以使用 Flask-Restful 自带的装饰器 `crossdomain` 给指定Api限制访问域名
+
+> https://github.com/flask-restful/flask-restful/blob/master/flask_restful/utils/cors.py
