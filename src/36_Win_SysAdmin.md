@@ -3,6 +3,32 @@
 Win 系统使用心得与经验记录。
 
 
+
+## AD 域服务器多个子网与路由问题
+
+
+参考：[11.4. Creating a Subnet](https://www.oreilly.com/library/view/active-directory-cookbook/0596004648/ch11s05.html)
+
+
+1. 打开 “Active Directory 站点和服务管理单元”， the Active Directory Sites and Services snap-in；
+
+![站点和服务管理单元](images/Sites_and_Services_snap-in.png)
+
+2. 右击 `Subnets` 容器，并选择新建子网；
+
+3. 输入地址和掩码，并在随后选择该子网是哪个站点的一部分；
+
+4. 点击 `OK`。
+
+
+注意：一台服务器接入多个网卡后，会出现路由问题。此时，需要使用 `route` 命令，删除默认路由并建立正确的默认永久路由。
+
+```powershell
+route delete 0.0.0.0
+route add 0.0.0.0 mask 0.0.0.0 10.11.0.254 -p
+```
+
+
 ## `C:\Windows\system32\control.exe` 权限问题（Server 2019）
 
 参考：[Windows Server 2019 Standard - Active Directory Domain Services](https://learn.microsoft.com/en-us/answers/questions/490998/windows-server-2019-standard-active-directory-doma?page=2)
