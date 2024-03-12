@@ -3,6 +3,24 @@
 Win 系统使用心得与经验记录。
 
 
+## `C:\Windows\system32\control.exe` 权限问题（Server 2019）
+
+参考：[Windows Server 2019 Standard - Active Directory Domain Services](https://learn.microsoft.com/en-us/answers/questions/490998/windows-server-2019-standard-active-directory-doma?page=2)
+
+
+在修改网卡参数时，会碰到这个问题。
+
+
+![Win Server 2019 无法修改网卡选项](images/error-control.png)
+
+
+解决办法：
+
+
+前往 `Local Security Policy` -> `Local Policies` -> `Security Options` -> `User Account Control: Admin Approval Mode for the Built-in Administrator account`, 启用这个选项。重启服务器并再度尝试，便可修复此问题。
+
+
+
 ## `W32Time` 服务无法启动
 
 使用 `net start w32time`，或在 `服务Services` 管理程序中启动 `W32Time` 服务时，可能遇到该服务无法启动的问题。原因是 windows time 服务失效。
