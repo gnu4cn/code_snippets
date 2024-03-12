@@ -10,6 +10,7 @@ Win 系统使用心得与经验记录。
 参考：[11.4. Creating a Subnet](https://www.oreilly.com/library/view/active-directory-cookbook/0596004648/ch11s05.html)
 
 
+
 1. 打开 “Active Directory 站点和服务管理单元”， the Active Directory Sites and Services snap-in；
 
 ![站点和服务管理单元](images/Sites_and_services_snap-in.png)
