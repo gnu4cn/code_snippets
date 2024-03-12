@@ -13,7 +13,7 @@ Win 系统使用心得与经验记录。
 
 1. 打开 “Active Directory 站点和服务管理单元”， the Active Directory Sites and Services snap-in；
 
-![站点和服务管理单元](images/Sites_and_services_snap-in.png)
+![站点和服务管理单元](images/sites_and_services.png)
 
 2. 右击 `Subnets` 容器，并选择新建子网；
 
