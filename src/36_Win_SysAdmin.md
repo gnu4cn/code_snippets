@@ -19,6 +19,7 @@ Win 系统使用心得与经验记录。
 
 前往 `Local Security Policy` -> `Local Policies` -> `Security Options` -> `User Account Control: Admin Approval Mode for the Built-in Administrator account`, 启用这个选项。重启服务器并再度尝试，便可修复此问题。
 
+`本地安全策略` -> `本地策略` -> `安全选项` -> `用户账户控制：用于内置管理员账户的管理员批准模式`。
 
 
 ## `W32Time` 服务无法启动
