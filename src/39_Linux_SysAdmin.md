@@ -777,3 +777,9 @@ $sudo cfdisk
 此方法更为简便，直接使用 GParted 启动镜像，可扩大 Linux 与 Windows 的分区，使用新增/闲置的磁盘空间。
 
 
+## `cannot find required auxiliary files: ltmain.sh compile missing install-sh`
+
+
+参考：[Automake error './ltmain.sh' not found](https://stackoverflow.com/a/22625555)
+
+需要使用 `autoreconf` 工具，先要安装 `sudo apt install -y libtool`，然后运行 `autoreconf -i` 即可解决。
