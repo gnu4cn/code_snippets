@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 TARGET_DIR="/home/data/测试文件"
 FTP_SERVER="ftp://10.11.1.9"
-CRED="tsn_download:S8r0-P19" 
+CRED="xfoss-com:123456789" 
 
 for file in $(curl -s -u "$CRED" "$FTP_SERVER" -l); do
 	remote="$FTP_SERVER/$file"
