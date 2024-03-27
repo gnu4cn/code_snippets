@@ -727,6 +727,13 @@ Nov 30 14:19:15 fpga-sta sshd[7060]: fatal: Access denied for user lenny.peng by
 ```
 
 
+
+
+
+一种妥协的处理办法是，将 `ad_gpo_access_control = permissive` 添加到 `/etc/sssd/sssd.conf` 配置文件的 `[domain/xfoss.com]` 小节，便可通过 LDAP/AD 登录了。
+
+参考：[Debugging sssd login: pam_sss [...] System error](https://serverfault.com/q/872542)
+
 **Debian 上不能正确显示组名字**
 
 
@@ -750,11 +757,6 @@ root@dlp:~# systemctl restart sssd
 ```
 
 
-
-
-一种妥协的处理办法是，将 `ad_gpo_access_control = permissive` 添加到 `/etc/sssd/sssd.conf` 配置文件的 `[domain/xfoss.com]` 小节，便可通过 LDAP/AD 登录了。
-
-参考：[Debugging sssd login: pam_sss [...] System error](https://serverfault.com/q/872542)
 
 
 ## modprobe
