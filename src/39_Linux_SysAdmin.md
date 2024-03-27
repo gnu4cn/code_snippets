@@ -726,6 +726,32 @@ Nov 30 14:19:15 fpga-sta sshd[7060]: fatal: Access denied for user lenny.peng by
 ...
 ```
 
+
+**Debian 上不能正确显示组名字**
+
+
+需要执行以下操作：
+
+
+```console
+ root@dlp:~# vi /etc/sssd/sssd.conf
+# line 17 : change
+
+# ldap_id_mapping = False
+# add to the end
+
+ldap_user_uid_number = uidNumber
+ldap_user_gid_number = gidNumber
+# clear cache and restart sssd
+
+root@dlp:~# rm -f /var/lib/sss/db/*
+
+root@dlp:~# systemctl restart sssd
+```
+
+
+
+
 一种妥协的处理办法是，将 `ad_gpo_access_control = permissive` 添加到 `/etc/sssd/sssd.conf` 配置文件的 `[domain/xfoss.com]` 小节，便可通过 LDAP/AD 登录了。
 
 参考：[Debugging sssd login: pam_sss [...] System error](https://serverfault.com/q/872542)
