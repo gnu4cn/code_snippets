@@ -1,4 +1,10 @@
-# 在内网安装 Python 第三方包
+# Python tips
+
+
+本文记录 Python 的一些技巧、疑难现象。
+
+
+## 在内网安装 Python 第三方包
 
 参考：[如何在内网安装python第三方包（库）](https://blog.csdn.net/xue_11/article/details/112802149)
 
@@ -18,3 +24,20 @@
 
 
 **注意**：批量安装 `requirements.txt` 中的库时，建议将 `pip` 的安装包删掉，因为内网机器上以及有 `pip` 这个包了，删除时应将 `packages_required` 文件夹中的 `pip*.whl` 文件、`requirements.txt` 中 `pip` 这行删掉。
+
+
+
+## `import git` 报出 `Segmentation fault` 
+
+
+![`import git` 报出 `Segmentation fault` 错误](images/import-git-segmentation-fault.png)
+
+此问题较难发现、解决，耗时较长。期间发现 `import git` 疑似与 `GitPython` 相关，但实则是 `python-git` 所提供。
+
+随后偶然发现在 `import pygit` 随后再 `import git` 时，就不报 `Segmentation fault` 错误了。且随后可以在 Python 程序中使用 `git` 这个模块了。
+
+
+![`import git` 成功](images/import-git.png)
+
+
+![使用导入的 `git` 模块](images/using-pygit.png)
