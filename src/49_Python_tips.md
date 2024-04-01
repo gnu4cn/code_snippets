@@ -45,7 +45,11 @@
 
 ## `import pandas` 报出 `segmentation fault`
 
-Python 3.6.8 中，运行程序时，始终报出 `segmentation fault`。逐一排查，程序依赖 `pandas` 包，而 `pandas` 包又依赖 `numpy` 这个包。在环境中成功安装了 `numpy` 包后直接 `import numpy` 时，会报出 `segmentation fault`。此问题并非个例，如：[Segmentation fault (core dumped) while trying to print numpy and pandas objects in python via cygwin](https://stackoverflow.com/questions/70511576/segmentation-fault-core-dumped-while-trying-to-print-numpy-and-pandas-objectshttps://stackoverflow.com/questions/70511576/segmentation-fault-core-dumped-while-trying-to-print-numpy-and-pandas-objects)。
+
+Python 3.6.8 中，运行程序时，始终报出 `segmentation fault`。逐一排查，程序依赖 `pandas` 包，而 `pandas` 包又依赖 `numpy` 这个包。在环境中成功安装了 `numpy` 包后直接 `import numpy` 时，会报出 `segmentation fault`。
+
+
+此问题并非个例，如：[Segmentation fault (core dumped) while trying to print numpy and pandas objects in python via cygwin](https://stackoverflow.com/questions/70511576/segmentation-fault-core-dumped-while-trying-to-print-numpy-and-pandas-objectshttps://stackoverflow.com/questions/70511576/segmentation-fault-core-dumped-while-trying-to-print-numpy-and-pandas-objects)。
 
 
 但是，与上一个 `import git` 报 `segmentation fault` 类似，在 `import pandas`（或 `import numpy`）前，放一个 `import pip` 的行，就不会再报出 `segmentation fault` 错误。
