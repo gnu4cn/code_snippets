@@ -16,6 +16,25 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+
+## Debian 网络配置中的一个问题
+
+
+在安装了 Debian 基本系统，手动配置了网络接口 IP 地址后，因需要使用其图形界面，故安装了 Xfce, Lxde 两个桌面环境，而随之安装了 [`connman` 软件包](https://packages.debian.org/bookworm/connman)。此时原先手动配置的 IP 地址失效，`connman` 接管了系统网络接口的配置，手动配置的 IP 地址失效，网络接口将默认通过 DHCP 获取 IP 地址，除非在 `connman` 中设置了 IP 地址。
+
+
+此外，`connman` 将建立一条默认 `default` 路由，且经测试，该默认路由无法通过 `ip route delete` 或 `route delete` 删除。从而给主机通信造成问题。
+
+
+要在使用 `connman` 的情况下，有正确的默认路由，可修改 `connman` 配置文件 `/etc/connman/main.conf`，利用 `NetworkInterfaceBlacklist`，先暂时把不希望作为默认路由的网卡，设置为不由 `connman` 管理，随后运行 `systemctl restart connman` 即可生效。等得到正确的默认路由后，再注释掉这个配置，此后也要运行 `systemctl restart connman`。
+
+
+
+
+
+
+
+
 ## `sshd_config` 中 `UsePAM yes` 及 `PAM` 环境变量的问题
 
 

@@ -123,3 +123,23 @@ I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
 ```
 
 - 可以看到 `Disk /dev/mapper/me5_vol01_20t: 18.19 TiB, 19999997558784 bytes, 39062495232 sectors` 已经出现，随后即可使用磁盘工具对其格式化并加以使用。
+
+
+
+### Debian 下格式化多路径的块设备
+
+
+经由 `multipathd` 建立的多路径下的块设备，比如 `/dev/mapper/me5_vol01_20ti`，在使用命令 `sudo gparted /dev/mapper/me5_vol01_20ti`，欲对其进行分区格式化创建文件系统以加以利用时，发现总是会报出 `Device or resource busy` 错误。
+
+有人的解决办法，是暂时移除多路径设备的映射。步骤如下：
+
+
+- 移除多路径设备名字。（`multipath -f /dev/mappper/me5_vol01_20ti`）;
+
+- 对多路径从设备运行 `gparted`。（如：`sudo gparted /dev/sdb`）;
+
+- 重建多路径设备映射。（`multipath -r`）。
+
+
+参考：[mke2fs says "Device or resource busy while setting up superblock"](https://serverfault.com/a/727244/994825)
+
