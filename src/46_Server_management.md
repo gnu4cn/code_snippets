@@ -141,5 +141,112 @@ I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
 - 重建多路径设备映射。（`multipath -r`）。
 
 
-参考：[mke2fs says "Device or resource busy while setting up superblock"](https://serverfault.com/a/727244/994825)
+**注意**：在移除多路径设备时，若多路径设备已被挂载，那么会报出以下错误：
+
+
+```console
+root@backup:~# multipath -f /dev/mapper/me5_vol01_20t
+59172.163246 | me5_vol01_20t-part1: map in use
+```
+
+在排除了对该多路径设备的已有挂载后，移除多路径设备的命令将不再报错。
+
+
+参考：
+
+- [mke2fs says "Device or resource busy while setting up superblock"](https://serverfault.com/a/727244/994825)
+
+- [Multipath: Best and Safe Solution Map in Use Devices](https://www.teimouri.net/remove-multipath-device/)
+
+
+## `btrfs` 分区的挂载
+
+
+临时挂载 `btrfs` 分区，直接运行命令 `sudo mount /dev/mapper/me5_vol01_20ti-part1 /0.135`，即可把 `/dev/mapper/me5_vol01_20ti-part1` 挂载到主机的 `/0.135` 目录下。
+
+要将此挂载设置，写入到 `/etc/fstab`，就需要先找到 `btrfs` 设备的信息，通过以下方式之一：
+
+
+```console
+# btrfs filesystem show /mount/point/
+# btrfs filesystem show /dev/DEVICE
+# btrfs filesystem show /dev/sda
+# btrfs filesystem show
+```
+
+比如：
+
+
+```console
+root@backup:~# btrfs filesystem show
+Label: none  uuid: e508b096-1641-41aa-96f4-37548f6e33dd
+        Total devices 1 FS bytes used 24.56GiB
+        devid    1 size 7.27TiB used 45.02GiB path /dev/sdd4
+
+Label: none  uuid: ca060281-526e-4a88-b9f5-296a32624c9b
+        Total devices 1 FS bytes used 78.37MiB
+        devid    1 size 487.00MiB used 216.00MiB path /dev/sdd1
+
+Label: none  uuid: 8447d73b-fd92-4ee1-9769-af1961ceb79c
+        Total devices 1 FS bytes used 144.00KiB
+        devid    1 size 195.31GiB used 2.02GiB path /dev/mapper/me5_vol01_20t-part1
+
+```
+
+
+### `mount` 命令语法
+
+
+```console
+root@backup:~# mkdir /data/
+root@backup:~# mount /dev/mapper/me5_vol01_20t-part1 /data
+root@backup:~# btrfs filesystem df /data
+Data, single: total=8.00MiB, used=0.00B
+System, DUP: total=8.00MiB, used=16.00KiB
+Metadata, DUP: total=1.00GiB, used=128.00KiB
+GlobalReserve, single: total=3.50MiB, used=0.00B
+```
+
+
+### `/etc/fstab` 文件语法
+
+
+首先要找出设备的 UUID，请输入：
+
+
+```console
+# blkid /dev/mapper/me5_vol01_20t-part1
+```
+
+或
+
+```console
+# lsblk --fs /dev/mapper/me5_vol01_20t-part1
+```
+
+将输出：
+
+```console
+root@backup:~# blkid /dev/mapper/me5_vol01_20t-part1
+/dev/mapper/me5_vol01_20t-part1: UUID="8447d73b-fd92-4ee1-9769-af1961ceb79c" UUID_SUB="04798ed7-4ad0-4ea2-b2e1-154fae497871" BLOCK_SIZE="4096" TYPE="btrfs" PARTUUID="2cd4eb20-779e-4c8c-9d73-82280115407e"
+```
+
+
+```console
+root@backup:~# lsblk --fs /dev/mapper/me5_vol01_20t-part1
+NAME                FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+me5_vol01_20t-part1 btrfs              8447d73b-fd92-4ee1-9769-af1961ceb79c
+root@backup:~# lsblk --fs /dev/mapper/me5_vol01_20t-part2
+NAME                FSTYPE FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+me5_vol01_20t-part2 btrfs              34d15471-e8b1-401e-94cd-f4465e6ad4ba
+```
+
+然后编辑 `/etc/fstab`，下面的语法，是使用 UUID 把 `btrfs` 设备挂载于 `/0.135` 和 `/me5_vol01_part2` 两个挂载点：
+
+
+```fstab
+UUID=8447d73b-fd92-4ee1-9769-af1961ceb79c /0.135           btrfs   defaults        0       0
+UUID=34d15471-e8b1-401e-94cd-f4465e6ad4ba /me5_vol01_part2          btrfs   defaults        0       0
+```
+
 
