@@ -261,3 +261,15 @@ FAS2750::> voloume modify -vserver svm_data -volume tempdata -files 200000000
 ```
 
 随后运行 `df -i`，将显示挂载的存储卷 `IUse%` 已降至低于 `100%`。
+
+`df -i` 的示例输出：
+
+
+```console
+% df  -i
+Filesystem      Inodes  IUsed   IFree IUse% Mounted on
+tmpfs           122560    624  121936    1% /run                                                                                                                                     /dev/sda       1605632 289295 1316337   19% /
+tmpfs           122560      1  122559    1% /dev/shm
+tmpfs           122560      3  122557    1% /run/lock
+tmpfs            24512     25   24487    1% /run/user/1000
+```
