@@ -250,3 +250,14 @@ UUID=34d15471-e8b1-401e-94cd-f4465e6ad4ba /me5_vol01_part2          btrfs   defa
 ```
 
 
+## 存储文件数量限制导致可用空间为 0
+
+
+运行 `df -i`，可以看到 `IUse%` 为 `100%`。此时即使存储还有可用空间，程序仍会报出可用空间为 `0`。解决方法：调整存储的文件数量限制。以 NetApp 为例：
+
+
+```console
+FAS2750::> voloume modify -vserver svm_data -volume tempdata -files 200000000
+```
+
+随后运行 `df -i`，将显示挂载的存储卷 `IUse%` 已降至低于 `100%`。
