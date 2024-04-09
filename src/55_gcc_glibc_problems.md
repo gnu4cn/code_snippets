@@ -34,3 +34,5 @@ export LD_LIBRARY_PATH=/opt/gcc-11.4.0/lib64:$LD_LIBRARY_PATH
 2. [Intro to ‘make’ Linux Command: Installation and Usage](https://ioflood.com/blog/install-make-command-linux/#Installing_8216make8217_Command_from_Source_Code)
 
 3. [centos7升级glibc2.28](https://blog.csdn.net/nangonghen/article/details/132258675)
+
+4. [下载最新的glibc库并临时使用，而不污染原有系统环境](https://www.cnblogs.com/saolv/p/9762842.html)
