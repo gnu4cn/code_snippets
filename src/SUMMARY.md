@@ -46,6 +46,7 @@
 - [`git` skills](43_git_skills.md)
 - [An burn-down chart app deployment notes](45_burn-down_chart_notes.md)
 - [Python tips](49_Python_tips.md)
+- [GCC and GLIBC problems](55_gcc_glibc_problems.md)
 
 ---
 # 杂项
