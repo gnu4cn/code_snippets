@@ -20,3 +20,17 @@ export LD_LIBRARY_PATH=/opt/gcc-11.4.0/lib64:$LD_LIBRARY_PATH
 
 
 此问题正在解决中，预计需要重新构建 GLIBC。
+
+重新构建 GLIBC 2.27 时，需要使用 GCC 7.3.0 和 GNU Make 4.2.1；因此需要首先构建指定版本的这两个工具。
+
+
+在执行 `../configure ...` 后，就要使用 `/opt/make-4.2.1/bin/make`，在 `build` 目录下，直接调用 GNU Make 4.2.1 工具，进行 GLIBC 2.27 的构建。
+
+
+参考：
+
+1. [How To Install GCC on CentOS 7](https://linuxhostsupport.com/blog/how-to-install-gcc-on-centos-7/)
+
+2. [Intro to ‘make’ Linux Command: Installation and Usage](https://ioflood.com/blog/install-make-command-linux/#Installing_8216make8217_Command_from_Source_Code)
+
+3. [centos7升级glibc2.28](https://blog.csdn.net/nangonghen/article/details/132258675)
