@@ -39,3 +39,5 @@ export LD_LIBRARY_PATH=/opt/gcc-11.4.0/lib64:$LD_LIBRARY_PATH
 3. [centos7升级glibc2.28](https://blog.csdn.net/nangonghen/article/details/132258675)
 
 4. [下载最新的glibc库并临时使用，而不污染原有系统环境](https://www.cnblogs.com/saolv/p/9762842.html)
+
+5. [GCC and linking environment variables and flags](https://stackoverflow.com/a/16047559/12288760)
