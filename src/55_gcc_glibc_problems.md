@@ -26,6 +26,9 @@ export LD_LIBRARY_PATH=/opt/gcc-11.4.0/lib64:$LD_LIBRARY_PATH
 
 在执行 `../configure ...` 后，就要使用 `/opt/make-4.2.1/bin/make`，在 `build` 目录下，直接调用 GNU Make 4.2.1 工具，进行 GLIBC 2.27 的构建。
 
+
+经测试，使用 GCC 7.3.0 和 GNU Make 4.1 构建 GLIBC 2.29 没有问题。
+
 **注意**：在系统（CentOS EL7）上存在多个 GLIBC 时，不能 `export LD_LIBRARY_PATH=/opt/glibc-2.27/lib:$LD_LIBRARY_PATH`，这样在执行系统工具（如：`ls`、`ps`）时，会报出 `Segmentation fault` 错误。而应 `export LD_LIBRARY_PATH=/lib64:/opt/glibc-2.27/lib:$LD_LIBRARY_PATH`，避免此类错误。
 
 
