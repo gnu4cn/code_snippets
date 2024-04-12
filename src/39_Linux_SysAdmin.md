@@ -830,3 +830,12 @@ $sudo cfdisk
 参考：[Automake error './ltmain.sh' not found](https://stackoverflow.com/a/22625555)
 
 需要使用 `autoreconf` 工具，先要安装 `sudo apt install -y libtool`，然后运行 `autoreconf -i` 即可解决。
+
+
+## `make uninstall`
+
+
+在编译安装 GCC 时，由于没有配置 `--prefix=/opt/gcc-11.4.0`，而导致 `gcc` 被安装在 `/usr/local/bin` 下。此时欲运行 `make uninstall` 移除这种安装，但在 `gcc-11.4.0` 源码目录下，直接运行 `sudo make uninstall` 不行。查询发现，应在 `gcc-11.4.0/gcc` 目录下，才能执行 `sudo make uninstall` 命令。
+
+
+参考：[卸载源码安装的gdb报错问题](https://axss.oschina.io/2018/12/21/%E6%8A%80%E6%9C%AF/2018-12-21-%E5%8D%B8%E8%BD%BD%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85%E7%9A%84gdb%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/index.html)
