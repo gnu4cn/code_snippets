@@ -32,6 +32,28 @@ export LD_LIBRARY_PATH=/opt/gcc-11.4.0/lib64:$LD_LIBRARY_PATH
 **注意**：在系统（CentOS EL7）上存在多个 GLIBC 时，不能 `export LD_LIBRARY_PATH=/opt/glibc-2.27/lib:$LD_LIBRARY_PATH`，这样在执行系统工具（如：`ls`、`ps`）时，会报出 `Segmentation fault` 错误。而应 `export LD_LIBRARY_PATH=/lib64:/opt/glibc-2.27/lib:$LD_LIBRARY_PATH`，避免此类错误。
 
 
+## 从源码构建 GDB
+
+
+由于 GDB 依赖 GMP 和 MPFR（MPFR 又依赖 GMP），故要先安装 GMP、MPFR，再安装 GDB。GMP 和 MPFR 的源码，在安装 GCC 时，通过 `scripts/download_prerequistes` 可以获取到。
+
+
+在构建 MPFR 时，需要通过 `--with-gmp=/opt/gmp-6.1.0`，为 MPFR 指定 GMP 所在的位置。构建好 MPFR 后，就可以开始构建 GDB 了。需要通过使用：
+
+
+```console
+./configure --prefix=/opt/gdb-14.2 CFLAGS="-I/opt/mpfr-3.1.6/include -L/opt/mpfr-3.1.6/lib -I/opt/gmp-6.1.0/include -L/opt/gmp-6.1.0/lib" CXXFLAGS="-I/opt/mpfr-3.1.6/include -L/opt/mpfr-3.1.6/lib -I/opt/gmp-6.1.0/include -L/opt/gmp-6.1.0/lib"
+```
+
+为 GDB 指定其所需的 GMP、MPFR 库文件和头文件。随后运行：
+
+
+```console
+make
+make check
+sudo make install
+```
+
 
 参考：
 
@@ -44,3 +66,5 @@ export LD_LIBRARY_PATH=/opt/gcc-11.4.0/lib64:$LD_LIBRARY_PATH
 4. [下载最新的glibc库并临时使用，而不污染原有系统环境](https://www.cnblogs.com/saolv/p/9762842.html)
 
 5. [GCC and linking environment variables and flags](https://stackoverflow.com/a/16047559/12288760)
+
+6. [gmp is missing while configuring building gdb from source](https://stackoverflow.com/a/70384197/12288760)
