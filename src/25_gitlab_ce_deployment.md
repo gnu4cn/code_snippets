@@ -422,3 +422,11 @@ $ sudo su - gitlab-psql
 --source-server='host=192.168.192.137 port=5432 dbname=gitlabhq_production' \
 --progress --debug -n
 ```
+
+## GitLab 升级
+
+
+参考：[Gitlab的升级（9.2.2升级到11.10.4）](https://blog.csdn.net/wc1695040842/article/details/89925246)
+
+
+
