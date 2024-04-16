@@ -426,6 +426,14 @@ $ sudo su - gitlab-psql
 ## GitLab 升级
 
 
+查看 GitLab 版本：
+
+
+```console
+cat /opt/gitlab/embedded/service/gitlab-rails/VERSION
+```
+
+
 参考：[Gitlab的升级（9.2.2升级到11.10.4）](https://blog.csdn.net/wc1695040842/article/details/89925246)
 
 
