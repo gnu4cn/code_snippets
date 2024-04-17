@@ -30,7 +30,13 @@
 
 
 
+### Debian IP 地址设置
 
+
+在一个安装的 Debian 机器上，想要配置静态 IP 地址，发现修改 `/etc/network/interfaces` 并不生效。后面发现，该机器上安装了 `xfce`、`lxde` 桌面环境，需要使用 `root` 账号，在图形下于 `NetworkManger Applet` 上点击鼠标右键，通过 `Edit connections` 进行添加。
+
+
+此外，Debian 上的网络连接会因为某种原因（如 `apt purge -y connman`）DOWN 掉，这时需要在 `root` 用户下，运行 `ifup ens192` 类似命令开启，网络连接才又会正常。
 
 
 
@@ -842,10 +848,4 @@ $sudo cfdisk
 
 
 
-## Debian IP 地址设置
 
-
-在一个安装的 Debian 机器上，想要配置静态 IP 地址，发现修改 `/etc/network/interfaces` 并不生效。后面发现，该机器上安装了 `xfce`、`lxde` 桌面环境，需要使用 `root` 账号，在图形下于 `NetworkManger Applet` 上点击鼠标右键，通过 `Edit connections` 进行添加。
-
-
-此外，Debian 上的网络连接会因为某种原因（如 `apt purge -y connman`）DOWN 掉，这时需要在 `root` 用户下，运行 `ifup ens192` 类似命令开启，网络连接才又会正常。
