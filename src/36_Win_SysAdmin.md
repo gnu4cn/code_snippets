@@ -146,6 +146,8 @@ Windows Server 2012 R2 单个用户下，会偶发此问题，如下图所示：
 
 ## 使用 RDP Wrapper 实现多用户同时 RDP
 
+
+
 [RDP Wrapper: stascorp/rdpwrap](https://github.com/stascorp/rdpwrap)，该项目的目标是在家用较弱的系统上，实现远程桌面主机支持和并发 RDP 会话。
 
 RDP Wrapper 可作为服务控制管理器，Service Control Manager，和终端服务，Terminal Serices，之间的一个层，因此原始 `termsrv.dll` 文件不会受到影响。此外，这种方法对抗 Windows Update 的能力很强。
@@ -153,6 +155,10 @@ RDP Wrapper 可作为服务控制管理器，Service Control Manager，和终端
 使用 RDP Wrapper 需要结合 [sebaxakerhtc/rdpwrap.ini](https://github.com/sebaxakerhtc/rdpwrap.ini)，根据 `termsrv.dll`，在这个代码仓库中查找适合的 `rdpwrap.ini` 配置文件，并使用对应的配置文件，替换（管理员下编辑） `C:\Program Files\RDP Wrapper\` 文件夹下的 `rdpwrap.ini`。
 
 ![`termsrv.dll` 文件属性](images/termsrv.dll-20231204.png)
+
+
+
+若在 `sebaxakerhtc/rdpwrap.ini` 上找不到对应 `termsrv.dll` 版本的 `rdpwrap.ini`，可使用 [`llccd/RDPWrapOffsetFinder`](https://github.com/llccd/RDPWrapOffsetFinder) 工具，生成系统当前 `termsrv.dll` 版本的 `rdpwrap.ini` 配置，亲测可用。
 
 
 ## 本地 AD 密码同步到 Azure Ad 的问题
