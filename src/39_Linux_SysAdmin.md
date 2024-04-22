@@ -848,4 +848,68 @@ $sudo cfdisk
 
 
 
+## Debian（bookworm）网络接口 Bonding
 
+
+今天（2024-4-22），在将存储中心接入万兆交换机时，要使用两条 40GE 链路端口聚合 bonding，以获取较高速率和可靠性。以下时配置记录。
+
+
+Linux 主机 `/etc/network/interfaces`:
+
+
+```console
+auto ens1f0
+iface ens1f0 inet manual
+    bond-master bond0
+    bond-mode 802.3ad
+
+auto ens1f1
+iface ens1f1 inet manual
+    bond-master bond0
+    bond-mode 802.3ad
+
+auto bond0
+iface bond0 inet static
+    address 10.11.1.25
+    netmask 255.255.255.0
+    network 10.11.1.0
+    bond-slaves ens1f0 ens1f1
+    bond-mode 802.3ad
+    bond-miimon 100
+    bond-downdelay 200
+    bond-updelay 200
+    bond-lacp-rate 1
+    bond-xmit-hash-policy layer2+3
+```
+
+
+交换机上的配置：
+
+
+```console
+interface eth-trunk 11
+    description To-backup-center
+    port link-mode access
+    port default vlan 11
+    max active-linknumber 2
+interface 40GE 0/0/1
+    eth-trunk 11
+interface 40GE 0/0/2
+    eth-trunk 11
+   
+```
+
+
+### `ifup bond0` 失败问题解决
+
+
+```console
+root@backup:~# ifup bond0                                                                                                                              
+/etc/network/if-pre-up.d/ifenslave: 39: echo: echo: I/O error
+/etc/network/if-pre-up.d/ifenslave: 39: echo: echo: I/O error
+RTNETLINK answers: File exists
+ifup: failed to bring up bond0
+```
+
+
+此时需要运行 `ip add flush dev bond0`，刷新 `bond0` 的 IP 地址。随后运行 `ifup --force --verbose bond0` 可成功将 `bond0` 开启。与此类似 `ifdown --force --verbose bond0` 也可以将 `bond0` 关闭，并以 `verbose` 模式打印出其间的调试信息。 
