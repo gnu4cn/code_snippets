@@ -286,15 +286,17 @@ backup_dir["analog_project"]="/opt"
 backup_dir["analog_project/SOS_DATA/repo/analog_project.rep"]="/opt"
 backup_dir["analog_project/SOS_DATA/cache/analog_project.cac"]="/opt"
 
-do_backup() {                                                                                                                                                                                                          if [ ! -d "${2}" ]; then mkdir -p "${2}"; fi
-                                                                                                                                                                                                                       if [ -d "${1}" ] && [ ! -z "$(ls -A ${1})" ] && [ $(ps -ef | grep "rsync" | grep "${3}" | wc -l) -eq 0 ]; then
-                cd "${1}"
-                /usr/bin/rsync -cdlptgo --delete --exclude ".snapshot" --exclude "tmp" . ${2}                                                                                                                                  find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -not -name "SOS_DATA" -exec rsync -crulptgo --delete {} ${2} \;
-        fi
+do_backup() {
+    if [ ! -d "${2}" ]; then mkdir -p "${2}"; fi
+    if [ -d "${1}" ] && [ ! -z "$(ls -A ${1})" ] && [ $(ps -ef | grep "rsync" | grep "${3}" | wc -l) -eq 0 ]; then
+        cd "${1}"
+        /usr/bin/rsync -cdlptgo --delete --exclude ".snapshot" --exclude "tmp" . ${2}
+        find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -not -name "SOS_DATA" -exec rsync -crulptgo --delete {} ${2} \;
+    fi
 }
 
 for name in ${!backup_dir[@]}; do
-        do_backup "/${name}" "${backup_dir[$name]}/${name}" $name
+    do_backup "/${name}" "${backup_dir[$name]}/${name}" $name
 done
 ```
 
