@@ -273,3 +273,31 @@ tmpfs           122560      1  122559    1% /dev/shm
 tmpfs           122560      3  122557    1% /run/lock
 tmpfs            24512     25   24487    1% /run/user/1000
 ```
+
+
+## 数据备份
+
+
+```bash
+#!/usr/bin/env bash
+
+declare -A backup_dir
+backup_dir["analog_project"]="/opt"
+backup_dir["analog_project/SOS_DATA/repo/analog_project.rep"]="/opt"
+backup_dir["analog_project/SOS_DATA/cache/analog_project.cac"]="/opt"
+
+do_backup() {                                                                                                                                                                                                          if [ ! -d "${2}" ]; then mkdir -p "${2}"; fi
+                                                                                                                                                                                                                       if [ -d "${1}" ] && [ ! -z "$(ls -A ${1})" ] && [ $(ps -ef | grep "rsync" | grep "${3}" | wc -l) -eq 0 ]; then
+                cd "${1}"
+                /usr/bin/rsync -cdlptgo --delete --exclude ".snapshot" --exclude "tmp" . ${2}                                                                                                                                  find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -not -name "SOS_DATA" -exec rsync -crulptgo --delete {} ${2} \;
+        fi
+}
+
+for name in ${!backup_dir[@]}; do
+        do_backup "/${name}" "${backup_dir[$name]}/${name}" $name
+done
+```
+
+对于备份数据量大、文件数目多的数据，此备份脚本将其分解为较小的部分，以减小 `rsync` 所用到增量文件大小，有效提升备份速度。
+
+参考：[如何使用 rsync 的高级用法进行大型备份](https://zhuanlan.zhihu.com/p/66206489)
