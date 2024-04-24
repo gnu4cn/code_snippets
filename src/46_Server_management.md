@@ -11,6 +11,12 @@
 出现此类事故后，应立即关机。使用 GParted LiveCD 启动系统，`sudo su -` 后运行 `fdisk -l`，找到要恢复的磁盘设备。然后给 GParted 配置 IP 地址和 DNS 服务器。运行 `apt install -y extundelete` 安装 `extundelete`。然后直接运行 `extundelete /dev/mapper/vg_vol01-home –restore-all`，恢复 `home` 卷下的数据（应先 `cd` 到挂载的 NFS 目录）。
 
 
+参考：
+
+- [干货：“ rm -rf” 克星ext4magic](https://www.modb.pro/db/25652)
+
+- [linux rm -rf * 文件恢复记](https://www.cnblogs.com/fps2tao/p/8676463.html)
+
 
 ## H330 阵列卡 HBA 直通模式与 RAID 模式切换
 
