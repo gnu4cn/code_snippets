@@ -17,6 +17,8 @@
 
 - [linux rm -rf * 文件恢复记](https://www.cnblogs.com/fps2tao/p/8676463.html)
 
+- [Image backup with deleted files [duplicate]](https://unix.stackexchange.com/a/285999)
+
 
 ## H330 阵列卡 HBA 直通模式与 RAID 模式切换
 
