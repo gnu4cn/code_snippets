@@ -331,7 +331,8 @@ done
 Match address 10.11.1.0/24
         ForceCommand internal-sftp -R
         PasswordAuthentication yes
-                                                                                                                                                                                Match address 10.11.2.0/24
+
+Match address 10.11.2.0/24
         ForceCommand internal-sftp -R
         PasswordAuthentication yes
 ```
