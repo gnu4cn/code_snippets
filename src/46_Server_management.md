@@ -317,3 +317,26 @@ done
 对于备份数据量大、文件数目多的数据，此备份脚本将其分解为较小的部分，以减小 `rsync` 所用到增量文件大小，有效提升备份速度。
 
 参考：[如何使用 rsync 的高级用法进行大型备份](https://zhuanlan.zhihu.com/p/66206489)
+
+
+## 单向上传通道
+
+
+建立从办公网到研发内网的单向上传通道，是研发型机构的一般需求。通过 OpenSSH-Server 的配置文件 `/etc/ssh/sshd_config`，可实现此需求。
+
+在配置文件中，添加如下配置：
+
+
+```conf
+Match address 10.11.1.0/24
+        ForceCommand internal-sftp -R
+        PasswordAuthentication yes
+                                                                                                                                                                                Match address 10.11.2.0/24
+        ForceCommand internal-sftp -R
+        PasswordAuthentication yes
+```
+
+其中 `10.11.1.0/24` 和 `10.11.2.0/24` 分别是两个级别不同的研发网段。如此设置后，便只能从研发网段下载文件数据而无法上传，且无法 SSH 登录。
+
+
+参考：[How to restrict sftp user to read-only access](https://www.ibm.com/support/pages/how-restrict-sftp-user-read-only-access)
