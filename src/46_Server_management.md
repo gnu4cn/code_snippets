@@ -339,4 +339,12 @@ Match address 10.11.1.0/24
 其中 `10.11.1.0/24` 和 `10.11.2.0/24` 分别是两个级别不同的研发网段。如此设置后，便只能从研发网段下载文件数据而无法上传，且无法 SSH 登录。
 
 
+```console
+[hector.peng@vnc03.xfoss.com]$ ssh it@dl.xfoss.com
+hector.peng@dl.xfoss.com's password:
+This service allows sftp connections only.
+Connection to dl.xfoss.com closed.
+```
+
+
 参考：[How to restrict sftp user to read-only access](https://www.ibm.com/support/pages/how-restrict-sftp-user-read-only-access)
