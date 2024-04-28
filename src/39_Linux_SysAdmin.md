@@ -851,7 +851,7 @@ $sudo cfdisk
 ## Debian（bookworm）网络接口 Bonding
 
 
-今天（2024-4-22），在将存储中心接入万兆交换机时，要使用两条 40GE 链路端口聚合 bonding，以获取较高速率和可靠性。以下时配置记录。
+今天（2024-4-22），在将存储中心接入万兆交换机时，要使用两条 40GE 链路端口聚合 bonding，以获取较高速率和可靠性。以下是配置记录。
 
 
 Linux 主机 `/etc/network/interfaces`:
