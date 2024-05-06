@@ -264,6 +264,103 @@ UUID=34d15471-e8b1-401e-94cd-f4465e6ad4ba /me5_vol01_part2          btrfs   defa
 ```
 
 
+## NFS 磁盘配额
+
+
+经测试，在 `/etc/exporfs` 的导出项参数中，通过加入 `du=1000000` 这样的参数，实现磁盘配额，会报出如下错误。
+
+
+```console
+unknown keyword "du=100000000"
+```
+
+故要实现 NFS 导出的限额，需要其他途径。而 BTRFS 文件系统，原生支持子卷的配额，因此可通过 BTRFS 的这一特性，实现这一需求。
+
+
+### 前提条件
+
+服务器上已有两块 SAS 盘组成的 RAID-1 阵列卷，并使用 GParted 创建出一个 BTRFS 的分区 `/sas_disks`。
+
+
+
+### 创建子卷
+
+
+
+以下命令需在 `root` 账号下执行。
+
+```console
+cd /sas_disks
+btrfs subvolume create rdp-1.50_share
+```
+
+运行 `btrfs subvolume list /sas_disks`，可列出 `/sas_disks` 下的子卷。
+
+
+
+### 配额设置
+
+
+首先开启 `/sas_disks` 的配额。
+
+```console
+btrfs quota enable /sas_disks
+``` 
+
+
+然后建立 `/sas_disks` 配额的 `qgroup`。
+
+
+```
+btrfs subvolume list /sas_disks | cut -d' ' -f2 | xargs -I{} -n1 btrfs qgroup create 0/{} /sas_disks
+btrfs quota rescan /sas_disks
+```
+
+最后设置 `rdp-1.50_share` 子卷的配额限制。
+
+
+```console
+btrfs qgroup limit 100G /sas_disks/rdp-1.50_share
+```
+
+通过 `btrfs qgroup show -reF /sas_disks/rdp-1.50_share` 检查对 `rdp-1.50_share` 的配额设置。
+
+
+```console
+btrfs qgroup show -reF /sas_disks/rdp-1.50_share/
+Qgroupid    Referenced    Exclusive  Max referenced  Max exclusive   Path 
+--------    ----------    ---------  --------------  -------------   ---- 
+0/256         16.00KiB     16.00KiB       100.00GiB           none   rdp-1.50_share
+```
+
+
+
+### 挂载 BTRFS 子卷
+
+
+执行以下命令，可临时将 BTRFS 子卷挂载到系统中。其中 `subvol=rdp-1.50_share` 是 `/sas_disks` 下 `rdp-1.50_share` 的路径，可通过 `btrfs subvolume list -p /sas_disks` 看到；`/dev/sdc1` 是 `/sas_disks` 所对应的分区。 
+
+```console
+mount -o subvol=rdp-1.50_share /dev/sdc1 /rdp-1.50_share
+```
+
+
+在 `/etc/fstab` 中，写入下面这样的配置行，即可永久挂载 BTRFS 的子卷。其中 `/dev/sdc1` 是 `/sas_disks` 对于的磁盘分区，`subvolid=256` 是执行 `btrfs subvolume list /sas_disks` 所见的 `rdp-1.50_share` 子卷的子卷 id。
+
+```fstab
+/dev/sdc1 				/rdp-1.50_share		btrfs   defaults,compress=lzo,commit=120,subvolid=256 0       0
+```
+
+
+参考：
+
+- [Linux磁盘共享nfs,限定大小](https://juejin.cn/s/Linux%E7%A3%81%E7%9B%98%E5%85%B1%E4%BA%ABnfs%2C%E9%99%90%E5%AE%9A%E5%A4%A7%E5%B0%8F)
+
+- [Btrfs 详解：子卷](https://linux.cn/article-16250-1.html)
+
+- [Btrfs 文件系统入门](https://linux.cn/article-13440-1.html)
+
+
 ## 存储文件数量限制导致可用空间为 0
 
 
@@ -282,7 +379,8 @@ FAS2750::> voloume modify -vserver svm_data -volume tempdata -files 200000000
 ```console
 % df  -i
 Filesystem      Inodes  IUsed   IFree IUse% Mounted on
-tmpfs           122560    624  121936    1% /run                                                                                                                                     /dev/sda       1605632 289295 1316337   19% /
+tmpfs           122560    624  121936    1% /run
+/dev/sda       1605632 289295 1316337   19% /
 tmpfs           122560      1  122559    1% /dev/shm
 tmpfs           122560      3  122557    1% /run/lock
 tmpfs            24512     25   24487    1% /run/user/1000
