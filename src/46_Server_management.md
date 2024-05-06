@@ -360,6 +360,11 @@ mount -o subvol=rdp-1.50_share /dev/sdc1 /rdp-1.50_share
 
 - [Btrfs 文件系统入门](https://linux.cn/article-13440-1.html)
 
+- [Quotas and Setting Limits on Directory Sizes00](https://www.baeldung.com/linux/quotas-limit-directory-size)
+
+- [Btrfs](https://wiki.archlinux.org/title/btrfs)
+
+
 
 ## 存储文件数量限制导致可用空间为 0
 
