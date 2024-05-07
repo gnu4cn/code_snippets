@@ -452,3 +452,76 @@ Connection to dl.xfoss.com closed.
 
 
 参考：[How to restrict sftp user to read-only access](https://www.ibm.com/support/pages/how-restrict-sftp-user-read-only-access)
+
+
+## `svnserve` 通过 SASL 与 LDAP（MS AD） 集成
+
+
+[`svnserve`](https://manpages.debian.org/bookworm/subversion/svnserve.8.en.html)，是提供 `svn` 代码仓库访问方式的一个服务器。[SASL](https://datatracker.ietf.org/doc/html/rfc4422)，Simple Authentication and Secure Layer，简单身份验证和安全层，是通过可替换机制，在面向连接的协议中，提供身份验证和数据安全服务的框架。
+
+
+配置过程：
+
+
+- 安装 `cyrus-sasl`、`cyrus-sasl-lib`、`cyrus-sasl-plain` 包；
+
+- 修改 `/etc/sysconfig/saslauthd` 文件；
+
+```config
+MECH=ldap
+FLASS="-O /etc/saslauthd.conf"
+```
+
+
+- 创建 `/etc/saslauthd.conf` 文件
+
+
+```config
+ldap_servers: ldap://x.x.x.x
+ldap_default_domain: example.com
+ldap_bind_dn: cn=admin,cn=Users,dc=example,dc=com
+ldap_bind_pw: password
+ldap_search_base: dc=example,dc=com
+ldap_filter: (sAMAccountName=%u)
+ldap_password_attr: userPassword
+ldap_deref: never
+ldap_restart: yes
+ldap_scope: sub
+ldap_use_sasl: no
+ldap_start_tls: no
+ldap_version: 3
+ldap_auth_method: bind
+ldap_timeout: 10
+ldap_cache_ttl: 30
+ldap_cache_mem: 32786
+```
+
+
+- 创建 `/etc/sasl2/svn.conf`
+
+```conf
+pwcheck_method:saslauthd
+mech_list:plain login
+```
+
+
+- 重启 `sasl` 服务并加入开机自启
+
+
+```console
+systemctl restart saslauthd
+systemctl enable saslauthd
+```
+
+
+- 测试连接
+
+```
+#testsaslauthd -u xxx -p passwd
+```
+
+
+如果成功，报 `OK “Success.”`
+
+
+
