@@ -3,6 +3,35 @@
 Win 系统使用心得与经验记录。
 
 
+## 为 Windows 所有用户挂载 NFS 存储
+
+
+首先，挂载 NFS 存储的 Windows 命令为（安装了 [`winfsp/nfs-win`](https://github.com/winfsp/nfs-win) 后）。
+
+
+```console
+net use z: \\nfs\10.11.1.25\rdp-1.50_share
+```
+
+
+与之相反，删除此挂载的命令为：
+
+
+```console
+net use z: /del /y
+```
+
+
+接下来，使用 “任务计划程序” ，指定在用户登录时运行以下 `.bat` 脚本。
+
+
+```bat
+@echo off
+if not exist z:\ (net use z: \\nfs\10.11.1.25\rdp-1.50_share )
+```
+
+
+
 
 ## Windows 11 23H2 中，打开 “网络连接（Network Connections）” 的方式
 
