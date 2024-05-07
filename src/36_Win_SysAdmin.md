@@ -22,7 +22,7 @@ net use z: /del /y
 ```
 
 
-接下来，使用 “任务计划程序” ，指定在用户登录时运行以下 `.bat` 脚本。
+可通过下面的 `.bat` 脚本，实现脚本化的挂载与卸载。
 
 
 ```bat
@@ -31,9 +31,44 @@ if not exist z:\ (net use z: \\nfs\10.11.1.25\rdp-1.50_share )
 ```
 
 
+```bat
+@echo off
+if exist z:\ (net use z: /del /y )
+```
+
+
+而要实现此 NFS 网盘的自动挂载，可通过在域控制器上，“服务器管理器” -> “工具” -> “组策略管理”。
+
+![组策略管理](images/GroupPolicyManagement.png)
+
+
+在 `Default Domain Policy` 上点击右键，选择 “编辑(E)”，对其进行编辑。
+
+![编辑“Default Domain Policy”](images/EditGPO.png)
+
+
+并在接下来的“组策略管理编辑器”中，新建出“映射驱动器”。
+
+![新建“映射驱动器”](NewDriveMapping.png)
+
+
+编辑“映射驱动器”的属性，如下所示。
+
+
+![映射驱动器“常规”属性](images/DriveMappingAttr-01.png)
+
+> **注意**：这里的 `//nfs/10.11.1.25/rdp-1.50_share`，需要首先安装 `nfs-win` 软件。
+
+
+
+![映射驱动器“常用”属性](images/DriveMappingAttr-02.png)
+
+
+
 参考：
 
-- [Automatically run a script when I log on to Windows](https://superuser.com/a/797635)
+- [【Windows Server 2019】组策略的配置与管理——配置基于域的组策略（下）进阶配置示例](https://blog.csdn.net/NOWSHUT/article/details/108425415)
+
 
 
 ## Windows 11 23H2 中，打开 “网络连接（Network Connections）” 的方式
