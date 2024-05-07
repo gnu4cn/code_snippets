@@ -31,6 +31,9 @@ if not exist z:\ (net use z: \\nfs\10.11.1.25\rdp-1.50_share )
 ```
 
 
+参考：
+
+- [Automatically run a script when I log on to Windows](https://superuser.com/a/797635)
 
 
 ## Windows 11 23H2 中，打开 “网络连接（Network Connections）” 的方式
