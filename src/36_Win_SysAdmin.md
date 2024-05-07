@@ -49,7 +49,7 @@ if exist z:\ (net use z: /del /y )
 
 并在接下来的“组策略管理编辑器”中，新建出“映射驱动器”。
 
-![新建“映射驱动器”](NewDriveMapping.png)
+![新建“映射驱动器”](images/NewDriveMapping.png)
 
 
 编辑“映射驱动器”的属性，如下所示。
