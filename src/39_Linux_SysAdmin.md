@@ -16,6 +16,24 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+## 列出 `wheel` 组下用户，及将用户从 `wheel` 组移除
+
+
+列出 `wheel` 组下的用户
+
+
+```console
+getent group wheel
+```
+
+
+将用户从 `wheel` 组移除
+
+
+```console
+gpasswd --delete username wheel
+```
+
 
 ## Debian 网络配置中的一个问题
 
