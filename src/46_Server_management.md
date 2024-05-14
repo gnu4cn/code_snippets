@@ -427,9 +427,11 @@ done
 ```
 
 > **注意**：
-
+>
 > `find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -exec /usr/bin/rsync -crulptgo --delete {} ${2} \;`
+>
 > 行中最后的 `\;` 需要保留，否则会报出
+>
 > `find: missing argument to -exec'` 错误。
 
 对于备份数据量大、文件数目多的数据，此备份脚本将其分解为较小的部分，以减小 `rsync` 所用到增量文件大小，有效提升备份速度。
