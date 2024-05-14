@@ -398,24 +398,39 @@ tmpfs            24512     25   24487    1% /run/user/1000
 ```bash
 #!/usr/bin/env bash
 
+# 2024-05-14
+#
+# Optimized analog_project backup deeply
+#
+#
+
 declare -A backup_dir
-backup_dir["analog_project"]="/opt"
+# For analog_project
+backup_dir["analog_project/mercury_b1/smic40/doc"]="/opt"
+backup_dir["analog_project/venus_a0_tc/umc40/sos"]="/opt"
 backup_dir["analog_project/SOS_DATA/repo/analog_project.rep"]="/opt"
 backup_dir["analog_project/SOS_DATA/cache/analog_project.cac"]="/opt"
 
 do_backup() {
-    if [ ! -d "${2}" ]; then mkdir -p "${2}"; fi
-    if [ -d "${1}" ] && [ ! -z "$(ls -A ${1})" ] && [ $(ps -ef | grep "rsync" | grep "${3}" | wc -l) -eq 0 ]; then
-        cd "${1}"
-        /usr/bin/rsync -cdlptgo --delete --exclude ".snapshot" --exclude "tmp" . ${2}
-        find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -not -name "SOS_DATA" -exec rsync -crulptgo --delete {} ${2} \;
-    fi
+        if [ ! -d "${2}" ]; then mkdir -p "${2}"; fi
+
+        if [ -d "${1}" ] && [ ! -z "$(ls -A ${1})" ] && [ $(ps -ef | grep "rsync" | grep "${3} ${2}" | wc -l) -eq 0 ]; then
+                cd "${1}"
+                /usr/bin/rsync -cdlptgo --delete --exclude '.snapshot' --exclude 'tmp' . ${2}
+                find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -exec /usr/bin/rsync -crulptgo --delete {} ${2} \;
+        fi
 }
 
 for name in ${!backup_dir[@]}; do
-    do_backup "/${name}" "${backup_dir[$name]}/${name}" $name
+        do_backup "/${name}" "${backup_dir[$name]}/${name}" $name
 done
 ```
+
+> **注意**：
+
+> `find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -exec /usr/bin/rsync -crulptgo --delete {} ${2} \;`
+> 行中最后的 `\;` 需要保留，否则会报出
+> `find: missing argument to -exec'` 错误。
 
 对于备份数据量大、文件数目多的数据，此备份脚本将其分解为较小的部分，以减小 `rsync` 所用到增量文件大小，有效提升备份速度。
 
