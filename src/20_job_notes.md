@@ -1,5 +1,32 @@
 # 工作杂记
 
+本文记录工作中的一些经验。
+
+
+## `FortiGate` 经由 LDAP(M$ AD) 的用户认证
+
+
+首先，在 “用户与认证” --> “LDAP” 下，“新建” 出一个 LDAP 实例。
+
+![FortiGate LDAP 配置](images/FG-LDAP_Configuration.png)
+
+其中：
+
+-  “服务器IP/名称” 中填入 M$ AD 服务器 IP 地址；
+
+- “通用名称标识符”中填入 `sAMAccountName`；
+
+- “Distinguished Name” 中填入域的 DN；
+
+- “用户名” 中填入域管理员的 DN；
+
+可通过 “测试连接性” 和 “测试用户认证信息”，对所配置的 M$ AD LDAP 服务器进行测试。
+
+
+随后，在 “用户与认证” -> “用户组” 中，可以通过 “新建”，或者在既有的用户组的 “远程组”，浏览到所配置 LDAP 服务器中的全部用户组。此时可根据需要，选择相应的用户组，作为可连接 FG VPN 的用户筛选依据。
+
+
+![FG 远程用户组](images/FG-LDAP_Group.png)
 
 
 ## `FortiGate` 报错：`Credential or SSLVPN configuration is wrong. (-7200)`

@@ -18,7 +18,7 @@
 - [Arch Linux Manjaro Autoproxy Pac](34_ArchLinux_Manjaro_autoproxy_pac.md)
 - [Win Sys Admin](36_Win_SysAdmin.md)
 - [Linux Sys Admin](39_Linux_SysAdmin.md)
-- [Server Management with `mdbook` and Nginx](42_mdbook_Server_Management.md)
+- [`mdbook` and Nginx web publish solution](42_mdbook_Server_Management.md)
 - [`fire.fundersclub.com` installation notes](44_fire.fundersclub.com_installation_notes.md)
 - [Server management](46_Server_management.md)
 - [InvenTree deployment notes](47_InvenTree_deployment_notes.md)
