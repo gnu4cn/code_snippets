@@ -495,10 +495,10 @@ FLASS="-O /etc/saslauthd.conf"
 
 ```config
 ldap_servers: ldap://x.x.x.x
-ldap_default_domain: example.com
-ldap_bind_dn: cn=admin,cn=Users,dc=example,dc=com
+ldap_default_domain: xfoss.com
+ldap_bind_dn: cn=admin,cn=Users,dc=xfoss,dc=com
 ldap_bind_pw: password
-ldap_search_base: dc=example,dc=com
+ldap_search_base: dc=xfoss,dc=com
 ldap_filter: (sAMAccountName=%u)
 ldap_password_attr: userPassword
 ldap_deref: never
