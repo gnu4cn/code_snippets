@@ -35,7 +35,7 @@ export LD_LIBRARY_PATH=/opt/gcc-11.4.0/lib64:$LD_LIBRARY_PATH
 ## 从源码构建 GDB
 
 
-由于 GDB 依赖 GMP 和 MPFR（MPFR 又依赖 GMP），故要先安装 GMP、MPFR，再安装 GDB。GMP 和 MPFR 的源码，在安装 GCC 时，通过 `scripts/download_prerequistes` 可以获取到。
+由于 GDB 依赖 GMP 和 MPFR（MPFR 又依赖 GMP），故要先安装 GMP、MPFR，再安装 GDB。GMP 和 MPFR 的源码，在安装 GCC 时，通过 `contrib/download_prerequistes` 可以获取到。
 
 
 在构建 MPFR 时，需要通过 `--with-gmp=/opt/gmp-6.1.0`，为 MPFR 指定 GMP 所在的位置。构建好 MPFR 后，就可以开始构建 GDB 了。需要通过使用：
