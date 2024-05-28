@@ -474,6 +474,32 @@ Connection to dl.xfoss.com closed.
 ```
 
 
+### 仅 `sftp` 连接而无法 SSH 登录的配置
+
+
+```conf
+# override default of no subsystems                                                                                     # Subsystem     sftp    /usr/lib/openssh/sftp-server
+Subsystem       sftp    internal-sftp
+
+# Example of overriding settings on a per-user basis
+#Match User anoncvs
+#       X11Forwarding no
+#       AllowTcpForwarding no
+#       PermitTTY no
+#       ForceCommand cvs server
+Match group sftponly
+        ChrootDirectory /upload
+        X11Forwarding no
+        AllowTcpForwarding no                                                                                                   AllowAgentForwarding no
+        ForceCommand internal-sftp -d /%u
+#       PermitTTY no
+#       ForceCommand cvs server
+```
+
+
+
+
+
 参考：[How to restrict sftp user to read-only access](https://www.ibm.com/support/pages/how-restrict-sftp-user-read-only-access)
 
 
