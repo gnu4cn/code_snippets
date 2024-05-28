@@ -496,7 +496,13 @@ Match group sftponly
 #       ForceCommand cvs server
 ```
 
+效果如下。
 
+
+```console
+This service allows sftp connections only.
+Connection to f.xfoss.com closed.
+```
 
 
 
