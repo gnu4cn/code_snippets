@@ -20,6 +20,19 @@
 - [Image backup with deleted files [duplicate]](https://unix.stackexchange.com/a/285999)
 
 
+
+### 专业存储（NetApp）上的做法
+
+
+对于专业存储，都会设置合理的快照计划，比如保留 3 个每两小时快照、4 个每天快照以及 1 个每周快照。在做了这样的快照设置时，挂载了数据卷的客户机上，可以通过 `cd .snapshot` 命令，访问到所挂载卷的这些快照，从而在用户有恢复误删除数据需求时，可以在对应的快照下，非常容易的恢复出他们想要的数据。
+
+
+比如下面的 `/home` 是挂载的某台 NetApp 存储上， `/nishome` 卷的 `home` 目录（卷下的 Qtree 项目）。则其快照 `.snapshot` 如下图所示。
+
+
+![NetApp 数据卷的 Qtree 项目下的快照](images/netapp_volume_snapshot.png)
+
+
 ## H330 阵列卡 HBA 直通模式与 RAID 模式切换
 
 
