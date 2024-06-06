@@ -211,6 +211,37 @@ root@backup:~# multipath -f /dev/mapper/me5_vol01_20t
 - [Multipath: Best and Safe Solution Map in Use Devices](https://www.teimouri.net/remove-multipath-device/)
 
 
+## 存储上新加卷后 Linux 主机上找不到的问题
+
+
+近日我在 DELL/EMC ME5012 上，从存储池创建出一个新卷后，无法在 Linux 主机上，通过 `fdisk -l` 找到。随后联系 DELL 技术支持工程师，按照他们所提供的资料，运行命令 `# /usr/bin/rescan-scsi-bus.sh -a` 后，成功发现这一存储上的新加卷。
+
+
+```console
+Disk /dev/sdg: 3.18 TiB, 3499999887360 bytes, 6835937280 sectors
+Disk model: ME5
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
+
+
+Disk /dev/sdh: 3.18 TiB, 3499999887360 bytes, 6835937280 sectors
+Disk model: ME5
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
+
+
+Disk /dev/mapper/mpathb: 3.18 TiB, 3499999887360 bytes, 6835937280 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
+```
+
+
+该脚本来自 [`sg3-utils`](https://sg.danny.cz/sg/sg3_utils.html) 软件包，Debian Linux 自带了这个软件包。
+
+
 ## `btrfs` 分区的挂载
 
 
