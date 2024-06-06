@@ -242,7 +242,7 @@ I/O size (minimum/optimal): 4096 bytes / 1048576 bytes
 该脚本来自 [`sg3-utils`](https://sg.danny.cz/sg/sg3_utils.html) 软件包，Debian Linux 自带了这个软件包（[软件包：sg3-utils](https://packages.debian.org/bookworm/sg3-utils)）。
 
 
-大多数操作系统都有 SCSI 直通接口，SCSI pass-through interfaces, 可让用户空间程序，user space programs，向设备发送 SCSI 命令并获取响应。通过 SCSI 到 ATA 转换，SCSI to ATA Translation, SAT，许多 ATA 磁盘现在都能处理 SCSI 命令。通常情况下，这个软件包中的每个实用程序，都能实现一条 SCSI 命令。有关 SCSI 命令和 SAT 的定义，请参见 [www.t10.org](https://www.t13.org/) 上的标准草案。ATA 命令定义在 [www.t13.org](https://www.t13.org/) 的标准草案中。有关本软件包中支持的 SCSI 和 ATA 命令与实用程序名称之间的映射，请参阅 [`COVERAGE`](https://github.com/hreinecke/sg3_utils/blob/master/COVERAGE) 文件。
+> 大多数操作系统都有 SCSI 直通接口，SCSI pass-through interfaces, 可让用户空间程序，user space programs，向设备发送 SCSI 命令并获取响应。通过 SCSI 到 ATA 转换，SCSI to ATA Translation, SAT，许多 ATA 磁盘现在都能处理 SCSI 命令。通常情况下，这个软件包中的每个实用程序，都能实现一条 SCSI 命令。有关 SCSI 命令和 SAT 的定义，请参见 [www.t10.org](https://www.t13.org/) 上的标准草案。ATA 命令定义在 [www.t13.org](https://www.t13.org/) 的标准草案中。有关本软件包中支持的 SCSI 和 ATA 命令与实用程序名称之间的映射，请参阅 [`COVERAGE`](https://github.com/hreinecke/sg3_utils/blob/master/COVERAGE) 文件。
 
 
 ## `btrfs` 分区的挂载
