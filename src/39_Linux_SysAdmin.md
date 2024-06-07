@@ -16,6 +16,36 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+
+## 调整 Linux LVM 分区大小
+
+
+近期发现一台 Linux 服务器分区不合理， `/` 根分区过小（`50G`）, 其与 `/home` 分区（分配了较多空间，但是并未使用）一起在一个 LVM 逻辑卷（合计约 `1.7T`）下，使用了 `xfs` 文件系统。
+
+
+调整他们大小的命令如下：
+
+
+
+```console
+umount -lf /home
+lvremove /dev/mapper/centos-home
+lvextend -L +1000G /dev/mapper/centos-root
+xfs_growfs /dev/mapper/centos-root
+lvcreate -L 400G -n home centos
+mkfs.xfs /dev/centos/home
+lsblk -f
+lvdisplay
+mkfs.xfs /dev/centos/home
+mount /dev/centos/home /home
+df -h
+```
+
+
+> 参考：[Chapitre 5. Modifying the size of a logical volume](https://access.redhat.com/documentation/fr-fr/red_hat_enterprise_linux/9/html/configuring_and_managing_logical_volumes/modifying-the-size-of-a-logical-volume_configuring-and-managing-logical-volumes#doc-wrapper)
+
+
+
 ## 列出 `wheel` 组下用户，及将用户从 `wheel` 组移除
 
 

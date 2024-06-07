@@ -4,31 +4,6 @@
 本文记录服务器管理方面的一些经验。
 
 
-## 调整 Linux LVM 分区大小
-
-
-近期发现一台 Linux 服务器分区不合理， `/` 根分区过小（`50G`）, 其与 `/home` 分区（分配了较多空间，但是并未使用）一起在一个 LVM 逻辑卷（合计约 `1.7T`）下，使用了 `xfs` 文件系统。
-
-
-调整他们大小的命令如下：
-
-
-
-```console
-umount -lf /home
-lvremove /dev/mapper/centos-home
-lvextend -L +1000G /dev/mapper/centos-root
-xfs_growfs /dev/mapper/centos-root
-lvcreate -L 400G -n home centos
-mkfs.xfs /dev/centos/home
-lsblk -f
-lvdisplay
-mkfs.xfs /dev/centos/home
-mount /dev/centos/home /home
-df -h
-```
-
-
 
 ## 恢复 `rm -rf` 删除的数据
 
