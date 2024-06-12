@@ -33,6 +33,19 @@
 ![NetApp 数据卷的 Qtree 项目下的快照](images/netapp_volume_snapshot.png)
 
 
+
+## 删除 3 个月（90 天前）的文件与文件夹
+
+
+```bash
+{{#include ../projects/delete_3_mo_ago.sh}}
+```
+
+其中 `-mtime +90` 表示 90 天前有改动的文件和文件夹。
+
+
+
+
 ## H330 阵列卡 HBA 直通模式与 RAID 模式切换
 
 
