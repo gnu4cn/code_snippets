@@ -17,6 +17,18 @@
 
 
 
+## 删除 3 个月（90 天前）的文件与文件夹
+
+
+```bash
+{{#include ../projects/delete_3_mo_ago.sh}}
+```
+
+其中 `-mtime +90` 表示 90 天前有改动的文件和文件夹。
+
+
+
+
 ## 调整 Linux LVM 分区大小
 
 
