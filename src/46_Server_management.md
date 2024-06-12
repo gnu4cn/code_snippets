@@ -442,6 +442,7 @@ tmpfs            24512     25   24487    1% /run/user/1000
 ## 数据备份
 
 
+
 ```bash
 #!/usr/bin/env bash
 
@@ -490,6 +491,66 @@ done
 对于备份数据量大、文件数目多的数据，此备份脚本将其分解为较小的部分，以减小 `rsync` 所用到增量文件大小，有效提升备份速度。
 
 参考：[如何使用 rsync 的高级用法进行大型备份](https://zhuanlan.zhihu.com/p/66206489)
+
+
+
+### 将 `do_backup` 提取到库文件，并根据备份数据性质调整增量更新频率为每天、每周
+
+
+`projects_backup.lib.sh`：
+
+
+```bash
+do_backup() {                                                                                                                                                                                                                                            if [ ! -d "${2}" ]; then mkdir -p "${2}"; fi
+
+        if [ -d "${1}" ] && [ ! -z "$(ls -A ${1})" ] && [ $(ps -ef | grep "find" | grep "${2}" | wc -l) -eq 0 ]; then
+                cd "${1}"
+                /usr/bin/rsync -cdlptgo --delete --exclude '.snapshot' --exclude 'tmp' . ${2}
+                find . -maxdepth 1 -type d -not -name "." -not -name ".snapshot" -not -name "tmp" -exec /usr/bin/rsync -crulptgo --delete {} ${2} \;
+        fi
+}
+
+
+declare -A backup_dir
+```
+
+
+
+`projects_backup.daily.sh`：
+
+
+```bash
+#!/usr/bin/env bash
+source projects_backup.lib.sh
+
+#
+# 2024-05-20
+#
+# Optimized the criteria of rsync execution
+#
+
+
+# 2024-05-14
+#
+# Optimized analog_project backup deeply
+#
+#
+
+
+# For Test SVN
+backup_dir["0.135-svn"]="/me5_vol01_part2"
+
+
+# For Software/BSP/SDK
+backup_dir["1.22-gitlab"]="/me5_vol01_part2/scm-data"
+backup_dir["0.137-svn"]="/me5_vol01_part2"
+
+for name in ${!backup_dir[@]}; do
+        do_backup "/${name}" "${backup_dir[$name]}/${name}" $name
+done
+```
+
+
 
 
 ## 单向上传通道
