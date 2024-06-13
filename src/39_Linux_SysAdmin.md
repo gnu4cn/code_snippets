@@ -16,6 +16,30 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+## `modprobe -a vmw_vmci vmmon` 问题
+
+
+在 manjaro 上，安装了 vmware-workstation 后，运行 `vmware` 会报出 `vmmon` 找不到的问题。
+
+
+而在运行 `sudo modprobe -a vmmon` 时，会报错错误：
+
+
+```console
+modprobe: WARNING: Module vmmon not found in directory /lib/modules/6.6.32-1-MANJARO
+```
+
+此时执行以下操作，即可解决此问题。
+
+
+```console
+$ uname -r
+6.6.32-1-MANJARO
+$ sudo pacman -S linux66-headers
+$ sudo modprobe -a vmw_vmci vmmon
+```
+
+
 
 ## 删除 3 个月（90 天前）的文件与文件夹
 
