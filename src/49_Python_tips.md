@@ -4,6 +4,21 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
+## 编译 `ssl`、`readline` 支持（Debian Bookworm）
+
+
+在使用 [plone/Installers-UnifiedInstaller](https://github.com/plone/Installers-UnifiedInstaller) 安装 [Plone](https://plone.org) 时，要求 Python 必须有对 `ssl` 的支持，最好带有 `readline` 的支持。为此需要在编译 Python38 时，带有对他们两的支持。
+
+```console
+sudo apt install libssl-dev libreadline-dev -y
+./configure --prefix=/opt/python38 --enable-optimizations --with-ssl --with-readline
+make -j$(nproc)
+sudo make install
+```
+
+
+
+
 ## 在内网安装 Python 第三方包
 
 参考：[如何在内网安装python第三方包（库）](https://blog.csdn.net/xue_11/article/details/112802149)
