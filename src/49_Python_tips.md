@@ -4,10 +4,28 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
-## 编译 `ssl`、`readline` 支持（Debian Bookworm）
+## Plone 安装笔记
 
 
-在使用 [plone/Installers-UnifiedInstaller](https://github.com/plone/Installers-UnifiedInstaller) 安装 [Plone](https://plone.org) 时，要求 Python 必须有对 `ssl` 的支持，最好带有 `readline` 的支持。为此需要在编译 Python38 时，带有对他们两的支持。
+在使用 [plone/Installers-UnifiedInstaller](https://github.com/plone/Installers-UnifiedInstaller) 安装 [Plone](https://plone.org) 有诸多要求、依赖。这里加以记录。
+
+
+### `libffi-dev`、`libjpeg-dev`、`libxslt1-dev` 与 `libxslt1.1`
+
+这是系统的 foreign function library，外部函数库的开发链接库（头文件和链接库），在后面 `pip install python-ldap` 过程中，构建出 `ldap` 的 Python 封装时，要用到 Python 的 `_ctypes` 模块，而这个模块就需要在编译 Python 时，预先安装 `libffi-dev` 这个包。
+
+`libjpeg-dev`、`libxslt1-dev` 与 `libxslt1.1` 是运行 UnifiedInstaller 时需要的依赖。
+
+
+```console
+sudo apt install -y libffi-dev libjpeg-dev libxslt1-dev libxslt1.1
+```
+
+
+### 编译 `ssl`、`readline` 支持（Debian Bookworm）
+
+
+，要求 Python 必须有对 `ssl` 的支持，最好带有 `readline` 的支持。为此需要在编译 Python38 时，带有对他们两的支持。
 
 ```console
 sudo apt install libssl-dev libreadline-dev -y
