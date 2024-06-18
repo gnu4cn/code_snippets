@@ -65,6 +65,25 @@ eggs =
     Products.PloneLDAP
 ```
 
+
+### `Zope` 依赖问题
+
+`buildout_templates/buildout.cfg` 里，`[buildout]` 小节的 `extends` 中引用的 `versions.cfg`，使用的是 `4.8.10` 版本的 `Zope`，由于上面添加的一些 `eggs` 需要 `Zope>=5`，会导致安装失败，报出以下错误。
+
+```console
+Error: The requirement ('Zope>=5') is not allowed by your [versions] constraint (4.8.10)
+Buildout failed. Unable to continue
+```
+
+此时只需在 `[buildout]` 小节的 `extends` 中，添加如下 `Zope` 的 `versions.cfg` 即可解决此问题。如下所示。
+
+```cfg
+extends =
+    base.cfg
+    https://dist.plone.org/release/5.2.14/versions.cfg
+    https://zopefoundation.github.io/Zope/releases/5.10/versions.cfg
+```
+
 > 参考：
 > - [plone 的部署 以及采用windows AD认证](https://blog.51cto.com/wsxxsl/1921347)
 > - [Delivering egg-based applications with zc.buildout, using a distributed model (Tarek Ziadé)](https://markvanlent.dev/2008/10/10/delivering-egg-based-applications-with-zc.buildout-using-a-distributed-model-tarek-ziade/)
