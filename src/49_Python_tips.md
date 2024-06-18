@@ -35,6 +35,39 @@ sudo make install
 ```
 
 
+### 为 `buildout` 设置 PyPi 镜像
+
+默认运行 `buildout`，会使用 `pypi.org` 并从 `files.pythonhosted.org` 下载 Python 包，这样速度会很慢且有下载失败问题。为此需要为 `buildout` 配置 PyPi 镜像。修改 `base.cfg` 文件，在 `[buildout]` 小节后加入 `index=https://repo.huaweicloud.com/repository/pypi/simple`。
+
+```cfg
+[buildout]
+index=https://repo.huaweicloud.com/repository/pypi/simple
+eggs-directory=../buildout-cache/eggs
+download-cache=../buildout-cache/downloads
+abi-tag-eggs = true
+```
+
+
+### UnifiedInstaller 的 `buildout.cfg`
+
+UnifiedInstaller 位于 `buildout_templates/buildout.cfg`，需要在 `eggs` 中添加如下内容。
+
+
+```cfg
+eggs =
+    Plone
+    Pillow
+    Products.PluginRegistry
+    Products.PluggableAuthService
+    Products.LDAPUserFolder
+    Products.SimpleUserFolder
+    Products.LDAPMultiPlugins
+    Products.PloneLDAP
+```
+
+> 参考：
+> - [plone 的部署 以及采用windows AD认证](https://blog.51cto.com/wsxxsl/1921347)
+> - [Delivering egg-based applications with zc.buildout, using a distributed model (Tarek Ziadé)](https://markvanlent.dev/2008/10/10/delivering-egg-based-applications-with-zc.buildout-using-a-distributed-model-tarek-ziade/)
 
 
 ## 在内网安装 Python 第三方包
@@ -60,7 +93,7 @@ sudo make install
 
 
 
-## `import git` 报出 `Segmentation fault` 
+## `import git` 报出 `Segmentation fault`
 
 
 ![`import git` 报出 `Segmentation fault` 错误](images/import-git-segmentation-fault.png)
