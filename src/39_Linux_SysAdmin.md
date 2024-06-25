@@ -16,6 +16,17 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+
+## 执行 `df -h` 命令卡住问题
+
+
+近日（2024-06），连接了 DELL ME5012+ME412 存储，又挂载了很多 NFS 分区的一台 Debian Bookworm 主机，在执行 `df -h` 时，出现卡顿。原先怀疑跟 ME5012 上的 SCSI 有关系，但最终发现是所挂载的一个 NFS 分区不可用造成。遂通过 `# umount -l /0.137-svn` 将该有问题的 NFS 挂载加以卸载，后问题解决 `df -h` 命令不再挂起。
+
+
+> **参考**：[当df命令hang住了， 怎么办？](https://www.cnblogs.com/awpatp/p/13919924.html)
+
+
+
 ## `modprobe -a vmw_vmci vmmon` 问题
 
 
