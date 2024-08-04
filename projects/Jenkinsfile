@@ -1,0 +1,562 @@
+#!/usr/bin/env groovy
+
+// remote 是个后面 sshCommand、sshPut 要用到的 map 映射
+def remote = [:]
+remote.name = "ci.xfoss.com"
+remote.host = "ci.xfoss.com"
+remote.allowAnyHosts = true
+
+
+// release 是个包含了与 relase 相关的许多数据的 map 映射
+// 预先建立这个数据结构，目的是提升程序运行速度
+def release = [:]
+release.website = "https://dl.xfoss.com"
+release.index = ""
+release.date = ""
+release.date_short = ""
+release.changelogs = ""
+release.changelogs_html = ""
+release.org_name = ""
+release.repo_name = ""
+release.dto = ""
+release.affected_files = ""
+release.artifacts = ""
+release.diffs_url = ""
+release.repo_fullname = ""
+release.repo_url = ""
+release.target_dir = ""
+release.page = ""
+
+// 一些全局变量
+def target = ""
+def make_log = ""
+def tar_filename = ""
+def tar_file_count = ""
+def log_data = ""
+def old_index = ""
+def html_email = ""
+def defConfigs = []
+def tmpCount = 0
+def total = 0
+def json = ""
+def defConfigPath = ""
+def is_sdk = false
+def build_script = ""
+
+// Pipeline 定义开始
+pipeline {
+
+    // 定义 buildDiscarder 选项，只保留 10 次构建
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
+    }
+
+    // 指定构建代理为 agent-on-linux-01
+    agent {
+        label {
+            label 'agent-on-linux-01'
+                retries 3
+        }
+    }
+
+    // 构建触发器为 cron，每天早上 8：25 -8：40 启动构建
+    triggers {
+        cron '''TZ=Asia/Shanghai
+            H(25-40) 8 * * *
+            '''
+    }
+
+    // 定义组成这个 Pipeline 的阶段 stages
+    stages {
+        // 'checkout_scm' 阶段，检出源代码
+        stage('checkout_scm') {
+            // 此阶段的环境变量，为 git 检出指定凭据
+            environment {
+                GITHUB_CREDS = credentials('for-github-op')
+                GIT_SSH_COMMAND = 'ssh -i $GITHUB_CREDS'
+            }
+            // 此阶段的步骤
+            steps {
+                // checkout 操作的选项，会覆盖默认的 checkout，目的是要检出子模组的代码
+                checkout([
+                    $class: 'GitSCM',
+                    branches: scm.branches,
+                    doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+                    extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+                    userRemoteConfigs: scm.userRemoteConfigs,
+                ])
+
+                sh """rm -rf api/ docs/ app/ayla/
+                    git submodule update --init --recursive --remote"""
+            }
+        }
+        // 构建阶段
+        stage('check_build') {
+            // 构建条件：指定仅在有 changeSets 时才构建
+            when {
+                expression { return currentBuild.changeSets.size() > 0 ? true : false }
+            }
+            // 构建阶段的步骤
+            steps {
+                // 为 sshCommand、sshPut 指定 SSH 凭据
+                withCredentials([sshUserPrivateKey(
+                    credentialsId: 'scp-op-ssh-key',
+                    keyFileVariable: 'SSH_KEY',
+                    usernameVariable: 'USERNAME'
+                )]) {
+                    // 构建脚本
+                    script {
+                        // 给顶部建立的 remote 映射数据结构字段赋值
+                        remote.user = USERNAME
+                        remote.identityFile = SSH_KEY
+
+                        // 给 release 的一些字段赋值
+                        release.repo_fullname = env.GIT_URL.split(':')[1].split("\\.")[0]
+                        release.org_name = release.repo_fullname.split('/')[0]
+                        release.repo_name = release.repo_fullname.split('/')[1]
+
+                        release.target_dir = "/opt/${USERNAME}/releases/${release.repo_fullname}"
+                        release.page = "${release.target_dir}/index.html"
+                        release.repo_url = "https://github.com/${release.repo_fullname}"
+
+                        // Make the directory if not exists
+                        sshCommand remote: remote, command: """
+                            if [ ! -d ${release.target_dir} ]; then
+                                mkdir -p ${release.target_dir}
+                            fi
+                            if [ ! -f ${release.page} ]; then
+                                touch ${release.page}
+                            fi"""
+
+
+                        // 继续为 remote 字段赋值
+                        def now = new Date()
+                        release.date = now.format('yyyyMMdd')
+                        release.date_short = now.format('dd/MM')
+
+                        release.changelogs_html = get_changelogs_html(release.repo_url)
+                        release.changelogs = get_changelogs()
+                        release.affected_files = get_affected_files()
+                        release.diffs_url = get_diffs_url(release.repo_url)
+
+                        // 查找 tag 的代码
+                        def tag = sh(returnStdout: true, script: 'git tag --sort=committerdate')
+                            .trim()
+                            .split('\n')
+                            .last()
+
+
+                        // 开始准备 release 的 dto 字段，该 dto 的值将被 POST 到 dl.xfoss.com 的
+                        // 后台 API
+                        release.dto += """{
+                            "repo": {
+                                "org": "${release.org_name}",
+                                "repo": "${release.repo_name}"
+                            },
+                            "release": {
+                                    "release_channel": "nightly",
+                                    "diffs_url": "${release.diffs_url}",
+                                    "repository_id": 0
+                            },
+                            "tag": {
+                                    "name": "${tag}",
+                                    "release_id": 0,
+                                    "repository_id": 0
+                            },
+                            "changelogs": ${release.changelogs},
+                        """
+
+                        // 准备邮件通知的内容
+                        html_email += """
+<h2>
+    ${release.org_name}/${release.repo_name} nightly release ${release.date} build report
+</h2>
+<p>${release.changelogs_html}</p>
+<h3>Build result:</h3>
+<ul style="list-style-type: none;">
+"""
+
+                        // 读取 master 分支中的构建脚本
+                        def shLines = readFile(file: 'check_build_essential.sh').trim().split('\n')
+
+                        // 从读取到的构建脚本中，提取 defconfig
+                        for (line in shLines) {
+                            if(line.trim().startsWith("./check_build.sh")) {
+                                defConfigs.addAll(line.trim().split(' ')[1..-1])
+                            }
+                        }
+
+                        // Remove any duplicate then process each defconfig
+                        def uniqueSortedDefconfigs = defConfigs.unique().sort()
+                        def defconfigCount = uniqueSortedDefconfigs.size()
+
+                        // 开始执行构建，并开始准备 release 的  artifacts 字段
+                        tmpCount = 0
+                        release.artifacts += "["
+                        for( defConfig in uniqueSortedDefconfigs ) {
+                            // 检查 defConfig 是否为 SDK 的 defconfig
+                            is_sdk = defConfig.contains("_sdk")
+                            defConfig = is_sdk ? defConfig[0..-5] : defConfig
+                            defConfigPath = "configs/${defConfig}"
+
+                            target = defConfig[0..-11]
+                            target = is_sdk ? "${target}.sdk" : target
+                            // 构建 log 文件
+                            make_log = "${target}.${release.repo_name}${is_sdk ? "_sdk" : ""}-build_${release.date}.log"
+
+                            // 检查 defconfig  文件是否存在
+                            if (fileExists(defConfigPath)) {
+                                // 一次构建后压缩文件的名字
+                                tar_filename = "${target}.${release.repo_name}${is_sdk ? "_sdk" : ""}-release_nightly_${release.date}.tar.gz"
+
+                                // 构建脚本
+                                build_script = is_sdk
+                                        ? """#!/usr/bin/env bash
+                                        if [ -d "../wise-sdk" ]; then rm -rf "../wise-sdk"; fi
+                                        { make distclean && make ${defConfig} && make wise-sdk BUILDTEST=1; } 2> ${make_log}
+                                        if [ \${PIPESTATUS[0]} -eq 0 ]; then tar czf ${tar_filename} -T <(\\ls wise*) System.map; fi"""
+                                        : """#!/usr/bin/env bash
+                                        { make distclean && make ${defConfig} && make; } 2> ${make_log}
+                                        if [ \${PIPESTATUS[0]} -eq 0 ]; then tar czf ${tar_filename} -T <(\\ls wise*) System.map; fi"""
+
+                                // 执行构建脚本
+                                sh build_script
+
+                                // 检查构建后的压缩打包文件是否存在
+                                if (fileExists(tar_filename)) {
+                                    // 将构建产物压缩包，使用 sshPut POST 到 dl.xfoss.com 服务器
+                                    def files = findFiles(glob: "${tar_filename}")
+                                    sshPut remote: remote, from: "${tar_filename}", into: release.target_dir
+
+                                    // 继续准备邮件通知内容
+                                    html_email += """
+<li style="color: ${is_sdk ? "red" : "black"};">
+    ✔️  ${target} build success.
+    <a href="${release.website}/${release.repo_fullname}/${tar_filename}" style="float: right;">
+        ${tar_filename} (${files[0].length} bytes)
+    </a>
+</li>"""
+
+                                    // 将本次构建的压缩文件添加到 release 的 artifacts 字段
+                                    release.artifacts += ( defconfigCount>1 && tmpCount != defconfigCount-1 )
+                                        ? """{
+                                            "defconfig": "${target}",
+                                            "url": "${release.website}/${release.repo_fullname}/${tar_filename}",
+                                            "filesize": ${files[0].length},
+                                            "build_log_url": "",
+                                            "repository_id": 0,
+                                            "release_id": 0
+                                        },"""
+                                        : """{
+                                            "defconfig": "${target}",
+                                            "url": "${release.website}/${release.repo_fullname}/${tar_filename}",
+                                            "filesize": ${files[0].length},
+                                            "build_log_url": "",
+                                            "repository_id": 0,
+                                            "release_id": 0
+                                        }"""
+                                }
+                                else {
+                                    // 构建失败
+                                    html_email += """
+<li>❌ ${target} - build FAILED! - <a target="_blank"
+    href="${release.website}/${release.repo_fullname}/${make_log}.html">
+Build log</a></li>"""
+
+                                    writeFile(file: "${make_log}.html", text: """
+<!DOCTYPE html>
+<head><meta charset="UTF-8"></head>
+<pre style="font-family: monospace; text-wrap: wrap; white-space: pre-wrap;">
+    ${readFile(file: make_log)}
+</pre>""")
+                                    // 将构建失败日志，通过 sshPut 上传到 dl.xfoss.com 服务器
+                                    sshPut remote: remote, from: "${make_log}.html", into: "${release.target_dir}/${make_log}.html"
+
+                                    // 将本次构建失败，添加到 release 的 artifacts 字段
+                                    release.artifacts += ( defconfigCount>1 && tmpCount != defconfigCount-1 )
+                                        ? """{
+                                            "defconfig": "${target}",
+                                            "url": "",
+                                            "filesize": 0,
+                                            "build_log_url": "${release.website}/${release.repo_fullname}/${make_log}.html",
+                                            "repository_id": 0,
+                                            "release_id": 0
+                                        },"""
+                                        : """{
+                                            "defconfig": "${target}",
+                                            "url": "",
+                                            "filesize": 0,
+                                            "build_log_url": "${release.website}/${release.repo_fullname}/${make_log}.html",
+                                            "repository_id": 0,
+                                            "release_id": 0
+                                        }"""
+                                }
+                            }
+                            else {
+                                // 处理 defconfig 不存在的情况
+                                html_email += "<li>❌ ${defConfigPath} NOT EXISTS!</li>"
+
+                                writeFile(file: "${make_log}.html", text: """
+<!DOCTYPE html><head><meta charset="UTF-8"></head>
+<pre style="font-family: monospace; text-wrap: wrap; white-space: pre-wrap;">
+    ${defConfigPath} NOT EXISTS!
+</pre>""")
+                                sshPut remote: remote, from: "${make_log}.html", into: "${release.target_dir}/${make_log}.html"
+
+                                release.artifacts += ( defconfigCount>1 && tmpCount != defconfigCount-1)
+                                    ? """{
+                                        "defconfig": "${target}",
+                                        "url": "",
+                                        "filesize": 0,
+                                        "build_log_url": "${release.website}/${release.repo_fullname}/${make_log}.html",
+                                        "repository_id": 0,
+                                        "release_id": 0
+                                    },"""
+                                    : """{
+                                        "defconfig": "${target}",
+                                        "url": "",
+                                        "filesize": 0,
+                                        "build_log_url": "${release.website}/${release.repo_fullname}/${make_log}.html",
+                                        "repository_id": 0,
+                                        "release_id": 0
+                                    }"""
+                            }
+
+                            tmpCount += 1
+                            sh "rm -rf ${tar_filename} ${make_log} ${make_log}.html"
+                        }
+                        release.artifacts += "]"
+
+                        html_email += "</ul>"
+
+                        release.dto += """
+                            "artifacts": ${release.artifacts},
+                            "affected_files": ${release.affected_files}
+                        }"""
+
+                        // 将要 POST 到 dl.xfoss.com RESTful API 的这个 json 文件，上传到该服务器
+                        // 供以后检查 POST 失败原因
+                        writeFile(file: "release.json", text: "${release.dto}")
+                        sshPut remote: remote, from: "release.json", into: "${release.target_dir}/release-${release.date}.json"
+
+                        // 将这个 release.json 文件，通过 curl POST 到 dl.xfoss.com
+                        sh "curl -X POST -k -H 'Content-Type: application/json' -i '${release.website}/api/release/new' -d @release.json --noproxy '*'"
+                    }
+                }
+            }
+        }
+    // Pipeline 结束
+    }
+
+    // 构建后的操作
+    post {
+        // 构建失败情况
+        failure {
+            // 发送邮件到 shaobo.zhang@xfoss.com
+            emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - FAILURE:
+                Check console output at $BUILD_URL to view the results. ${BUILD_LOG, maxLines=100, escapeHtml=false}''',
+                recipientProviders: [],
+                subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - FAILURE!',
+                to: 'ryan.wu@xfoss.com, shaobo.zhang@xfoss.com'
+
+        }
+        // 构建成功的情况
+        success {
+            // 发送邮件
+            emailext body: '''<h4>$PROJECT_NAME - Build # $BUILD_NUMBER - SUCCESS:
+                Check https://dl.xfoss.com/ to view the results.</h4>''' + "\n${html_email}",
+                recipientProviders: [developers(), culprits()],
+                // recipientProviders: [],
+                subject: '$PROJECT_NAME',
+                to: 'thomas@xfoss.com, michael.rong@xfoss.com, lenny.peng@xfoss.com',
+                // to: 'lenny.peng@xfoss.com',
+                mimeType: 'text/html'
+        }
+    }
+}
+
+// 一个函数，获取邮件通知中的 changelogs 内容
+@NonCPS
+def get_changelogs_html(repo_url) {
+    String msg = "<b>Changelog</b>: <ul>"
+
+    def lastId = null
+    def prevId = prevBuildLastCommitId()
+    def changeLogSets = currentBuild.changeSets
+
+    for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+        for (int j = 0; j < entries.length; j++) {
+            def entry = entries[j]
+            lastId = entry.commitId
+            msg = msg + "${commitInfo(entry)}"
+        }
+    }
+
+    msg += "</ul>"
+
+    msg += "<b>Affected files</b>: <ul>"
+    for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+
+        for (int j = 0; j < entries.length; j++) {
+            def entry = entries[j]
+
+            def files = new ArrayList(entry.affectedFiles)
+            for (int k = 0; k < files.size(); k++) {
+                def file = files[k]
+                msg += "<li><b>${file.editType.name}</b> <code>${file.path}</code></li>"
+            }
+        }
+    }
+
+    msg += "</ul>"
+
+    if (prevId != null && lastId != null) {
+        msg += """
+<p><b>Check diffs</b>: <a href="${repo_url}/compare/${prevId}..${lastId}#diff" target="_blank">
+    ${repo_url}/compare/${prevId.take(7)}...${lastId.take(7)}#diffs
+</a></p>
+"""
+    }
+
+    return msg
+}
+
+// 一个函数：获取 POST 到 dl.xfoss.com 的 JSON 数据中，changelogs 字段的内容
+@NonCPS
+def get_changelogs() {
+    def changeLogSets = currentBuild.changeSets
+
+    // Count total items
+    total = 0
+    for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+        total += entries.size()
+    }
+
+    tmpCount = 0
+    json = "["
+    for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+
+        for (int j = 0; j < entries.size(); j++) {
+            def entry = entries[j]
+
+            json += ( total > 1 && tmpCount != total-1 )
+                ? """{
+                    "commit_id": "${entry.commitId.take(7)}",
+                    "commit_comment": "${entry.msg.replaceAll('"', "'")}",
+                    "commited_by": "${entry.author}",
+                    "release_id": 0
+                },"""
+                : """{
+                    "commit_id": "${entry.commitId.take(7)}",
+                    "commit_comment": "${entry.msg.replaceAll('"', "'")}",
+                    "commited_by": "${entry.author}",
+                    "release_id": 0
+                }"""
+
+            tmpCount += 1
+        }
+    }
+    json += "]"
+
+    return json
+}
+
+// 一个函数：获取 JSON 数据中，affected_files 字段
+@NonCPS
+def get_affected_files() {
+    def changeLogSets = currentBuild.changeSets
+
+    total = 0
+    // Count total amount.
+    for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+        for (int j = 0; j < entries.size(); j++) {
+            def entry = entries[j]
+            def files = new ArrayList(entry.affectedFiles)
+            total += files.size()
+        }
+    }
+
+    // Get JSON result.
+    tmpCount = 0
+    json = "["
+    for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+
+        for (int j = 0; j < entries.size(); j++) {
+            def entry = entries[j]
+            def files = new ArrayList(entry.affectedFiles)
+
+            for (int k = 0; k < files.size(); k++) {
+                def file = files[k]
+
+                json += ( total > 1 && tmpCount != total-1 )
+                    ? """{
+                        "file_edit_type": "${file.editType.name}",
+                        "file_path": "${file.path}",
+                        "release_id": 0
+                    },"""
+                    : """{
+                        "file_edit_type": "${file.editType.name}",
+                        "file_path": "${file.path}",
+                        "release_id": 0
+                    }"""
+
+                tmpCount += 1
+            }
+        }
+    }
+    json += "]"
+
+    return json
+}
+
+
+// 一个函数，获取邮件通知与 JSON 数据中的 diffs_url 内容
+@NonCPS
+def get_diffs_url(repo_url) {
+    def lastId = null
+    def prevId = prevBuildLastCommitId()
+    def changeLogSets = currentBuild.changeSets
+
+    for (int i = 0; i < changeLogSets.size(); i++) {
+        def entries = changeLogSets[i].items
+        for (int j = 0; j < entries.length; j++) {
+            def entry = entries[j]
+            lastId = entry.commitId
+        }
+    }
+
+    if (prevId != null && lastId != null) {
+        return "${repo_url}/compare/${prevId}..${lastId}#diff"
+    }
+
+    return ""
+}
+
+
+// 一个函数：获取上次构建的 Commit ID
+@NonCPS
+def prevBuildLastCommitId() {
+    def prev = currentBuild.previousBuild
+    def items = null
+    def result = null
+
+    if (prev != null && prev.changeSets != null && prev.changeSets.size() && prev.changeSets[prev.changeSets.size() - 1].items.length) {
+        items = prev.changeSets[prev.changeSets.size() - 1].items
+        result = items[items.length - 1].commitId
+    }
+    return result
+}
+
+// 一个函数：获取 Commit Info
+@NonCPS
+def commitInfo(commit) {
+    return commit != null
+        ? "<li><code>${commit.commitId.take(7)}</code>  <i>${commit.msg}</i>  <em>by ${commit.author}</em></li> \n"
+        : ""
+}

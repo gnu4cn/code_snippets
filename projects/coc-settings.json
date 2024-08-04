@@ -1,0 +1,11 @@
+{
+  "rust-analyzer.server.extraEnv": {
+    "RUSTUP_TOOLCHAIN": "stable"
+  },
+  "workspace.ignoredFolders": [
+    "$HOME",
+    "$HOME/.cargo/**",
+    "$HOME/.rustup/**"
+  ],
+  "rust-analyzer.server.path": "/usr/lib/rustup/bin/rust-analyzer"
+}
