@@ -4,6 +4,35 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
+## Superdesk 安装笔记
+
+
+Superdesk 有较多依赖。需要在编译构建时，安装以下软件包。
+
+
+```console
+apt install -y libbz2-dev zlib1g-dev
+```
+
+然后编译安装 Python-3.8。
+
+
+```console
+./configure --prefix=/opt/python38 --enable-optimizations --with-ssl --with-readline
+make -j$(nproc)
+sudo make install
+```
+
+然后安装 Python-3.8 的一些模组。
+
+
+```console
+cd /opt/python38/bin
+python3 -m pip3 install -U pip3
+./pip3 install Click requests pyexiv2
+```
+
+
 ## Plone 安装笔记
 
 
