@@ -32,6 +32,12 @@ python3 -m pip3 install -U pip3
 ./pip3 install Click requests pyexiv2
 ```
 
+### 前端
+
+
+需要降级 NODEJS 到 14 lts 版本，以得到前端匹配的 `npm` 版本。
+
+并需要将 `package-lock.json` 中的 `registry.nodejs.org` 更换为 `repo.huaweicloud.com/repository/npm`，以加快下载速度。 
 
 ## Plone 安装笔记
 
