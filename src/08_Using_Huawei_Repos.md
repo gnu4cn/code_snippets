@@ -53,6 +53,14 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 echo 'export NVM_NODEJS_ORG_MIRROR=https://repo.huaweicloud.com/nodejs' >> ~/.bashrc
 ```
 
+> **注意**：上面的配置似乎已经不可用。下面是 阿里云 的镜像配置。
+
+
+```bash
+echo 'export NVM_NODEJS_ORG_MIRROR="https://npmmirror.com/mirrors/node"' >> ~/.bashrc
+```
+
+
 然后运行：
 
 ```bash
