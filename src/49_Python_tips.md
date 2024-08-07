@@ -39,6 +39,15 @@ python3 -m pip3 install -U pip3
 
 并需要将 `package-lock.json` 中的 `registry.nodejs.org` 更换为 `repo.huaweicloud.com/repository/npm`，以加快下载速度。 
 
+此外，前端构建需要使用 Python2，因此需要安装 Python27。
+
+
+参考：
+
+- [【环境篇 npm 报错】npm ERR gyp ERR stack `import sys； print “%s.%s.%s“ % sys.version_info[:3]；`](https://blog.csdn.net/weixin_49736959/article/details/122149324)
+
+- [Installing Python 2.7 on Debian 12 (Bookworm)](https://www.fadedbee.com/2024/01/18/installing-python2-on-debian-12-bookworm/)
+
 ## Plone 安装笔记
 
 
