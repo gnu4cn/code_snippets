@@ -26,6 +26,14 @@ gem install rails --version 5.2.8.1
 ```
 
 
+### 更新 RubyGems 到指定版本
+
+
+```console
+gem update --system 3.3.22
+```
+
+
 > **参考链接**
 >
 > - [How to Install Publify on Kali Linux Latest](https://ipv6.rs/tutorial/Kali_Linux_Latest/Publify/)
@@ -33,6 +41,8 @@ gem install rails --version 5.2.8.1
 > - [Install Ruby 2.7.5 on Debian Bookworm](https://text.malam.or.id/2024/05/06/install-ruby-2.7.5-on-debian-bookworm/)
 >
 > - [rbenv-cn](https://github.com/RubyMetric/rbenv-cn)
+>
+> - [Update RubyGems to a specific version (for legacy system installs)](https://gist.github.com/larsthegeek/4029012)
 
 
 ## Superdesk 安装笔记
