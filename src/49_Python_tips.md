@@ -9,12 +9,30 @@
 [Publify](https://github.com/publify/publify) 是以 Ruby 语言编写的优秀 CMS 系统。
 
 
-## `gem` 检索远端上包版本
+### `gem` 检索远端上包版本
 
 
 ```console
 gem list ^rails$ --remote --all
 ```
+
+
+### `gem` 安装 Ruby 包
+
+
+```console
+gem install nokogiri -v 1.15.6
+gem install rails --version 5.2.8.1
+```
+
+
+> **参考链接**
+>
+> - [How to Install Publify on Kali Linux Latest](https://ipv6.rs/tutorial/Kali_Linux_Latest/Publify/)
+>
+> - [Install Ruby 2.7.5 on Debian Bookworm](https://text.malam.or.id/2024/05/06/install-ruby-2.7.5-on-debian-bookworm/)
+>
+> - [rbenv-cn](https://github.com/RubyMetric/rbenv-cn)
 
 
 ## Superdesk 安装笔记
