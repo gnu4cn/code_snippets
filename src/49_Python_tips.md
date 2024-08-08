@@ -34,6 +34,19 @@ gem update --system 3.3.22
 ```
 
 
+### 安装 Publify 
+
+
+```console
+RAILS_ENV=production bundle install --without development test mysql sqlite
+rake db:migrate
+rake db:seed
+rake assets:precompile
+```
+
+> **注意**：上面是已经使用 PostgreSQL 并已经建立了数据库 `publify` 的情况下。
+
+
 > **参考链接**
 >
 > - [How to Install Publify on Kali Linux Latest](https://ipv6.rs/tutorial/Kali_Linux_Latest/Publify/)
@@ -43,7 +56,8 @@ gem update --system 3.3.22
 > - [rbenv-cn](https://github.com/RubyMetric/rbenv-cn)
 >
 > - [Update RubyGems to a specific version (for legacy system installs)](https://gist.github.com/larsthegeek/4029012)
-
+>
+> - [Install Publify on Ubuntu 14.04](https://www.rosehosting.com/blog/install-publify-on-an-ubuntu-14-04/)
 
 ## Superdesk 安装笔记
 
