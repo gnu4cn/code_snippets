@@ -4,6 +4,19 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
+## Publify 安装笔记
+
+[Publify](https://github.com/publify/publify) 是以 Ruby 语言编写的优秀 CMS 系统。
+
+
+## `gem` 检索远端上包版本
+
+
+```console
+gem list ^rails$ --remote --all
+```
+
+
 ## Superdesk 安装笔记
 
 
