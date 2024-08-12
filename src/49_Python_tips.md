@@ -4,6 +4,27 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
+
+## Typo3 CMS 安装笔记
+
+
+### 需要安装 `php-ldap`
+
+
+```console
+composer req causal/ig_ldap_sso_auth
+```
+
+
+安装 Typo3 的 `LDAP/SSO` 认证扩展，需要安装 `php-ldap` 包。
+
+
+
+```console
+apt install -y php-ldap
+```
+
+
 ## Publify 安装笔记
 
 [Publify](https://github.com/publify/publify) 是以 Ruby 语言编写的优秀 CMS 系统。
