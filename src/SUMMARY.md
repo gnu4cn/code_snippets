@@ -27,6 +27,7 @@
 - [Redmine Deployment](52_redmine_deployment.md)
 - [GNS3 Network Study](54_gns3_network_study.md)
 - [XMPP Server Openfire deployment](56_openfire_deployment.md)
+- [CMS deployment](57_CMS_deployment.md)
 
 ---
 # 编程开发
