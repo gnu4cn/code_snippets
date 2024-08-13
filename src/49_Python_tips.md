@@ -4,6 +4,32 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
+## `python setup.py install` 下修改源
+
+
+- 修改 `~/.pydistutils.cfg`
+
+
+```conf
+[easy_install]
+index_url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+
+- 修改/创建 `setup.py` 所在目录下的 `setup.cfg`，加入：
+
+
+
+```conf
+[easy_install]
+index_url = https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+
+
+> **参考**：[关于使用setup.py下载库修改源的问题](https://blog.csdn.net/qq_36852276/article/details/100740865)
+
+
 ## 在内网安装 Python 第三方包
 
 参考：[如何在内网安装python第三方包（库）](https://blog.csdn.net/xue_11/article/details/112802149)
