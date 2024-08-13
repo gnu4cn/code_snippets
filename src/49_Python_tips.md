@@ -14,8 +14,16 @@ v=3.10.0; wget https://repo.huaweicloud.com/python//$v/Python-$v.tar.xz -P ~/.py
 上面的命令，使用 [https://repo.huaweicloud.com/python/](https://repo.huaweicloud.com/python/) 的 Python 源代码仓库，安装 Python 3.10.0。
 
 
+使用安装的 Python 3.10.0，`pyenv global 3.10.0`。
 
-> **参考**: [pyenv 如何安装管理多个环境，以及国内镜像加速（换源）,安装虚拟环境](https://blog.csdn.net/qq_43213352/article/details/104343365)
+
+
+
+
+> **参考**: 
+>
+> - [pyenv 如何安装管理多个环境，以及国内镜像加速（换源）,安装虚拟环境](https://blog.csdn.net/qq_43213352/article/details/104343365)
+> - [Node gyp ERR - invalid mode: 'rU' while trying to load binding.gyp](https://stackoverflow.com/a/74732671/12288760)
 
 
 
