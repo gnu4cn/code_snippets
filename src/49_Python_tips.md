@@ -17,6 +17,15 @@ v=3.10.0; wget https://repo.huaweicloud.com/python//$v/Python-$v.tar.xz -P ~/.py
 使用安装的 Python 3.10.0，`pyenv global 3.10.0`。
 
 
+在使用 `pyenv install x.y.z` 安装某个版本的 Python 前，通常要安装下面的包。
+
+
+
+```console
+sudo apt-get install -y lzma liblzma-dev libffi-dev
+```
+
+
 
 
 
