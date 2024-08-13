@@ -4,6 +4,21 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
+## `pyenv` 使用国内源码仓库
+
+
+```console
+v=3.10.0; wget https://repo.huaweicloud.com/python//$v/Python-$v.tar.xz -P ~/.pyenv/cache/; pyenv install $v
+```
+
+上面的命令，使用 [https://repo.huaweicloud.com/python/](https://repo.huaweicloud.com/python/) 的 Python 源代码仓库，安装 Python 3.10.0。
+
+
+
+> **参考**: [pyenv 如何安装管理多个环境，以及国内镜像加速（换源）,安装虚拟环境](https://blog.csdn.net/qq_43213352/article/details/104343365)
+
+
+
 ## `python setup.py install` 下修改源
 
 
