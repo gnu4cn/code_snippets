@@ -1,7 +1,30 @@
 # 内容管理系统部署笔记
 
 
+
+
 开源、优秀的内容管理系统繁多，有的只有框架没有 UI，有的架构过于复杂，真正能开箱即用很少。下面是在部署一个运行在企业内部办公网 Portal 页面时，对各种 CMS 部署的笔记（最后选择了 Typo3）。
+
+
+
+
+## 安全多个版本的 PHP （Debian Bookworm）
+
+
+使用 `phpenv` 方案较为复杂，实际可以通过添加 Debian PPA 代码仓库，安装多个版本的 PHP。
+
+
+- 安装必要软件包
+
+
+```console
+sudo apt install -y lsb-release ca-certificates apt-transport-https software-properties-common gnupg2
+```
+
+
+
+
+> **参考**：[How To Install PHP 8.1 on Debian 12/11/10](https://computingforgeeks.com/how-to-install-php-on-debian-linux-2/)
 
 
 ## Typo3 CMS 安装笔记
