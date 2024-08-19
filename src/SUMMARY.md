@@ -8,7 +8,6 @@
 
 - [RG AC Configuration Notes](16_RG_AC_configuration_notes.md)
 - [Wordpress Optimization](19_wordpress_optimization.md)
-- [Huawei Switch SSH TELENT Weird Problem](23_Huawei_switch_SSH_TELENT_weird_problem.md)
 - [Gitlab CE Deployment](25_gitlab_ce_deployment.md)
 - [Epel Nginx Selinux Problem](26_epel_nginx_selinux_problem.md)
 - [Zotrs Nginx Deployment](27_zotrs_nginx_deployment.md)
