@@ -33,6 +33,25 @@ Openfire 安装配置十分简单，大致分为：
 
 ![Openfire 4.8.3 - 插件](images/openfire-4.8.3.png)
 
+
+
+### 在客户端列出所有用户
+
+
+
+客户端中默认不会显示所有聊天成员。需要通过 “联系人” -> “添加联系人” 才能添加好友发起聊天，这影响了用户效率。可以通过在 Openfire 后台设置加以解决。
+
+
+方法是：在 “用户/组” 页面，打开某个组，然后 “启用联系人列表组共享”，输入一个名字，再点击“保存联系人列表设置”即可。
+
+
+
+
+> **参考**：[Show all members automatically?](https://discourse.igniterealtime.org/t/show-all-members-automatically/56660)
+
+
+
+
 ## `Spark` 客户端
 
 
