@@ -4,6 +4,19 @@
 本文记录 Python 的一些技巧、疑难现象。
 
 
+## `node-xxx-headers.tar.gz` 下载失败
+
+先将压缩包下载到本地，然后运行以下命令将该本地文件设置为 `tarball` 变量。
+
+
+```console
+npm config set tarball /tmp/node-xxx-headers.tgz
+```
+
+
+> **参考**：[npm 下载 node-xxx-headers.tar.gz 失败](https://blog.csdn.net/u013992330/article/details/130892724)
+
+
 ## `pyenv` 使用国内源码仓库
 
 
