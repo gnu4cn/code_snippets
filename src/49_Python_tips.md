@@ -3,6 +3,19 @@
 
 本文记录 Python 的一些技巧、疑难现象。
 
+## `npm i` 使用 SOCKS5 代理
+
+
+```console
+ALL_PROXY=socks5://192.168.46.1:10080 npm i
+```
+
+
+其中 `socks5://192.168.46.1:10080` 是 VMWare 宿主机上开放的 SOCKS5 端口。
+
+
+> **参考**：[Running NPM install behind a socks5 proxy](https://github.com/npm/npm/issues/6204#issuecomment-160516258)
+
 
 ## `node-xxx-headers.tar.gz` 下载失败
 
@@ -42,7 +55,7 @@ sudo apt-get install -y lzma liblzma-dev libffi-dev
 
 
 
-> **参考**: 
+> **参考**:
 >
 > - [pyenv 如何安装管理多个环境，以及国内镜像加速（换源）,安装虚拟环境](https://blog.csdn.net/qq_43213352/article/details/104343365)
 > - [Node gyp ERR - invalid mode: 'rU' while trying to load binding.gyp](https://stackoverflow.com/a/74732671/12288760)
