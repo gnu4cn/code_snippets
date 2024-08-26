@@ -1,7 +1,9 @@
-# Python tips
+# Python/NodeJS tips
 
 
-本文记录 Python 的一些技巧、疑难现象。
+本文记录 Python/NodeJS 的一些技巧、疑难现象。
+
+
 
 ## `npm i` 使用 SOCKS5 代理
 

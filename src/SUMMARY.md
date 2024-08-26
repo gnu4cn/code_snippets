@@ -45,7 +45,7 @@
 - [Low Level Programming University](41_Low_Level_Programming_Brief.md)
 - [`git` skills](43_git_skills.md)
 - [An burn-down chart app deployment notes](45_burn-down_chart_notes.md)
-- [Python tips](49_Python_tips.md)
+- [Python/NodeJS tips](49_Python_tips.md)
 - [GCC, GLIBC and GDB problems](55_gcc_glibc_gdb_problems.md)
 
 ---
