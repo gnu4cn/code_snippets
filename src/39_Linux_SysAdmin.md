@@ -4,6 +4,7 @@
 
 
 
+
 ## `auditd` 部署的危险性
 
 
@@ -14,6 +15,35 @@
 - [linux audit审计系统](https://zhuanlan.zhihu.com/p/337289840)
 
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
+
+
+## CentOS `debuginfo-install` 问题
+
+
+![`debuginfo-install`](images/debuginfo-install.png)
+
+
+调试信息显示，需要安全 `glibc-2.17-317.el7.x86_64` 的包，就要前往 CentOS Debuginfo Mirror 下载下面两个包：
+
+- `glibc-debuginfo-common-2.17-317.el7.x86_64.rpm`
+
+- `glibc-debuginfo-2.17-317.el7.x86_64.rpm`
+
+
+然后运行以下命令安装这两个软件包。
+
+
+```console
+rpm -ivh glibc-debuginfo-common-2.17-317.el7.x86_64.rpm glibc-debuginfo-2.17-317.el7.x86_64.rpm
+```
+
+
+
+> **参考**：
+>
+> - [gdb提示Missing separate debuginfos, use: debuginfo-install glibc-2.17-325.el7_9.x86_64...](https://blog.csdn.net/hope18578/article/details/122384730)
+>
+> - [CentOS Debuginfo Mirror](http://debuginfo.centos.org/7/x86_64/)
 
 
 
