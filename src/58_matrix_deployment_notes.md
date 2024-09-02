@@ -11,3 +11,5 @@
 
 
 **解决办法**：不配置 `public_baseurl`，或将其配置为正确的内容，比如 `https://matrix.xfoss.com:443`。
+
+> **参考**：[Login fails after update from 1.25.0 to 1.26.0 - syncing forever ... many rooms](https://github.com/matrix-org/synapse/issues/9264#issuecomment-770475990)
