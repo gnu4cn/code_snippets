@@ -40,7 +40,7 @@ modules:
      enabled: true
      uri: "ldap://10.11.2.12:389"
      # start_tls: true
-     base: "dc=com,dc=com"
+     base: "dc=xfoss,dc=com"
      attributes:
         uid: "sAMAccountName"
         mail: "mail"
@@ -61,10 +61,12 @@ modules:
 
 **解决办法**：不配置 `public_baseurl`，或将其配置为正确的内容，比如 `https://matrix.xfoss.com:443`。
 
-> **参考**：[Login fails after update from 1.25.0 to 1.26.0 - syncing forever ... many rooms](https://github.com/matrix-org/synapse/issues/9264#issuecomment-770475990)
+### 参考
+
+> - [Login fails after update from 1.25.0 to 1.26.0 - syncing forever ... many rooms](https://github.com/matrix-org/synapse/issues/9264#issuecomment-770475990)
 
 
-### `element-web` 
+### `element-web`
 
 
 `element-web` 是个使用了 [Matrix React SDK](https://github.com/matrix-org/matrix-react-sdk) 的 Matrix web 客户端。本质上是使用现代 ES6 并用到 Node.js 构建系统的模块化 webapp。
@@ -223,7 +225,7 @@ Debian Bookworm 上运行 `sudo apt install -y docker-compose`，即可安装上
 
 
 
-### `docker-compose` 用到的 `.env` 配置 
+### `docker-compose` 用到的 `.env` 配置
 
 
 ```yaml
@@ -275,8 +277,8 @@ sudo cp ~/PEM/_.xfoss.com.key ~/.jitsi-meet-cfg/web/keys/cert.key
 `docker-jitsi-meet` 的 `docker-compose.yaml` 中自带了基于 Nginx 的 web 镜像/容器，因此不必再使用 Nginx 对其进行反向代理。
 
 
-> **参考**：
->
+### 参考
+
 > - [Docker 搭建](https://www.erballoon.vip/2024/03/04/dockerdjkysphypt/)
 >
 > - [【教程】最新可用！Docker国内镜像源列表](https://blog.csdn.net/sxf1061700625/article/details/140895299)
