@@ -1,7 +1,7 @@
 # 现代即时通讯方案 Matrix 部署笔记
 
 
-本文记录 Matrix（`matrix-synapse`） 部署时的注意点。
+本文记录 Matrix（`matrix-synapse`） 部署时的注意点。[Matrix](https://matrix.org/) 是个用于安全、去中心化通讯的开放网络。[element.io](https://element.io/) 编写维护的 [`matrix-synapse`](https://github.com/element-hq/synapse)
 
 
 ## `matrix-synapse` 部署
