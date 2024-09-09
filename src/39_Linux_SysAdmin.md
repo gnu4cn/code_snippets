@@ -17,6 +17,11 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+## `/etc/fstab` 中的挂载项导致 Linux 开机失败
+
+
+在机房整理过程中（2024.9.8）一台 Linux 服务器启动失败，进入安全模式。经查这是由于 `/etc/fstab` 中一些加载项无法加载导致。关机后从 U 盘启动进入 Live Linux 系统。并参考 [挂载 LVM 逻辑卷](#挂载-lvm-逻辑卷)，挂载原系统上的 `/dev/mapper/rhel-root` 卷到 `/media/tmpRoot`，然后修改原系统的 `/etc/fstab`，重启成功启动该主机 Linux 系统。
+
 
 ## `/etc/rc.local` Linux 自启动程序
 
