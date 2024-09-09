@@ -17,6 +17,33 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+
+## `/etc/rc.local` Linux 自启动程序
+
+
+RH/CentOS EL7 上，可以在 `/etc/rc.local` 中，加入随系统启动的自启动程序。
+
+
+```console
+# ll /etc/rc.local
+lrwxrwxrwx. 1 root root 13 Mar 29 00:14 /etc/rc.local -> rc.d/rc.local
+```
+
+
+> “但是自从 Debian 9 开始，Debian 默认不带 /etc/rc.local 文件，而 rc.local 服务却还是自带的”
+
+
+因此，在 Debian 系统上如何加入自启动程序，请参阅下面的链接。
+
+
+
+> **参考**
+>
+> - [Linux开机启动程序rc.local](https://www.cnblogs.com/wucongzhou/p/12588682.html)
+>
+> - [Debian 12 解决 /etc/rc.local 开机启动问题](https://u.sb/debian-rc-local/)
+
+
 ## CentOS `debuginfo-install` 问题
 
 

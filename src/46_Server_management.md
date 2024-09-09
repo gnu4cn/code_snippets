@@ -4,6 +4,19 @@
 本文记录服务器管理方面的一些经验。
 
 
+## 禅道 ZenTao 系统启动笔记
+
+
+要启动禅道系统，首先要挂载用于备份的 `/backup`，然后进入 `/opt/zbox`，运行 `./zbox start`，如下所示：
+
+
+
+```console
+# mount 10.11.0.21:/0.135 /backup
+# cd /opt/zbox
+# ./zbox start
+```
+
 
 
 ## DELL HTML5 虚拟控制台
