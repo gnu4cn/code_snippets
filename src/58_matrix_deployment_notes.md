@@ -53,13 +53,37 @@ modules:
 
 
 
-**一直同步的问题**
+***一直同步的问题***
 
 
 若对 `homeserver.yaml` 中 `public_baseurl` 项目进行了不当配置，那么在用户登陆时将出现一直同步（“Syncing forever...”）问题。报出“If you've joined lots of rooms, this might take a while.” 提示。
 
 
 **解决办法**：不配置 `public_baseurl`，或将其配置为正确的内容，比如 `https://matrix.xfoss.com:443`。
+
+
+***`M_LIMIT_EXCEEDED` 而无法登录***
+
+
+有用户反馈，在 `element-web` 网页客户端上登录时，出现 `There was a problem communicating with homeserver, please try again later.`。原因是服务器返回了 `M_LIMIT_EXCEEDED`。
+
+
+**解决办法**：往 `homeserver.yaml` 中增加如下参数：
+
+
+```yaml
+
+...
+
+log_config: "/home/synapse/config/logging.yaml"
+
+
+rc_messages_per_second: 200000
+rc_message_burst_count: 100000
+
+...
+
+```
 
 
 ### `element-web`
@@ -286,3 +310,5 @@ sudo cp ~/PEM/_.xfoss.com.key ~/.jitsi-meet-cfg/web/keys/cert.key
 > - [stable-9073: You have been disconnected / The WebSocket connection could not be established or was disconnected.](https://github.com/jitsi/docker-jitsi-meet/issues/1646#issuecomment-1925765528)
 >
 > - [No video and audio when 3 or more participants joining](https://github.com/jitsi/jitsi-meet/issues/14212#issuecomment-1893436766)
+
+> - [Too much M_LIMIT_EXCEEDED](https://gitlab.com/guifi-exo/matrix-killspam#too-much-m_limit_exceeded)
