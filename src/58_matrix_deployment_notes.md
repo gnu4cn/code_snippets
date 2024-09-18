@@ -65,7 +65,7 @@ modules:
 ***`M_LIMIT_EXCEEDED` 而无法登录***
 
 
-有用户反馈，在 `element-web` 网页客户端上登录时，出现 `There was a problem communicating with homeserver, please try again later.`。原因是服务器返回了 `M_LIMIT_EXCEEDED`。
+有用户反馈，在 `element-web` 网页客户端上登录时，出现 `There was a problem communicating with homeserver, please try again later.` 原因是服务器返回了 `M_LIMIT_EXCEEDED`。
 
 
 **解决办法**：往 `homeserver.yaml` 中增加如下参数：
