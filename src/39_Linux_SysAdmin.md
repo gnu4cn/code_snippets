@@ -17,6 +17,19 @@
 - [第 7 章 系统审核](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html/security_guide/chap-system_auditing)
 
 
+
+## `crontab` 定时任务运行问题
+
+
+在复杂的定时任务中，`crontab` 因为不会发生用户登录动作，而导致用户 home 目录下的 `.bashrc` （或 `.zshrc`） 脚本文件不会运行，因此其中设置的环境变量就不会生效。在定时任务依赖这些环境变量时，那么这些定时任务就会失败。
+
+
+此时，应 `source /etc/profile && source /etc/bashrc && source ~/.bashrc`，然后运行定时任务。
+
+
+
+
+
 ## `/etc/fstab` 中的挂载项导致 Linux 开机失败
 
 
