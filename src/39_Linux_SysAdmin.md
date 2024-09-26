@@ -18,6 +18,14 @@
 
 
 
+## 使用 `gpg` 命令生成随机密码
+
+
+命令 `gpg --gen-random 1 6 | base64` 可生成能作为随机密码的 8 位随机字符串。`gpg --gen-random 1 8 | base64` 可生成 12 位随机字符串。
+
+> **参考**：[4 Ways to Generate a Strong Pre-Shared Key (PSK) in Linux](https://www.tecmint.com/generate-pre-shared-key-in-linux/)
+
+
 ## `crontab` 定时任务运行问题
 
 
