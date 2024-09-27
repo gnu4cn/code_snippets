@@ -18,6 +18,50 @@
 
 
 
+## 统计到指定 IP 地址 `ping` 延迟脚本
+
+
+此脚本每 10 分钟向特定 IP 地址进行 `ping` 操作，并获取结果中的 `avg` 信息记录到文本文件中。
+
+
+```bash
+#!/usr/bin/env bash
+
+# Parameter list:
+# $1 - target ip address
+# $2 - target name
+
+TARGET_IP=$1
+TARGET_NAME=$2
+
+record="delay_${TARGET_IP}_${TARGET_NAME}-$(date '+%Y%m%d').txt"
+
+if [ -f "$record" ]; then rm -rf $record; fi
+
+touch $record
+echo -e "\nDelay to ${TARGET_IP}(${TARGET_NAME}) based upon \`ping\` command\n\n\t---------------------------" > $record
+
+delay_sampling () {
+    delay_average=$(ping -c 4 $1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2)
+    ping_at=$(date '+%Y-%m-%d %H:%M:%S')
+
+    echo -e "Delay at $ping_at\t- $delay_average ms" >> $2
+}
+
+i=0
+
+while [ $i -lt 144 ]; do
+    delay_sampling $TARGET_IP $record
+    i=$((i+1))
+    sleep 600
+done
+```
+
+
+> **参考**：[extract average time from ping -c](https://stackoverflow.com/a/9634982/12288760)
+
+
+
 ## 使用 `gpg` 命令生成随机密码
 
 
