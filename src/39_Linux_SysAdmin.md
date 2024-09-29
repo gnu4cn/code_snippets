@@ -28,8 +28,8 @@
 #!/usr/bin/env bash
 
 # Parameter list:
-# $1 - target ip address
-# $2 - target name
+#   $1 - target ip address
+#   $2 - target name
 
 TARGET_IP=$1
 TARGET_NAME=$2
@@ -49,13 +49,11 @@ delay_sampling () {
 }
 
 i=0
-
 while [ $i -lt 144 ]; do
     delay_sampling $TARGET_IP $record
     i=$((i+1))
     sleep 600
 done
-
 
 exit 0
 ```
