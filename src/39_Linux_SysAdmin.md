@@ -55,6 +55,9 @@ while [ $i -lt 144 ]; do
     i=$((i+1))
     sleep 600
 done
+
+
+exit 0
 ```
 
 
